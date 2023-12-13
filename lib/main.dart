@@ -10,6 +10,7 @@ final theme = ThemeData(
         brightness: Brightness.light,
         seedColor: const Color(0xFF9833FF),
         background: const Color(0xFFFFFFFF),
+        outline: const Color(0xFFC0C0C0),
         primary: const Color(0xFF9833FF),
         secondary: const Color(0xFF515151),
         onError: const Color(0xFFFE4657),
