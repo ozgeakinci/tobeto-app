@@ -18,7 +18,7 @@ Tobeto App, kullanıcıların çeşitli işlevlere erişebildiği bir Flutter uy
 ##  Projeyi Ayağa Kaldırmak için
 
 1. Projeyi bilgisayarınıza klonlayın.
-    git clone https://github.com/your-username/tobeto-app.git
+    git clone https://github.com/ozgeakinci/tobeto-app
 
 2. Proje dizinine gidin. 
     cd tobeto-app
