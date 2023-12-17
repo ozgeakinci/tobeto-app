@@ -34,6 +34,7 @@ Tobeto App, kullanıcıların çeşitli işlevlere erişebildiği bir Flutter uy
 
 - [oguzhan558476] (https://github.com/oguzhan558476)
 - [hasanbektas1] (https://github.com/hasanbektas1)
+- [ozgeakinci]  (https://github.com/ozgeakinci)
 
 ## Projenin Ekran Görüntüleri
 [Login Light]<img width="306" alt="tobeto_login_page_light" src="https://github.com/ozgeakinci/tobeto-app/assets/95983264/b7e633c1-4433-4b9e-86a0-e70560e9d602">
