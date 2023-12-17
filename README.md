@@ -41,9 +41,3 @@ Tobeto App, kullanıcıların çeşitli işlevlere erişebildiği bir Flutter uy
 [Login Dark]<img width="322" alt="tobeto_logIn_dark_mode" src="https://github.com/ozgeakinci/tobeto-app/assets/95983264/14cded18-463d-429e-aa39-02669e32e51b">
 
 
-
-
-
-## Lisans
-
-Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır. Detaylı bilgiler için lisans dosyasını inceleyebilirsiniz.
