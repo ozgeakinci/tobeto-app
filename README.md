@@ -1,16 +1,42 @@
-# tobeto_app
+# Tobeto App
 
-A new Flutter project.
+Tobeto App, kullanıcıların çeşitli işlevlere erişebildiği bir Flutter uygulamasıdır.
 
-## Getting Started
+## Özellikler
 
-This project is a starting point for a Flutter application.
+- **Giriş Yap:** Kullanıcılar uygulamaya giriş yapabilir ve kişisel hesaplarını yönetebilir.
+- **Menü Navigasyon:** Uygulama içinde gezinmek için kullanılan menü.
+- **Görsel Arka Plan:** Giriş ekranında görsel arka plan.
+- **Şifremi Unuttum:** Kullanıcılar şifrelerini sıfırlamak için bu özelliği kullanabilirler.
 
-A few resources to get you started if this is your first Flutter project:
+## Kullanılan Teknolojiler
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter
+- Dart
+- ...
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+##  Projeyi Ayağa Kaldırmak için
+
+1. Projeyi bilgisayarınıza klonlayın.
+    git clone https://github.com/your-username/tobeto-app.git
+
+2. Proje dizinine gidin. 
+    cd tobeto-app
+
+3. Gerekli bağımlılıkları yükleyin.
+     flutter pub get
+
+4. Uygulamayı çalıştırın.
+    flutter run
+    
+
+## Katkıda bulunanlar
+
+[oguzhan558476] (https://github.com/oguzhan558476)
+
+
+
+
+## Lisans
+
+Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır. Detaylı bilgiler için lisans dosyasını inceleyebilirsiniz.
