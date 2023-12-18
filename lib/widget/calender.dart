@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Calender extends StatefulWidget {
+class Calender extends StatelessWidget {
   const Calender({Key? key}) : super(key: key);
 
   @override
-  _CalenderState createState() => _CalenderState();
-}
-
-class _CalenderState extends State<Calender> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: const Center(child: Text('Takvim')),
+    return const Scaffold(
+      body: Center(child: Text('Takvim')),
     );
   }
 }

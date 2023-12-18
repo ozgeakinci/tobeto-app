@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/widget/home_page.dart';
+import 'package:tobeto_app/widget/swiper_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                         ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (ctx) => const HomePage()));
+                                builder: (ctx) => const SwiperPage()));
                           },
                           child: const Text(_loginIn),
                         ),
