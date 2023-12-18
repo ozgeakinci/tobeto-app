@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/datas/menu_data.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/widget/home_page.dart';
+import 'package:tobeto_app/widget/login_page.dart';
+import 'package:tobeto_app/widget/profile.dart';
+import 'package:tobeto_app/widget/swiper_page.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({Key? key, required this.selectedMenuItem})
@@ -9,84 +14,129 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String getCurrentDate() {
+      DateTime now = DateTime.now();
+      return "${now.year}";
+    }
+
     return Drawer(
+      elevation: 1,
       child: ListView(
         children: [
-          DrawerHeader(
-            child: SizedBox(
-              height: 100,
-              child: Stack(
+          const SizedBox(
+            height: 40,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Image.asset(
+                'assets/images/tobeto-logo.png',
+                width: 170,
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.close,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 70,
+          ),
+          for (final menuItem in menus)
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                selectedMenuItem(menuItem.name);
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 25, bottom: 20, right: 15, top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(menuItem.name),
+                    menuItem.menuIcon,
+                  ],
+                ),
+              ),
+            ),
+          const SizedBox(height: 20),
+          const Divider(
+            height: 3,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) => const SwiperPage()));
+              },
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Positioned(
-                    child: Image.asset(
-                      'assets/images/tobeto-logo.png',
-                      width: 170,
-                    ),
+                  const Icon(Icons.home_outlined),
+                  const SizedBox(
+                    width: 10,
                   ),
-                  Positioned(
-                      top: 0,
-                      right: 0,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(
-                          Icons.close,
-                          color: Color.fromARGB(255, 172, 169, 169),
-                          size: 30,
-                        ),
-                      )),
+                  Text(
+                    'Tobeto',
+                    style: TextStyle(
+                        color: TobetoAppColor.textColor,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
             ),
           ),
-          for (final menuItem in menus)
-            Row(
-              children: [
-                Container(
-                    decoration: const BoxDecoration(),
-                    child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: InkWell(
-                          onTap: () {
-                            selectedMenuItem(menuItem.name);
-                            Navigator.pop(context);
-                          },
-                          child: Row(
-                            children: [Text(menuItem.name), menuItem.menuIcon],
-                          ),
-                        ))),
-              ],
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListTile(
+              shape: RoundedRectangleBorder(
+                side: const BorderSide(
+                  width: 0,
+                ),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              title: Text(
+                "Kullanıcı Adı",
+                style: TextStyle(color: TobetoAppColor.textColor),
+              ),
+              trailing: const CircleAvatar(
+                child: Icon(Icons.person_2_outlined),
+              ),
             ),
-          /*    ListTile(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color:
-                              Color.fromARGB(255, 211, 211, 211), // Çizgi rengi
-                          width: 1.0, // Çizgi kalınlığı
-                        ),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text(newUserWatch))),
-                CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 151, 148, 148),
-                  child: Icon(
-                    Icons.person_pin_outlined,
-                    color: Colors.red,
-                    size: 40,
-                  ),
-                )
-              ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              title: Text(
+                'Çıkış Yap',
+                style: TextStyle(
+                    color: TobetoAppColor.textColor,
+                    fontWeight: FontWeight.bold),
+              ),
+              trailing: const Icon(Icons.logout_outlined),
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) => const LoginPage()));
+              },
             ),
-            onTap: () {
-              print("Tıklandı");
-            },
-          ), */
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 38.0,
+              left: 8,
+            ),
+            child: Text(
+              ' © ${getCurrentDate()} Tobeto',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          )
         ],
       ),
     );
