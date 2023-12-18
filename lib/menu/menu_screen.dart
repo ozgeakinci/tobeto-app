@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tobeto_app/datas/menu_data.dart';
 
 class MenuScreen extends StatelessWidget {
-  const MenuScreen({Key? key}) : super(key: key);
+  const MenuScreen({Key? key, required this.selectedMenuItem})
+      : super(key: key);
+
+  final void Function(String selectedMenuName) selectedMenuItem;
 
   @override
   Widget build(BuildContext context) {
-    // final newUserWatch = ref.watch(userProvider);
-
     return Drawer(
       child: ListView(
         children: [
@@ -46,8 +47,14 @@ class MenuScreen extends StatelessWidget {
                     decoration: const BoxDecoration(),
                     child: Padding(
                         padding: const EdgeInsets.all(10),
-                        child: Row(
-                          children: [Text(menuItem.name), menuItem.menuIcon],
+                        child: InkWell(
+                          onTap: () {
+                            selectedMenuItem(menuItem.name);
+                            Navigator.pop(context);
+                          },
+                          child: Row(
+                            children: [Text(menuItem.name), menuItem.menuIcon],
+                          ),
                         ))),
               ],
             ),

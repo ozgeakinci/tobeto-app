@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Reviews extends StatefulWidget {
+class Reviews extends StatelessWidget {
   const Reviews({Key? key}) : super(key: key);
 
   @override
-  _ReviewsState createState() => _ReviewsState();
-}
-
-class _ReviewsState extends State<Reviews> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: const Center(child: Text('Değerlendirmeler')),
+    return const Scaffold(
+      body: Center(child: Text('Değerlendirmeler')),
     );
   }
 }
