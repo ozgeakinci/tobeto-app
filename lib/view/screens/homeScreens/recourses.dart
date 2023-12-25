@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
 class Recourses extends StatelessWidget {
   const Recourses({Key? key}) : super(key: key);
@@ -7,11 +8,11 @@ class Recourses extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Başvurularım",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: TobetoAppColor.textColorDark),
         ),
-        backgroundColor: Color(0xFF9B4FFD),
+        backgroundColor: TobetoAppColor.colorSchemeLight.primary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(14.0),
@@ -31,55 +32,65 @@ class Recourses extends StatelessWidget {
                 ],
                 color: Colors.white,
               ),
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "İstanbul Kodluyor Bilgilendirme",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: Text(
+                        "Kabul Edildi",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: TobetoAppColor.colorSchemeLight.secondary,
+                            fontWeight: FontWeight.normal),
+                      ),
+                    ),
+                    Row(
                       children: [
-                        Wrap(
-                          children: [
-                            Text(
-                              "İstanbul Kodluyor Bilgilendirme",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 15),
-                            ),
-                          ],
+                        Icon(
+                          Icons.check,
+                          size: 20,
+                          color: TobetoAppColor.colorSchemeLight.secondary,
                         ),
-                        Wrap(
-                          children: [
-                            Text(
-                                "✔ İstanbul Kodluyor Başvuru Formu Onaylandı."),
-                          ],
+                        const SizedBox(
+                          width: 10,
                         ),
-                        Wrap(
-                          children: [
-                            Text(
-                                "✔ İstanbul Kodluyor Belge Yükleme Formu Onaylandı."),
-                          ],
+                        Expanded(
+                          child: Text(
+                            "İstanbul Kodluyor Başvuru Formu Onaylandı.",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(
-                    width: 30,
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(5.0),
-                            bottomLeft: Radius.circular(5.0)),
-                      ),
-                      child: const Text(
-                        " Kabul Edildi     ",
-                        style: TextStyle(color: Colors.white),
-                      ),
+                    const SizedBox(
+                      height: 8,
                     ),
-                  ),
-                ],
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.check,
+                          size: 20,
+                          color: TobetoAppColor.colorSchemeLight.secondary,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "İstanbul Kodluyor Belge Yükleme Formu Onaylandı.",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
