@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/view/screens/homeScreens/announccementAndnews.dart';
+import 'package:tobeto_app/view/screens/homeScreens/educations.dart';
+import 'package:tobeto_app/view/screens/homeScreens/recourses.dart';
+import 'package:tobeto_app/view/screens/homeScreens/surveys.dart';
 
 class BigButton extends StatelessWidget {
   BigButton({
@@ -18,6 +22,21 @@ class BigButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
+        onTap: () {
+          if (title == "Başvurularım") {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (ctx) => const Recourses()));
+          } else if (title == "Eğitimlerim") {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (ctx) => const Educations()));
+          } else if (title == "Duyuru ve Haberler") {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => const AnnounccementAndnews()));
+          } else if (title == "Anketlerim") {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (ctx) => const Surveys()));
+          }
+        },
         child: Stack(
           children: [
             Container(
