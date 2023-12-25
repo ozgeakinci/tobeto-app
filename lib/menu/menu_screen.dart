@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/datas/menu_data.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
-import 'package:tobeto_app/widget/home_page.dart';
-import 'package:tobeto_app/widget/login_page.dart';
-import 'package:tobeto_app/widget/profile.dart';
-import 'package:tobeto_app/widget/swiper_page.dart';
+import 'package:tobeto_app/view/screens/login_page.dart';
+import 'package:tobeto_app/view/swiper_page.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({Key? key, required this.selectedMenuItem})

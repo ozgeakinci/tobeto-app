@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/menu/menu_screen.dart';
-import 'package:tobeto_app/widget/calender.dart';
-import 'package:tobeto_app/widget/catalog.dart';
-import 'package:tobeto_app/widget/home_page.dart';
-import 'package:tobeto_app/widget/profile.dart';
-import 'package:tobeto_app/widget/reviews.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/view/screens/menuScreens/calender.dart';
+import 'package:tobeto_app/view/screens/menuScreens/catalog.dart';
+import 'package:tobeto_app/view/screens/home_page.dart';
+import 'package:tobeto_app/view/screens/menuScreens/profile.dart';
+import 'package:tobeto_app/view/screens/menuScreens/reviews.dart';
 
 class SwiperPage extends StatefulWidget {
   const SwiperPage({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _SwiperPageState extends State<SwiperPage> {
   Widget build(BuildContext context) {
     final menuWidgets = {
       "Ana Sayfa": HomePage(),
-      "Değerlendirmeler": Reviews(),
+      "Değerlendirmeler": const Reviews(),
       "Profilim": Profile(),
       "Katalog": Catalog(),
       "Takvim": Calender(),
@@ -35,7 +36,16 @@ class _SwiperPageState extends State<SwiperPage> {
     final selectedWidget = menuWidgets[activeScreenName];
 
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: TobetoAppColor.colorSchemeLight.primary,
+          title: Text(
+            activeScreenName,
+            style: TextStyle(
+                color: TobetoAppColor.textColorDark,
+                fontSize: 20,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
         drawer: MenuScreen(
           selectedMenuItem: ((menuName) => changeScreen(menuName)),
         ),

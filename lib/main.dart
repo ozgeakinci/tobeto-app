@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme.dart';
-import 'package:tobeto_app/widget/login_page.dart';
+import 'package:tobeto_app/view/screens/login_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
