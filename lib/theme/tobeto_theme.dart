@@ -13,16 +13,18 @@ class TobetoAppTheme {
         ),
         colorScheme: TobetoAppColor.colorSchemeLight,
         textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-          labelLarge: GoogleFonts.poppins(
-              color: TobetoAppColor.backgroundDark,
-              fontWeight: FontWeight.bold),
+          // size = 16
+          bodyLarge: GoogleFonts.poppins(
+            color: TobetoAppColor.backgroundDark,
+          ),
+          // default text theme size = 14
           bodyMedium: TextStyle(
-              color: TobetoAppColor.textColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 18),
+            color: TobetoAppColor.textColorBlack,
+            fontWeight: FontWeight.bold,
+          ),
+          // size=12
           bodySmall: TextStyle(
-            fontSize: 16,
-            color: TobetoAppColor.textColor,
+            color: TobetoAppColor.textColorBlack,
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
@@ -34,13 +36,19 @@ class TobetoAppTheme {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+              textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
               backgroundColor: TobetoAppColor.colorSchemeLight.primary,
               fixedSize: const Size(350, 45),
               foregroundColor: TobetoAppColor.textColorDark),
         ),
         textButtonTheme: TextButtonThemeData(
-          style:
-              TextButton.styleFrom(foregroundColor: TobetoAppColor.textColor),
+          style: TextButton.styleFrom(
+              foregroundColor: TobetoAppColor.textColorBlack,
+              textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+              )),
         ),
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(

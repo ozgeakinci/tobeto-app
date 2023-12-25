@@ -101,8 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text(_isMember,
-                                    style: TextStyle(fontSize: 16)),
+                                const Text(
+                                  _isMember,
+                                ),
                                 TextButton(
                                   onPressed: () {},
                                   child: const Text(
