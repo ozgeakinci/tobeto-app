@@ -63,6 +63,7 @@ flutter:
      - assets/images/login_page_background.png
      - assets/images/hello_tobeto.png
      - assets/images/anket_image.png
+     - assets/images/survey_image.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
