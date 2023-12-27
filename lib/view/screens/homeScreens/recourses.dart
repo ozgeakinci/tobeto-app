@@ -25,11 +25,11 @@ class Recourses extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 3),
-                    ),
+                        color: isDarkMode
+                            ? Colors.grey.withOpacity(0.1)
+                            : Colors.grey.withOpacity(0.3),
+                        spreadRadius: 2,
+                        blurRadius: 3),
                   ],
                   color: isDarkMode
                       ? TobetoAppColor.buttonColorDark

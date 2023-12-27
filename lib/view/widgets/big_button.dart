@@ -55,7 +55,7 @@ class BigButton extends StatelessWidget {
                   style: TextStyle(
                       color: isDarkMode
                           ? TobetoAppColor.textColorDark
-                          : TobetoAppColor.textColorDark),
+                          : TobetoAppColor.textColorBlack),
                 ),
               ),
             )

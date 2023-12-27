@@ -82,9 +82,6 @@ class MenuScreen extends StatelessWidget {
                   ),
                   Text(
                     'Tobeto',
-                    style: TextStyle(
-                        color: TobetoAppColor.textColor,
-                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -114,9 +111,6 @@ class MenuScreen extends StatelessWidget {
             child: ListTile(
               title: Text(
                 'Çıkış Yap',
-                style: TextStyle(
-                    color: TobetoAppColor.textColor,
-                    fontWeight: FontWeight.bold),
               ),
               trailing: const Icon(Icons.logout_outlined),
               onTap: () {
