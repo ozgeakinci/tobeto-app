@@ -6,6 +6,7 @@ class Recourses extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -21,17 +22,18 @@ class Recourses extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-                color: Colors.white,
-              ),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                  color: isDarkMode
+                      ? TobetoAppColor.buttonColorDark
+                      : TobetoAppColor.buttonColorLight),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -63,7 +65,10 @@ class Recourses extends StatelessWidget {
                         Expanded(
                           child: Text(
                             "İstanbul Kodluyor Başvuru Formu Onaylandı.",
-                            style: Theme.of(context).textTheme.bodySmall,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.w400),
                           ),
                         ),
                       ],
@@ -84,7 +89,10 @@ class Recourses extends StatelessWidget {
                         Expanded(
                           child: Text(
                             "İstanbul Kodluyor Belge Yükleme Formu Onaylandı.",
-                            style: Theme.of(context).textTheme.bodySmall,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.w400),
                           ),
                         ),
                       ],
