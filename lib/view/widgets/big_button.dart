@@ -20,6 +20,7 @@ class BigButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Expanded(
       child: InkWell(
         onTap: () {
@@ -51,7 +52,10 @@ class BigButton extends StatelessWidget {
               child: Center(
                 child: Text(
                   title,
-                  style: TextStyle(color: textColor),
+                  style: TextStyle(
+                      color: isDarkMode
+                          ? TobetoAppColor.textColorDark
+                          : TobetoAppColor.textColorDark),
                 ),
               ),
             )

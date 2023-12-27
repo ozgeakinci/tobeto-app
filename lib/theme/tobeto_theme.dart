@@ -70,7 +70,8 @@ class TobetoAppTheme {
               color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
           displayLarge: TextStyle(color: TobetoAppColor.textColor),
           bodyMedium: TextStyle(
-              color: TobetoAppColor.textColor, fontWeight: FontWeight.bold)),
+              color: TobetoAppColor.textColorDark,
+              fontWeight: FontWeight.bold)),
       inputDecorationTheme: InputDecorationTheme(
         prefixIconColor: TobetoAppColor.textColor,
         suffixIconColor: TobetoAppColor.textColor,

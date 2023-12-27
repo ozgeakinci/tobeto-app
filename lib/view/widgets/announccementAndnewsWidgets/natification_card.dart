@@ -6,20 +6,22 @@ class NatificationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5), // Adjust the radius as needed
-        boxShadow: [
-          BoxShadow(
-            color: TobetoAppColor.textColor,
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-        color: TobetoAppColor.backgroundLight,
-      ),
+          borderRadius: BorderRadius.circular(5), // Adjust the radius as needed
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+          color: isDarkMode
+              ? TobetoAppColor.buttonColorDark
+              : TobetoAppColor.buttonColorLight),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class TobetoAppColor {
   static ColorScheme colorSchemeLight = ColorScheme.fromSeed(
-    seedColor: const Color(0xFF9833FF),
-    primary: const Color(0xFF9833FF),
+    seedColor: const Color(0xff822BD9),
+    primary: const Color(0xff822BD9),
     secondary: const Color(0xFF00D29B),
     surface: const Color(0xFFFFFFFF),
     background: const Color(0xFFFFFFFF),
@@ -17,8 +17,8 @@ class TobetoAppColor {
   );
 
   static ColorScheme colorSchemeDark = ColorScheme.fromSeed(
-    seedColor: const Color(0xFF9833FF),
-    primary: const Color(0xFF9833FF),
+    seedColor: const Color(0xff822BD9),
+    primary: const Color(0xff822BD9),
     secondary: const Color(0xFF00D29B),
     surface: const Color(0xFF333333),
     background: const Color(0xFF333333),
@@ -30,11 +30,14 @@ class TobetoAppColor {
     onError: const Color(0xFFFE4657),
     brightness: Brightness.dark,
   );
+
+  //Color shemada isimlendirmeye bakacağız
+
   static Color textColorBlack = const Color.fromARGB(255, 77, 77, 77);
   static Color textColorDark = const Color(0xFFFFFFFF);
   static Color textColor = const Color.fromARGB(255, 199, 198, 198);
-  static Color buttonColorDark = const Color.fromARGB(255, 223, 223, 223);
+  static Color buttonColorDark = Color.fromARGB(255, 96, 96, 96);
   static Color buttonColorLight = Colors.white;
-  static Color backgroundDark = const Color.fromARGB(255, 77, 77, 77);
+  static Color backgroundDark = Color.fromARGB(255, 54, 54, 54);
   static Color backgroundLight = const Color(0xfff5f5f5);
 }
