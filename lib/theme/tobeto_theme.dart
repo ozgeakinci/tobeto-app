@@ -66,12 +66,20 @@ class TobetoAppTheme {
       ),
       colorScheme: TobetoAppColor.colorSchemeDark,
       textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-          labelLarge: GoogleFonts.poppins(
-              color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
-          displayLarge: TextStyle(color: TobetoAppColor.textColor),
-          bodyMedium: TextStyle(
-              color: TobetoAppColor.textColorDark,
-              fontWeight: FontWeight.bold)),
+        labelLarge: GoogleFonts.poppins(
+            color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
+        displayLarge: TextStyle(color: TobetoAppColor.textColor),
+        // size = 16
+        bodyLarge: GoogleFonts.poppins(
+          color: TobetoAppColor.textColorDark,
+        ),
+        bodyMedium: TextStyle(
+            color: TobetoAppColor.textColorDark,
+            fontWeight: FontWeight.bold), // size=12
+        bodySmall: TextStyle(
+          color: TobetoAppColor.textColorDark,
+        ),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         prefixIconColor: TobetoAppColor.textColor,
         suffixIconColor: TobetoAppColor.textColor,

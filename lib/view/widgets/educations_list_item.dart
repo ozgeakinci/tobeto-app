@@ -13,9 +13,11 @@ class EducationsListItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 2,
-            ),
+                color: isDarkMode
+                    ? Colors.grey.withOpacity(0.1)
+                    : Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 3),
           ],
           color: isDarkMode
               ? TobetoAppColor.buttonColorDark
@@ -57,8 +59,9 @@ class EducationsListItem extends StatelessWidget {
               child: Text(
                 "EĞİTİME GİT",
                 style: TextStyle(
-                  color: TobetoAppColor.colorSchemeLight.primary,
-                ),
+                    color: isDarkMode
+                        ? TobetoAppColor.textColorDark
+                        : TobetoAppColor.colorSchemeLight.primary),
               ),
             ),
           ),

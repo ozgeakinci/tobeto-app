@@ -6,6 +6,8 @@ class Surveys extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -37,8 +39,9 @@ class Surveys extends StatelessWidget {
             Text(
               "Atanmış herhangi bir anket bulunamadı",
               style: TextStyle(
-                  color: TobetoAppColor.colorSchemeLight.primary,
-                  fontWeight: FontWeight.w500),
+                  color: isDarkMode
+                      ? TobetoAppColor.textColorDark
+                      : TobetoAppColor.colorSchemeLight.primary),
             ),
           ],
         ),
