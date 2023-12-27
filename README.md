@@ -48,7 +48,7 @@ Tobeto App, kullanıcıların çeşitli işlevlere erişebildiği bir Flutter uy
 
 <img width="200" height="400"  alt="recourses_screen" src="https://github.com/ozgeakinci/tobeto-app/assets/95983264/80ed953a-8d25-4b8f-86be-0fe0233ebb12">
  <img width="200" height="400"  alt="recourses_screen_dark" src="https://github.com/ozgeakinci/tobeto-app/assets/95983264/88f07c81-2f5b-49db-b786-058dfcce6eec">
-<img width="200" alt="survey_dark" src="https://github.com/ozgeakinci/tobeto-app/assets/95983264/30c06fb1-52eb-4da2-b77d-5372451eb089">
+<img width="200"  height="400"  alt="survey_dark" src="https://github.com/ozgeakinci/tobeto-app/assets/95983264/30c06fb1-52eb-4da2-b77d-5372451eb089">
 <img width="200"  height="400" alt="new_screen_light" src="https://github.com/ozgeakinci/tobeto-app/assets/95983264/14800809-102d-4ce3-aab2-56e531f36f4c">
 <img width="200"  height="400"  alt="new_screen_dark" src="https://github.com/ozgeakinci/tobeto-app/assets/95983264/26f2845d-8e39-40a9-87eb-1400f0485db7">
 
