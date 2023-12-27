@@ -39,20 +39,23 @@ class EducationsListItem extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Center(
-            child: Image.asset(
-              // 344 × 258
-              'assets/images/video_image.png',
-            ),
+          Image.asset(
+            // 344 × 258
+            'assets/images/video_image.png',
+            width: double.infinity,
+            fit: BoxFit.cover,
           ),
 
           // Margin derini nereden alıyor ?
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              "EĞİTİME GİT",
-              style: TextStyle(
-                color: TobetoAppColor.colorSchemeLight.primary,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3),
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                "EĞİTİME GİT",
+                style: TextStyle(
+                  color: TobetoAppColor.colorSchemeLight.primary,
+                ),
               ),
             ),
           ),
