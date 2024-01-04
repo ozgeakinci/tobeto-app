@@ -11,7 +11,7 @@ class BigButton extends StatelessWidget {
     required this.title,
     required this.color,
     Color? textColor,
-  })  : textColor = textColor ?? TobetoAppColor.textColorBlack,
+  })  : textColor = textColor ?? TobetoAppColor.textColor,
         super(key: key);
 
   final String title;
@@ -52,10 +52,7 @@ class BigButton extends StatelessWidget {
               child: Center(
                 child: Text(
                   title,
-                  style: TextStyle(
-                      color: isDarkMode
-                          ? TobetoAppColor.textColorDark
-                          : TobetoAppColor.textColorBlack),
+                  style: TextStyle(color: textColor),
                 ),
               ),
             )

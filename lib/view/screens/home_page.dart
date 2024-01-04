@@ -98,7 +98,10 @@ class HomePage extends StatelessWidget {
                               title: 'Başvurularım',
                               color: isDarkMode
                                   ? TobetoAppColor.buttonColorDark
-                                  : TobetoAppColor.buttonColorLight),
+                                  : TobetoAppColor.buttonColorLight,
+                              textColor: isDarkMode
+                                  ? TobetoAppColor.textColorDark
+                                  : TobetoAppColor.textColorBlack),
                           const SizedBox(
                             width: 10,
                           ),
@@ -106,7 +109,10 @@ class HomePage extends StatelessWidget {
                               title: 'Eğitimlerim',
                               color: isDarkMode
                                   ? TobetoAppColor.buttonColorDark
-                                  : TobetoAppColor.buttonColorLight)
+                                  : TobetoAppColor.buttonColorLight,
+                              textColor: isDarkMode
+                                  ? TobetoAppColor.textColorDark
+                                  : TobetoAppColor.textColorBlack)
                         ],
                       ),
                     ),
@@ -119,7 +125,10 @@ class HomePage extends StatelessWidget {
                             title: 'Duyuru ve Haberler',
                             color: isDarkMode
                                 ? TobetoAppColor.buttonColorDark
-                                : TobetoAppColor.buttonColorLight),
+                                : TobetoAppColor.buttonColorLight,
+                            textColor: isDarkMode
+                                ? TobetoAppColor.textColorDark
+                                : TobetoAppColor.textColorBlack),
                         const SizedBox(
                           width: 10,
                         ),
@@ -127,7 +136,10 @@ class HomePage extends StatelessWidget {
                             title: 'Anketlerim',
                             color: isDarkMode
                                 ? TobetoAppColor.buttonColorDark
-                                : TobetoAppColor.buttonColorLight)
+                                : TobetoAppColor.buttonColorLight,
+                            textColor: isDarkMode
+                                ? TobetoAppColor.textColorDark
+                                : TobetoAppColor.textColorBlack)
                       ],
                     )
                   ]),
