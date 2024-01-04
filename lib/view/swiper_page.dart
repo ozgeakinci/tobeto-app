@@ -45,6 +45,20 @@ class _SwiperPageState extends State<SwiperPage> {
                 fontSize: 20,
                 fontWeight: FontWeight.w500),
           ),
+          actions: [
+            if (activeScreenName == "Takvim")
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {
+                  Calender().calenderAddIcon(context);
+                  /*    showBottomSheet(
+                      context: context,
+                      builder: (ctx) {
+                        return Calender();
+                      }); */
+                },
+              ),
+          ],
         ),
         drawer: MenuScreen(
           selectedMenuItem: ((menuName) => changeScreen(menuName)),
