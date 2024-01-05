@@ -18,18 +18,19 @@ class _LoginPageState extends State<LoginPage> {
     const String _registerText = 'Kayıt ol';
 
     return Scaffold(
-      body: Builder(
-        builder: (context) {
-          return Stack(
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                            'assets/images/login_page_background.png'))),
-                child: Center(
-                  child: Container(
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image:
+                        AssetImage('assets/images/login_page_background.png'))),
+            child: Center(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  Container(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -117,11 +118,11 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          );
-        },
+            ),
+          ),
+        ],
       ),
     );
   }
