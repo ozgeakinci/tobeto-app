@@ -13,5 +13,3 @@ void main() {
     ),
   );
 }
-
-// Git denem 2

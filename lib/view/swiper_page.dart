@@ -47,16 +47,21 @@ class _SwiperPageState extends State<SwiperPage> {
           ),
           actions: [
             if (activeScreenName == "Takvim")
-              IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {
-                  Calender().calenderAddIcon(context);
-                  /*    showBottomSheet(
-                      context: context,
-                      builder: (ctx) {
-                        return Calender();
-                      }); */
-                },
+              Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      print("searchicon");
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.filter_list_alt),
+                    onPressed: () {
+                      Calender().calenderAddIcon(context);
+                    },
+                  ),
+                ],
               ),
           ],
         ),
