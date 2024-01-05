@@ -32,8 +32,8 @@ class TobetoAppTheme {
             color: TobetoAppColor.textColorBlack,
           ),
           titleLarge: GoogleFonts.poppins(
-              color: TobetoAppColor.textColorBlack,
-              fontWeight: FontWeight.w500),
+            color: TobetoAppColor.textColorBlack,
+          ),
           labelLarge: GoogleFonts.poppins(
               color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
         ),
@@ -80,7 +80,8 @@ class TobetoAppTheme {
     return ThemeData(
       useMaterial3: true,
       scaffoldBackgroundColor: TobetoAppColor.backgroundDark,
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
+        color: Colors.black,
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       colorScheme: TobetoAppColor.colorSchemeDark,
@@ -94,7 +95,8 @@ class TobetoAppTheme {
         bodySmall: GoogleFonts.poppins(color: TobetoAppColor.textColorDark),
 
         titleLarge: GoogleFonts.poppins(
-            color: TobetoAppColor.textColorDark, fontWeight: FontWeight.w500),
+          color: TobetoAppColor.textColorDark,
+        ),
 
         labelLarge: GoogleFonts.poppins(
             color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),

@@ -13,7 +13,6 @@ class Recourses extends StatelessWidget {
           "Başvurularım",
           style: TextStyle(color: TobetoAppColor.textColorDark),
         ),
-        backgroundColor: TobetoAppColor.colorSchemeLight.primary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(14.0),

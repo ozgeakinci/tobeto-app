@@ -37,19 +37,18 @@ class ExamStatusCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
                   flex: 1,
                   child: Text(
                     point,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: TobetoAppColor.colorSchemeLight.secondary,
-                        fontWeight: FontWeight.w800),
+                        color: TobetoAppColor.colorSchemeLight.secondary),
                   ),
                 ),
                 Expanded(
-                  flex: 4,
+                  flex: 3,
                   child: Text(
                     section,
                     style: Theme.of(context)

@@ -13,7 +13,6 @@ class Educations extends StatelessWidget {
           "Eğitimlerim",
           style: TextStyle(color: TobetoAppColor.backgroundLight),
         ),
-        backgroundColor: TobetoAppColor.colorSchemeLight.primary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),

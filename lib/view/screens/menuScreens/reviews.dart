@@ -22,7 +22,7 @@ class Reviews extends StatelessWidget {
                   text: 'Yetkinlik',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: TobetoAppColor.colorSchemeLight.primary,
-                      fontWeight: FontWeight.w500)),
+                      fontWeight: FontWeight.w600)),
               TextSpan(
                   text: 'lerini ücretsiz ölç,           ',
                   style: Theme.of(context).textTheme.titleLarge),
@@ -75,36 +75,36 @@ class Reviews extends StatelessWidget {
         ExamStatusCard(
           point: "--",
           section: 'Full Stack',
-          icon: TextButton(
-            onPressed: () {},
-            child: Text('Başla',
-                style: TextStyle(
-                  color: TobetoAppTheme.lightTheme().primaryColor,
-                )),
-          ),
+          // icon: TextButton(
+          //   onPressed: () {},
+          //   child: Text('Başla',
+          //       style: TextStyle(
+          //         color: TobetoAppTheme.lightTheme().primaryColor,
+          //       )),
+          // ),
         ),
         ExamStatusCard(
           point: '--',
           section: 'Back End',
-          icon: TextButton(
-            onPressed: () {},
-            child: Text('Başla',
-                style: TextStyle(
-                    color: TobetoAppTheme.lightTheme().primaryColor,
-                    fontWeight: FontWeight.normal)),
-          ),
+          // icon: TextButton(
+          //   onPressed: () {},
+          //   child: Text('Başla',
+          //       style: TextStyle(
+          //           color: TobetoAppTheme.lightTheme().primaryColor,
+          //           fontWeight: FontWeight.normal)),
+          // ),
         ),
         const ExamStatusCard(point: '76.00', section: 'Microsoft SQL Server'),
         ExamStatusCard(
           point: '--',
           section: 'Masaüstü Programlama',
-          icon: TextButton(
-            onPressed: () {},
-            child: Text('Başla',
-                style: TextStyle(
-                    color: TobetoAppTheme.lightTheme().primaryColor,
-                    fontWeight: FontWeight.normal)),
-          ),
+          // icon: TextButton(
+          //   onPressed: () {},
+          //   child: Text('Başla',
+          //       style: TextStyle(
+          //           color: TobetoAppTheme.lightTheme().primaryColor,
+          //           fontWeight: FontWeight.normal)),
+          // ),
         ),
         const SizedBox(
           height: 10,
@@ -118,7 +118,7 @@ class Reviews extends StatelessWidget {
                   text: 'Aboneliğe özel ',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: TobetoAppColor.colorSchemeLight.primary,
-                      fontWeight: FontWeight.w500)),
+                      fontWeight: FontWeight.w600)),
               TextSpan(
                   text: 'değerlendirme araçları için',
                   style: Theme.of(context).textTheme.titleLarge),

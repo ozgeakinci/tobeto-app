@@ -14,7 +14,6 @@ class Surveys extends StatelessWidget {
           "Anketlerim",
           style: TextStyle(color: TobetoAppColor.backgroundLight),
         ),
-        backgroundColor: TobetoAppColor.colorSchemeLight.primary,
       ),
       body: Center(
         child: Column(

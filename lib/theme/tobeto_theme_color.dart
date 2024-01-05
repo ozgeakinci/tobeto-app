@@ -36,8 +36,8 @@ class TobetoAppColor {
   static Color textColorBlack = const Color.fromARGB(255, 77, 77, 77);
   static Color textColorDark = const Color(0xFFFFFFFF);
   static Color textColor = const Color.fromARGB(255, 199, 198, 198);
-  static Color buttonColorDark = Color.fromARGB(255, 96, 96, 96);
+  static Color buttonColorDark = Color(0xff161618);
   static Color buttonColorLight = Colors.white;
-  static Color backgroundDark = Color.fromARGB(255, 54, 54, 54);
+  static Color backgroundDark = Colors.black;
   static Color backgroundLight = const Color(0xfff5f5f5);
 }

@@ -9,12 +9,10 @@ class AnnounccementAndnews extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Duyuru ve Haberler",
-          style: TextStyle(color: TobetoAppColor.textColorDark),
-        ),
-        backgroundColor: TobetoAppColor.colorSchemeLight.primary,
-      ),
+          title: Text(
+            "Duyuru ve Haberler",
+          ),
+          backgroundColor: Colors.black),
       body: Padding(
         padding: const EdgeInsets.all(14.0),
         child: ListView(

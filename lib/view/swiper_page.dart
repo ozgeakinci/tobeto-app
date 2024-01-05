@@ -37,7 +37,7 @@ class _SwiperPageState extends State<SwiperPage> {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: TobetoAppColor.colorSchemeLight.primary,
+          // backgroundColor: TobetoAppColor.colorSchemeLight.primary,
           title: Text(
             activeScreenName,
             style: TextStyle(
