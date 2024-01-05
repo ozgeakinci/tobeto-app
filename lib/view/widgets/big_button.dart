@@ -20,7 +20,6 @@ class BigButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Expanded(
       child: InkWell(
         onTap: () {

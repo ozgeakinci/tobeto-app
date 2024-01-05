@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
 class TobetoAppTheme {
+  //Light Theme
   static ThemeData lightTheme() {
     return ThemeData(
         useMaterial3: true,
@@ -12,21 +13,29 @@ class TobetoAppTheme {
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
         colorScheme: TobetoAppColor.colorSchemeLight,
+        //Text Control
         textTheme: GoogleFonts.poppinsTextTheme().copyWith(
           // size = 16
           bodyLarge: GoogleFonts.poppins(
             color: TobetoAppColor.backgroundDark,
           ),
           // default text theme size = 14
-          bodyMedium: TextStyle(
-            color: TobetoAppColor.textColorBlack,
-            fontWeight: FontWeight.bold,
-          ),
+          bodyMedium: GoogleFonts.poppins(
+              color: TobetoAppColor.textColorBlack,
+              fontWeight: FontWeight.normal),
+
           // size=12
-          bodySmall: TextStyle(
+          bodySmall: GoogleFonts.poppins(
             color: TobetoAppColor.textColorBlack,
           ),
+          titleLarge: GoogleFonts.poppins(
+              color: TobetoAppColor.textColorBlack,
+              fontWeight: FontWeight.w500),
+          labelLarge: GoogleFonts.poppins(
+              color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
         ),
+
+        //Input Control
         inputDecorationTheme: InputDecorationTheme(
           prefixIconColor: TobetoAppColor.textColor,
           suffixIconColor: TobetoAppColor.textColor,
@@ -34,9 +43,10 @@ class TobetoAppTheme {
             color: TobetoAppColor.textColor,
           ),
         ),
+        //Button Control
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-              textStyle: TextStyle(
+              textStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
               backgroundColor: TobetoAppColor.colorSchemeLight.primary,
@@ -46,17 +56,23 @@ class TobetoAppTheme {
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
               foregroundColor: TobetoAppColor.textColorBlack,
-              textStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-              )),
+              textStyle: const TextStyle()),
         ),
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
               foregroundColor: TobetoAppColor.textColor, iconSize: 25),
         ),
-        iconTheme: IconThemeData(color: TobetoAppColor.textColor, size: 30));
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+              backgroundColor: TobetoAppColor.buttonColorLight,
+              foregroundColor: TobetoAppColor.colorSchemeLight.primary,
+              fixedSize: const Size(140, 60)),
+        ),
+        iconTheme:
+            IconThemeData(color: TobetoAppColor.buttonColorDark, size: 30));
   }
 
+  //Dark Theme
   static ThemeData darkTheme() {
     return ThemeData(
       useMaterial3: true,
@@ -66,20 +82,27 @@ class TobetoAppTheme {
       ),
       colorScheme: TobetoAppColor.colorSchemeDark,
       textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-        labelLarge: GoogleFonts.poppins(
-            color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
-        displayLarge: TextStyle(color: TobetoAppColor.textColor),
-        // size = 16
         bodyLarge: GoogleFonts.poppins(
           color: TobetoAppColor.textColorDark,
         ),
-        bodyMedium: TextStyle(
-            color: TobetoAppColor.textColorDark,
-            fontWeight: FontWeight.bold), // size=12
-        bodySmall: TextStyle(
-          color: TobetoAppColor.textColorDark,
-        ),
+
+        bodyMedium: GoogleFonts.poppins(
+            color: TobetoAppColor.textColorDark, fontWeight: FontWeight.normal),
+        bodySmall: GoogleFonts.poppins(color: TobetoAppColor.textColorDark),
+
+        titleLarge: GoogleFonts.poppins(
+            color: TobetoAppColor.textColorDark, fontWeight: FontWeight.w500),
+
+        labelLarge: GoogleFonts.poppins(
+            color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
+        displayLarge: TextStyle(color: TobetoAppColor.textColorBlack),
+
+        // size = 16
+
+        // size=12
       ),
+
+      //Input Control
       inputDecorationTheme: InputDecorationTheme(
         prefixIconColor: TobetoAppColor.textColor,
         suffixIconColor: TobetoAppColor.textColor,
@@ -87,6 +110,9 @@ class TobetoAppTheme {
           color: TobetoAppColor.textColor,
         ),
       ),
+
+      //Button Control
+
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             backgroundColor: TobetoAppColor.colorSchemeLight.primary,
@@ -99,6 +125,13 @@ class TobetoAppTheme {
       iconButtonTheme: IconButtonThemeData(
         style: IconButton.styleFrom(
             foregroundColor: TobetoAppColor.textColor, iconSize: 30),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: TobetoAppColor.buttonColorLight,
+          foregroundColor: TobetoAppColor.colorSchemeLight.primary,
+          fixedSize: const Size(140, 60),
+        ),
       ),
     );
   }

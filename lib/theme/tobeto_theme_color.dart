@@ -17,8 +17,8 @@ class TobetoAppColor {
   );
 
   static ColorScheme colorSchemeDark = ColorScheme.fromSeed(
-    seedColor: const Color(0xff822BD9),
-    primary: const Color(0xff822BD9),
+    seedColor: const Color(0xffB266FF),
+    primary: const Color(0xffAA55FF),
     secondary: const Color(0xFF00D29B),
     surface: const Color(0xFF333333),
     background: const Color(0xFF333333),
