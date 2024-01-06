@@ -85,6 +85,9 @@ class TobetoAppTheme {
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       colorScheme: TobetoAppColor.colorSchemeDark,
+      // showModalBottomSheet => Üst köşelerin düz olması saglandı
+      bottomSheetTheme: const BottomSheetThemeData(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
       textTheme: GoogleFonts.poppinsTextTheme().copyWith(
         bodyLarge: GoogleFonts.poppins(
           color: TobetoAppColor.textColorDark,

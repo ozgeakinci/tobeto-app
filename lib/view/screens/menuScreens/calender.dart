@@ -28,10 +28,10 @@ class Calender extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Filtre',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+                  Text('Filtre',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          )),
                   const SizedBox(height: 20),
                   DropdownButton(
                     isExpanded: true,
@@ -40,7 +40,9 @@ class Calender extends StatelessWidget {
                     items: teachers.map((teacher) {
                       return DropdownMenuItem(
                         value: teacher,
-                        child: Text(teacher),
+                        child: Text(
+                          teacher,
+                        ),
                       );
                     }).toList(),
                     onChanged: (newValue) {
