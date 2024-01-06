@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/theme/tobeto_theme.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/widgets/reviewsWidget/exam_status_card.dart';
 import 'package:tobeto_app/view/widgets/reviewsWidget/info_banner_card.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/widgets/announccementAndnewsWidgets/notification_card.dart';
 
 class AnnounccementAndnews extends StatelessWidget {
@@ -9,10 +8,10 @@ class AnnounccementAndnews extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-            "Duyuru ve Haberler",
-          ),
-          backgroundColor: Colors.black),
+        title: const Text(
+          "Duyuru ve Haberler",
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(14.0),
         child: ListView(
@@ -21,8 +20,6 @@ class AnnounccementAndnews extends StatelessWidget {
               title: "Yeni grupların Discorda katılımı",
               date: "12.12.2023",
               image: "assets/images/message_icon.png",
-
-              //"assets/images/message_icon.png"
             ),
             SizedBox(
               height: 16,
