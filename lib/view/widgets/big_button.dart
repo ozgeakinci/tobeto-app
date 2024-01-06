@@ -18,23 +18,22 @@ class BigButton extends StatelessWidget {
   final Color color;
   final Color? textColor;
 
+  final Map<String, Widget> routes = {
+    "Başvurularım": const Recourses(),
+    "Eğitimlerim": const Educations(),
+    "Duyuru ve Haberler": const AnnounccementAndnews(),
+    "Anketlerim": const Surveys(),
+  };
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
         onTap: () {
-          if (title == "Başvurularım") {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (ctx) => const Recourses()));
-          } else if (title == "Eğitimlerim") {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (ctx) => const Educations()));
-          } else if (title == "Duyuru ve Haberler") {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (ctx) => const AnnounccementAndnews()));
-          } else if (title == "Anketlerim") {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (ctx) => const Surveys()));
+          if (routes.containsKey(title)) {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (ctx) => routes[title]!),
+            );
           }
         },
         child: Stack(

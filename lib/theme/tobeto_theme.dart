@@ -9,8 +9,9 @@ class TobetoAppTheme {
     return ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
+          color: TobetoAppColor.colorSchemeLight.primary,
         ),
         colorScheme: TobetoAppColor.colorSchemeLight,
         // showModalBottomSheet => Üst köşelerin düz olması saglandı
