@@ -35,8 +35,9 @@ class MenuScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.close,
+                  color: TobetoAppColor.textColorBlack,
                 ),
               ),
             ],

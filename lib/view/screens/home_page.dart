@@ -15,26 +15,25 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(
+            Padding(
+              padding: const EdgeInsets.only(
                 left: 20,
                 top: 15,
               ),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Hoşgeldin Özge, Hasan',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    SizedBox(
+                    Text('Hoşgeldin Özge, Hasan',
+                        style: Theme.of(context).textTheme.titleLarge),
+                    const SizedBox(
                       height: 4,
                     ),
                     Text(
                       'Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!',
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.normal),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: TobetoAppColor.textColor),
                     )
                   ]),
             ),
@@ -44,7 +43,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Container(
                     width: width,
-                    height: height * 0.22,
+                    height: height * 0.16,
                     decoration: BoxDecoration(
                         color: TobetoAppColor.colorSchemeLight.secondary,
                         borderRadius: BorderRadius.circular(20)),
@@ -52,19 +51,19 @@ class HomePage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: Padding(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             left: 32,
                             top: 16,
                             right: 20,
                           ),
                           child: Text(
                             'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al. Aradığın “İş” Burada!',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w400),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: TobetoAppColor.textColorDark),
                           ),
                         ),
                       ),
@@ -88,9 +87,12 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Bilgilendirmeler',
-                      style: TextStyle(fontSize: 18),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontWeight: FontWeight.w600),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
@@ -154,9 +156,12 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Gelişim',
-                      style: TextStyle(fontSize: 18),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontWeight: FontWeight.w600),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),

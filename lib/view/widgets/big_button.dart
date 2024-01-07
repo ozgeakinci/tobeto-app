@@ -50,7 +50,8 @@ class BigButton extends StatelessWidget {
               child: Center(
                 child: Text(
                   title,
-                  style: TextStyle(color: textColor),
+                  style:
+                      TextStyle(color: textColor, fontWeight: FontWeight.w600),
                 ),
               ),
             )

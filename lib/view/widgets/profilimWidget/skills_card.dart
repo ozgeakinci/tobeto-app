@@ -26,12 +26,15 @@ class SkillsCard extends StatelessWidget {
             side: const BorderSide(
                 style: BorderStyle.solid,
                 color: Color.fromARGB(255, 221, 221, 221))),
-        child: ListTile(
-            dense: true,
-            leading: icon,
-            title: title,
-            subtitle: subTitle,
-            trailing: textButton),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8, right: 0, top: 8, bottom: 8),
+          child: ListTile(
+              dense: true,
+              leading: icon,
+              title: title,
+              subtitle: subTitle,
+              trailing: textButton),
+        ),
       ),
     );
   }

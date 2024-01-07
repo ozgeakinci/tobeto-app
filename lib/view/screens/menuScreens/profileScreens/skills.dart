@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/profilimWidget/skills_card.dart';
 
 class Skills extends StatelessWidget {
@@ -14,26 +13,26 @@ class Skills extends StatelessWidget {
       body: ListView(children: [
         SkillsCard(
           title: const Text('JavaScript'),
-          textButton: _skillsTextButton(),
+          textButton: DeleteButton.deleteIconButton,
         ),
         SkillsCard(
           title: const Text('Uyum Sağlama'),
-          textButton: _skillsTextButton(),
+          textButton: DeleteButton.deleteIconButton,
         ),
         SkillsCard(
           title: const Text('Aktif Öğrenme'),
-          textButton: _skillsTextButton(),
+          textButton: DeleteButton.deleteIconButton,
         ),
         SkillsCard(
           title: const Text('Bootstrap(Front-End FrameWork)'),
-          textButton: _skillsTextButton(),
+          textButton: DeleteButton.deleteIconButton,
         )
       ]),
     );
   }
+}
 
-  TextButton _skillsTextButton() {
-    return TextButton(
-        onPressed: () {}, child: Image.asset("assets/images/delete_icon.png"));
-  }
+class DeleteButton {
+  static TextButton deleteIconButton = TextButton(
+      onPressed: () {}, child: Image.asset("assets/images/delete_icon.png"));
 }

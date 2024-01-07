@@ -33,9 +33,9 @@ class TobetoAppColor {
 
   //Color shemada isimlendirmeye bakacağız
 
-  static Color textColorBlack = const Color.fromARGB(255, 77, 77, 77);
+  static Color textColorBlack = Color.fromARGB(255, 34, 34, 34);
   static Color textColorDark = const Color(0xFFFFFFFF);
-  static Color textColor = const Color.fromARGB(255, 199, 198, 198);
+  static Color textColor = Color.fromARGB(255, 123, 123, 123);
   static Color buttonColorDark = Color(0xff161618);
   static Color buttonColorLight = Colors.white;
   static Color backgroundDark = Colors.black;

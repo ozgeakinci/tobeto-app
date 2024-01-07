@@ -22,24 +22,25 @@ class TobetoAppTheme {
         bottomSheetTheme: const BottomSheetThemeData(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
         //Text Control
-        textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+        textTheme: GoogleFonts.robotoTextTheme().copyWith(
           // size = 16
-          bodyLarge: GoogleFonts.poppins(
+          bodyLarge: GoogleFonts.roboto(
             color: TobetoAppColor.backgroundDark,
           ),
           // default text theme size = 14
-          bodyMedium: GoogleFonts.poppins(
+          bodyMedium: GoogleFonts.roboto(
               color: TobetoAppColor.textColorBlack,
-              fontWeight: FontWeight.normal),
+              fontWeight: FontWeight.w500),
 
           // size=12
-          bodySmall: GoogleFonts.poppins(
+          bodySmall: GoogleFonts.roboto(
             color: TobetoAppColor.textColorBlack,
           ),
-          titleLarge: GoogleFonts.poppins(
-            color: TobetoAppColor.textColorBlack,
-          ),
-          labelLarge: GoogleFonts.poppins(
+          titleLarge: GoogleFonts.roboto(
+              color: TobetoAppColor.textColorBlack,
+              fontSize: 20,
+              fontWeight: FontWeight.w600),
+          labelLarge: GoogleFonts.roboto(
               color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
         ),
 
@@ -68,7 +69,7 @@ class TobetoAppTheme {
         ),
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
-              foregroundColor: TobetoAppColor.textColor, iconSize: 25),
+              foregroundColor: TobetoAppColor.textColorDark, iconSize: 25),
         ),
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
@@ -98,18 +99,18 @@ class TobetoAppTheme {
         // showModalBottomSheet => Üst köşelerin düz olması saglandı
         bottomSheetTheme: const BottomSheetThemeData(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
-        textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-          bodyLarge: GoogleFonts.poppins(
+        textTheme: GoogleFonts.robotoTextTheme().copyWith(
+          bodyLarge: GoogleFonts.roboto(
             color: TobetoAppColor.textColorDark,
           ),
-          bodyMedium: GoogleFonts.poppins(
+          bodyMedium: GoogleFonts.roboto(
+              color: TobetoAppColor.textColorDark, fontWeight: FontWeight.w500),
+          bodySmall: GoogleFonts.roboto(color: TobetoAppColor.textColorDark),
+          titleLarge: GoogleFonts.roboto(
               color: TobetoAppColor.textColorDark,
-              fontWeight: FontWeight.normal),
-          bodySmall: GoogleFonts.poppins(color: TobetoAppColor.textColorDark),
-          titleLarge: GoogleFonts.poppins(
-            color: TobetoAppColor.textColorDark,
-          ),
-          labelLarge: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w600),
+          labelLarge: GoogleFonts.roboto(
               color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
           displayLarge: TextStyle(color: TobetoAppColor.textColorBlack),
         ),
@@ -137,7 +138,7 @@ class TobetoAppTheme {
         ),
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
-              foregroundColor: TobetoAppColor.textColor, iconSize: 30),
+              foregroundColor: TobetoAppColor.textColorDark, iconSize: 30),
         ),
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(

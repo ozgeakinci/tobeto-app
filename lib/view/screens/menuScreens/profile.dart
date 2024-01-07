@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/view/screens/menuScreens/profileScreens/certificate.dart';
+import 'package:tobeto_app/view/screens/menuScreens/profileScreens/competency_badge.dart';
+import 'package:tobeto_app/view/screens/menuScreens/profileScreens/education_life.dart';
 import 'package:tobeto_app/view/screens/menuScreens/profileScreens/experience.dart';
+import 'package:tobeto_app/view/screens/menuScreens/profileScreens/foreign_language.dart';
 import 'package:tobeto_app/view/screens/menuScreens/profileScreens/personal_info.dart';
 import 'package:tobeto_app/view/screens/menuScreens/profileScreens/setting.dart';
 import 'package:tobeto_app/view/screens/menuScreens/profileScreens/skills.dart';
 import 'package:tobeto_app/view/screens/menuScreens/profileScreens/tobetoSuccesModelAtwork.dart';
+import 'package:tobeto_app/view/screens/menuScreens/profileScreens/tobeto_level_test.dart';
 
 class Profile extends StatelessWidget {
   final Map<String, dynamic> profileData = {
     'Kişisel Bilgiler': PersonalInfo(),
     'Deneyimlerm': Experience(),
     'Yetkinliklerim': Skills(),
-    'Yabancı dillerim': Experience(),
-    'Sertifikalarım': Experience(),
+    'Yabancı dillerim': ForeignLanguage(),
+    'Sertifikalarım': Certificate(),
     'Medya Hesaplarım': Experience(),
     'Tobeto işte başarı modelim': TobetoSuccesModelAtwork(),
-    'Tobeto seviye testlereim': Experience(),
-    'Yetkinlik rozetlerim': Experience(),
+    'Tobeto seviye testlereim': TobetoLevelTest(),
+    'Yetkinlik rozetlerim': CompetencyBadge(),
     'Activite Haritam': Experience(),
-    'Eğitim hayatım ve deneyimlerim': Experience(),
+    'Eğitim hayatım ve deneyimlerim': EducationLife(),
     'Ayarlar': Setting(),
 
     // Geri Kalanlar

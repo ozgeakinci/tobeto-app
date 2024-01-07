@@ -66,7 +66,7 @@ class Recourses extends StatelessWidget {
                             "İstanbul Kodluyor Başvuru Formu Onaylandı.",
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyMedium
+                                .bodySmall
                                 ?.copyWith(fontWeight: FontWeight.w400),
                           ),
                         ),
@@ -90,7 +90,7 @@ class Recourses extends StatelessWidget {
                             "İstanbul Kodluyor Belge Yükleme Formu Onaylandı.",
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyMedium
+                                .bodySmall
                                 ?.copyWith(fontWeight: FontWeight.w400),
                           ),
                         ),
