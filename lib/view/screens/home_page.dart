@@ -8,11 +8,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: isDarkMode
-          ? TobetoAppColor.backgroundDark
-          : TobetoAppColor.backgroundLight,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -44,8 +43,8 @@ class HomePage extends StatelessWidget {
               child: Stack(
                 children: [
                   Container(
-                    width: double.infinity,
-                    height: 150,
+                    width: width,
+                    height: height * 0.22,
                     decoration: BoxDecoration(
                         color: TobetoAppColor.colorSchemeLight.secondary,
                         borderRadius: BorderRadius.circular(20)),
@@ -55,8 +54,11 @@ class HomePage extends StatelessWidget {
                     children: [
                       const Expanded(
                         child: Padding(
-                          padding:
-                              EdgeInsets.only(left: 32, top: 16, right: 20),
+                          padding: EdgeInsets.only(
+                            left: 32,
+                            top: 16,
+                            right: 20,
+                          ),
                           child: Text(
                             'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al. Aradığın “İş” Burada!',
                             style: TextStyle(

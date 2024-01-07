@@ -8,12 +8,16 @@ class TobetoAppTheme {
   static ThemeData lightTheme() {
     return ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
-          color: TobetoAppColor.colorSchemeLight.primary,
-        ),
         colorScheme: TobetoAppColor.colorSchemeLight,
+        scaffoldBackgroundColor: TobetoAppColor.backgroundLight,
+        //Appbar Control
+
+        appBarTheme: AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+            color: TobetoAppColor.colorSchemeLight.primary,
+            titleTextStyle:
+                TextStyle(color: TobetoAppColor.textColorDark, fontSize: 20)),
+
         // showModalBottomSheet => Üst köşelerin düz olması saglandı
         bottomSheetTheme: const BottomSheetThemeData(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
@@ -73,75 +77,76 @@ class TobetoAppTheme {
               fixedSize: const Size(140, 60)),
         ),
         iconTheme:
-            IconThemeData(color: TobetoAppColor.buttonColorDark, size: 30));
+            IconThemeData(color: TobetoAppColor.buttonColorDark, size: 30),
+
+        //Drawer Control
+
+        drawerTheme:
+            DrawerThemeData(backgroundColor: TobetoAppColor.backgroundLight));
   }
 
   //Dark Theme
   static ThemeData darkTheme() {
     return ThemeData(
-      useMaterial3: true,
-      scaffoldBackgroundColor: TobetoAppColor.backgroundDark,
-      appBarTheme: AppBarTheme(
-        color: Colors.black,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-      ),
-      colorScheme: TobetoAppColor.colorSchemeDark,
-      // showModalBottomSheet => Üst köşelerin düz olması saglandı
-      bottomSheetTheme: const BottomSheetThemeData(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
-      textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-        bodyLarge: GoogleFonts.poppins(
-          color: TobetoAppColor.textColorDark,
+        useMaterial3: true,
+        scaffoldBackgroundColor: TobetoAppColor.backgroundDark,
+        appBarTheme: AppBarTheme(
+          color: TobetoAppColor.backgroundDark,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+        ),
+        colorScheme: TobetoAppColor.colorSchemeDark,
+        // showModalBottomSheet => Üst köşelerin düz olması saglandı
+        bottomSheetTheme: const BottomSheetThemeData(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
+        textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+          bodyLarge: GoogleFonts.poppins(
+            color: TobetoAppColor.textColorDark,
+          ),
+          bodyMedium: GoogleFonts.poppins(
+              color: TobetoAppColor.textColorDark,
+              fontWeight: FontWeight.normal),
+          bodySmall: GoogleFonts.poppins(color: TobetoAppColor.textColorDark),
+          titleLarge: GoogleFonts.poppins(
+            color: TobetoAppColor.textColorDark,
+          ),
+          labelLarge: GoogleFonts.poppins(
+              color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
+          displayLarge: TextStyle(color: TobetoAppColor.textColorBlack),
         ),
 
-        bodyMedium: GoogleFonts.poppins(
-            color: TobetoAppColor.textColorDark, fontWeight: FontWeight.normal),
-        bodySmall: GoogleFonts.poppins(color: TobetoAppColor.textColorDark),
-
-        titleLarge: GoogleFonts.poppins(
-          color: TobetoAppColor.textColorDark,
+        //Input Control
+        inputDecorationTheme: InputDecorationTheme(
+          prefixIconColor: TobetoAppColor.textColor,
+          suffixIconColor: TobetoAppColor.textColor,
+          labelStyle: TextStyle(
+            color: TobetoAppColor.textColor,
+          ),
         ),
 
-        labelLarge: GoogleFonts.poppins(
-            color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
-        displayLarge: TextStyle(color: TobetoAppColor.textColorBlack),
+        //Button Control
 
-        // size = 16
-
-        // size=12
-      ),
-
-      //Input Control
-      inputDecorationTheme: InputDecorationTheme(
-        prefixIconColor: TobetoAppColor.textColor,
-        suffixIconColor: TobetoAppColor.textColor,
-        labelStyle: TextStyle(
-          color: TobetoAppColor.textColor,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: TobetoAppColor.colorSchemeLight.primary,
+              fixedSize: const Size(350, 45),
+              foregroundColor: TobetoAppColor.textColorDark),
         ),
-      ),
-
-      //Button Control
-
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: TobetoAppColor.colorSchemeLight.primary,
-            fixedSize: const Size(350, 45),
-            foregroundColor: TobetoAppColor.textColorDark),
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(foregroundColor: TobetoAppColor.textColor),
-      ),
-      iconButtonTheme: IconButtonThemeData(
-        style: IconButton.styleFrom(
-            foregroundColor: TobetoAppColor.textColor, iconSize: 30),
-      ),
-      filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          backgroundColor: TobetoAppColor.buttonColorLight,
-          foregroundColor: TobetoAppColor.colorSchemeLight.primary,
-          fixedSize: const Size(140, 60),
+        textButtonTheme: TextButtonThemeData(
+          style:
+              TextButton.styleFrom(foregroundColor: TobetoAppColor.textColor),
         ),
-      ),
-    );
+        iconButtonTheme: IconButtonThemeData(
+          style: IconButton.styleFrom(
+              foregroundColor: TobetoAppColor.textColor, iconSize: 30),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            backgroundColor: TobetoAppColor.buttonColorLight,
+            foregroundColor: TobetoAppColor.colorSchemeLight.primary,
+            fixedSize: const Size(140, 60),
+          ),
+        ),
+        drawerTheme:
+            DrawerThemeData(backgroundColor: TobetoAppColor.backgroundDark));
   }
 }

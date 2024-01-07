@@ -68,6 +68,12 @@ flutter:
      - assets/images/message_icon.png
      - assets/images/video_image.png
      - assets/images/spiderman.jpeg
+     - assets/images/badge_coding.png
+     - assets/images/file_png_icon.png
+     - assets/images/file_pdf_icon.png
+     - assets/images/education_icon.png
+     - assets/images/world_icon.png
+     - assets/images/delete_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

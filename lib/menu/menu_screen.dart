@@ -42,7 +42,7 @@ class MenuScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 70,
+            height: 40,
           ),
           for (final menuItem in menus)
             InkWell(
@@ -73,11 +73,11 @@ class MenuScreen extends StatelessWidget {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (ctx) => const SwiperPage()));
               },
-              title: Row(
+              title: const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Icon(Icons.home_outlined),
-                  const SizedBox(
+                  Icon(Icons.home_outlined),
+                  SizedBox(
                     width: 10,
                   ),
                   Text(
