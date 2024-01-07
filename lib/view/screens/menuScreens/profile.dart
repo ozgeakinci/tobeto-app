@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/view/screens/menuScreens/profileScreens/experience.dart';
 import 'package:tobeto_app/view/screens/menuScreens/profileScreens/personal_info.dart';
+import 'package:tobeto_app/view/screens/menuScreens/profileScreens/setting.dart';
 import 'package:tobeto_app/view/screens/menuScreens/profileScreens/skills.dart';
+import 'package:tobeto_app/view/screens/menuScreens/profileScreens/tobetoSuccesModelAtwork.dart';
 
 class Profile extends StatelessWidget {
   final Map<String, dynamic> profileData = {
@@ -11,12 +13,12 @@ class Profile extends StatelessWidget {
     'Yabancı dillerim': Experience(),
     'Sertifikalarım': Experience(),
     'Medya Hesaplarım': Experience(),
-    'Tobeto işte başarı modelim': Experience(),
+    'Tobeto işte başarı modelim': TobetoSuccesModelAtwork(),
     'Tobeto seviye testlereim': Experience(),
     'Yetkinlik rozetlerim': Experience(),
     'Activite Haritam': Experience(),
     'Eğitim hayatım ve deneyimlerim': Experience(),
-    'Ayarlar': Experience(),
+    'Ayarlar': Setting(),
 
     // Geri Kalanlar
     /*        'Kişisel Bilgiler': PersonalInfo(),

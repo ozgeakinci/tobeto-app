@@ -67,6 +67,7 @@ flutter:
      - assets/images/time_icon.png
      - assets/images/message_icon.png
      - assets/images/video_image.png
+     - assets/images/spiderman.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
