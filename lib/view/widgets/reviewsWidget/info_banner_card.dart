@@ -12,11 +12,11 @@ class InfoBannerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Container(
-        //Responsive yapılacak
-        height: 165,
+        height: height * 0.25,
         child: Card(
           elevation: 0,
           shape:

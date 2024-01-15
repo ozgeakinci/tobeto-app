@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:tobeto_app/view/widgets/educations_list_item.dart';
+import 'package:tobeto_app/view/widgets/educational_card.dart';
 
 class Educations extends StatelessWidget {
   const Educations({Key? key}) : super(key: key);
@@ -13,13 +13,15 @@ class Educations extends StatelessWidget {
           "Eğitimlerim",
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: ListView(
-          children: const [
-            EducationsListItem(),
-          ],
-        ),
+      body: ListView(
+        children: const [
+          EducationalCard(
+              title: "Dr. Ecmal Ayral'dan Hoşgeldin Mesajı",
+              subTitle: "21 Eylül 2023 15:20"),
+          EducationalCard(
+              title: "Dr. Ecmal Ayral'dan Hoşgeldin Mesajı",
+              subTitle: "21 Eylül 2023 15:20"),
+        ],
       ),
     );
   }

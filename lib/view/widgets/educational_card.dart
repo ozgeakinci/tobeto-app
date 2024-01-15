@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
-class EducationsListItem extends StatelessWidget {
-  const EducationsListItem({Key? key}) : super(key: key);
+class EducationalCard extends StatelessWidget {
+  const EducationalCard({Key? key, required this.title, required this.subTitle})
+      : super(key: key);
+
+  final String title;
+  final String subTitle;
 
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
@@ -31,11 +36,11 @@ class EducationsListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Dr. Ecmal Ayral'dan Hoşgeldin Mesajı",
+                  title,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
-                  "21 Eylül 2023 15:20",
+                  subTitle,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],

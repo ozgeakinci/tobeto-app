@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/theme/tobeto_theme.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/widgets/reviewsWidget/exam_status_card.dart';
 import 'package:tobeto_app/view/widgets/reviewsWidget/info_banner_card.dart';
@@ -74,36 +75,36 @@ class Reviews extends StatelessWidget {
         ExamStatusCard(
           point: "--",
           section: 'Full Stack',
-          // icon: TextButton(
-          //   onPressed: () {},
-          //   child: Text('Başla',
-          //       style: TextStyle(
-          //         color: TobetoAppTheme.lightTheme().primaryColor,
-          //       )),
-          // ),
+          icon: TextButton(
+            onPressed: () {},
+            child: Text('Başla',
+                style: TextStyle(
+                  color: TobetoAppTheme.lightTheme().primaryColor,
+                )),
+          ),
         ),
         ExamStatusCard(
           point: '--',
           section: 'Back End',
-          // icon: TextButton(
-          //   onPressed: () {},
-          //   child: Text('Başla',
-          //       style: TextStyle(
-          //           color: TobetoAppTheme.lightTheme().primaryColor,
-          //           fontWeight: FontWeight.normal)),
-          // ),
+          icon: TextButton(
+            onPressed: () {},
+            child: Text('Başla',
+                style: TextStyle(
+                    color: TobetoAppTheme.lightTheme().primaryColor,
+                    fontWeight: FontWeight.normal)),
+          ),
         ),
         const ExamStatusCard(point: '76.00', section: 'Microsoft SQL Server'),
         ExamStatusCard(
           point: '--',
           section: 'Masaüstü Programlama',
-          // icon: TextButton(
-          //   onPressed: () {},
-          //   child: Text('Başla',
-          //       style: TextStyle(
-          //           color: TobetoAppTheme.lightTheme().primaryColor,
-          //           fontWeight: FontWeight.normal)),
-          // ),
+          icon: TextButton(
+            onPressed: () {},
+            child: Text('Başla',
+                style: TextStyle(
+                    color: TobetoAppTheme.lightTheme().primaryColor,
+                    fontWeight: FontWeight.normal)),
+          ),
         ),
         const SizedBox(
           height: 10,
