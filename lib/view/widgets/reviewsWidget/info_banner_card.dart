@@ -16,7 +16,7 @@ class InfoBannerCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Container(
         //Responsive yapılacak
-        height: 165,
+        height: MediaQuery.sizeOf(context).height / 2,
         child: Card(
           elevation: 0,
           shape:
