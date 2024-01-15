@@ -34,7 +34,12 @@ class _SwiperPageState extends State<SwiperPage> {
     };
 
     final selectedWidget = menuWidgets[activeScreenName];
-
+      // Katalog sayfasına gelindiğinde, AppBar yerine Scaffold oluşturabilirsiniz
+      if (activeScreenName == "Katalog") {
+        return Scaffold(
+          body: selectedWidget,
+        );
+      }
     return Scaffold(
         appBar: AppBar(
           // backgroundColor: TobetoAppColor.colorSchemeLight.primary,
