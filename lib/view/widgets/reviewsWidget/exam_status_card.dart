@@ -28,7 +28,7 @@ class ExamStatusCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
             side: BorderSide(
-              color: TobetoAppColor.textColor,
+              color: TobetoAppColor.textColor.withOpacity(0.3),
             )),
         child: Container(
           height: 55,

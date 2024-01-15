@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/utilities/utilities.dart';
 
 class PersonalInfo extends StatefulWidget {
   const PersonalInfo({Key? key}) : super(key: key);
@@ -9,9 +11,6 @@ class PersonalInfo extends StatefulWidget {
 }
 
 class _PersonalInfoState extends State<PersonalInfo> {
-  final String gibiIlkkan =
-      "Yahşı günde yar yahşıdır yaman günde yetiş gardaş....Kuki İlkkan";
-
   TextEditingController adController = TextEditingController();
   TextEditingController aboutMeController = TextEditingController();
 
@@ -19,7 +18,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kişisel Bilgilerim"),
+        title: const Text("Kişisel Bilgilerim"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
@@ -28,7 +27,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
             decoration: BoxDecoration(
               border: Border.all(
                 width: 2,
-                color: Color.fromARGB(255, 226, 223, 223),
+                color: TobetoAppColor.textColor.withOpacity(0.3),
               ),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -37,26 +36,31 @@ class _PersonalInfoState extends State<PersonalInfo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(gibiIlkkan),
-                  const SizedBox(height: 20),
                   _buildUserPhoto(),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ProjectUtilities.projectHeight20),
+                  Text(
+                    'Profil Fotoğrafı Ekle',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: TobetoAppColor.colorSchemeLight.primary),
+                  ),
+                  SizedBox(height: ProjectUtilities.projectHeight20),
                   _buildTextField("Adınız"),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ProjectUtilities.projectHeight20),
                   _buildTextField("Soy Adınız"),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ProjectUtilities.projectHeight20),
                   _buildPhoneNumberField(),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ProjectUtilities.projectHeight20),
                   _buildDateOfBirthField(),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ProjectUtilities.projectHeight20),
                   _buildTextField("TC Kimlik No"),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ProjectUtilities.projectHeight20),
                   _buildTextField("E-posta"),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ProjectUtilities.projectHeight20),
                   _buildTextField("Ülke il İlçe Seçilecek"),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ProjectUtilities.projectHeight20),
                   _buildAboutMeField(),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ProjectUtilities.projectHeight20),
                   _buildSaveButton(),
                 ],
               ),
@@ -69,16 +73,14 @@ class _PersonalInfoState extends State<PersonalInfo> {
 
   Widget _buildUserPhoto() {
     return Container(
-      width: 100,
-      height: 100,
+      width: 72,
+      height: 72,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(
-            width: 2, color: const Color.fromARGB(255, 150, 148, 148)),
-        color: const Color.fromARGB(255, 208, 203, 203),
+        border: Border.all(width: 2, color: Color.fromARGB(255, 214, 213, 213)),
+        color: TobetoAppColor.textColor.withOpacity(0.1),
       ),
-      child: const Icon(Icons.person,
-          size: 60, color: const Color.fromARGB(255, 137, 132, 132)),
+      child: Image.asset('assets/images/profile_icon.png'),
     );
   }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/utilities/utilities.dart';
 
 class Setting extends StatelessWidget {
   const Setting({Key? key}) : super(key: key);
@@ -9,59 +11,42 @@ class Setting extends StatelessWidget {
       appBar: AppBar(
         title: Text("Ayarlar"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(ProjectUtilities.paddingAll8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                    width: 2,
-                    color: Color.fromARGB(255, 226, 223, 223),
-                  ),
+                      width: 2, color: TobetoAppColor.backgroundLight),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      _buildTextField("Örn:123456", "Eski Şifre*"),
-                      const SizedBox(height: 10),
-                      _buildTextField("Örn:1234567", "Yeni Şifre*"),
-                      const SizedBox(height: 10),
-                      _buildTextField("Örn:1234567", "Yeni Şifre Tekrar*"),
-                    ],
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _buildTextField("Örn:123456", "Eski Şifre*"),
+                    _buildTextField("Örn:1234567", "Yeni Şifre*"),
+                    _buildTextField("Örn:1234567", "Yeni Şifre Tekrar*"),
+                  ],
                 ),
               ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        print("Şifre degiştir");
-                      },
-                      child: Text("Şifre Değiştir"),
+              Padding(
+                padding: EdgeInsets.all(ProjectUtilities.paddingAll16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SettingButton(
+                      backgroundColor: TobetoAppColor.colorSchemeLight.primary,
+                      title: 'Şifre Değiştir',
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        print("Üyeliği Sonlandır");
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                      ),
-                      child: Text("Üyeliği Sonlandır"),
+                    SettingButton(
+                      backgroundColor: TobetoAppColor.colorSchemeLight.error,
+                      title: 'Üyeliği Sonlandır',
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -71,25 +56,51 @@ class Setting extends StatelessWidget {
   }
 
   Widget _buildTextField(String labelText, String titleText) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(titleText),
-        TextFormField(
-          controller: null,
-          decoration: InputDecoration(
-            labelText: labelText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 12,
+    return Padding(
+      padding: EdgeInsets.all(ProjectUtilities.paddingAll16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(titleText),
+          TextFormField(
+            controller: null,
+            decoration: InputDecoration(
+              labelText: labelText,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 22,
+              ),
             ),
           ),
-          style: TextStyle(fontSize: 15),
-        ),
-      ],
+        ],
+      ),
+    );
+  }
+}
+
+class SettingButton extends StatelessWidget {
+  const SettingButton({
+    super.key,
+    required this.backgroundColor,
+    required this.title,
+  });
+  final Color backgroundColor;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+          fixedSize: const Size(170, 24),
+          backgroundColor: backgroundColor),
+      child: Text(
+        title,
+      ),
     );
   }
 }

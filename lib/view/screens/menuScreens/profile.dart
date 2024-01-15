@@ -24,20 +24,6 @@ class Profile extends StatelessWidget {
     'Activite Haritam': Experience(),
     'Eğitim hayatım ve deneyimlerim': EducationLife(),
     'Ayarlar': Setting(),
-
-    // Geri Kalanlar
-    /*        'Kişisel Bilgiler': PersonalInfo(),
-    'Deneyimlerm': Experience(),
-    'Yetkinliklerim': Skills(),
-    'Yabancı dillerim': ForeignLanguages(),
-    'Sertifikalarım': Certifications(),
-    'Medya Hesaplarım': SocialMediaAccounts(),
-    'Tobeto işte başarı modelim': TobetoSuccessModelAtWork(),
-    'Tobeto seviye testlereim': TobetoLevelTests(),
-    'Yetkinlik rozetlerim': SkillBadges(),
-    'Activite Haritam': ActivityMap(),
-    'Eğitim hayatım ve deneyimlerim': EducationAndExperiences(),
-    'Ayarlar': Settings(), */
   };
 
   Profile({Key? key}) : super(key: key);
@@ -45,6 +31,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> keys = profileData.keys.toList();
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       body: Center(
@@ -57,11 +44,10 @@ class Profile extends StatelessWidget {
                 itemBuilder: (context, index) {
                   String key = keys[index];
                   return ListTile(
-                    title: Text(
-                      key,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    trailing: Icon(Icons.chevron_right),
+                    title: Text(key,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: isDarkMode ? Colors.white : Colors.black)),
+                    trailing: const Icon(Icons.chevron_right),
                     onTap: () {
                       dynamic selectedClass = profileData[key];
                       if (selectedClass is Widget) {
