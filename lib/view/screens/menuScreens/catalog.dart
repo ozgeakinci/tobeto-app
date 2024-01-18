@@ -6,70 +6,47 @@ import 'package:tobeto_app/view/widgets/educational_card.dart';
 class Catalog extends StatelessWidget {
   const Catalog({Key? key}) : super(key: key);
 
+  void catalogAddIcon(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(0.0)),
+      ),
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Filtre',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                buildBottomSheetOption('Bana Özel'),
+                buildBottomSheetOption('Kategori'),
+                buildBottomSheetOption('Eğitimler'),
+                buildBottomSheetOption('Seviye'),
+                buildBottomSheetOption('Konu'),
+                buildBottomSheetOption('Yazılım Dili'),
+                buildBottomSheetOption('Eğitmen'),
+                buildBottomSheetOption('Durum'),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: TobetoAppColor.colorSchemeLight.primary,
-        title: Text(
-          'Katalog',
-          style: TextStyle(
-            color: TobetoAppColor.textColorDark, // Yazı rengi
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              // Burada arama işlemleri gerçekleştirilebilir
-            },
-            icon: Icon(Icons.search), // Arama simgesi
-          ),
-          IconButton(
-            onPressed: () {
-              // Filtreleme işlemleri burada gerçekleştirilebilir
-              showModalBottomSheet(
-                context: context,
-                shape: const RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(0.0)),
-                ),
-                builder: (BuildContext context) {
-                  return SingleChildScrollView(
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text(
-                            'Filtre', // Başlık
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold, // Kalın font
-                              fontSize: 20, // Metin boyutu
-                            ),
-                          ),
-                          const SizedBox(
-                              height:
-                                  12), // Başlık ile seçenekler arasında boşluk bırakmak için
-                          buildBottomSheetOption('Bana Özel'),
-                          buildBottomSheetOption('Kategori'),
-                          buildBottomSheetOption('Eğitimler'),
-                          buildBottomSheetOption('Seviye'),
-                          buildBottomSheetOption('Konu'),
-                          buildBottomSheetOption('Yazılım Dili'),
-                          buildBottomSheetOption('Eğitmen'),
-                          buildBottomSheetOption('Durum'),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              );
-            },
-            icon: Icon(Icons.filter_list_alt), //filtre simgesi
-          ),
-        ],
-      ),
       body: Column(
         children: [
           Expanded(
@@ -78,9 +55,10 @@ class Catalog extends StatelessWidget {
               itemBuilder: (context, index) {
                 final course = CourseData.courses[index];
                 return EducationalCard(
-                    title:
-                        "Dinle, Anla, İfade Et: Etkili İletişim Gelişim Yolculuğu",
-                    subTitle: "Gürkan İlişen");
+                  title:
+                      "Dinle, Anla, İfade Et: Etkili İletişim Gelişim Yolculuğu",
+                  subTitle: "Gürkan İlişen",
+                );
               },
             ),
           ),
@@ -92,12 +70,10 @@ class Catalog extends StatelessWidget {
   Widget buildBottomSheetOption(String title) {
     return InkWell(
       onTap: () {
-        // Seçeneğe tıklama işlemleri
         print('Tapped $title');
       },
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-            16, 12, 16, 12), // Kenar boşlukları ayarlandı
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -110,7 +86,7 @@ class Catalog extends StatelessWidget {
                 ),
               ),
             ),
-            const Icon(Icons.chevron_right), // Seçeneklerin yanındaki sembol
+            const Icon(Icons.chevron_right),
           ],
         ),
       ),

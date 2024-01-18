@@ -34,45 +34,59 @@ class _SwiperPageState extends State<SwiperPage> {
     };
 
     final selectedWidget = menuWidgets[activeScreenName];
-      // Katalog sayfasına gelindiğinde, AppBar yerine Scaffold oluşturabilirsiniz
-      if (activeScreenName == "Katalog") {
-        return Scaffold(
-          body: selectedWidget,
-        );
-      }
+
     return Scaffold(
-        appBar: AppBar(
-          // backgroundColor: TobetoAppColor.colorSchemeLight.primary,
-          title: Text(
-            activeScreenName,
-            style: TextStyle(
-                color: TobetoAppColor.textColorDark,
-                fontSize: 20,
-                fontWeight: FontWeight.w500),
+      appBar: AppBar(
+        // backgroundColor: TobetoAppColor.colorSchemeLight.primary,
+        title: Text(
+          activeScreenName,
+          style: TextStyle(
+            color: TobetoAppColor.textColorDark,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
           ),
-          actions: [
-            if (activeScreenName == "Takvim")
-              Row(
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                      print("searchicon");
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.filter_list_alt),
-                    onPressed: () {
-                      Calender().calenderAddIcon(context);
-                    },
-                  ),
-                ],
-              ),
-          ],
         ),
-        drawer: MenuScreen(
-          selectedMenuItem: ((menuName) => changeScreen(menuName)),
-        ),
-        body: selectedWidget);
+        actions: [
+          if (activeScreenName == "Takvim")
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    print("searchicon");
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.filter_list_alt),
+                  onPressed: () {
+                    Calender().calenderAddIcon(context);
+                  },
+                ),
+              ],
+            ),                   
+          if (activeScreenName == "Katalog")
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.search), 
+                  onPressed: () {
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.filter_list_alt), 
+                  onPressed: () {
+                    Catalog().catalogAddIcon(context);
+                  },
+                ),
+              ],
+            ),
+        ],
+      ),
+      drawer: MenuScreen(
+        selectedMenuItem: ((menuName) => changeScreen(menuName)),
+      ),
+      body: selectedWidget,
+    );
   }
 }
+
