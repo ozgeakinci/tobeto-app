@@ -54,7 +54,7 @@ class Catalog extends StatelessWidget {
               itemCount: CourseData.courses.length,
               itemBuilder: (context, index) {
                 final course = CourseData.courses[index];
-                return EducationalCard(
+                return const EducationalCard(
                   title:
                       "Dinle, Anla, İfade Et: Etkili İletişim Gelişim Yolculuğu",
                   subTitle: "Gürkan İlişen",
