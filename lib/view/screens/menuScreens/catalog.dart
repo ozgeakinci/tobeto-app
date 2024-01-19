@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/datas/menu_data.dart';
-import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/widgets/educational_card.dart';
 
 class Catalog extends StatelessWidget {
@@ -44,21 +42,32 @@ class Catalog extends StatelessWidget {
     );
   }
 
+  void catalogAddSearchIcon(BuildContext context) {
+    // Buraya arama işlevini ekleyin
+    print('Arama işlevi');
+  }
+
   @override
   Widget build(BuildContext context) {
+    final List<EducationalCard> fakeCourses = [
+      const EducationalCard(
+        title: 'Dinle, Anla, İfade Et: Etkili İletişim Gelişim Yolculuğu',
+        subTitle: 'Gürkan İlişen',
+      ),
+    const EducationalCard(
+        title: 'Dinle, Anla, İfade Et: Etkili İletişim Gelişim Yolculuğu',
+        subTitle: 'Gürkan İlişen',
+      ),
+    ];
+
     return Scaffold(
       body: Column(
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: CourseData.courses.length,
+              itemCount: fakeCourses.length,
               itemBuilder: (context, index) {
-                final course = CourseData.courses[index];
-                return const EducationalCard(
-                  title:
-                      "Dinle, Anla, İfade Et: Etkili İletişim Gelişim Yolculuğu",
-                  subTitle: "Gürkan İlişen",
-                );
+                return fakeCourses[index];
               },
             ),
           ),

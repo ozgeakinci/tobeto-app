@@ -70,6 +70,7 @@ class _SwiperPageState extends State<SwiperPage> {
                 IconButton(
                   icon: Icon(Icons.search), 
                   onPressed: () {
+                    Catalog().catalogAddSearchIcon(context);
                   },
                 ),
                 IconButton(
