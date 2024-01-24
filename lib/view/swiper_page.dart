@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/menu/menu_screen.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
-import 'package:tobeto_app/view/screens/menuScreens/calender.dart';
-import 'package:tobeto_app/view/screens/menuScreens/catalog.dart';
+import 'package:tobeto_app/view/screens/menu/calender.dart';
+import 'package:tobeto_app/view/screens/menu/catalog.dart';
 import 'package:tobeto_app/view/screens/home_page.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profile.dart';
-import 'package:tobeto_app/view/screens/menuScreens/reviews.dart';
+import 'package:tobeto_app/view/screens/menu/profile.dart';
+import 'package:tobeto_app/view/screens/menu/reviews.dart';
 
 class SwiperPage extends StatefulWidget {
   const SwiperPage({Key? key}) : super(key: key);
@@ -63,18 +63,18 @@ class _SwiperPageState extends State<SwiperPage> {
                   },
                 ),
               ],
-            ),                   
+            ),
           if (activeScreenName == "Katalog")
             Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.search), 
+                  icon: Icon(Icons.search),
                   onPressed: () {
                     Catalog().catalogAddSearchIcon(context);
                   },
                 ),
                 IconButton(
-                  icon: Icon(Icons.filter_list_alt), 
+                  icon: Icon(Icons.filter_list_alt),
                   onPressed: () {
                     Catalog().catalogAddIcon(context);
                   },
@@ -90,4 +90,3 @@ class _SwiperPageState extends State<SwiperPage> {
     );
   }
 }
-

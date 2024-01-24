@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/view/widgets/announccementAndnewsWidgets/notification_card.dart';
+import 'package:tobeto_app/view/widgets/notification_card.dart';
 
 class AnnounccementAndnews extends StatelessWidget {
   const AnnounccementAndnews({Key? key}) : super(key: key);

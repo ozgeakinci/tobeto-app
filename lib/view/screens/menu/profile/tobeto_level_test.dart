@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
-import 'package:tobeto_app/view/widgets/profilimWidget/skills_card.dart';
+import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class TobetoLevelTest extends StatelessWidget {
   const TobetoLevelTest({Key? key}) : super(key: key);

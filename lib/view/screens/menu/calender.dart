@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/view/widgets/announccementAndnewsWidgets/notification_card.dart';
+import 'package:tobeto_app/view/widgets/notification_card.dart';
 
 class Calender extends StatelessWidget {
   Calender({Key? key}) : super(key: key);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
-import 'package:tobeto_app/view/screens/homeScreens/announccementAndnews.dart';
-import 'package:tobeto_app/view/screens/homeScreens/educations.dart';
-import 'package:tobeto_app/view/screens/homeScreens/recourses.dart';
-import 'package:tobeto_app/view/screens/homeScreens/surveys.dart';
+import 'package:tobeto_app/view/screens/home/announccementAndnews.dart';
+import 'package:tobeto_app/view/screens/home/educations.dart';
+import 'package:tobeto_app/view/screens/home/recourses.dart';
+import 'package:tobeto_app/view/screens/home/surveys.dart';
 
 class BigButton extends StatelessWidget {
   BigButton({

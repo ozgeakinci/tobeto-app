@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/view/widgets/profilimWidget/skills_card.dart';
+import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class CompetencyBadge extends StatelessWidget {
   const CompetencyBadge({Key? key}) : super(key: key);

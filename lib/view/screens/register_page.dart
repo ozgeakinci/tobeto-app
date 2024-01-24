@@ -4,14 +4,14 @@ import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/swiper_page.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -39,6 +39,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     CustomTextField(
                         onSaved: _email,
+                        hintText: LanguageItems.hintNameText,
+                        prefixIcon: Icons.person_2_rounded),
+                    SizedBox(
+                      height: ProjectUtilities.projectHeight_8,
+                    ),
+                    CustomTextField(
+                        onSaved: _password,
                         hintText: LanguageItems.hintEmailText,
                         prefixIcon: Icons.person_2_rounded),
                     SizedBox(
@@ -50,23 +57,8 @@ class _LoginPageState extends State<LoginPage> {
                       prefixIcon: Icons.lock,
                       obscureText: true,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: ProjectUtilities.sizeWidth_8),
-                          child: TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              LanguageItems.forgotPassword,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     SizedBox(
-                      height: ProjectUtilities.paddingAll_8,
+                      height: ProjectUtilities.paddingAll_16,
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(),
@@ -74,28 +66,8 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (ctx) => const SwiperPage()));
                       },
-                      child: const Text(LanguageItems.loginIn),
+                      child: const Text(LanguageItems.registerText),
                     ),
-                    // Padding(
-                    //   padding: EdgeInsets.only(
-                    //       top: ProjectUtilities.projectHeight_32),
-                    //   child: Center(
-                    //     child: Row(
-                    //       mainAxisAlignment: MainAxisAlignment.center,
-                    //       children: [
-                    //         const Text(
-                    //           LanguageItems.isMember,
-                    //         ),
-                    //         TextButton(
-                    //           onPressed: () {},
-                    //           child: const Text(
-                    //             LanguageItems.registerText,
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // )
                   ],
                 ),
               ),

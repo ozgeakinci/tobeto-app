@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/skills.dart';
-import 'package:tobeto_app/view/widgets/profilimWidget/skills_card.dart';
+import 'package:tobeto_app/view/screens/menu/profile/skills.dart';
+import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class Certificate extends StatelessWidget {
   const Certificate({Key? key}) : super(key: key);

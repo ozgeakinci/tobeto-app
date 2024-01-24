@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/certificate.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/competency_badge.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/education_life.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/experience.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/foreign_language.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/personal_info.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/setting.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/skills.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/tobetoSuccesModelAtwork.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/tobeto_level_test.dart';
+import 'package:tobeto_app/view/screens/menu/profile/certificate.dart';
+import 'package:tobeto_app/view/screens/menu/profile/competency_badge.dart';
+import 'package:tobeto_app/view/screens/menu/profile/education_life.dart';
+import 'package:tobeto_app/view/screens/menu/profile/experience.dart';
+import 'package:tobeto_app/view/screens/menu/profile/foreign_language.dart';
+import 'package:tobeto_app/view/screens/menu/profile/personal_info.dart';
+import 'package:tobeto_app/view/screens/menu/profile/setting.dart';
+import 'package:tobeto_app/view/screens/menu/profile/skills.dart';
+import 'package:tobeto_app/view/screens/menu/profile/tobetoSuccesModelAtwork.dart';
+import 'package:tobeto_app/view/screens/menu/profile/tobeto_level_test.dart';
 
 class Profile extends StatelessWidget {
   final Map<String, dynamic> profileData = {

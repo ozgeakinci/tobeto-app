@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/view/screens/menuScreens/profileScreens/skills.dart';
-import 'package:tobeto_app/view/widgets/profilimWidget/skills_card.dart';
+import 'package:tobeto_app/view/screens/menu/profile/skills.dart';
+import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class EducationLife extends StatelessWidget {
   const EducationLife({Key? key}) : super(key: key);
