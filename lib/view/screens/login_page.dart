@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/language/language_items.dart';
+import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/swiper_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,19 +13,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    const String _hintText = 'Kullanıcı Adı';
-    const String _hintTextPassword = 'Şifre';
-    const String _loginIn = 'Giriş';
-    const String _isMember = 'Hala üye değil misiniz?';
-    const String _registerText = 'Kayıt ol';
-
     return Scaffold(
       body: Stack(
         children: [
           Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                     image:
                         AssetImage('assets/images/login_page_background.png'))),
             child: Center(
@@ -31,84 +27,66 @@ class _LoginPageState extends State<LoginPage> {
                 shrinkWrap: true,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: EdgeInsets.all(ProjectUtilities.paddingAll_24),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset('assets/images/tobeto-logo.png'),
-                        const SizedBox(
-                          height: 30,
+                        SizedBox(
+                          height: ProjectUtilities.projectHeight_32,
                         ),
-                        const SizedBox(
-                          width: 350,
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: _hintText,
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8))),
-                                prefixIcon: Icon(Icons.person_2_rounded),
-                              ),
-                            ),
-                          ),
+                        const CustomTextField(
+                            hintText: LanguageItems.hintText,
+                            prefixIcon: Icons.person_2_rounded),
+                        SizedBox(
+                          height: ProjectUtilities.projectHeight_8,
                         ),
-                        const SizedBox(height: 5),
-                        const SizedBox(
-                          width: 350,
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                hintText: _hintTextPassword,
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8))),
-                                prefixIcon: Icon(Icons.lock),
-                              ),
-                            ),
-                          ),
+                        const CustomTextField(
+                          hintText: LanguageItems.hintTextPassword,
+                          prefixIcon: Icons.lock,
+                          obscureText: true,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(right: 18.0),
+                              padding: EdgeInsets.only(
+                                  right: ProjectUtilities.sizeWidth_8),
                               child: TextButton(
                                 onPressed: () {},
                                 child: const Text(
-                                  'Şifremi Unuttum',
+                                  LanguageItems.forgotPassword,
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: ProjectUtilities.paddingAll_8,
+                        ),
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (ctx) => const SwiperPage()));
                           },
-                          child: const Text(_loginIn),
+                          child: const Text(LanguageItems.loginIn),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 30.0),
+                          padding: EdgeInsets.only(
+                              top: ProjectUtilities.projectHeight_32),
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Text(
-                                  _isMember,
+                                  LanguageItems.isMember,
                                 ),
                                 TextButton(
                                   onPressed: () {},
                                   child: const Text(
-                                    _registerText,
+                                    LanguageItems.registerText,
                                   ),
                                 ),
                               ],
@@ -123,6 +101,42 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final String hintText;
+  final IconData prefixIcon;
+  final bool obscureText;
+  final TextEditingController? controller;
+
+  const CustomTextField({
+    Key? key,
+    required this.hintText,
+    required this.prefixIcon,
+    this.obscureText = false,
+    this.controller,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 350,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextFormField(
+          controller: controller,
+          obscureText: obscureText,
+          decoration: InputDecoration(
+            hintText: hintText,
+            border: const OutlineInputBorder(
+                borderSide: BorderSide(),
+                borderRadius: BorderRadius.all(Radius.circular(8))),
+            prefixIcon: Icon(prefixIcon),
+          ),
+        ),
       ),
     );
   }

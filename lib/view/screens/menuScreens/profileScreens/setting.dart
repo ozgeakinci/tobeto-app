@@ -13,7 +13,7 @@ class Setting extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(ProjectUtilities.paddingAll8),
+          padding: EdgeInsets.all(ProjectUtilities.paddingAll_8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -33,7 +33,7 @@ class Setting extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(ProjectUtilities.paddingAll16),
+                padding: EdgeInsets.all(ProjectUtilities.paddingAll_16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -57,7 +57,7 @@ class Setting extends StatelessWidget {
 
   Widget _buildTextField(String labelText, String titleText) {
     return Padding(
-      padding: EdgeInsets.all(ProjectUtilities.paddingAll16),
+      padding: EdgeInsets.all(ProjectUtilities.paddingAll_16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

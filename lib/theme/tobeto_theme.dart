@@ -6,82 +6,82 @@ class TobetoAppTheme {
   //Light Theme
   static ThemeData lightTheme() {
     return ThemeData(
-        useMaterial3: true,
-        colorScheme: TobetoAppColor.colorSchemeLight,
-        scaffoldBackgroundColor: TobetoAppColor.backgroundLight,
-        //Appbar Control
+      useMaterial3: true,
+      colorScheme: TobetoAppColor.colorSchemeLight,
+      scaffoldBackgroundColor: TobetoAppColor.backgroundLight,
+      //Appbar Control
 
-        appBarTheme: AppBarTheme(
-            systemOverlayStyle: ThemeData.dark().appBarTheme.systemOverlayStyle,
-            color: TobetoAppColor.colorSchemeLight.primary,
-            titleTextStyle:
-                TextStyle(color: TobetoAppColor.textColorDark, fontSize: 20)),
+      appBarTheme: AppBarTheme(
+          systemOverlayStyle: ThemeData.dark().appBarTheme.systemOverlayStyle,
+          color: TobetoAppColor.colorSchemeLight.primary,
+          titleTextStyle:
+              TextStyle(color: TobetoAppColor.textColorDark, fontSize: 20)),
 
-        // showModalBottomSheet => Üst köşelerin düz olması saglandı
-        bottomSheetTheme: const BottomSheetThemeData(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
-        //Text Control
-        textTheme: TextTheme(
-          // size = 16
-          bodyLarge: TextStyle(
-            color: TobetoAppColor.backgroundDark,
-          ),
-          // default text theme size = 14
-          bodyMedium: TextStyle(
-              color: TobetoAppColor.textColorBlack,
-              fontWeight: FontWeight.w500),
+      // showModalBottomSheet => Üst köşelerin düz olması saglandı
+      bottomSheetTheme: const BottomSheetThemeData(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
+      //Text Control
+      textTheme: TextTheme(
+        // size = 16
+        bodyLarge: TextStyle(
+          color: TobetoAppColor.backgroundDark,
+        ),
+        // default text theme size = 14
+        bodyMedium: TextStyle(
+            color: TobetoAppColor.textColorBlack, fontWeight: FontWeight.w500),
 
-          // size=12
-          bodySmall: TextStyle(
-            color: TobetoAppColor.textColorBlack,
-          ),
-          titleLarge: TextStyle(
-              color: TobetoAppColor.textColorBlack,
-              fontWeight: FontWeight.w600),
-          labelLarge: TextStyle(
-              color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
+        // size=12
+        bodySmall: TextStyle(
+          color: TobetoAppColor.textColorBlack,
         ),
+        titleLarge: TextStyle(
+            color: TobetoAppColor.textColorBlack, fontWeight: FontWeight.w600),
+        labelLarge: TextStyle(
+            color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
+      ),
 
-        //Input Control
-        inputDecorationTheme: InputDecorationTheme(
-          prefixIconColor: TobetoAppColor.textColor,
-          suffixIconColor: TobetoAppColor.textColor,
-          labelStyle: TextStyle(
-            color: TobetoAppColor.textColor,
-          ),
+      //Input Control
+      inputDecorationTheme: InputDecorationTheme(
+        prefixIconColor: TobetoAppColor.textColor,
+        suffixIconColor: TobetoAppColor.textColor,
+        labelStyle: TextStyle(
+          color: TobetoAppColor.textColor,
         ),
-        //Button Control
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-              textStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-              backgroundColor: TobetoAppColor.colorSchemeLight.primary,
-              fixedSize: const Size(350, 45),
-              foregroundColor: TobetoAppColor.textColorDark),
+      ),
+      //Button Control
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+            backgroundColor: TobetoAppColor.colorSchemeLight.primary,
+            fixedSize: const Size(340, 45),
+            foregroundColor: TobetoAppColor.textColorDark,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10))),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: TobetoAppColor.textColorBlack,
         ),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            foregroundColor: TobetoAppColor.textColorBlack,
-          ),
-        ),
-        iconButtonTheme: IconButtonThemeData(
-          style: IconButton.styleFrom(
-              foregroundColor: TobetoAppColor.textColorDark, iconSize: 25),
-        ),
-        filledButtonTheme: FilledButtonThemeData(
-          style: FilledButton.styleFrom(
-              backgroundColor: TobetoAppColor.buttonColorLight,
-              foregroundColor: TobetoAppColor.colorSchemeLight.primary,
-              fixedSize: const Size(140, 60)),
-        ),
-        iconTheme:
-            IconThemeData(color: TobetoAppColor.buttonColorDark, size: 30),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+            foregroundColor: TobetoAppColor.textColorDark, iconSize: 25),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+            backgroundColor: TobetoAppColor.buttonColorLight,
+            foregroundColor: TobetoAppColor.colorSchemeLight.primary,
+            fixedSize: const Size(140, 60)),
+      ),
+      iconTheme: IconThemeData(color: TobetoAppColor.buttonColorDark, size: 30),
 
-        //Drawer Control
+      //Drawer Control
 
-        drawerTheme:
-            DrawerThemeData(backgroundColor: TobetoAppColor.backgroundLight));
+      drawerTheme:
+          DrawerThemeData(backgroundColor: TobetoAppColor.backgroundLight),
+    );
   }
 
   //Dark Theme
@@ -130,8 +130,10 @@ class TobetoAppTheme {
                 fontWeight: FontWeight.bold,
               ),
               backgroundColor: TobetoAppColor.colorSchemeLight.primary,
-              fixedSize: const Size(350, 45),
-              foregroundColor: TobetoAppColor.textColorDark),
+              fixedSize: const Size(340, 45),
+              foregroundColor: TobetoAppColor.textColorDark,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10))),
         ),
         textButtonTheme: TextButtonThemeData(
           style:
