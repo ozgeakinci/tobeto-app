@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
+import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/language/language_items.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
-import 'package:tobeto_app/view/swiper_page.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -17,6 +19,16 @@ class _RegisterPageState extends State<RegisterPage> {
     final _formKey = GlobalKey<FormState>();
     String _email = '';
     String _password = '';
+    String _username = '';
+
+    void _submit() {
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+        context.read<AuthBloc>().add(
+            Register(email: _email, password: _password, username: _username));
+      }
+    }
+
     return Stack(
       children: [
         Container(
@@ -38,21 +50,21 @@ class _RegisterPageState extends State<RegisterPage> {
                       height: ProjectUtilities.projectHeight_32,
                     ),
                     CustomTextField(
-                        onSaved: _email,
+                        onSaved: (value) => _username = value!,
                         hintText: LanguageItems.hintNameText,
                         prefixIcon: Icons.person_2_rounded),
                     SizedBox(
                       height: ProjectUtilities.projectHeight_8,
                     ),
                     CustomTextField(
-                        onSaved: _password,
+                        onSaved: (value) => _email = value!,
                         hintText: LanguageItems.hintEmailText,
                         prefixIcon: Icons.person_2_rounded),
                     SizedBox(
                       height: ProjectUtilities.projectHeight_8,
                     ),
                     CustomTextField(
-                      onSaved: _password,
+                      onSaved: (value) => _password = value!,
                       hintText: LanguageItems.hintTextPassword,
                       prefixIcon: Icons.lock,
                       obscureText: true,
@@ -63,8 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(),
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) => const SwiperPage()));
+                        _submit();
                       },
                       child: const Text(LanguageItems.registerText),
                     ),

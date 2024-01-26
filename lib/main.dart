@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/firebase_options.dart';
 import 'package:tobeto_app/theme/tobeto_theme.dart';
-import 'package:tobeto_app/view/screens/login_page.dart';
 import 'package:tobeto_app/view/screens/start_page.dart';
 
 void main() async {

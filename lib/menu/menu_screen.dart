@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
+import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/datas/menu_data.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/screens/login_page.dart';
@@ -110,13 +114,12 @@ class MenuScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
-              title: Text(
+              title: const Text(
                 'Çıkış Yap',
               ),
               trailing: const Icon(Icons.logout_outlined),
               onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const LoginPage()));
+                context.read<AuthBloc>().add(Logout());
               },
             ),
           ),

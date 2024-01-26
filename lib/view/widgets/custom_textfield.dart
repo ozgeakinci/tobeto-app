@@ -5,9 +5,9 @@ class CustomTextField extends StatelessWidget {
   final IconData prefixIcon;
   final bool obscureText;
   final TextEditingController? controller;
-  String onSaved;
+  final Function(String?)? onSaved;
 
-  CustomTextField({
+  const CustomTextField({
     Key? key,
     required this.hintText,
     required this.prefixIcon,
@@ -23,9 +23,7 @@ class CustomTextField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextFormField(
-          onSaved: (value) {
-            onSaved = value!;
-          },
+          onSaved: onSaved,
           controller: controller,
           obscureText: obscureText,
           decoration: InputDecoration(

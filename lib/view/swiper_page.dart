@@ -26,10 +26,10 @@ class _SwiperPageState extends State<SwiperPage> {
   @override
   Widget build(BuildContext context) {
     final menuWidgets = {
-      "Ana Sayfa": HomePage(),
+      "Ana Sayfa": const HomePage(),
       "Değerlendirmeler": const Reviews(),
       "Profilim": Profile(),
-      "Katalog": Catalog(),
+      "Katalog": const Catalog(),
       "Takvim": Calender(),
     };
 

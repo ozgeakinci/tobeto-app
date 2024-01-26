@@ -12,6 +12,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
         super(InitialState()) {
+    _firebaseAuth.authStateChanges().listen(
+      (user) {
+        if (user != null) {
+          emit(Authenticated(user: user));
+        } else {
+          emit(NotAuthenticated());
+        }
+      },
+    );
     on<Login>((event, emit) async {
       try {
         UserCredential userCredential =

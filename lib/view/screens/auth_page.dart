@@ -12,7 +12,7 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  bool _isLogin = false;
+  bool _isLogin = true;
   @override
   Widget build(BuildContext context) {
     Widget formWidget = _isLogin ? const LoginPage() : const RegisterPage();
