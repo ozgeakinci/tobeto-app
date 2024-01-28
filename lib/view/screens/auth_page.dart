@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/language/language_items.dart';
-import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/screens/login_page.dart';
 import 'package:tobeto_app/view/screens/register_page.dart';
 

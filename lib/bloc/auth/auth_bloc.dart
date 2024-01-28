@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/bloc/auth/auth_state.dart';
+import 'package:tobeto_app/repositories/user_repositories.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final FirebaseAuth _firebaseAuth;
@@ -39,9 +40,35 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             email: event.email,
             password: event.password,
           );
+          await _firebaseFirestore
+              .collection("users")
+              .doc(userCredential.user!.uid)
+              .set({
+            'email': event.email,
+            'username': event.username,
+            'registerDate': DateTime.now()
+          });
         } on FirebaseAuthException catch (e) {}
       },
     );
+
+/*     on<ResetAuthEvent>((event, emit) {
+      emit(InitialState());
+    }); */
+
+    on<GetUserEvent>((event, emit) async {
+      try {
+        final userInfos = await UserRepositories().getUserInfoFromFirebase();
+        print("Veriler Çekildii");
+        print(userInfos.username);
+        emit(GetUserState(usernameState: userInfos.username));
+      } catch (e) {
+        emit(GetUserState(usernameState: "No name")); // Degişecek
+        print("HatayaDüştü");
+        print(e);
+      }
+    });
+
     on<Logout>((event, emit) async {
       await _firebaseAuth.signOut();
     });

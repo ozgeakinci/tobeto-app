@@ -18,3 +18,10 @@ class Authenticated extends AuthState {
     this.user,
   });
 }
+
+class GetUserState extends AuthState {
+  final String usernameState;
+  GetUserState({
+    required this.usernameState,
+  });
+}
