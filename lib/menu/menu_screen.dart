@@ -16,6 +16,7 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     String getCurrentDate() {
       DateTime now = DateTime.now();
       return "${now.year}";
@@ -31,17 +32,22 @@ class MenuScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Image.asset(
-                'assets/images/tobeto-logo.png',
-                width: 170,
-              ),
+              isDarkMode
+                  ? Image.asset(
+                      'assets/images/tobeto_logo_dark.png',
+                      width: MediaQuery.of(context).size.width * 0.45,
+                    )
+                  : Image.asset(
+                      'assets/images/tobeto_logo_light.png',
+                      width: MediaQuery.of(context).size.width * 0.45,
+                    ),
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 icon: Icon(
                   Icons.close,
-                  color: TobetoAppColor.textColorBlack,
+                  color: TobetoAppColor.textColor,
                 ),
               ),
             ],

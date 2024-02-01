@@ -6,6 +6,7 @@ class ProjectUtilities {
     left: 5,
     right: 5,
   );
+
   static double projectHeight_8 = 8;
   static double projectHeight_16 = 16;
   static double projectHeight_24 = 24;

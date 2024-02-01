@@ -31,57 +31,43 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Stack(
       children: [
-        Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image:
-                      AssetImage('assets/images/login_page_background.png'))),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset('assets/images/tobeto-logo.png'),
-                    SizedBox(
-                      height: ProjectUtilities.projectHeight_32,
-                    ),
-                    CustomTextField(
-                        onSaved: (value) => _username = value!,
-                        hintText: LanguageItems.hintNameText,
-                        prefixIcon: Icons.person_2_rounded),
-                    SizedBox(
-                      height: ProjectUtilities.projectHeight_8,
-                    ),
-                    CustomTextField(
-                        onSaved: (value) => _email = value!,
-                        hintText: LanguageItems.hintEmailText,
-                        prefixIcon: Icons.person_2_rounded),
-                    SizedBox(
-                      height: ProjectUtilities.projectHeight_8,
-                    ),
-                    CustomTextField(
-                      onSaved: (value) => _password = value!,
-                      hintText: LanguageItems.hintTextPassword,
-                      prefixIcon: Icons.lock,
-                      obscureText: true,
-                    ),
-                    SizedBox(
-                      height: ProjectUtilities.paddingAll_16,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(),
-                      onPressed: () {
-                        _submit();
-                      },
-                      child: const Text(LanguageItems.registerText),
-                    ),
-                  ],
+        Center(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: ProjectUtilities.projectHeight_32,
                 ),
-              ),
+                CustomTextField(
+                    onSaved: (value) => _username = value!,
+                    hintText: LanguageItems.hintNameText,
+                    prefixIcon: Icons.person_2_rounded),
+                CustomTextField(
+                    onSaved: (value) => _email = value!,
+                    hintText: LanguageItems.hintEmailText,
+                    prefixIcon: Icons.person_2_rounded),
+                CustomTextField(
+                  onSaved: (value) => _password = value!,
+                  hintText: LanguageItems.hintTextPassword,
+                  prefixIcon: Icons.lock,
+                  obscureText: true,
+                ),
+                SizedBox(
+                  height: ProjectUtilities.paddingAll_8,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(MediaQuery.of(context).size.width * 0.89,
+                          MediaQuery.of(context).size.height * 0.064)),
+                  onPressed: () {
+                    _submit();
+                  },
+                  child: const Text(LanguageItems.registerText),
+                ),
+              ],
             ),
           ),
         ),

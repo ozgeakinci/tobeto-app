@@ -55,7 +55,7 @@ class TobetoAppTheme {
               fontWeight: FontWeight.bold,
             ),
             backgroundColor: TobetoAppColor.colorSchemeLight.primary,
-            fixedSize: const Size(340, 45),
+            fixedSize: const Size(360, 45),
             foregroundColor: TobetoAppColor.textColorDark,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10))),
@@ -90,7 +90,7 @@ class TobetoAppTheme {
         useMaterial3: true,
         scaffoldBackgroundColor: TobetoAppColor.backgroundDark,
         appBarTheme: AppBarTheme(
-            color: TobetoAppColor.backgroundDark,
+            color: TobetoAppColor.colorSchemeDark.primary,
             systemOverlayStyle:
                 ThemeData.light().appBarTheme.systemOverlayStyle,
             titleTextStyle:
@@ -130,14 +130,14 @@ class TobetoAppTheme {
                 fontWeight: FontWeight.bold,
               ),
               backgroundColor: TobetoAppColor.colorSchemeLight.primary,
-              fixedSize: const Size(340, 45),
+              fixedSize: const Size(360, 45),
               foregroundColor: TobetoAppColor.textColorDark,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10))),
         ),
         textButtonTheme: TextButtonThemeData(
-          style:
-              TextButton.styleFrom(foregroundColor: TobetoAppColor.textColor),
+          style: TextButton.styleFrom(
+              foregroundColor: TobetoAppColor.textColorDark),
         ),
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -18,18 +19,24 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
-      width: 350,
+      width: MediaQuery.of(context).size.width * 0.92,
+      height: MediaQuery.of(context).size.height * 0.099,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
         child: TextFormField(
           onSaved: onSaved,
           controller: controller,
           obscureText: obscureText,
           decoration: InputDecoration(
+            filled: true,
+            fillColor: isDarkMode
+                ? TobetoAppColor.inputDarkBackground
+                : TobetoAppColor.backgroundLight,
             hintText: hintText,
-            border: const OutlineInputBorder(
-                borderSide: BorderSide(),
+            border: OutlineInputBorder(
+                borderSide: isDarkMode ? BorderSide.none : BorderSide(),
                 borderRadius: BorderRadius.all(Radius.circular(8))),
             prefixIcon: Icon(prefixIcon),
           ),

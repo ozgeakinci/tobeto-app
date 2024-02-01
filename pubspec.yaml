@@ -64,7 +64,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-     - assets/images/tobeto-logo.png
+     - assets/images/tobeto_logo_dark.png
+     - assets/images/tobeto_logo_light.png
      - assets/images/login_page_background.png
      - assets/images/hello_tobeto.png
      - assets/images/anket_image.png
@@ -80,6 +81,8 @@ flutter:
      - assets/images/world_icon.png
      - assets/images/delete_icon.png
      - assets/images/profile_icon.png
+
+     
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

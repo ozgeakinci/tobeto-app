@@ -128,7 +128,7 @@ class HomePage extends StatelessWidget {
                             BigButton(
                                 title: 'Başvurularım',
                                 color: isDarkMode
-                                    ? TobetoAppColor.buttonColorDark
+                                    ? TobetoAppColor.inputDarkBackground
                                     : TobetoAppColor.buttonColorLight,
                                 textColor: isDarkMode
                                     ? TobetoAppColor.textColorDark
@@ -139,7 +139,7 @@ class HomePage extends StatelessWidget {
                             BigButton(
                                 title: 'Eğitimlerim',
                                 color: isDarkMode
-                                    ? TobetoAppColor.buttonColorDark
+                                    ? TobetoAppColor.inputDarkBackground
                                     : TobetoAppColor.buttonColorLight,
                                 textColor: isDarkMode
                                     ? TobetoAppColor.textColorDark
@@ -155,7 +155,7 @@ class HomePage extends StatelessWidget {
                           BigButton(
                               title: 'Duyuru ve Haberler',
                               color: isDarkMode
-                                  ? TobetoAppColor.buttonColorDark
+                                  ? TobetoAppColor.inputDarkBackground
                                   : TobetoAppColor.buttonColorLight,
                               textColor: isDarkMode
                                   ? TobetoAppColor.textColorDark
@@ -166,7 +166,7 @@ class HomePage extends StatelessWidget {
                           BigButton(
                               title: 'Anketlerim',
                               color: isDarkMode
-                                  ? TobetoAppColor.buttonColorDark
+                                  ? TobetoAppColor.inputDarkBackground
                                   : TobetoAppColor.buttonColorLight,
                               textColor: isDarkMode
                                   ? TobetoAppColor.textColorDark
