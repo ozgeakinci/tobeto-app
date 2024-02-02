@@ -46,6 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               .set({
             'email': event.email,
             'username': event.username,
+            'department': event.department,
             'registerDate': DateTime.now()
           });
         } on FirebaseAuthException catch (e) {}
@@ -61,9 +62,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final userInfos = await UserRepositories().getUserInfoFromFirebase();
         print("Veriler Çekildii");
         print(userInfos.username);
-        emit(GetUserState(usernameState: userInfos.username));
+        print(userInfos.department);
+        emit(GetUserState(
+            usernameState: userInfos.username,
+            departmentState: userInfos.department));
       } catch (e) {
-        emit(GetUserState(usernameState: "No name")); // Degişecek
+        emit(GetUserState(
+            usernameState: "No name",
+            departmentState: "No Department")); // Degişecek
+        print("HatayaDüştü");
+        print(e);
+      }
+    });
+
+    on<GetDepartmentEvent>((event, emit) async {
+      try {
+        final departmentInfos = await UserRepositories()
+            .getDepartmentInfoFromFirebase(event.department);
+        print("Veriler Deparmtnettt----------");
+        print(departmentInfos.videoUrl);
+        emit(GetDepartmentState(videoDepartment: departmentInfos.videoUrl));
+      } catch (e) {
+        emit(GetDepartmentState(videoDepartment: "No name")); // Degişecek
         print("HatayaDüştü");
         print(e);
       }

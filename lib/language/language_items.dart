@@ -2,6 +2,7 @@ class LanguageItems {
   static const String skillsTitleJs = 'JavaScript';
   static const String skillsSubTitle = '';
   static const String hintNameText = 'Ad Soyad';
+  static const String hintDepartmentText = 'Department';
   static const String hintEmailText = 'E-mail';
   static const String hintTextPassword = 'Şifre';
   static const String loginIn = 'Giriş';

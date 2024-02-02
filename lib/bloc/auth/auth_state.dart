@@ -21,7 +21,16 @@ class Authenticated extends AuthState {
 
 class GetUserState extends AuthState {
   final String usernameState;
+  final String departmentState;
   GetUserState({
     required this.usernameState,
+    required this.departmentState,
+  });
+}
+
+class GetDepartmentState extends AuthState {
+  final String videoDepartment;
+  GetDepartmentState({
+    required this.videoDepartment,
   });
 }

@@ -1,15 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class UserModel {
-  String username;
-  String department;
-  String email;
-  UserModel({
-    required this.username,
-    required this.department,
-    required this.email,
-  });
+class DepartmentModel {
+  String videoUrl;
+  DepartmentModel({required this.videoUrl});
 
 /*   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -18,13 +12,11 @@ class UserModel {
     };
   } */
 
-  factory UserModel.fromUserFireStore(
+  factory DepartmentModel.fromDepartmentFireStore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final map = snapshot.data() as Map;
-    return UserModel(
-      username: map['username'] as String,
-      department: map['department'] as String,
-      email: map['email'] as String,
+    return DepartmentModel(
+      videoUrl: map['videomobil'] as String,
     );
   }
 

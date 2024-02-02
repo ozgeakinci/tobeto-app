@@ -20,12 +20,16 @@ class _RegisterPageState extends State<RegisterPage> {
     String _email = '';
     String _password = '';
     String _username = '';
+    String _department = '';
 
     void _submit() {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        context.read<AuthBloc>().add(
-            Register(email: _email, password: _password, username: _username));
+        context.read<AuthBloc>().add(Register(
+            email: _email,
+            password: _password,
+            username: _username,
+            department: _department));
       }
     }
 
@@ -44,6 +48,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 CustomTextField(
                     onSaved: (value) => _username = value!,
                     hintText: LanguageItems.hintNameText,
+                    prefixIcon: Icons.person_2_rounded),
+                CustomTextField(
+                    onSaved: (value) => _department = value!,
+                    hintText: LanguageItems.hintDepartmentText,
                     prefixIcon: Icons.person_2_rounded),
                 CustomTextField(
                     onSaved: (value) => _email = value!,

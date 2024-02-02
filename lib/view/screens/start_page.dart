@@ -16,7 +16,9 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
-      if (state is Authenticated || state is GetUserState) {
+      if (state is Authenticated ||
+          state is GetUserState ||
+          state is GetDepartmentState) {
         return const SwiperPage();
       }
 

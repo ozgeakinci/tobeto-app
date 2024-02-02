@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
       if (state is GetUserState) {
         print("GetUSerState çalıştıı");
         print(state.usernameState);
-        print(state);
+        print(state.departmentState);
 
         return SingleChildScrollView(
           child: Column(
@@ -54,6 +54,16 @@ class HomePage extends StatelessWidget {
                       const SizedBox(
                         height: 4,
                       ),
+                      ElevatedButton(
+                          onPressed: () {
+                            context.read<AuthBloc>().add(GetDepartmentEvent(
+                                department: state.departmentState));
+
+                            print("Tıklandı Button");
+                            print(state.departmentState);
+                            print(state.usernameState);
+                          },
+                          child: Text("Depaartmenett")),
                       Text(
                         'Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!',
                         style: Theme.of(context)
@@ -233,6 +243,36 @@ class HomePage extends StatelessWidget {
                       )
                     ]),
               )
+            ],
+          ),
+        );
+      }
+      if (state is GetDepartmentState) {
+        print("GetDepartmentState çalıştıı");
+        print(state.videoDepartment);
+        print(state.videoDepartment);
+
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  top: 15,
+                ),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          state.videoDepartment.isNotEmpty
+                              ? 'Hoşgeldin ${state.videoDepartment}'
+                              : 'Hoşgeldin Kullanıcı',
+                          style: Theme.of(context).textTheme.titleLarge),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                    ]),
+              ),
             ],
           ),
         );
