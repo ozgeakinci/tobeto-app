@@ -57,33 +57,33 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(InitialState());
     }); */
 
-    on<GetUserEvent>((event, emit) async {
+    on<GetUser>((event, emit) async {
       try {
         final userInfos = await UserRepositories().getUserInfoFromFirebase();
         print("Veriler Çekildii");
         print(userInfos.username);
         print(userInfos.department);
-        emit(GetUserState(
-            usernameState: userInfos.username,
-            departmentState: userInfos.department));
+        emit(GetUserInfo(
+            username: userInfos.username, department: userInfos.department));
       } catch (e) {
-        emit(GetUserState(
-            usernameState: "No name",
-            departmentState: "No Department")); // Degişecek
+        emit(GetUserInfo(
+            username: "No name", department: "No Department")); // Degişecek
         print("HatayaDüştü");
         print(e);
       }
     });
 
-    on<GetDepartmentEvent>((event, emit) async {
+    on<GetDepartment>((event, emit) async {
       try {
-        final departmentInfos = await UserRepositories()
+        final departmentInfo = await UserRepositories()
             .getDepartmentInfoFromFirebase(event.department);
         print("Veriler Deparmtnettt----------");
-        print(departmentInfos.videoUrl);
-        emit(GetDepartmentState(videoDepartment: departmentInfos.videoUrl));
+        print(departmentInfo.videoInfo);
+        emit(GetDepartmentInfo(
+            educationDepartmentInfo: departmentInfo.videoInfo));
       } catch (e) {
-        emit(GetDepartmentState(videoDepartment: "No name")); // Degişecek
+        emit(
+            GetDepartmentInfo(educationDepartmentInfo: "No name")); // Degişecek
         print("HatayaDüştü");
         print(e);
       }

@@ -22,18 +22,18 @@ class HomePage extends StatelessWidget {
       if (state is NotAuthenticated) {
         print("NotAuthenticated Çaıştı");
 
-        context.read<AuthBloc>().add(GetUserEvent());
+        context.read<AuthBloc>().add(GetUser());
       }
 
       if (state is Authenticated) {
         print("Authenticated Çaıştı");
 
-        context.read<AuthBloc>().add(GetUserEvent());
+        context.read<AuthBloc>().add(GetUser());
       }
-      if (state is GetUserState) {
+      if (state is GetUserInfo) {
         print("GetUSerState çalıştıı");
-        print(state.usernameState);
-        print(state.departmentState);
+        print(state.username);
+        print(state.department);
 
         return SingleChildScrollView(
           child: Column(
@@ -47,23 +47,23 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                          state.usernameState.isNotEmpty
-                              ? 'Hoşgeldin ${state.usernameState}'
+                          state.username.isNotEmpty
+                              ? 'Hoşgeldin ${state.username}'
                               : 'Hoşgeldin Kullanıcı',
                           style: Theme.of(context).textTheme.titleLarge),
                       const SizedBox(
                         height: 4,
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            context.read<AuthBloc>().add(GetDepartmentEvent(
-                                department: state.departmentState));
+                      // ElevatedButton(
+                      //     onPressed: () {
+                      //       context.read<AuthBloc>().add(
+                      //           GetDepartment(department: state.department));
 
-                            print("Tıklandı Button");
-                            print(state.departmentState);
-                            print(state.usernameState);
-                          },
-                          child: Text("Depaartmenett")),
+                      //       print("Tıklandı Button");
+                      //       print(state.department);
+                      //       print(state.username);
+                      //     },
+                      //     child: Text("Depaartmenett")),
                       Text(
                         'Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!',
                         style: Theme.of(context)
@@ -247,36 +247,37 @@ class HomePage extends StatelessWidget {
           ),
         );
       }
-      if (state is GetDepartmentState) {
-        print("GetDepartmentState çalıştıı");
-        print(state.videoDepartment);
-        print(state.videoDepartment);
+      // if (state is GetDepartmentInfo) {
+      //   print("GetDepartmentState çalıştıı");
+      //   print(state.educationDepartmentInfo);
+      //   print(state.educationDepartmentInfo);
 
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  top: 15,
-                ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          state.videoDepartment.isNotEmpty
-                              ? 'Hoşgeldin ${state.videoDepartment}'
-                              : 'Hoşgeldin Kullanıcı',
-                          style: Theme.of(context).textTheme.titleLarge),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                    ]),
-              ),
-            ],
-          ),
-        );
-      } else {
+      //   return SingleChildScrollView(
+      //     child: Column(
+      //       children: [
+      //         Padding(
+      //           padding: const EdgeInsets.only(
+      //             left: 20,
+      //             top: 15,
+      //           ),
+      //           child: Column(
+      //               crossAxisAlignment: CrossAxisAlignment.start,
+      //               children: [
+      //                 Text(
+      //                     state.educationDepartmentInfo.isNotEmpty
+      //                         ? 'Hoşgeldin ${state.educationDepartmentInfo}'
+      //                         : 'Hoşgeldin Kullanıcı',
+      //                     style: Theme.of(context).textTheme.titleLarge),
+      //                 const SizedBox(
+      //                   height: 4,
+      //                 ),
+      //               ]),
+      //         ),
+      //       ],
+      //     ),
+      //   );
+      // }
+      else {
         return const Center(child: Text("Unknown State"));
       }
     }));

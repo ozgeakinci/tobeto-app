@@ -19,18 +19,18 @@ class Authenticated extends AuthState {
   });
 }
 
-class GetUserState extends AuthState {
-  final String usernameState;
-  final String departmentState;
-  GetUserState({
-    required this.usernameState,
-    required this.departmentState,
+class GetUserInfo extends AuthState {
+  final String username;
+  final String department;
+  GetUserInfo({
+    required this.username,
+    required this.department,
   });
 }
 
-class GetDepartmentState extends AuthState {
-  final String videoDepartment;
-  GetDepartmentState({
-    required this.videoDepartment,
+class GetDepartmentInfo extends AuthState {
+  final String educationDepartmentInfo;
+  GetDepartmentInfo({
+    required this.educationDepartmentInfo,
   });
 }

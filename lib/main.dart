@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
+import 'package:tobeto_app/bloc/department/department_bloc.dart';
+import 'package:tobeto_app/bloc/department/department_state.dart';
 import 'package:tobeto_app/firebase_options.dart';
 import 'package:tobeto_app/theme/tobeto_theme.dart';
 import 'package:tobeto_app/view/screens/start_page.dart';
@@ -11,7 +13,10 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider<AuthBloc>(create: (context) => AuthBloc())],
+      providers: [
+        BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+        BlocProvider<DepartmentBloc>(create: (context) => DepartmentBloc())
+      ],
       child: MaterialApp(
         theme: TobetoAppTheme.lightTheme(),
         darkTheme: TobetoAppTheme.darkTheme(),

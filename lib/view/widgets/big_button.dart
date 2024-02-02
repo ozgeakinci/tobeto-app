@@ -28,36 +28,34 @@ class BigButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: InkWell(
-        onTap: () {
-          if (routes.containsKey(title)) {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (ctx) => routes[title]!),
-            );
-          }
-        },
-        child: Stack(
-          children: [
-            Container(
-                width: double.infinity,
-                height: 100,
-                decoration: BoxDecoration(
-                    color: color, borderRadius: BorderRadius.circular(20))),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 35,
+        child: InkWell(
+      onTap: () {
+        if (routes.containsKey(title)) {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (ctx) => routes[title]!),
+          );
+        }
+      },
+      child: Stack(
+        children: [
+          Container(
+              width: double.infinity,
+              height: 100,
+              decoration: BoxDecoration(
+                  color: color, borderRadius: BorderRadius.circular(20))),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 35,
+            ),
+            child: Center(
+              child: Text(
+                title,
+                style: TextStyle(color: textColor, fontWeight: FontWeight.w600),
               ),
-              child: Center(
-                child: Text(
-                  title,
-                  style:
-                      TextStyle(color: textColor, fontWeight: FontWeight.w600),
-                ),
-              ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
-    );
+    ));
   }
 }

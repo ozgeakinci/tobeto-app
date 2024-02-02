@@ -25,11 +25,11 @@ class Register extends AuthEvent {
 
 class Logout extends AuthEvent {}
 
-class GetUserEvent extends AuthEvent {}
+class GetUser extends AuthEvent {}
 
-class GetDepartmentEvent extends AuthEvent {
+class GetDepartment extends AuthEvent {
   String department;
-  GetDepartmentEvent({
+  GetDepartment({
     required this.department,
   });
 }
