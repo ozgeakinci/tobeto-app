@@ -24,4 +24,13 @@ class UserRepositories {
     final departmentInfo = DepartmentModel.fromDepartmentFireStore(userFromDb);
     return departmentInfo;
   }
+
+  Future<DepartmentModel> getCatalogInfoFromFirebase() async {
+    final firestoreUser = FirebaseFirestore.instance;
+    final userFromDb =
+        await firestoreUser.collection('catalog').doc("catalogvideos").get();
+
+    final departmentInfo = DepartmentModel.fromDepartmentFireStore(userFromDb);
+    return departmentInfo;
+  }
 }

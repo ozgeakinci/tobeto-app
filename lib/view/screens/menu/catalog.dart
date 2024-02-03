@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_app/bloc/catalog/catalog_bloc.dart';
+import 'package:tobeto_app/bloc/catalog/catalog_event.dart';
+import 'package:tobeto_app/bloc/catalog/catalog_state.dart';
 import 'package:tobeto_app/view/widgets/educational_card.dart';
 
 class Catalog extends StatelessWidget {
@@ -49,31 +53,42 @@ class Catalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<EducationalCard> fakeCourses = [
-      const EducationalCard(
+    context.read<CatalogBloc>().add(ResetCatalogEvent());
+
+    /*    final List<EducationalCard> fakeCourses = [
+      /*   const EducationalCard(
         title: 'Dinle, Anla, İfade Et: Etkili İletişim Gelişim Yolculuğu',
         subTitle: 'Gürkan İlişen',
       ),
     const EducationalCard(
         title: 'Dinle, Anla, İfade Et: Etkili İletişim Gelişim Yolculuğu',
         subTitle: 'Gürkan İlişen',
-      ),
-    ];
+      ), */
+    ]; */
 
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: fakeCourses.length,
-              itemBuilder: (context, index) {
-                return fakeCourses[index];
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+        body: BlocBuilder<CatalogBloc, CatalogState>(builder: (context, state) {
+      if (state is InitialCatalogState) {
+        print("nsbdjhsdjhsdk  $state");
+
+        context.read<CatalogBloc>().add(GetCatalogEvent());
+      }
+      if (state is GetCatalogInfo) {
+        print("nsbdjhsdjhsdk  $state");
+
+        // context.read<CatalogBloc>().add(GetCatalogEvent());
+      }
+
+      if (state is GetCatalogInfo) {
+        print(state.educationCatalogInfo.length);
+        return ListView.builder(
+            itemCount: state.educationCatalogInfo.length,
+            itemBuilder: (context, index) =>
+                EducationalCard(department: state.educationCatalogInfo[index]));
+      } else {
+        return const Center(child: Text("Unknown State"));
+      }
+    }));
   }
 
   Widget buildBottomSheetOption(String title) {

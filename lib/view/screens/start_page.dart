@@ -19,7 +19,7 @@ class _StartPageState extends State<StartPage> {
     return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
       if (state is Authenticated ||
           state is GetUserInfo ||
-          state is GetDepartmentInfo) {
+          state is DepartmentLoaded) {
         return const SwiperPage();
       }
 

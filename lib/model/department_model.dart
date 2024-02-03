@@ -1,27 +1,42 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class DepartmentModel {
+/* class DepartmentModel {
   String videoInfo;
   DepartmentModel({required this.videoInfo});
-
-/*   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'username': username,
-      'email': email,
-    };
-  } */
 
   factory DepartmentModel.fromDepartmentFireStore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final map = snapshot.data() as Map;
     return DepartmentModel(
-      videoInfo: map['videomobil'] as String,
+      videoInfo: map['videos'] as String,
     );
   }
+} */
+class DepartmentModel {
+  final List<DepartmentVideoModel> videos;
 
-/*   String toJson() => json.encode(toMap());
+  DepartmentModel({required this.videos});
 
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromFireStore(json.decode(source) as DocumentSnapshot<Map<String, dynamic>>); */
+  factory DepartmentModel.fromDepartmentFireStore(
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    final List<dynamic>? videosList = snapshot.data()?['videos'];
+    if (videosList == null) {
+      return DepartmentModel(videos: []);
+    }
+    List<DepartmentVideoModel> videos = videosList.map((videoMap) {
+      return DepartmentVideoModel(
+        videoName: videoMap['videoname'] as String,
+        videoUrl: videoMap['videourl'] as String,
+      );
+    }).toList();
+    return DepartmentModel(videos: videos);
+  }
+}
+
+class DepartmentVideoModel {
+  final String videoName;
+  final String videoUrl;
+
+  DepartmentVideoModel({required this.videoName, required this.videoUrl});
 }

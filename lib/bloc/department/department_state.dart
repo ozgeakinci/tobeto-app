@@ -1,3 +1,5 @@
+import 'package:tobeto_app/model/department_model.dart';
+
 abstract class DepartmentState {}
 
 class DepartmentInitial extends DepartmentState {}
@@ -5,9 +7,9 @@ class DepartmentInitial extends DepartmentState {}
 class DepartmentLoading extends DepartmentState {}
 
 class DepartmentLoaded extends DepartmentState {
-  final String educationDepartmentInfo;
+  final List<DepartmentVideoModel> educationDepartmenogInfo;
   DepartmentLoaded({
-    required this.educationDepartmentInfo,
+    required this.educationDepartmenogInfo,
   });
 }
 

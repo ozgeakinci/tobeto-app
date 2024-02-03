@@ -1,11 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/datas/menu_data.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
-import 'package:tobeto_app/view/screens/login_page.dart';
 import 'package:tobeto_app/view/swiper_page.dart';
 
 class MenuScreen extends StatelessWidget {

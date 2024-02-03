@@ -73,21 +73,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    on<GetDepartment>((event, emit) async {
+/*     on<GetDepartment>((event, emit) async {
       try {
         final departmentInfo = await UserRepositories()
             .getDepartmentInfoFromFirebase(event.department);
         print("Veriler Deparmtnettt----------");
-        print(departmentInfo.videoInfo);
-        emit(GetDepartmentInfo(
-            educationDepartmentInfo: departmentInfo.videoInfo));
+        print(departmentInfo.videos);
+        emit(GetDepartmentInfo(educationDepartmentInfo: departmentInfo.videos));
       } catch (e) {
-        emit(
-            GetDepartmentInfo(educationDepartmentInfo: "No name")); // Degişecek
+        emit(GetDepartmentInfo(educationDepartmentInfo: [])); // Degişecek
         print("HatayaDüştü");
         print(e);
       }
-    });
+    }); */
 
     on<Logout>((event, emit) async {
       await _firebaseAuth.signOut();

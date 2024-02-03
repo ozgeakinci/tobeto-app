@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
-import 'package:tobeto_app/bloc/auth/auth_event.dart';
-import 'package:tobeto_app/bloc/auth/auth_state.dart';
+import 'package:tobeto_app/bloc/department/department_bloc.dart';
+import 'package:tobeto_app/bloc/department/department_event.dart';
+import 'package:tobeto_app/bloc/department/department_state.dart';
 
 import 'package:tobeto_app/view/widgets/educational_card.dart';
 
@@ -17,26 +17,29 @@ class Educations extends StatelessWidget {
             "Eğitimlerim",
           ),
         ),
-        body: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
-          if (state is GetUserInfo) {
-            print("nsbdjhsdjhsdk  $state");
+        body: BlocBuilder<DepartmentBloc, DepartmentState>(
+            builder: (context, state) {
+          print("Departmenetttadadasd---  $state");
+          if (state is DepartmentInitial) {
+            print("Departmenettt  $state");
 
             context
-                .read<AuthBloc>()
-                .add(GetDepartment(department: state.department));
+                .read<DepartmentBloc>()
+                .add(GetDepartment(department: "collective"));
           }
 
-          if (state is GetDepartmentInfo) {
-            return ListView(
-              children: [
-                EducationalCard(
-                    title: state.educationDepartmentInfo,
-                    subTitle: "21 Eylül 2023 15:20"),
-                const EducationalCard(
-                    title: "Dr. Ecmal Ayral'dan Hoşgeldin Mesajı",
-                    subTitle: "21 Eylül 2023 15:20"),
-              ],
-            );
+          if (state is DepartmentLoading) {
+            print("Departmenettt  $state");
+
+            /*     */
+          }
+
+          if (state is DepartmentLoaded) {
+            print(state.educationDepartmenogInfo.length);
+            return ListView.builder(
+                itemCount: state.educationDepartmenogInfo.length,
+                itemBuilder: (context, index) => EducationalCard(
+                    department: state.educationDepartmenogInfo[index]));
           } else {
             return const Center(child: Text("Unknown State"));
           }

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/model/department_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
 class EducationalCard extends StatelessWidget {
-  const EducationalCard({Key? key, required this.title, required this.subTitle})
-      : super(key: key);
+  const EducationalCard({Key? key, required this.department}) : super(key: key);
 
-  final String title;
-  final String subTitle;
+  /* final String title;
+  final String subTitle; */
+
+  final DepartmentVideoModel department;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +38,11 @@ class EducationalCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  department.videoName,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
-                  subTitle,
+                  department.videoUrl,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
