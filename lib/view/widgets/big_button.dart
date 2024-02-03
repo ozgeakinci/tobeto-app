@@ -9,24 +9,27 @@ class BigButton extends StatelessWidget {
   BigButton({
     Key? key,
     required this.title,
+    required this.department,
     required this.color,
     Color? textColor,
   })  : textColor = textColor ?? TobetoAppColor.textColor,
         super(key: key);
 
   final String title;
+  final String department;
   final Color color;
   final Color? textColor;
 
-  final Map<String, Widget> routes = {
-    "Başvurularım": const Recourses(),
-    "Eğitimlerim": const Educations(),
-    "Duyuru ve Haberler": const AnnounccementAndnews(),
-    "Anketlerim": const Surveys(),
-  };
-
   @override
   Widget build(BuildContext context) {
+    final Map<String, Widget> routes;
+
+    routes = {
+      "Başvurularım": const Recourses(),
+      "Eğitimlerim": Educations(department: department),
+      "Duyuru ve Haberler": const AnnounccementAndnews(),
+      "Anketlerim": const Surveys(),
+    };
     return Expanded(
         child: InkWell(
       onTap: () {

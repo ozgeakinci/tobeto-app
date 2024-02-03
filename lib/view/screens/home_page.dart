@@ -136,6 +136,7 @@ class HomePage extends StatelessWidget {
                         child: Row(
                           children: [
                             BigButton(
+                                department: state.department,
                                 title: 'Başvurularım',
                                 color: isDarkMode
                                     ? TobetoAppColor.inputDarkBackground
@@ -147,6 +148,7 @@ class HomePage extends StatelessWidget {
                               width: 10,
                             ),
                             BigButton(
+                                department: state.department,
                                 title: 'Eğitimlerim',
                                 color: isDarkMode
                                     ? TobetoAppColor.inputDarkBackground
@@ -163,6 +165,7 @@ class HomePage extends StatelessWidget {
                       Row(
                         children: [
                           BigButton(
+                              department: state.department,
                               title: 'Duyuru ve Haberler',
                               color: isDarkMode
                                   ? TobetoAppColor.inputDarkBackground
@@ -174,6 +177,7 @@ class HomePage extends StatelessWidget {
                             width: 10,
                           ),
                           BigButton(
+                              department: state.department,
                               title: 'Anketlerim',
                               color: isDarkMode
                                   ? TobetoAppColor.inputDarkBackground
@@ -206,6 +210,7 @@ class HomePage extends StatelessWidget {
                         child: Row(
                           children: [
                             BigButton(
+                              department: state.department,
                               title: 'Sınavlarım',
                               color: const Color(0xffEC7B9C),
                               textColor: Colors.white,
@@ -214,6 +219,7 @@ class HomePage extends StatelessWidget {
                               width: 10,
                             ),
                             BigButton(
+                              department: state.department,
                               title: 'Profil Oluştur',
                               color: const Color(0xff7086FF),
                               textColor: Colors.white,
@@ -227,6 +233,7 @@ class HomePage extends StatelessWidget {
                       Row(
                         children: [
                           BigButton(
+                            department: state.department,
                             title: 'Kendini Değerlendir',
                             color: const Color(0xff62CBA2),
                             textColor: Colors.white,
@@ -235,6 +242,7 @@ class HomePage extends StatelessWidget {
                             width: 10,
                           ),
                           BigButton(
+                            department: state.department,
                             title: 'Öğrenmeye başla',
                             color: const Color(0xffB266FF),
                             textColor: Colors.white,

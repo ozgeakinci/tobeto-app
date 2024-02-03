@@ -1,6 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/model/department_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/view/screens/video_player.dart';
 
 class EducationalCard extends StatelessWidget {
   const EducationalCard({Key? key, required this.department}) : super(key: key);
@@ -42,8 +44,14 @@ class EducationalCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
-                  department.videoUrl,
+                  "Dateeee",
                   style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Image.asset(
+                  // 344 × 258
+                  'assets/images/video_image.png',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
               ],
             ),
@@ -51,18 +59,18 @@ class EducationalCard extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Image.asset(
-            // 344 × 258
-            'assets/images/video_image.png',
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ),
+          //     VideoApp(videoUrl: department.videoUrl),
 
           // Margin derini nereden alıyor ?
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => LessonVideo(
+                          videoUrl: department.videoUrl,
+                        )));
+              },
               child: Text(
                 "EĞİTİME GİT",
                 style: TextStyle(
