@@ -29,6 +29,7 @@ class DepartmentModel {
         videoName: videoMap['videoname'] as String,
         videoUrl: videoMap['videourl'] as String,
         date: videoMap['date'] as String,
+        imageURL: videoMap['imageURL'] as String,
       );
     }).toList();
     return DepartmentModel(videos: videos);
@@ -38,8 +39,13 @@ class DepartmentModel {
 class DepartmentVideoModel {
   final String videoName;
   final String videoUrl;
+  final String imageURL;
   final String? date;
 
-  DepartmentVideoModel(
-      {required this.videoName, required this.videoUrl, this.date});
+  DepartmentVideoModel({
+    required this.videoName,
+    required this.videoUrl,
+    required this.imageURL,
+    this.date,
+  });
 }

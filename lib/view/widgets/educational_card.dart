@@ -51,11 +51,10 @@ class EducationalCard extends StatelessWidget {
                 SizedBox(
                   height: ProjectUtilities.projectHeight_8,
                 ),
-                Image.asset(
+                Image.network(
                   // 344 × 258
-                  'assets/images/mobil_education_image.png',
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+                  department.imageURL,
+                  fit: BoxFit.fill,
                 ),
               ],
             ),

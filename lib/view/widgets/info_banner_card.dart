@@ -3,50 +3,57 @@ import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
 class InfoBannerCard extends StatelessWidget {
   const InfoBannerCard(
-      {Key? key, required this.title, required this.subtitle, this.button})
+      {Key? key, this.title, required this.subtitle, this.button, this.color})
       : super(key: key);
 
-  final String title;
+  final String? title;
   final String subtitle;
   final Widget? button;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final cardColor = color ?? TobetoAppColor.colorSchemeLight.primary;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Container(
-        height: height * 0.21,
+        height: 180,
         child: Card(
           elevation: 0,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          color: TobetoAppColor.colorSchemeLight.primary,
+          color: cardColor,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                title,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(color: TobetoAppColor.textColorDark),
-              ),
+              if (title!.isNotEmpty)
+                Text(
+                  title!,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: isDarkMode
+                          ? TobetoAppColor.backgroundLight
+                          : TobetoAppColor.backgroundDark),
+                ),
               if (button != null)
                 Row(
                   children: [
                     SizedBox(
-                      width: 160,
+                      width: 190,
                       height: 86,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8),
                         child: Text(
                           subtitle,
-                          // '80 soru ile yetkinliklerini ölç, önerilen eğitimleri tamamla, rozetini   kazan.',
-                          style: TextStyle(
-                              color: TobetoAppColor.textColorDark,
-                              fontWeight: FontWeight.w400),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                  color: isDarkMode
+                                      ? TobetoAppColor.backgroundDark
+                                      : TobetoAppColor.backgroundLight),
                         ),
                       ),
                     ),
@@ -62,7 +69,9 @@ class InfoBannerCard extends StatelessWidget {
                       child: Text(
                         subtitle,
                         style: TextStyle(
-                          color: TobetoAppColor.textColorDark,
+                          color: isDarkMode
+                              ? TobetoAppColor.backgroundDark
+                              : TobetoAppColor.backgroundDark,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
