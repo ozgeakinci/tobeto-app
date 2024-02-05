@@ -15,7 +15,7 @@ class TobetoAppTheme {
           systemOverlayStyle: ThemeData.dark().appBarTheme.systemOverlayStyle,
           color: TobetoAppColor.colorSchemeLight.primary,
           titleTextStyle:
-              TextStyle(color: TobetoAppColor.textColorDark, fontSize: 20)),
+              TextStyle(color: TobetoAppColor.backgroundLight, fontSize: 20)),
 
       // showModalBottomSheet => Üst köşelerin düz olması saglandı
       bottomSheetTheme: const BottomSheetThemeData(

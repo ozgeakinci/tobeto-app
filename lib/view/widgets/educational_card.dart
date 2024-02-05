@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/model/department_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/screens/video_player.dart';
 
 class EducationalCard extends StatelessWidget {
@@ -44,12 +45,15 @@ class EducationalCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
-                  "Dateeee",
+                  department.date!,
                   style: Theme.of(context).textTheme.bodySmall,
+                ),
+                SizedBox(
+                  height: ProjectUtilities.projectHeight_8,
                 ),
                 Image.asset(
                   // 344 × 258
-                  'assets/images/video_image.png',
+                  'assets/images/mobil_education_image.png',
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),

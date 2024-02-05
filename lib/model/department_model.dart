@@ -28,6 +28,7 @@ class DepartmentModel {
       return DepartmentVideoModel(
         videoName: videoMap['videoname'] as String,
         videoUrl: videoMap['videourl'] as String,
+        date: videoMap['date'] as String,
       );
     }).toList();
     return DepartmentModel(videos: videos);
@@ -37,6 +38,8 @@ class DepartmentModel {
 class DepartmentVideoModel {
   final String videoName;
   final String videoUrl;
+  final String? date;
 
-  DepartmentVideoModel({required this.videoName, required this.videoUrl});
+  DepartmentVideoModel(
+      {required this.videoName, required this.videoUrl, this.date});
 }

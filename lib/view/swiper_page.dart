@@ -44,7 +44,7 @@ class _SwiperPageState extends State<SwiperPage> {
         title: Text(
           activeScreenName,
           style: TextStyle(
-            color: TobetoAppColor.textColorDark,
+            color: TobetoAppColor.backgroundLight,
             fontSize: 20,
             fontWeight: FontWeight.w500,
           ),

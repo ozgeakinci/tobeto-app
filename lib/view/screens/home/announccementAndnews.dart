@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_app/bloc/notifications/notifications_bloc.dart';
+import 'package:tobeto_app/bloc/notifications/notifications_event.dart';
+import 'package:tobeto_app/bloc/notifications/notifications_state.dart';
+
 import 'package:tobeto_app/view/widgets/notification_card.dart';
 
 class AnnounccementAndnews extends StatelessWidget {
-  const AnnounccementAndnews({Key? key}) : super(key: key);
+  const AnnounccementAndnews({Key? key, required this.department})
+      : super(key: key);
+
+  final String department;
 
   @override
   Widget build(BuildContext context) {
@@ -12,21 +20,44 @@ class AnnounccementAndnews extends StatelessWidget {
           "Duyuru ve Haberler",
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: ListView(
-          children: const [
-            NatificationCard(
-              title: "Yeni grupların Discorda katılımı",
-              date: "12.12.2023",
-              image: "assets/images/message_icon.png",
-            ),
-            SizedBox(
-              height: 16,
-            ),
-          ],
-        ),
-      ),
+      body: BlocBuilder<NotificationBloc, NotificationState>(
+          builder: (context, state) {
+        if (state is NotificationInitial) {
+          print('Notiiiii çalıştı ');
+          context
+              .read<NotificationBloc>()
+              .add(GetNotification(department: department));
+        }
+
+        if (state is NotificationLoading) {
+          print('Notiii loading ');
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is NotificationLoaded) {
+          print('Notiii loaded ${state.notifications}');
+          // return Text(state.notifications[1].title);
+          return Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: ListView.builder(
+                  itemCount: state.notifications.length,
+                  itemBuilder: (context, index) => NotificationCard(
+                      department: state.notifications[index])));
+        } else {
+          return const Center(child: Text("Unknown State"));
+        }
+      }),
     );
   }
 }
+      // children: const [
+              // NotificationCard(
+              //   title: "Yeni grupların Discorda katılımı",
+              //   date: "12.12.2023",
+              //   image: "assets/images/message_icon.png",
+              // ),
+              //   SizedBox(
+              //     height: 16,
+              //   ),
+              // ],

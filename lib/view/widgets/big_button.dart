@@ -27,7 +27,9 @@ class BigButton extends StatelessWidget {
     routes = {
       "Başvurularım": const Recourses(),
       "Eğitimlerim": Educations(department: department),
-      "Duyuru ve Haberler": const AnnounccementAndnews(),
+      "Duyuru ve Haberler": AnnounccementAndnews(
+        department: department,
+      ),
       "Anketlerim": const Surveys(),
     };
     return Expanded(

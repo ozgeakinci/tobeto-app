@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tobeto_app/model/auth_model.dart';
 import 'package:tobeto_app/model/department_model.dart';
+import 'package:tobeto_app/model/notification_model.dart';
 
 class UserRepositories {
   Future<UserModel> getUserInfoFromFirebase() async {
@@ -22,6 +23,7 @@ class UserRepositories {
         await firestoreUser.collection('educations').doc(department).get();
 
     final departmentInfo = DepartmentModel.fromDepartmentFireStore(userFromDb);
+    print("Eğitimlerim $departmentInfo");
     return departmentInfo;
   }
 
@@ -32,5 +34,17 @@ class UserRepositories {
 
     final departmentInfo = DepartmentModel.fromDepartmentFireStore(userFromDb);
     return departmentInfo;
+  }
+
+  Future<NotificationModel> getNotificationInfoFromFirebase(
+      String department) async {
+    final firestoreUser = FirebaseFirestore.instance;
+    final userFromDb =
+        await firestoreUser.collection('educations').doc(department).get();
+    print("Notification $userFromDb");
+
+    final notifications =
+        NotificationModel.fromNotificationsFireStore(userFromDb);
+    return notifications;
   }
 }
