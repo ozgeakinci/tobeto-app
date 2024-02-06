@@ -24,12 +24,3 @@ class Register extends AuthEvent {
 }
 
 class Logout extends AuthEvent {}
-
-class GetUser extends AuthEvent {}
-
-/* class GetDepartment extends AuthEvent {
-  String department;
-  GetDepartment({
-    required this.department,
-  });
-} */

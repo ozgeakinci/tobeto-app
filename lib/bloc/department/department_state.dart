@@ -7,7 +7,7 @@ class DepartmentInitial extends DepartmentState {}
 class DepartmentLoading extends DepartmentState {}
 
 class DepartmentLoaded extends DepartmentState {
-  final List<DepartmentVideoModel> educationDepartmenogInfo;
+  final List<DepartmentLessonModel> educationDepartmenogInfo;
   DepartmentLoaded({
     required this.educationDepartmenogInfo,
   });

@@ -1,50 +1,54 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tobeto_app/model/auth_model.dart';
+import 'package:tobeto_app/model/user_model.dart';
 import 'package:tobeto_app/model/department_model.dart';
 import 'package:tobeto_app/model/notification_model.dart';
 
 class UserRepositories {
+  final firebaseFirestore = FirebaseFirestore.instance;
+  final firebaseAuth = FirebaseAuth.instance;
+
+  // KULLANICI BİLGİLERİ       // fetchUserInfoFromFirebase ?
   Future<UserModel> getUserInfoFromFirebase() async {
-    final firestoreUser = FirebaseFirestore.instance;
-    final userFromDb = await firestoreUser
+    final userFromDb = await firebaseFirestore
         .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(firebaseAuth.currentUser!.uid)
         .get();
 
     final userInfo = UserModel.fromUserFireStore(userFromDb);
     return userInfo;
   }
 
+  // KATALOG SAYFASI BİLGİLERİ
+  Future<DepartmentModel> getCatalogInfoFromFirebase() async {
+    final catalogFromDb = await firebaseFirestore
+        .collection('catalog')
+        .doc("catalogvideos")
+        .get();
+
+    final catalogInfo = DepartmentModel.fromDepartmentFireStore(catalogFromDb);
+    return catalogInfo;
+  }
+
+  // EĞİTİMLERİM SAYFASI BİLGİLERİ
   Future<DepartmentModel> getDepartmentInfoFromFirebase(
       String department) async {
-    final firestoreUser = FirebaseFirestore.instance;
-    final userFromDb =
-        await firestoreUser.collection('educations').doc(department).get();
+    final educationsFromDb =
+        await firebaseFirestore.collection('educations').doc(department).get();
 
-    final departmentInfo = DepartmentModel.fromDepartmentFireStore(userFromDb);
-    print("Eğitimlerim $departmentInfo");
-    return departmentInfo;
+    final departmentEducationsInfo =
+        DepartmentModel.fromDepartmentFireStore(educationsFromDb);
+    return departmentEducationsInfo;
   }
 
-  Future<DepartmentModel> getCatalogInfoFromFirebase() async {
-    final firestoreUser = FirebaseFirestore.instance;
-    final userFromDb =
-        await firestoreUser.collection('catalog').doc("catalogvideos").get();
-
-    final departmentInfo = DepartmentModel.fromDepartmentFireStore(userFromDb);
-    return departmentInfo;
-  }
-
+  // DUYURU VE HABERLERİM SAYFASI BİLGİLERİ
   Future<NotificationModel> getNotificationInfoFromFirebase(
       String department) async {
-    final firestoreUser = FirebaseFirestore.instance;
-    final userFromDb =
-        await firestoreUser.collection('educations').doc(department).get();
-    print("Notification $userFromDb");
+    final notificationsFromDb =
+        await firebaseFirestore.collection('educations').doc(department).get();
 
     final notifications =
-        NotificationModel.fromNotificationsFireStore(userFromDb);
+        NotificationModel.fromNotificationsFireStore(notificationsFromDb);
     return notifications;
   }
 }

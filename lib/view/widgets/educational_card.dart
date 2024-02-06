@@ -11,7 +11,7 @@ class EducationalCard extends StatelessWidget {
   /* final String title;
   final String subTitle; */
 
-  final DepartmentVideoModel department;
+  final DepartmentLessonModel department;
 
   @override
   Widget build(BuildContext context) {

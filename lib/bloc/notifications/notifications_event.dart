@@ -1,10 +1,10 @@
 abstract class NotificationEvent {}
 
-class ResetEvent extends NotificationEvent {}
-
-class GetNotification extends NotificationEvent {
+class FetchNotificationsRequested extends NotificationEvent {
   String department;
-  GetNotification({
+  FetchNotificationsRequested({
     required this.department,
   });
 }
+
+class ResetNotificationsEvent extends NotificationEvent {}

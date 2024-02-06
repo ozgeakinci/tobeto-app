@@ -5,16 +5,16 @@ import 'package:tobeto_app/repositories/user_repositories.dart';
 
 class DepartmentBloc extends Bloc<DepartmentEvent, DepartmentState> {
   DepartmentBloc() : super(DepartmentInitial()) {
-    on<GetDepartment>((event, emit) async {
+    on<FetchDepartmentRequested>((event, emit) async {
       try {
         final departmentInfo = await UserRepositories()
             .getDepartmentInfoFromFirebase(event.department);
-        print("Veriler Deparmtnettt----------");
-        print(departmentInfo.videos);
-        emit(DepartmentLoaded(educationDepartmenogInfo: departmentInfo.videos));
+        print(departmentInfo.lessonList);
+        emit(DepartmentLoaded(
+            educationDepartmenogInfo: departmentInfo.lessonList));
       } catch (e) {
-        emit(DepartmentError()); // Degişecek
-        print("DepartmentError   Hataya düştüüü");
+        emit(DepartmentError());
+        print("DepartmentError FetchDepartmentRequested erorrrr");
         print(e);
       }
     });
@@ -22,10 +22,9 @@ class DepartmentBloc extends Bloc<DepartmentEvent, DepartmentState> {
     on<ResetDepartmentEvent>((event, emit) async {
       try {
         emit(DepartmentInitial());
-        print("DepartmentInitial Durumuna geçildiiiii");
       } catch (e) {
-        emit(DepartmentError()); // Degişecek
-        print("DepartmentError Hataya düştüüüü");
+        emit(DepartmentError());
+        print("DepartmentError ResetDepartmentEvent erorrrr");
         print(e);
       }
     });

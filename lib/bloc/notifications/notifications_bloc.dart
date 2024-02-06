@@ -5,7 +5,7 @@ import 'package:tobeto_app/repositories/user_repositories.dart';
 
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   NotificationBloc() : super(NotificationInitial()) {
-    on<GetNotification>((event, emit) async {
+    on<FetchNotificationsRequested>((event, emit) async {
       emit(NotificationLoading());
       try {
         final natificationInfo = await UserRepositories()
@@ -13,19 +13,19 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
 
         emit(NotificationLoaded(notifications: natificationInfo.notifications));
       } catch (e) {
-        emit(NotificationError()); // Degişecek
-        print("NotificationError Hataya düştüüü");
+        emit(NotificationError());
+        print("NotificationError FetchNotificationsRequested erorrrr");
         print(e);
       }
     });
 
-    on<ResetEvent>((event, emit) async {
+    on<ResetNotificationsEvent>((event, emit) async {
       try {
         emit(NotificationInitial());
         print("NotificationInitial Durumuna geçildiiiii");
       } catch (e) {
-        emit(NotificationError()); // Degişecek
-        print("NotificationError Hataya düştüüüü");
+        emit(NotificationError());
+        print("NotificationError ResetNotificationsEvent erorrrr");
         print(e);
       }
     });

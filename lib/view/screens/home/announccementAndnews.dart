@@ -26,7 +26,7 @@ class AnnounccementAndnews extends StatelessWidget {
           print('Notiiiii çalıştı ');
           context
               .read<NotificationBloc>()
-              .add(GetNotification(department: department));
+              .add(FetchNotificationsRequested(department: department));
         }
 
         if (state is NotificationLoading) {

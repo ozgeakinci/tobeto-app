@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
-import 'package:tobeto_app/bloc/auth/auth_event.dart';
-import 'package:tobeto_app/bloc/auth/auth_state.dart';
+import 'package:tobeto_app/bloc/user/user_bloc.dart';
+import 'package:tobeto_app/bloc/user/user_event.dart';
+import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/big_button.dart';
@@ -18,22 +18,23 @@ class HomePage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        body: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
+        body: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
       print(state);
 
-      if (state is NotAuthenticated) {
-        print("NotAuthenticated Çaıştı");
-
-        context.read<AuthBloc>().add(GetUser());
+      if (state is UserInitial) {
+        context.read<UserBloc>().add(FetchUserRequested());
       }
-
-      if (state is Authenticated) {
-        print("Authenticated Çaıştı");
-
-        context.read<AuthBloc>().add(GetUser());
+      if (state is UserLoading) {
+        return Center(
+          child: Transform.scale(
+            scale: 3,
+            child: CircularProgressIndicator(
+              strokeWidth: 5,
+            ),
+          ),
+        );
       }
-      if (state is GetUserInfo) {
-        print("GetUSerState çalıştıı");
+      if (state is UserLoaded) {
         print(state.username);
         print(state.department);
 
@@ -56,16 +57,6 @@ class HomePage extends StatelessWidget {
                       const SizedBox(
                         height: 4,
                       ),
-                      // ElevatedButton(
-                      //     onPressed: () {
-                      //       context.read<AuthBloc>().add(
-                      //           GetDepartment(department: state.department));
-
-                      //       print("Tıklandı Button");
-                      //       print(state.department);
-                      //       print(state.username);
-                      //     },
-                      //     child: Text("Depaartmenett")),
                       Text(
                         'Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!',
                         style: Theme.of(context)

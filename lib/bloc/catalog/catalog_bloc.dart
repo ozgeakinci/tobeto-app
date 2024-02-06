@@ -4,28 +4,26 @@ import 'package:tobeto_app/bloc/catalog/catalog_state.dart';
 import 'package:tobeto_app/repositories/user_repositories.dart';
 
 class CatalogBloc extends Bloc<CatalogEvent, CatalogState> {
-  CatalogBloc() : super(InitialCatalogState()) {
-    on<GetCatalogEvent>((event, emit) async {
+  final repositories = UserRepositories();
+  CatalogBloc() : super(CatalogInitial()) {
+    on<FetchCatalogRequested>((event, emit) async {
+      emit(CatalogLoading());
       try {
-        final catalogInfos =
-            await UserRepositories().getCatalogInfoFromFirebase();
-        print("Veriler Çekildii");
-        print(catalogInfos.videos);
-        emit(GetCatalogInfo(educationCatalogInfo: catalogInfos.videos));
+        final catalogInfos = await repositories.getCatalogInfoFromFirebase();
+        emit(CatologLoaded(educationCatalogInfo: catalogInfos.lessonList));
       } catch (e) {
-        emit(GetCatalogInfo(educationCatalogInfo: [])); // Degişecek
-        print("HatayaDüştü");
+        emit(CatalogError());
+        print("CatalogError GetCatalogEvent erorrrr");
         print(e);
       }
     });
 
     on<ResetCatalogEvent>((event, emit) async {
       try {
-        emit(InitialCatalogState());
-        print("InitialCatalogState Durumuna geçildiiiii");
+        emit(CatalogInitial());
       } catch (e) {
-        emit(GetCatalogInfo(educationCatalogInfo: [])); // Degişecek
-        print("HatayaDüştü Resetttt");
+        emit(CatalogError());
+        print("CatalogError ResetCatalogEvent erorrrr");
         print(e);
       }
     });

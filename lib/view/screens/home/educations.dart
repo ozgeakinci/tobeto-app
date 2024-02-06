@@ -30,7 +30,7 @@ class Educations extends StatelessWidget {
 
           context
               .read<DepartmentBloc>()
-              .add(GetDepartment(department: department));
+              .add(FetchDepartmentRequested(department: department));
         }
 
         if (state is DepartmentLoading) {

@@ -1,10 +1,10 @@
 abstract class DepartmentEvent {}
 
-class ResetDepartmentEvent extends DepartmentEvent {}
-
-class GetDepartment extends DepartmentEvent {
+class FetchDepartmentRequested extends DepartmentEvent {
   String department;
-  GetDepartment({
+  FetchDepartmentRequested({
     required this.department,
   });
 }
+
+class ResetDepartmentEvent extends DepartmentEvent {}

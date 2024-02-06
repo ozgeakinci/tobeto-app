@@ -14,35 +14,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
   }
 } */
 class DepartmentModel {
-  final List<DepartmentVideoModel> videos;
+  final List<DepartmentLessonModel> lessonList;
 
-  DepartmentModel({required this.videos});
+  DepartmentModel({required this.lessonList});
 
   factory DepartmentModel.fromDepartmentFireStore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final List<dynamic>? videosList = snapshot.data()?['videos'];
     if (videosList == null) {
-      return DepartmentModel(videos: []);
+      return DepartmentModel(lessonList: []);
     }
-    List<DepartmentVideoModel> videos = videosList.map((videoMap) {
-      return DepartmentVideoModel(
+    List<DepartmentLessonModel> videos = videosList.map((videoMap) {
+      return DepartmentLessonModel(
         videoName: videoMap['videoname'] as String,
         videoUrl: videoMap['videourl'] as String,
         date: videoMap['date'] as String,
         imageURL: videoMap['imageURL'] as String,
       );
     }).toList();
-    return DepartmentModel(videos: videos);
+    return DepartmentModel(lessonList: videos);
   }
 }
 
-class DepartmentVideoModel {
+class DepartmentLessonModel {
   final String videoName;
   final String videoUrl;
   final String imageURL;
   final String? date;
 
-  DepartmentVideoModel({
+  DepartmentLessonModel({
     required this.videoName,
     required this.videoUrl,
     required this.imageURL,

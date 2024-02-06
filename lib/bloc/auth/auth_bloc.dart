@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/bloc/auth/auth_state.dart';
-import 'package:tobeto_app/repositories/user_repositories.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final FirebaseAuth _firebaseAuth;
@@ -12,7 +11,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({FirebaseAuth? firebaseAuth, FirebaseFirestore? firebaseFirestore})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
-        super(InitialState()) {
+        super(AuthInitial()) {
     _firebaseAuth.authStateChanges().listen(
       (user) {
         if (user != null) {
@@ -52,40 +51,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         } on FirebaseAuthException catch (e) {}
       },
     );
-
-/*     on<ResetAuthEvent>((event, emit) {
-      emit(InitialState());
-    }); */
-
-    on<GetUser>((event, emit) async {
-      try {
-        final userInfos = await UserRepositories().getUserInfoFromFirebase();
-        print("Veriler Çekildii");
-        print(userInfos.username);
-        print(userInfos.department);
-        emit(GetUserInfo(
-            username: userInfos.username, department: userInfos.department));
-      } catch (e) {
-        emit(GetUserInfo(
-            username: "No name", department: "No Department")); // Degişecek
-        print("HatayaDüştü");
-        print(e);
-      }
-    });
-
-/*     on<GetDepartment>((event, emit) async {
-      try {
-        final departmentInfo = await UserRepositories()
-            .getDepartmentInfoFromFirebase(event.department);
-        print("Veriler Deparmtnettt----------");
-        print(departmentInfo.videos);
-        emit(GetDepartmentInfo(educationDepartmentInfo: departmentInfo.videos));
-      } catch (e) {
-        emit(GetDepartmentInfo(educationDepartmentInfo: [])); // Degişecek
-        print("HatayaDüştü");
-        print(e);
-      }
-    }); */
 
     on<Logout>((event, emit) async {
       await _firebaseAuth.signOut();

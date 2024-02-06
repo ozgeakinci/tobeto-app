@@ -68,18 +68,25 @@ class Catalog extends StatelessWidget {
 
     return Scaffold(
         body: BlocBuilder<CatalogBloc, CatalogState>(builder: (context, state) {
-      if (state is InitialCatalogState) {
+      if (state is CatalogInitial) {
         print("nsbdjhsdjhsdk  $state");
 
-        context.read<CatalogBloc>().add(GetCatalogEvent());
+        context.read<CatalogBloc>().add(FetchCatalogRequested());
       }
-      if (state is GetCatalogInfo) {
+      if (state is CatalogLoading) {
         print("nsbdjhsdjhsdk  $state");
 
-        // context.read<CatalogBloc>().add(GetCatalogEvent());
+        return Center(
+          child: Transform.scale(
+            scale: 3,
+            child: CircularProgressIndicator(
+              strokeWidth: 5,
+            ),
+          ),
+        );
       }
 
-      if (state is GetCatalogInfo) {
+      if (state is CatologLoaded) {
         print(state.educationCatalogInfo.length);
         return ListView.builder(
             itemCount: state.educationCatalogInfo.length,

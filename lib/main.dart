@@ -5,6 +5,7 @@ import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_bloc.dart';
 import 'package:tobeto_app/bloc/department/department_bloc.dart';
 import 'package:tobeto_app/bloc/notifications/notifications_bloc.dart';
+import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/firebase_options.dart';
 import 'package:tobeto_app/theme/tobeto_theme.dart';
 import 'package:tobeto_app/view/screens/start_page.dart';
@@ -18,7 +19,8 @@ void main() async {
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
         BlocProvider<DepartmentBloc>(create: (context) => DepartmentBloc()),
         BlocProvider<CatalogBloc>(create: (context) => CatalogBloc()),
-        BlocProvider<NotificationBloc>(create: (context) => NotificationBloc())
+        BlocProvider<NotificationBloc>(create: (context) => NotificationBloc()),
+        BlocProvider<UserBloc>(create: (context) => UserBloc())
       ],
       child: MaterialApp(
         theme: TobetoAppTheme.lightTheme(),

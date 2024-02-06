@@ -1,5 +1,5 @@
 abstract class CatalogEvent {}
 
-class GetCatalogEvent extends CatalogEvent {}
+class FetchCatalogRequested extends CatalogEvent {}
 
 class ResetCatalogEvent extends CatalogEvent {}
