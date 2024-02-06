@@ -15,6 +15,8 @@ class InfoTalentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Container(
@@ -36,10 +38,10 @@ class InfoTalentCard extends StatelessWidget {
                     flex: 2,
                     child: Text(
                       title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(color: TobetoAppColor.textColorDark),
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: isDarkMode
+                              ? TobetoAppColor.backgroundDark
+                              : TobetoAppColor.backgroundLight),
                     ),
                   ),
                 ],
@@ -50,7 +52,9 @@ class InfoTalentCard extends StatelessWidget {
               child: Text(
                 subtitle,
                 style: TextStyle(
-                    color: TobetoAppColor.textColorDark,
+                    color: isDarkMode
+                        ? TobetoAppColor.backgroundDark
+                        : TobetoAppColor.backgroundLight,
                     fontWeight: FontWeight.w400),
               ),
             ),

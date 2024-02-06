@@ -21,7 +21,7 @@ class Reviews extends StatelessWidget {
               TextSpan(
                   text: 'Yetkinlik',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: TobetoAppColor.colorSchemeLight.primary,
+                      color: TobetoAppColor.primaryBackgroundColor,
                       fontWeight: FontWeight.w600)),
               TextSpan(
                   text: 'lerini ücretsiz ölç,           ',
@@ -29,7 +29,7 @@ class Reviews extends StatelessWidget {
               TextSpan(
                   text: 'bilgi',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: TobetoAppColor.colorSchemeLight.primary,
+                      color: TobetoAppColor.primaryBackgroundColor,
                       fontWeight: FontWeight.w500)),
               TextSpan(
                   text: 'lerini test et.',
@@ -79,7 +79,7 @@ class Reviews extends StatelessWidget {
             onPressed: () {},
             child: Text('Başla',
                 style: TextStyle(
-                  color: TobetoAppTheme.lightTheme().primaryColor,
+                  color: TobetoAppColor.primaryBackgroundColor,
                 )),
           ),
         ),
@@ -90,7 +90,7 @@ class Reviews extends StatelessWidget {
             onPressed: () {},
             child: Text('Başla',
                 style: TextStyle(
-                    color: TobetoAppTheme.lightTheme().primaryColor,
+                    color: TobetoAppColor.primaryBackgroundColor,
                     fontWeight: FontWeight.normal)),
           ),
         ),
@@ -102,7 +102,7 @@ class Reviews extends StatelessWidget {
             onPressed: () {},
             child: Text('Başla',
                 style: TextStyle(
-                    color: TobetoAppTheme.lightTheme().primaryColor,
+                    color: TobetoAppColor.primaryBackgroundColor,
                     fontWeight: FontWeight.normal)),
           ),
         ),
@@ -117,7 +117,7 @@ class Reviews extends StatelessWidget {
               TextSpan(
                   text: 'Aboneliğe özel ',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: TobetoAppColor.colorSchemeLight.primary,
+                      color: TobetoAppColor.primaryBackgroundColor,
                       fontWeight: FontWeight.w600)),
               TextSpan(
                   text: 'değerlendirme araçları için',

@@ -29,7 +29,6 @@ class TobetoAppTheme {
         // default text theme size = 14
         bodyMedium: TextStyle(
             color: TobetoAppColor.textColorBlack, fontWeight: FontWeight.w500),
-
         // size=12
         bodySmall: TextStyle(
           color: TobetoAppColor.textColorBlack,
@@ -145,8 +144,8 @@ class TobetoAppTheme {
         ),
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
-            backgroundColor: TobetoAppColor.buttonColorLight,
-            foregroundColor: TobetoAppColor.colorSchemeLight.primary,
+            backgroundColor: TobetoAppColor.inputDarkBackground,
+            foregroundColor: TobetoAppColor.textColorDark,
             fixedSize: const Size(140, 60),
           ),
         ),

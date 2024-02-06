@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/theme/tobeto_theme.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
 class InfoBannerCard extends StatelessWidget {
@@ -14,7 +15,7 @@ class InfoBannerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final cardColor = color ?? TobetoAppColor.colorSchemeLight.primary;
+    final cardColor = color ?? TobetoAppColor.primaryBackgroundColor;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -32,10 +33,12 @@ class InfoBannerCard extends StatelessWidget {
               if (title!.isNotEmpty)
                 Text(
                   title!,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                       color: isDarkMode
-                          ? TobetoAppColor.backgroundLight
-                          : TobetoAppColor.backgroundDark),
+                          ? TobetoAppColor.backgroundDark
+                          : TobetoAppColor.backgroundLight),
                 ),
               if (button != null)
                 Row(
@@ -44,18 +47,15 @@ class InfoBannerCard extends StatelessWidget {
                       width: 190,
                       height: 86,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Text(
-                          subtitle,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                  color: isDarkMode
-                                      ? TobetoAppColor.backgroundDark
-                                      : TobetoAppColor.backgroundLight),
-                        ),
-                      ),
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            subtitle,
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: isDarkMode
+                                    ? TobetoAppColor.backgroundDark
+                                    : TobetoAppColor.backgroundLight),
+                          )),
                     ),
                     Spacer(),
                     button!
@@ -71,7 +71,7 @@ class InfoBannerCard extends StatelessWidget {
                         style: TextStyle(
                           color: isDarkMode
                               ? TobetoAppColor.backgroundDark
-                              : TobetoAppColor.backgroundDark,
+                              : TobetoAppColor.backgroundLight,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
