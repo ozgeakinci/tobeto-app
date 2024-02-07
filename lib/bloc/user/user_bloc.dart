@@ -13,13 +13,21 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         print(userInfos.username);
         print(userInfos.department);
         emit(UserLoaded(
-            username: userInfos.username, department: userInfos.department));
+            username: userInfos.username,
+            department: userInfos.department,
+            applicationStatus: userInfos.applicationStatus));
       } catch (e) {
         emit(UserLoaded(
-            username: "No name", department: "No Department")); // Degişecek
+            username: "No name",
+            department: "No Department",
+            applicationStatus: false)); // Degişecek
         print("HatayaDüştü");
         print(e);
       }
+    });
+
+    on<ResetUserEvent>((event, emit) async {
+      emit(UserInitial());
     });
   }
 }

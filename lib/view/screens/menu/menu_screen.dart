@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
+import 'package:tobeto_app/bloc/user/user_bloc.dart';
+import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/datas/menu_data.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/swiper_page.dart';
@@ -123,6 +125,7 @@ class MenuScreen extends StatelessWidget {
               ),
               trailing: const Icon(Icons.logout_outlined),
               onTap: () {
+                context.read<UserBloc>().add(ResetUserEvent());
                 context.read<AuthBloc>().add(Logout());
               },
             ),

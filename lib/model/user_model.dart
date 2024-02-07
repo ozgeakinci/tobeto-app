@@ -5,10 +5,12 @@ class UserModel {
   String username;
   String department;
   String email;
+  bool applicationStatus;
   UserModel({
     required this.username,
     required this.department,
     required this.email,
+    required this.applicationStatus,
   });
 
 /*   Map<String, dynamic> toMap() {
@@ -25,6 +27,7 @@ class UserModel {
       username: map['username'] as String,
       department: map['department'] as String,
       email: map['email'] as String,
+      applicationStatus: map['applicationStatus'] as bool,
     );
   }
 
