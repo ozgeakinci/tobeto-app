@@ -4,6 +4,7 @@ import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_state.dart';
 import 'package:tobeto_app/view/screens/auth_page.dart';
 import 'package:tobeto_app/view/swiper_page.dart';
+import 'package:tobeto_app/view/widgets/bottom_navbar.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _StartPageState extends State<StartPage> {
     return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
       if (state is Authenticated) {
         print('$state  tüm state');
-        return const SwiperPage();
+        return const BottomNavbar();
       }
 /*       if (state is Authenticated || state is GetUserInfo) {
         print('$state  tüm state');
