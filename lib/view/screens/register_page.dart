@@ -4,6 +4,7 @@ import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/language/language_items.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
+import 'package:tobeto_app/view/screens/login_page.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -29,7 +30,8 @@ class _RegisterPageState extends State<RegisterPage> {
             email: _email,
             password: _password,
             username: _username,
-            department: _department));
+            department: _department,
+            applicationstatus: false));
       }
     }
 

@@ -33,6 +33,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
     on<Register>(
       (event, emit) async {
+        emit(NotAuthenticated());
+
         try {
           UserCredential userCredential =
               await _firebaseAuth.createUserWithEmailAndPassword(
@@ -44,9 +46,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               .doc(userCredential.user!.uid)
               .set({
             'email': event.email,
+            'applicationStatus': event.applicationstatus,
             'username': event.username,
             'department': event.department,
-            'registerDate': DateTime.now()
+            'registerDate': DateTime.now(),
           });
         } on FirebaseAuthException catch (e) {}
       },

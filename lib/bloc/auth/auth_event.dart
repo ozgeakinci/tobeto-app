@@ -15,11 +15,13 @@ class Register extends AuthEvent {
   String password;
   String username;
   String department;
+  bool applicationstatus;
   Register({
     required this.email,
     required this.password,
     required this.username,
     required this.department,
+    required this.applicationstatus,
   });
 }
 

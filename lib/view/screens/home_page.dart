@@ -63,14 +63,14 @@ class HomePage extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Text(
-                            //     state.username.isNotEmpty
-                            //         ? 'Hoşgeldin ${state.username}'
-                            //         : 'Hoşgeldin Kullanıcı',
-                            //     style: Theme.of(context).textTheme.titleLarge),
-                            // const SizedBox(
-                            //   height: 4,
-                            // ),
+                            Text(
+                                state.username.isNotEmpty
+                                    ? 'Hoşgeldin ${state.username}'
+                                    : 'Hoşgeldin Kullanıcı',
+                                style: Theme.of(context).textTheme.titleLarge),
+                            const SizedBox(
+                              height: 4,
+                            ),
                             Text(
                               'Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!',
                               style: Theme.of(context)
