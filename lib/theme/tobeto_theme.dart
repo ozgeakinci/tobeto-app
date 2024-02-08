@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
@@ -9,13 +10,17 @@ class TobetoAppTheme {
       useMaterial3: true,
       colorScheme: TobetoAppColor.colorSchemeLight,
       scaffoldBackgroundColor: TobetoAppColor.backgroundLight,
+
       //Appbar Control
 
       appBarTheme: AppBarTheme(
-          systemOverlayStyle: ThemeData.dark().appBarTheme.systemOverlayStyle,
-          color: TobetoAppColor.colorSchemeLight.primary,
-          titleTextStyle:
-              TextStyle(color: TobetoAppColor.backgroundLight, fontSize: 20)),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        color: TobetoAppColor.primaryBackgroundColor,
+        elevation: 0,
+        titleTextStyle:
+            TextStyle(color: TobetoAppColor.textColorBlack, fontSize: 20),
+        iconTheme: IconThemeData(color: TobetoAppColor.backgroundLight),
+      ),
 
       // showModalBottomSheet => Üst köşelerin düz olması saglandı
       bottomSheetTheme: const BottomSheetThemeData(
@@ -92,6 +97,7 @@ class TobetoAppTheme {
             color: TobetoAppColor.colorSchemeDark.primary,
             systemOverlayStyle:
                 ThemeData.light().appBarTheme.systemOverlayStyle,
+            elevation: 0,
             titleTextStyle:
                 TextStyle(color: TobetoAppColor.textColorDark, fontSize: 20)),
         colorScheme: TobetoAppColor.colorSchemeDark,

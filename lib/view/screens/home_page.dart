@@ -7,7 +7,6 @@ import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/big_button.dart';
-import 'package:tobeto_app/view/widgets/bottom_navbar.dart';
 import 'package:tobeto_app/view/widgets/info_banner_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,20 +15,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        titleSpacing: 20,
-        title: const Text(
-          'Hoşgeldin ozge',
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
-        ),
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.dark,
       ),
+    );
+    return Scaffold(
       body: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {
           print(state);
@@ -41,7 +33,7 @@ class HomePage extends StatelessWidget {
             return Center(
               child: Transform.scale(
                 scale: 3,
-                child: CircularProgressIndicator(
+                child: const CircularProgressIndicator(
                   strokeWidth: 1,
                 ),
               ),
@@ -53,108 +45,159 @@ class HomePage extends StatelessWidget {
             print(state.applicationStatus);
 
             if (state.applicationStatus) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
+              return SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                          top: 16,
+                        ),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                      state.username.isNotEmpty ||
+                                              state.greeting.isNotEmpty
+                                          ? '${state.greeting} ${state.username} 🖐️'
+                                          : 'Hoşgeldin Kullanıcı',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        right: ProjectUtilities.sizeWidth_16),
+                                    child: IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                          Icons.notifications_active_rounded),
+                                      color: TobetoAppColor.textColor,
+                                      iconSize: 24,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                'Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(color: TobetoAppColor.textColor),
+                              )
+                            ]),
                       ),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                                state.username.isNotEmpty
-                                    ? 'Hoşgeldin ${state.username}'
-                                    : 'Hoşgeldin Kullanıcı',
-                                style: Theme.of(context).textTheme.titleLarge),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              'Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(color: TobetoAppColor.textColor),
-                            )
-                          ]),
-                    ),
-                    SizedBox(
-                      height: ProjectUtilities.projectHeight_8,
-                    ),
-                    InfoBannerCard(
-                      title: '',
-                      subtitle:
-                          'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al. Aradığın “İş” Burada!',
-                      color: TobetoAppColor.colorSchemeLight.secondary,
-                      button: Image.asset('assets/images/hello_tobeto.png'),
-                    ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
-                    //   child: Stack(
-                    //     children: [
-                    //       Container(
-                    //         width: width,
-                    //         height: height * 0.16,
-                    //         decoration: BoxDecoration(
-                    //             color: TobetoAppColor.colorSchemeLight.secondary,
-                    //             borderRadius: BorderRadius.circular(20)),
-                    //       ),
-                    //       Row(
-                    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //         children: [
-                    //           Expanded(
-                    //             child: Padding(
-                    //               padding: const EdgeInsets.only(
-                    //                 left: 32,
-                    //                 top: 16,
-                    //                 right: 20,
-                    //               ),
-                    //               child: Text(
-                    //                 'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al. Aradığın “İş” Burada!',
-                    //                 style: Theme.of(context)
-                    //                     .textTheme
-                    //                     .bodyMedium
-                    //                     ?.copyWith(
-                    //                         color: TobetoAppColor.textColorDark),
-                    //               ),
-                    //             ),
-                    //           ),
-                    //           Padding(
-                    //             padding: const EdgeInsets.only(right: 20, top: 10),
-                    //             child: Image.asset(
-                    //               'assets/images/hello_tobeto.png',
-                    //               fit: BoxFit.cover,
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       )
-                    //     ],
-                    //   ),
-                    // ),
+                      SizedBox(
+                        height: ProjectUtilities.projectHeight_8,
+                      ),
+                      InfoBannerCard(
+                        title: '',
+                        subtitle:
+                            'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al. Aradığın “İş” Burada!',
+                        color: TobetoAppColor.colorSchemeLight.secondary,
+                        button: Image.asset('assets/images/hello_tobeto.png'),
+                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
+                      //   child: Stack(
+                      //     children: [
+                      //       Container(
+                      //         width: width,
+                      //         height: height * 0.16,
+                      //         decoration: BoxDecoration(
+                      //             color: TobetoAppColor.colorSchemeLight.secondary,
+                      //             borderRadius: BorderRadius.circular(20)),
+                      //       ),
+                      //       Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           Expanded(
+                      //             child: Padding(
+                      //               padding: const EdgeInsets.only(
+                      //                 left: 32,
+                      //                 top: 16,
+                      //                 right: 20,
+                      //               ),
+                      //               child: Text(
+                      //                 'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al. Aradığın “İş” Burada!',
+                      //                 style: Theme.of(context)
+                      //                     .textTheme
+                      //                     .bodyMedium
+                      //                     ?.copyWith(
+                      //                         color: TobetoAppColor.textColorDark),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //           Padding(
+                      //             padding: const EdgeInsets.only(right: 20, top: 10),
+                      //             child: Image.asset(
+                      //               'assets/images/hello_tobeto.png',
+                      //               fit: BoxFit.cover,
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
 
-                    //Bilgilendirmeler Bölümü
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Bilgilendirmeler',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(fontWeight: FontWeight.w600),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Row(
+                      //Bilgilendirmeler Bölümü
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Bilgilendirmeler',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(fontWeight: FontWeight.w600),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Row(
+                                  children: [
+                                    BigButton(
+                                        department: state.department,
+                                        title: 'Başvurularım',
+                                        color: isDarkMode
+                                            ? TobetoAppColor.inputDarkBackground
+                                            : TobetoAppColor.buttonColorLight,
+                                        textColor: isDarkMode
+                                            ? TobetoAppColor.textColorDark
+                                            : TobetoAppColor.textColorBlack),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    BigButton(
+                                        department: state.department,
+                                        title: 'Eğitimlerim',
+                                        color: isDarkMode
+                                            ? TobetoAppColor.inputDarkBackground
+                                            : TobetoAppColor.buttonColorLight,
+                                        textColor: isDarkMode
+                                            ? TobetoAppColor.textColorDark
+                                            : TobetoAppColor.textColorBlack)
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
                                 children: [
                                   BigButton(
                                       department: state.department,
-                                      title: 'Başvurularım',
+                                      title: 'Duyuru ve Haberler',
                                       color: isDarkMode
                                           ? TobetoAppColor.inputDarkBackground
                                           : TobetoAppColor.buttonColorLight,
@@ -166,7 +209,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                   BigButton(
                                       department: state.department,
-                                      title: 'Eğitimlerim',
+                                      title: 'Anketlerim',
                                       color: isDarkMode
                                           ? TobetoAppColor.inputDarkBackground
                                           : TobetoAppColor.buttonColorLight,
@@ -174,62 +217,56 @@ class HomePage extends StatelessWidget {
                                           ? TobetoAppColor.textColorDark
                                           : TobetoAppColor.textColorBlack)
                                 ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                BigButton(
-                                    department: state.department,
-                                    title: 'Duyuru ve Haberler',
-                                    color: isDarkMode
-                                        ? TobetoAppColor.inputDarkBackground
-                                        : TobetoAppColor.buttonColorLight,
-                                    textColor: isDarkMode
-                                        ? TobetoAppColor.textColorDark
-                                        : TobetoAppColor.textColorBlack),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                BigButton(
-                                    department: state.department,
-                                    title: 'Anketlerim',
-                                    color: isDarkMode
-                                        ? TobetoAppColor.inputDarkBackground
-                                        : TobetoAppColor.buttonColorLight,
-                                    textColor: isDarkMode
-                                        ? TobetoAppColor.textColorDark
-                                        : TobetoAppColor.textColorBlack)
-                              ],
-                            )
-                          ]),
-                    ),
+                              )
+                            ]),
+                      ),
 
-                    //Gelişim Bölümü
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20.0, right: 20, bottom: 20),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Gelişim',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(fontWeight: FontWeight.w600),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Row(
+                      //Gelişim Bölümü
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20.0, right: 20, bottom: 20),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Gelişim',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(fontWeight: FontWeight.w600),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Row(
+                                  children: [
+                                    BigButton(
+                                      department: state.department,
+                                      title: 'Sınavlarım',
+                                      color: const Color(0xffEC7B9C),
+                                      textColor: Colors.white,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    BigButton(
+                                      department: state.department,
+                                      title: 'Profil Oluştur',
+                                      color: const Color(0xff7086FF),
+                                      textColor: Colors.white,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
                                 children: [
                                   BigButton(
                                     department: state.department,
-                                    title: 'Sınavlarım',
-                                    color: const Color(0xffEC7B9C),
+                                    title: 'Kendini Değerlendir',
+                                    color: const Color(0xff62CBA2),
                                     textColor: Colors.white,
                                   ),
                                   const SizedBox(
@@ -237,38 +274,16 @@ class HomePage extends StatelessWidget {
                                   ),
                                   BigButton(
                                     department: state.department,
-                                    title: 'Profil Oluştur',
-                                    color: const Color(0xff7086FF),
+                                    title: 'Öğrenmeye başla',
+                                    color: const Color(0xffB266FF),
                                     textColor: Colors.white,
                                   )
                                 ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                BigButton(
-                                  department: state.department,
-                                  title: 'Kendini Değerlendir',
-                                  color: const Color(0xff62CBA2),
-                                  textColor: Colors.white,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                BigButton(
-                                  department: state.department,
-                                  title: 'Öğrenmeye başla',
-                                  color: const Color(0xffB266FF),
-                                  textColor: Colors.white,
-                                )
-                              ],
-                            )
-                          ]),
-                    )
-                  ],
+                              )
+                            ]),
+                      )
+                    ],
+                  ),
                 ),
               );
             } else {
@@ -284,7 +299,7 @@ class HomePage extends StatelessWidget {
                         children: [
                           Text(
                               state.username.isNotEmpty
-                                  ? 'Hoşgeldin ${state.username}'
+                                  ? 'Hoşgeldin ${state.username} 🖐️'
                                   : 'Hoşgeldin Kullanıcı',
                               style: Theme.of(context).textTheme.titleLarge),
                           const SizedBox(

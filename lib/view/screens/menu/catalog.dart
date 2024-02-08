@@ -55,47 +55,59 @@ class Catalog extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<CatalogBloc>().add(ResetCatalogEvent());
 
-    /*    final List<EducationalCard> fakeCourses = [
-      /*   const EducationalCard(
-        title: 'Dinle, Anla, İfade Et: Etkili İletişim Gelişim Yolculuğu',
-        subTitle: 'Gürkan İlişen',
-      ),
-    const EducationalCard(
-        title: 'Dinle, Anla, İfade Et: Etkili İletişim Gelişim Yolculuğu',
-        subTitle: 'Gürkan İlişen',
-      ), */
-    ]; */
-
     return Scaffold(
-        body: BlocBuilder<CatalogBloc, CatalogState>(builder: (context, state) {
-      if (state is CatalogInitial) {
-        print("nsbdjhsdjhsdk  $state");
-
-        context.read<CatalogBloc>().add(FetchCatalogRequested());
-      }
-      if (state is CatalogLoading) {
-        print("nsbdjhsdjhsdk  $state");
-
-        return Center(
-          child: Transform.scale(
-            scale: 3,
-            child: CircularProgressIndicator(
-              strokeWidth: 5,
+        appBar: AppBar(
+          title: const Text(
+            'Katalog',
+            style: TextStyle(color: Colors.white),
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Color(0xFF6A00FF),
+                Color(0xFF9013FE),
+                Color(0xFFC100FF),
+              ], begin: Alignment.topRight, end: Alignment.bottomLeft),
             ),
           ),
-        );
-      }
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+            IconButton(
+                onPressed: () {
+                  catalogAddIcon(context);
+                },
+                icon: Icon(Icons.filter_alt))
+          ],
+        ),
+        body: BlocBuilder<CatalogBloc, CatalogState>(builder: (context, state) {
+          if (state is CatalogInitial) {
+            print("nsbdjhsdjhsdk  $state");
 
-      if (state is CatologLoaded) {
-        print(state.educationCatalogInfo.length);
-        return ListView.builder(
-            itemCount: state.educationCatalogInfo.length,
-            itemBuilder: (context, index) =>
-                EducationalCard(department: state.educationCatalogInfo[index]));
-      } else {
-        return const Center(child: Text("Unknown State"));
-      }
-    }));
+            context.read<CatalogBloc>().add(FetchCatalogRequested());
+          }
+          if (state is CatalogLoading) {
+            print("nsbdjhsdjhsdk  $state");
+
+            return Center(
+              child: Transform.scale(
+                scale: 1,
+                child: CircularProgressIndicator(
+                  strokeWidth: 1,
+                ),
+              ),
+            );
+          }
+
+          if (state is CatologLoaded) {
+            print(state.educationCatalogInfo.length);
+            return ListView.builder(
+                itemCount: state.educationCatalogInfo.length,
+                itemBuilder: (context, index) => EducationalCard(
+                    department: state.educationCatalogInfo[index]));
+          } else {
+            return const Center(child: Text("Unknown State"));
+          }
+        }));
   }
 
   Widget buildBottomSheetOption(String title) {

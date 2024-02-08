@@ -18,7 +18,7 @@ class EducationalCard extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
@@ -36,7 +36,7 @@ class EducationalCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -52,7 +52,6 @@ class EducationalCard extends StatelessWidget {
                   height: ProjectUtilities.projectHeight_8,
                 ),
                 Image.network(
-                  // 344 × 258
                   department.imageURL,
                   fit: BoxFit.fill,
                 ),

@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/bottom_navbar/bottom_navbar_bloc.dart';
 import 'package:tobeto_app/bloc/bottom_navbar/bottom_navbar_event.dart';
 import 'package:tobeto_app/bloc/bottom_navbar/bottom_navbar_state.dart';
-import 'package:tobeto_app/bloc/user/user_state.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/screens/home_page.dart';
 import 'package:tobeto_app/view/screens/menu/calender.dart';
 import 'package:tobeto_app/view/screens/menu/catalog.dart';
-import 'package:tobeto_app/view/screens/menu/menu_screen.dart';
 import 'package:tobeto_app/view/screens/menu/profile.dart';
+import 'package:tobeto_app/view/screens/menu/reviews.dart';
 import 'package:tobeto_app/view/swiper_page.dart';
 
 class BottomNavbar extends StatefulWidget {
@@ -29,58 +29,52 @@ class _BottomNavigatorState extends State<BottomNavbar> {
             children: [
               HomePage(),
               Catalog(),
-              Profile(),
               Calender(),
-              SwiperPage(),
+              Profile(),
+              Reviews(),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: state.currentIndex,
-            fixedColor: Colors.black45,
+            iconSize: 24,
+            selectedItemColor:
+                TobetoAppColor.primaryBackgroundColor, // Seçilen ikon rengi
+            unselectedItemColor: Colors.black45, //
+
             onTap: (index) {
               context.read<BottomNavbarBloc>().add(UpdatePageIndexEvent(index));
             },
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.home,
-                  color: Colors.black45,
-                  size: 32,
+                  Icons.home_outlined,
                 ),
                 label: 'Anasayfa',
                 backgroundColor: Colors.white,
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.cast_for_education,
-                  color: Colors.black45,
-                  size: 32,
+                  Icons.play_lesson_outlined,
                 ),
                 label: 'Katalog',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.calendar_month_outlined,
-                  color: Colors.black45,
-                  size: 32,
                 ),
                 label: 'Takvim',
                 backgroundColor: Colors.white,
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.person_2,
-                  color: Colors.black45,
-                  size: 32,
+                  Icons.person_2_outlined,
                 ),
                 label: 'Profilim',
                 backgroundColor: Colors.white,
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.business,
-                  color: Colors.black45,
-                  size: 32,
+                  Icons.rate_review_outlined,
                 ),
                 label: 'Değerlendirme',
                 backgroundColor: Colors.white,
