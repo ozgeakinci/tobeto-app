@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_bloc.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_event.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_state.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/educational_card.dart';
 
 class Catalog extends StatelessWidget {
@@ -56,27 +58,14 @@ class Catalog extends StatelessWidget {
     context.read<CatalogBloc>().add(ResetCatalogEvent());
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Katalog',
-            style: TextStyle(color: Colors.white),
-          ),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color(0xFF6A00FF),
-                Color(0xFF9013FE),
-                Color(0xFFC100FF),
-              ], begin: Alignment.topRight, end: Alignment.bottomLeft),
-            ),
-          ),
+        appBar: CustomAppbar(
+          title: 'Katalog',
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.search)),
             IconButton(
-                onPressed: () {
-                  catalogAddIcon(context);
-                },
-                icon: Icon(Icons.filter_alt))
+              onPressed: () {},
+              icon: Icon(Icons.filter_alt),
+            ),
           ],
         ),
         body: BlocBuilder<CatalogBloc, CatalogState>(builder: (context, state) {
@@ -91,7 +80,7 @@ class Catalog extends StatelessWidget {
             return Center(
               child: Transform.scale(
                 scale: 1,
-                child: CircularProgressIndicator(
+                child: const CircularProgressIndicator(
                   strokeWidth: 1,
                 ),
               ),

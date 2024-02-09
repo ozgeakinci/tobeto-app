@@ -134,7 +134,7 @@ class Profile extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                           backgroundColor: Colors.white),
-                      child: Text('Çıkış yap'),
+                      child: const Text('Çıkış yap'),
                       onPressed: () {
                         context.read<UserBloc>().add(ResetUserEvent());
                         context.read<AuthBloc>().add(Logout());
