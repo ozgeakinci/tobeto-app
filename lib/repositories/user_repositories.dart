@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tobeto_app/model/calendar_model.dart';
 import 'package:tobeto_app/model/user_model.dart';
 import 'package:tobeto_app/model/department_model.dart';
 import 'package:tobeto_app/model/notification_model.dart';
@@ -17,6 +18,15 @@ class UserRepositories {
 
     final userInfo = UserModel.fromUserFireStore(userFromDb);
     return userInfo;
+  }
+
+  // TAKVİM SAYFASI BİLGİLERİ
+  Future<CalendarModel> getCalendarInfoFromFirebase(String department) async {
+    final calendarFromDb =
+        await firebaseFirestore.collection('takvim').doc(department).get();
+
+    final calendarInfo = CalendarModel.fromCalendarFireStore(calendarFromDb);
+    return calendarInfo;
   }
 
   // KATALOG SAYFASI BİLGİLERİ

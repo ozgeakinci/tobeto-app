@@ -10,7 +10,7 @@ import 'package:tobeto_app/view/screens/home_page.dart';
 import 'package:tobeto_app/view/screens/menu/profile.dart';
 import 'package:tobeto_app/view/screens/menu/reviews.dart';
 
-class SwiperPage extends StatefulWidget {
+/* class SwiperPage extends StatefulWidget {
   const SwiperPage({Key? key}) : super(key: key);
 
   @override
@@ -50,7 +50,7 @@ class _SwiperPageState extends State<SwiperPage> {
           ),
         ),
         actions: [
-          if (activeScreenName == "Takvim")
+          /*   if (activeScreenName == "Takvim")
             Row(
               children: [
                 IconButton(
@@ -83,7 +83,7 @@ class _SwiperPageState extends State<SwiperPage> {
                   },
                 ),
               ],
-            ),
+            ), */
         ],
       ),
       drawer: MenuScreen(
@@ -93,3 +93,4 @@ class _SwiperPageState extends State<SwiperPage> {
     );
   }
 }
+ */
