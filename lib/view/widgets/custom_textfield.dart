@@ -2,19 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String hintText;
-  final IconData prefixIcon;
+  final String labelText;
+  final IconData? prefixIcon;
   final bool obscureText;
   final TextEditingController? controller;
   final Function(String?)? onSaved;
+  final TextInputType? keyboardType;
+  final String? initialValue;
+  final bool? enabled;
 
   const CustomTextField({
     Key? key,
-    required this.hintText,
-    required this.prefixIcon,
+    required this.labelText,
+    this.prefixIcon,
     this.obscureText = false,
+    this.enabled,
     this.controller,
-    required this.onSaved,
+    this.keyboardType,
+    this.initialValue,
+    this.onSaved,
   }) : super(key: key);
 
   @override
@@ -26,15 +32,18 @@ class CustomTextField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
         child: TextFormField(
+          enabled: enabled,
           onSaved: onSaved,
           controller: controller,
+          keyboardType: keyboardType,
           obscureText: obscureText,
+          initialValue: initialValue,
           decoration: InputDecoration(
+            labelText: labelText,
             filled: true,
             fillColor: isDarkMode
                 ? TobetoAppColor.inputDarkBackground
                 : TobetoAppColor.backgroundLight,
-            hintText: hintText,
             border: OutlineInputBorder(
                 borderSide: isDarkMode ? BorderSide.none : BorderSide(),
                 borderRadius: BorderRadius.all(Radius.circular(8))),

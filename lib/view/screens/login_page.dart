@@ -38,11 +38,11 @@ class _LoginPageState extends State<LoginPage> {
           ),
           CustomTextField(
               onSaved: (value) => _email = value!,
-              hintText: LanguageItems.hintEmailText,
+              labelText: LanguageItems.hintEmailText,
               prefixIcon: Icons.person_2_rounded),
           CustomTextField(
             onSaved: (value) => _password = value!,
-            hintText: LanguageItems.hintTextPassword,
+            labelText: LanguageItems.hintTextPassword,
             prefixIcon: Icons.lock,
             obscureText: true,
           ),

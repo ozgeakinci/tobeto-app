@@ -48,17 +48,20 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserLoaded(
           username: userInfos.username,
           department: userInfos.department,
+          email: userInfos.email,
           applicationStatus: userInfos.applicationStatus,
           greeting: greeting,
           usernameInitials: usernameInitials,
         ));
       } catch (e) {
         emit(UserLoaded(
-            username: "No name",
-            department: "No Department",
-            applicationStatus: false,
-            greeting: '',
-            usernameInitials: '')); // Degişecek
+          username: "No name",
+          department: "No Department",
+          email: '',
+          applicationStatus: false,
+          greeting: '',
+          usernameInitials: '',
+        )); // Degişecek
         print("HatayaDüştü");
         print(e);
       }

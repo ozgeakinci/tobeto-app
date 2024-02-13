@@ -135,7 +135,7 @@ Gürkan İlişen */
                       });
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _selectedDay != null
                       ? Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -146,8 +146,8 @@ Gürkan İlişen */
                                 'Seçilen Tarih: ${_selectedDay!.day}/${_selectedDay!.month}/${_selectedDay!.year}',
                                 style: TextStyle(fontSize: 16),
                               ),
-                              SizedBox(height: 10),
-                              Text(
+                              const SizedBox(height: 10),
+                              const Text(
                                 'Dersler:',
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold),

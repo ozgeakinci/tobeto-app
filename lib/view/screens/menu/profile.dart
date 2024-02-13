@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
+import 'package:tobeto_app/bloc/bottom_navbar/bottom_navbar_bloc.dart';
+import 'package:tobeto_app/bloc/bottom_navbar/bottom_navbar_event.dart';
 import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
-import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/screens/menu/profile/certificate.dart';
 import 'package:tobeto_app/view/screens/menu/profile/competency_badge.dart';
 import 'package:tobeto_app/view/screens/menu/profile/education_life.dart';
@@ -65,6 +66,9 @@ class Profile extends StatelessWidget {
       ),
       body: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {
+          if (state is UserInitial) {
+            context.read<UserBloc>().add(FetchUserRequested());
+          }
           if (state is UserLoaded) {
             return CustomScrollView(
               slivers: [
@@ -136,6 +140,9 @@ class Profile extends StatelessWidget {
                           backgroundColor: Colors.white),
                       child: const Text('Çıkış yap'),
                       onPressed: () {
+                        context
+                            .read<BottomNavbarBloc>()
+                            .add(UpdatePageIndexEvent(0));
                         context.read<UserBloc>().add(ResetUserEvent());
                         context.read<AuthBloc>().add(Logout());
                       },

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_app/bloc/user/user_bloc.dart';
+import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
+import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 
 class PersonalInfo extends StatefulWidget {
   const PersonalInfo({Key? key}) : super(key: key);
@@ -11,64 +15,83 @@ class PersonalInfo extends StatefulWidget {
 }
 
 class _PersonalInfoState extends State<PersonalInfo> {
-  TextEditingController adController = TextEditingController();
-  TextEditingController aboutMeController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  String _about = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Kişisel Bilgilerim"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: SingleChildScrollView(
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 2,
-                color: TobetoAppColor.textColor.withOpacity(0.3),
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _buildUserPhoto(),
-                  SizedBox(height: ProjectUtilities.projectHeight_24),
-                  Text(
-                    'Profil Fotoğrafı Ekle',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: TobetoAppColor.colorSchemeLight.primary),
-                  ),
-                  SizedBox(height: ProjectUtilities.projectHeight_24),
-                  _buildTextField("Adınız"),
-                  SizedBox(height: ProjectUtilities.projectHeight_24),
-                  _buildTextField("Soy Adınız"),
-                  SizedBox(height: ProjectUtilities.projectHeight_24),
-                  _buildPhoneNumberField(),
-                  SizedBox(height: ProjectUtilities.projectHeight_24),
-                  _buildDateOfBirthField(),
-                  SizedBox(height: ProjectUtilities.projectHeight_24),
-                  _buildTextField("TC Kimlik No"),
-                  SizedBox(height: ProjectUtilities.projectHeight_24),
-                  _buildTextField("E-posta"),
-                  SizedBox(height: ProjectUtilities.projectHeight_24),
-                  _buildTextField("Ülke il İlçe Seçilecek"),
-                  SizedBox(height: ProjectUtilities.projectHeight_24),
-                  _buildAboutMeField(),
-                  SizedBox(height: ProjectUtilities.projectHeight_24),
-                  _buildSaveButton(),
-                ],
-              ),
-            ),
-          ),
+        appBar: const CustomAppbar(
+          title: 'Kişisel Bilgilerim',
         ),
-      ),
-    );
+        body: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            if (state is UserLoaded) {
+              return Padding(
+                padding: EdgeInsets.all(ProjectUtilities.paddingAll_16),
+                child: SingleChildScrollView(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 2,
+                        color: TobetoAppColor.textColor.withOpacity(0.3),
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(ProjectUtilities.sizeWidth_8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          _buildUserPhoto(),
+                          SizedBox(height: ProjectUtilities.projectHeight_24),
+                          Text(
+                            'Profil Fotoğrafı Ekle',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: TobetoAppColor.colorSchemeLight.primary),
+                          ),
+                          Form(
+                              child: Column(
+                            children: [
+                              CustomTextField(
+                                labelText: 'Adınız Soyadınız*',
+                                initialValue: state.username,
+                                enabled: false,
+                              ),
+                              CustomTextField(
+                                labelText: 'E-Posta*',
+                                enabled: false,
+                                initialValue: state.email,
+                              ),
+                              CustomTextField(
+                                labelText: 'Bölüm',
+                                initialValue: state.department,
+                                enabled: false,
+                              ),
+                              CustomTextField(
+                                labelText: 'Hakkımda',
+                                initialValue: _about,
+                                onSaved: (value) => _about = value!,
+                              ),
+                              SizedBox(
+                                  height: ProjectUtilities.projectHeight_24),
+                              _buildSaveButton(),
+                            ],
+                          ))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ));
   }
 
   Widget _buildUserPhoto() {
@@ -84,83 +107,21 @@ class _PersonalInfoState extends State<PersonalInfo> {
     );
   }
 
-  Widget _buildTextField(String labelText) {
-    return TextFormField(
-      controller: adController,
-      decoration: InputDecoration(
-        labelText: labelText,
-        border: const OutlineInputBorder(),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 12,
-        ),
-      ),
-      style: TextStyle(fontSize: 15),
-    );
-  }
-
-  Widget _buildPhoneNumberField() {
-    return TextFormField(
-      controller: adController,
-      decoration: const InputDecoration(
-        labelText: "Telefon Numarası",
-        border: OutlineInputBorder(),
-        contentPadding: EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 12,
-        ),
-        prefixText: '+90 ', // Alan kodu veya ülke kodu ekleyebilirsiniz
-      ),
-      style: TextStyle(fontSize: 15),
-      keyboardType: TextInputType.phone,
-      inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
-        LengthLimitingTextInputFormatter(13),
-      ],
-    );
-  }
-
-  Widget _buildDateOfBirthField() {
-    return TextFormField(
-      controller: adController,
-      decoration: InputDecoration(
-        labelText: "Doğum Tarihiniz",
-        border: OutlineInputBorder(),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 12,
-        ),
-        suffixIcon: IconButton(
-          icon: Icon(Icons.calendar_today),
-          onPressed: () {
-            print("Tarih seçme açılacak");
-          },
-        ),
-      ),
-      style: TextStyle(fontSize: 15),
-    );
-  }
-
-  Widget _buildAboutMeField() {
-    return TextFormField(
-      controller: aboutMeController,
-      maxLines: null,
-      decoration: InputDecoration(
-        labelText: "Hakkımda",
-        border: OutlineInputBorder(),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 12,
-        ),
-      ),
-      style: TextStyle(fontSize: 15),
-    );
-  }
-
   Widget _buildSaveButton() {
     return ElevatedButton(
       onPressed: () {
-        print("Kaydet Tıklandı");
+        print('butona tıklandı');
+
+        if (_formKey.currentState != null &&
+            _formKey.currentState!.validate()) {
+          // Formu kaydet
+          _formKey.currentState!.save();
+
+          // Kullanıcının güncellemek istediği verileri al
+          // updatedUsername ve updatedEmail zaten formun içinde onSaved ile güncellenmiş durumda
+
+          // UserBloc'tan güncelleme event'ini tetikle
+        }
       },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(

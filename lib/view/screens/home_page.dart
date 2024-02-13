@@ -28,6 +28,7 @@ class HomePage extends StatelessWidget {
 
           if (state is UserInitial) {
             context.read<UserBloc>().add(FetchUserRequested());
+            print(state);
           }
           if (state is UserLoading) {
             return Center(

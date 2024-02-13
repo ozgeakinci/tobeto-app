@@ -6,6 +6,7 @@ class UserModel {
   String department;
   String email;
   bool applicationStatus;
+
   UserModel({
     required this.username,
     required this.department,

@@ -49,19 +49,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 CustomTextField(
                     onSaved: (value) => _username = value!,
-                    hintText: LanguageItems.hintNameText,
+                    labelText: LanguageItems.hintNameText,
                     prefixIcon: Icons.person_2_rounded),
                 CustomTextField(
                     onSaved: (value) => _department = value!,
-                    hintText: LanguageItems.hintDepartmentText,
+                    labelText: LanguageItems.hintDepartmentText,
                     prefixIcon: Icons.person_2_rounded),
                 CustomTextField(
                     onSaved: (value) => _email = value!,
-                    hintText: LanguageItems.hintEmailText,
+                    labelText: LanguageItems.hintEmailText,
                     prefixIcon: Icons.person_2_rounded),
                 CustomTextField(
                   onSaved: (value) => _password = value!,
-                  hintText: LanguageItems.hintTextPassword,
+                  labelText: LanguageItems.hintTextPassword,
                   prefixIcon: Icons.lock,
                   obscureText: true,
                 ),

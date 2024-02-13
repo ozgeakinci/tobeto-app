@@ -12,6 +12,10 @@ class BottomNavbarBloc extends Bloc<BottomNavbarEvent, BottomNavbarUpdate> {
     emit(BottomNavbarUpdate(event.index));
   }
 
+  void reset() {
+    add(UpdatePageIndexEvent(0));
+  }
+
   @override
   Stream<BottomNavbarUpdate> mapEventToState(BottomNavbarEvent event) async* {
     if (event is UpdatePageIndexEvent) {
