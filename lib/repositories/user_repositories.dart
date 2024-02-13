@@ -61,4 +61,14 @@ class UserRepositories {
         NotificationModel.fromNotificationsFireStore(notificationsFromDb);
     return notifications;
   }
+
+  // KULLANICI BİLGİLERİNİ FİREBASE'E GÖNDERME
+  Future<UserModel> sendUserInfoToFirebase(UserModel user) async {
+    final userRef = firebaseFirestore
+        .collection('users')
+        .doc(firebaseAuth.currentUser!.uid);
+
+    await userRef.set(user.toMap());
+    return user;
+  }
 }

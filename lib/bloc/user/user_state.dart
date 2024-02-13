@@ -11,6 +11,8 @@ class UserLoaded extends UserState {
   final String greeting;
   final String usernameInitials;
   String email;
+  String about;
+  DateTime birthDate;
 
   UserLoaded({
     required this.username,
@@ -19,6 +21,8 @@ class UserLoaded extends UserState {
     required this.greeting,
     required this.usernameInitials,
     required this.email,
+    required this.about,
+    required this.birthDate,
   });
 }
 

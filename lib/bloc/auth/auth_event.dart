@@ -16,13 +16,17 @@ class Register extends AuthEvent {
   String username;
   String department;
   bool applicationstatus;
-  Register({
-    required this.email,
-    required this.password,
-    required this.username,
-    required this.department,
-    required this.applicationstatus,
-  });
+  String? about;
+  DateTime? birthDate;
+
+  Register(
+      {required this.email,
+      required this.password,
+      required this.username,
+      required this.department,
+      required this.applicationstatus,
+      this.about,
+      this.birthDate});
 }
 
 class Logout extends AuthEvent {}

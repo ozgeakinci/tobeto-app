@@ -6,12 +6,16 @@ class UserModel {
   String department;
   String email;
   bool applicationStatus;
+  String about;
+  DateTime birthDate;
 
   UserModel({
     required this.username,
     required this.department,
     required this.email,
     required this.applicationStatus,
+    required this.about,
+    required this.birthDate,
   });
 
 /*   Map<String, dynamic> toMap() {
@@ -29,7 +33,32 @@ class UserModel {
       department: map['department'] as String,
       email: map['email'] as String,
       applicationStatus: map['applicationStatus'] as bool,
+      about: map['about'] as String,
+      birthDate: map['birthDate'] == null
+          ? DateTime.now()
+          : (map['birthDate'] as Timestamp).toDate(),
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'username': username,
+      'department': department,
+      'email': email,
+      'applicationStatus': applicationStatus,
+      'about': about,
+      'birthDate': birthDate
+    };
+  }
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+        username: json['username'] as String,
+        department: json['department'] as String,
+        email: json['email'] as String,
+        applicationStatus: json['applicationStatus'] as bool,
+        about: json['about'] as String,
+        birthDate: json['birthDate'] as DateTime);
   }
 
 /*   String toJson() => json.encode(toMap());
