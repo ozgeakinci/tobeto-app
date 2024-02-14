@@ -7,7 +7,7 @@ class NotificationModel {
 
   factory NotificationModel.fromNotificationsFireStore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final List<dynamic>? notificationsList = snapshot.data()?['natifications'];
+    final List<dynamic>? notificationsList = snapshot.data()?['notifications'];
     if (notificationsList == null) {
       return NotificationModel(notifications: []);
     }

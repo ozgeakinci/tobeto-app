@@ -44,7 +44,7 @@ class UserRepositories {
   Future<DepartmentModel> getDepartmentInfoFromFirebase(
       String department) async {
     final educationsFromDb =
-        await firebaseFirestore.collection('educations').doc(department).get();
+        await firebaseFirestore.collection('department').doc(department).get();
 
     final departmentEducationsInfo =
         DepartmentModel.fromDepartmentFireStore(educationsFromDb);
@@ -55,7 +55,7 @@ class UserRepositories {
   Future<NotificationModel> getNotificationInfoFromFirebase(
       String department) async {
     final notificationsFromDb =
-        await firebaseFirestore.collection('educations').doc(department).get();
+        await firebaseFirestore.collection('department').doc(department).get();
 
     final notifications =
         NotificationModel.fromNotificationsFireStore(notificationsFromDb);

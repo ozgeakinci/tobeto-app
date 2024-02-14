@@ -1,6 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
+enum Department {
+  isanalisti,
+  mobil,
+  fullstack,
+  work,
+}
+
+extension DepartmentExtension on Department {
+  String get stringValue {
+    switch (this) {
+      case Department.isanalisti:
+        return 'İş Analisti';
+      case Department.mobil:
+        return 'Mobil';
+      case Department.fullstack:
+        return 'Full Stack';
+      case Department.work:
+        return 'Work';
+      default:
+        return '';
+    }
+  }
+}
+
 class UserModel {
   String username;
   String department;

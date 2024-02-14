@@ -20,7 +20,7 @@ class DepartmentModel {
 
   factory DepartmentModel.fromDepartmentFireStore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final List<dynamic>? videosList = snapshot.data()?['videos'];
+    final List<dynamic>? videosList = snapshot.data()?['educations'];
     if (videosList == null) {
       return DepartmentModel(lessonList: []);
     }

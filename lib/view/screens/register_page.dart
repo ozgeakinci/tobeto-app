@@ -4,7 +4,6 @@ import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/language/language_items.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
-import 'package:tobeto_app/view/screens/login_page.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -15,13 +14,28 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  List<String> departmentList = [
+    'Java Fullstack',
+    '.NET Fullstack',
+    'Mobil Uygulama Geliştirme',
+    'Yazılım Kalite ve Test',
+    'İş Analisti',
+    'Veri Bilimi',
+    'Siber Güvenlik',
+    'Sistem ve Network',
+    'Oyun Yazılımı',
+    'Dijital Pazarlama',
+    'DevOps'
+  ];
+
+  String? _department;
+
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     String _email = '';
     String _password = '';
     String _username = '';
-    String _department = '';
 
     void _submit() {
       if (_formKey.currentState!.validate()) {
@@ -30,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
             email: _email,
             password: _password,
             username: _username,
-            department: _department,
+            department: _department!,
             applicationstatus: false));
       }
     }
@@ -59,6 +73,26 @@ class _RegisterPageState extends State<RegisterPage> {
                     onSaved: (value) => _email = value!,
                     labelText: LanguageItems.hintEmailText,
                     prefixIcon: Icons.person_2_rounded),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.92,
+                  height: 100, // TextFormField'ın yüksekliği ile aynı olabilir
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                    child: DropdownButtonFormField<String>(
+                      value: _department,
+                      hint: Text('Ders Türünü Seçiniz'),
+                      onSaved: (value) => _department = value!,
+                      items: departmentList.map((type) {
+                        return DropdownMenuItem<String>(
+                          value: type,
+                          child: Text(type),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {},
+                    ),
+                  ),
+                ),
                 CustomTextField(
                   onSaved: (value) => _password = value!,
                   labelText: LanguageItems.hintTextPassword,
