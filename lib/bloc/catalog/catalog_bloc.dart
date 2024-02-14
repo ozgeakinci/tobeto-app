@@ -10,10 +10,11 @@ class CatalogBloc extends Bloc<CatalogEvent, CatalogState> {
       emit(CatalogLoading());
       try {
         final catalogInfos = await repositories.getCatalogInfoFromFirebase();
-        emit(CatologLoaded(educationCatalogInfo: catalogInfos.lessonList));
+        emit(CatalogLoaded(catalogItem: catalogInfos.lessonList));
+        print('verii gelldii $catalogInfos');
       } catch (e) {
         emit(CatalogError());
-        print("CatalogError GetCatalogEvent erorrrr");
+        print("Error in FetchCatalogRequested: $e");
         print(e);
       }
     });

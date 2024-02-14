@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_bloc.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_event.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_state.dart';
+import 'package:tobeto_app/view/widgets/catalog_video_card.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
-import 'package:tobeto_app/view/widgets/educational_card.dart';
 
 class Catalog extends StatelessWidget {
   const Catalog({Key? key}) : super(key: key);
@@ -44,13 +43,15 @@ class Catalog extends StatelessWidget {
             );
           }
 
-          if (state is CatologLoaded) {
-            print(state.educationCatalogInfo.length);
+          if (state is CatalogLoaded) {
+            print(state.catalogItem.length);
+
             return ListView.builder(
-                itemCount: state.educationCatalogInfo.length,
-                itemBuilder: (context, index) => EducationalCard(
-                    department: state.educationCatalogInfo[index]));
+                itemCount: state.catalogItem.length,
+                itemBuilder: (context, index) =>
+                    CatalogVideoCard(catalogItem: state.catalogItem[index]));
           } else {
+            print("Unknown State: $state");
             return const Center(child: Text("Unknown State"));
           }
         }));

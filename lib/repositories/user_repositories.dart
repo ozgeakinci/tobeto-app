@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tobeto_app/model/calendar_model.dart';
+import 'package:tobeto_app/model/catalog_model.dart';
 import 'package:tobeto_app/model/user_model.dart';
 import 'package:tobeto_app/model/department_model.dart';
 import 'package:tobeto_app/model/notification_model.dart';
+import 'package:tobeto_app/view/screens/menu/catalog.dart';
 
 class UserRepositories {
   final firebaseFirestore = FirebaseFirestore.instance;
@@ -30,13 +32,13 @@ class UserRepositories {
   }
 
   // KATALOG SAYFASI BİLGİLERİ
-  Future<DepartmentModel> getCatalogInfoFromFirebase() async {
+  Future<CatalogModel> getCatalogInfoFromFirebase() async {
     final catalogFromDb = await firebaseFirestore
         .collection('catalog')
         .doc("catalogvideos")
         .get();
 
-    final catalogInfo = DepartmentModel.fromDepartmentFireStore(catalogFromDb);
+    final catalogInfo = CatalogModel.fromCatalogFireStore(catalogFromDb);
     return catalogInfo;
   }
 
