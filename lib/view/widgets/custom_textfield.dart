@@ -10,25 +10,29 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? initialValue;
   final bool? enabled;
+  final int? maxLines;
+  final double? height;
 
-  const CustomTextField({
-    Key? key,
-    required this.labelText,
-    this.prefixIcon,
-    this.obscureText = false,
-    this.enabled,
-    this.controller,
-    this.keyboardType,
-    this.initialValue,
-    this.onSaved,
-  }) : super(key: key);
+  const CustomTextField(
+      {Key? key,
+      required this.labelText,
+      this.prefixIcon,
+      this.obscureText = false,
+      this.enabled,
+      this.controller,
+      this.keyboardType,
+      this.initialValue,
+      this.onSaved,
+      this.maxLines,
+      this.height})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.92,
-      height: MediaQuery.of(context).size.height * 0.099,
+      height: height,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
         child: TextFormField(
@@ -38,6 +42,7 @@ class CustomTextField extends StatelessWidget {
           keyboardType: keyboardType,
           obscureText: obscureText,
           initialValue: initialValue,
+          maxLines: maxLines,
           decoration: InputDecoration(
             labelText: labelText,
             filled: true,

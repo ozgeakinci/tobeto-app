@@ -45,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
             labelText: LanguageItems.hintTextPassword,
             prefixIcon: Icons.lock,
             obscureText: true,
+            maxLines: 1,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

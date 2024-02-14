@@ -51,7 +51,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             'department': event.department,
             'registerDate': DateTime.now(),
             'about': '',
-            'birthDate': event.birthDate
           });
         } on FirebaseAuthException catch (e) {}
       },

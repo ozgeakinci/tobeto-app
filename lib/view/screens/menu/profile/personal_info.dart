@@ -79,11 +79,22 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                         child: Stack(
                                           children: [
                                             CustomTextField(
-                                                labelText: _selectedDate
-                                                    .toString()
-                                                    .split(' ')[0],
-                                                initialValue:
-                                                    state.birthDate.toString()),
+                                              labelText: state.birthDate != null
+                                                  ? 'Doğum Tarihi'
+                                                  : _selectedDate
+                                                      .toString()
+                                                      .split(' ')
+                                                      .first,
+                                              initialValue:
+                                                  _selectedDate == null
+                                                      ? state.birthDate
+                                                          ?.toString()
+                                                          .split(' ')
+                                                          .first
+                                                      : _selectedDate
+                                                          .toString()
+                                                          .split(' ')[0],
+                                            ),
                                             Positioned(
                                               right: 20,
                                               top: 0,
@@ -118,6 +129,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                     labelText: 'Hakkımda',
                                     initialValue: state.about,
                                     onSaved: (value) => _about = value!,
+                                    maxLines: 8,
                                   ),
                                   SizedBox(
                                       height:

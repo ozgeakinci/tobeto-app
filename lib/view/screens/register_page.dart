@@ -64,6 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   labelText: LanguageItems.hintTextPassword,
                   prefixIcon: Icons.lock,
                   obscureText: true,
+                  maxLines: 1,
                 ),
                 SizedBox(
                   height: ProjectUtilities.paddingAll_8,
