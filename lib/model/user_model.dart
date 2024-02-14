@@ -33,15 +33,16 @@ class UserModel {
   bool applicationStatus;
   String about;
   DateTime birthDate;
+  int? phoneNumber;
 
-  UserModel({
-    required this.username,
-    required this.department,
-    required this.email,
-    required this.applicationStatus,
-    required this.about,
-    required this.birthDate,
-  });
+  UserModel(
+      {required this.username,
+      required this.department,
+      required this.email,
+      required this.applicationStatus,
+      required this.about,
+      required this.birthDate,
+      required this.phoneNumber});
 
 /*   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -54,15 +55,15 @@ class UserModel {
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final map = snapshot.data() as Map;
     return UserModel(
-      username: map['username'] as String,
-      department: map['department'] as String,
-      email: map['email'] as String,
-      applicationStatus: map['applicationStatus'] as bool,
-      about: map['about'] as String,
-      birthDate: map['birthDate'] == null
-          ? DateTime.now()
-          : (map['birthDate'] as Timestamp).toDate(),
-    );
+        username: map['username'] as String,
+        department: map['department'] as String,
+        email: map['email'] as String,
+        applicationStatus: map['applicationStatus'] as bool,
+        about: map['about'] as String,
+        birthDate: map['birthDate'] == null
+            ? DateTime.now()
+            : (map['birthDate'] as Timestamp).toDate(),
+        phoneNumber: map['phoneNumber'] as int?);
   }
 
   Map<String, dynamic> toMap() {
@@ -72,7 +73,8 @@ class UserModel {
       'email': email,
       'applicationStatus': applicationStatus,
       'about': about,
-      'birthDate': birthDate
+      'birthDate': birthDate,
+      'phoneNumber': phoneNumber
     };
   }
 
@@ -83,7 +85,8 @@ class UserModel {
         email: json['email'] as String,
         applicationStatus: json['applicationStatus'] as bool,
         about: json['about'] as String,
-        birthDate: json['birthDate'] as DateTime);
+        birthDate: json['birthDate'] as DateTime,
+        phoneNumber: json['phoneNumber'] as int);
   }
 
 /*   String toJson() => json.encode(toMap());

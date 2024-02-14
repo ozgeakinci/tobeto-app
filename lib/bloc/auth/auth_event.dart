@@ -18,6 +18,7 @@ class Register extends AuthEvent {
   bool applicationstatus;
   String? about;
   DateTime? birthDate;
+  int? phoneNumber;
 
   Register(
       {required this.email,
@@ -26,7 +27,8 @@ class Register extends AuthEvent {
       required this.department,
       required this.applicationstatus,
       this.about,
-      this.birthDate});
+      this.birthDate,
+      this.phoneNumber});
 }
 
 class Logout extends AuthEvent {}

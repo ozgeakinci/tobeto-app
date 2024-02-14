@@ -20,6 +20,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
   final _formKey = GlobalKey<FormState>();
   String _about = '';
   DateTime? _selectedDate;
+  int _phoneNumber = 90;
 
   @override
   Widget build(BuildContext context) {
@@ -79,22 +80,15 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                         child: Stack(
                                           children: [
                                             CustomTextField(
-                                              labelText: state.birthDate != null
-                                                  ? 'Doğum Tarihi'
-                                                  : _selectedDate
-                                                      .toString()
-                                                      .split(' ')
-                                                      .first,
-                                              initialValue:
-                                                  _selectedDate == null
-                                                      ? state.birthDate
-                                                          ?.toString()
-                                                          .split(' ')
-                                                          .first
-                                                      : _selectedDate
-                                                          .toString()
-                                                          .split(' ')[0],
-                                            ),
+                                                labelText: _selectedDate
+                                                        ?.toString()
+                                                        .split(' ')
+                                                        .first ??
+                                                    'Doğum Tarihi',
+                                                initialValue: state.birthDate
+                                                    .toString()
+                                                    .split(' ')
+                                                    .first),
                                             Positioned(
                                               right: 20,
                                               top: 0,
@@ -131,6 +125,22 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                     onSaved: (value) => _about = value!,
                                     maxLines: 8,
                                   ),
+                                  CustomTextField(
+                                    labelText: 'Telefon Numaranız',
+                                    initialValue:
+                                        state.phoneNumber.toString() != null
+                                            ? state.phoneNumber.toString()
+                                            : '+90',
+                                    keyboardType: TextInputType.phone,
+                                    onSaved: (value) {
+                                      try {
+                                        _phoneNumber = int.parse(value!);
+                                      } catch (e) {
+                                        print(
+                                            "Hata: $e"); // Sayısal bir değere dönüştürme hatası
+                                      }
+                                    },
+                                  ),
                                   SizedBox(
                                       height:
                                           ProjectUtilities.projectHeight_24),
@@ -141,21 +151,22 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                         }
 
                                         UserModel updatedUser = UserModel(
-                                          username: state.username,
-                                          department: state.department,
-                                          email: state.email,
-                                          applicationStatus:
-                                              state.applicationStatus,
-                                          about: _about,
-                                          birthDate: _selectedDate != null
-                                              ? _selectedDate!
-                                              : DateTime.now(),
-                                        );
+                                            username: state.username,
+                                            department: state.department,
+                                            email: state.email,
+                                            applicationStatus:
+                                                state.applicationStatus,
+                                            about: _about,
+                                            birthDate: _selectedDate != null
+                                                ? _selectedDate!
+                                                : state.birthDate,
+                                            phoneNumber: _phoneNumber);
 
                                         context.read<UserBloc>().add(
                                             SendUserInfo(user: updatedUser));
+                                        Navigator.pop(context);
                                       },
-                                      child: Text('Kaydet'))
+                                      child: const Text('Kaydet'))
                                 ],
                               ))
                         ],

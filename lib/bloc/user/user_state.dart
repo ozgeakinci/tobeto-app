@@ -13,17 +13,18 @@ class UserLoaded extends UserState {
   String email;
   String about;
   DateTime birthDate;
+  int? phoneNumber;
 
-  UserLoaded({
-    required this.username,
-    required this.department,
-    required this.applicationStatus,
-    required this.greeting,
-    required this.usernameInitials,
-    required this.email,
-    required this.about,
-    required this.birthDate,
-  });
+  UserLoaded(
+      {required this.username,
+      required this.department,
+      required this.applicationStatus,
+      required this.greeting,
+      required this.usernameInitials,
+      required this.email,
+      required this.about,
+      required this.birthDate,
+      this.phoneNumber});
 }
 
 class UserError extends UserState {}

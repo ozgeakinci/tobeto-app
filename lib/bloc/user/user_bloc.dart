@@ -53,7 +53,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             greeting: greeting,
             usernameInitials: usernameInitials,
             about: userInfos.about,
-            birthDate: userInfos.birthDate));
+            birthDate: userInfos.birthDate,
+            phoneNumber: userInfos.phoneNumber));
       } catch (e) {
         emit(UserLoaded(
           username: "No name",
@@ -64,6 +65,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           usernameInitials: '',
           about: '',
           birthDate: DateTime.now(),
+          phoneNumber: 5432144321,
         )); // Degişecek
         print("HatayaDüştü");
         print(e);
@@ -72,17 +74,19 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     on<SendUserInfo>(
       (event, emit) async {
+        String greeting = getGreetingMessage();
         final userInfo =
             await UserRepositories().sendUserInfoToFirebase(event.user);
         emit(UserLoaded(
             username: userInfo.username,
             department: userInfo.department,
             applicationStatus: userInfo.applicationStatus,
-            greeting: '',
+            greeting: greeting,
             usernameInitials: usernameInitials,
             email: userInfo.email,
             about: userInfo.about,
-            birthDate: userInfo.birthDate));
+            birthDate: userInfo.birthDate,
+            phoneNumber: userInfo.phoneNumber));
       },
     );
 
