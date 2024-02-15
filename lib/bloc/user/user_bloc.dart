@@ -54,7 +54,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             usernameInitials: usernameInitials,
             about: userInfos.about,
             birthDate: userInfos.birthDate,
-            phoneNumber: userInfos.phoneNumber));
+            phoneNumber: userInfos.phoneNumber,
+            urlImage: userInfos.userImage));
       } catch (e) {
         emit(UserLoaded(
           username: "No name",
@@ -86,7 +87,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             email: userInfo.email,
             about: userInfo.about,
             birthDate: userInfo.birthDate,
-            phoneNumber: userInfo.phoneNumber));
+            phoneNumber: userInfo.phoneNumber,
+            urlImage: userInfo.userImage));
       },
     );
 

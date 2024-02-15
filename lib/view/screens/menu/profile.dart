@@ -93,7 +93,16 @@ class Profile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CircleAvatar(
-                            maxRadius: 32, child: Text(state.usernameInitials)),
+                          maxRadius: 32,
+                          child: state.urlImage != null
+                              ? CircleAvatar(
+                                  radius: 40,
+                                  backgroundColor: Colors.grey,
+                                  backgroundImage:
+                                      NetworkImage(state.urlImage!),
+                                )
+                              : Text(state.usernameInitials),
+                        ),
                         Text(
                           state.username,
                           style: TextStyle(color: Colors.white, fontSize: 24),

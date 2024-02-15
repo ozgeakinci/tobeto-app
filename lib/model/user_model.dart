@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
@@ -34,6 +36,7 @@ class UserModel {
   String about;
   DateTime birthDate;
   int? phoneNumber;
+  String? userImage;
 
   UserModel(
       {required this.username,
@@ -42,7 +45,8 @@ class UserModel {
       required this.applicationStatus,
       required this.about,
       required this.birthDate,
-      required this.phoneNumber});
+      required this.phoneNumber,
+      required this.userImage});
 
 /*   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -63,7 +67,8 @@ class UserModel {
         birthDate: map['birthDate'] == null
             ? DateTime.now()
             : (map['birthDate'] as Timestamp).toDate(),
-        phoneNumber: map['phoneNumber'] as int?);
+        phoneNumber: map['phoneNumber'] as int?,
+        userImage: map['imageUrl'] as String?);
   }
 
   Map<String, dynamic> toMap() {
@@ -74,19 +79,22 @@ class UserModel {
       'applicationStatus': applicationStatus,
       'about': about,
       'birthDate': birthDate,
-      'phoneNumber': phoneNumber
+      'phoneNumber': phoneNumber,
+      'imageUrl': userImage
     };
   }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-        username: json['username'] as String,
-        department: json['department'] as String,
-        email: json['email'] as String,
-        applicationStatus: json['applicationStatus'] as bool,
-        about: json['about'] as String,
-        birthDate: json['birthDate'] as DateTime,
-        phoneNumber: json['phoneNumber'] as int);
+      username: json['username'] as String,
+      department: json['department'] as String,
+      email: json['email'] as String,
+      applicationStatus: json['applicationStatus'] as bool,
+      about: json['about'] as String,
+      birthDate: json['birthDate'] as DateTime,
+      phoneNumber: json['phoneNumber'] as int,
+      userImage: json['imageUrl'] as String,
+    );
   }
 
 /*   String toJson() => json.encode(toMap());

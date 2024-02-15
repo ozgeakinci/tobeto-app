@@ -14,6 +14,7 @@ class UserLoaded extends UserState {
   String about;
   DateTime birthDate;
   int? phoneNumber;
+  String? urlImage;
 
   UserLoaded(
       {required this.username,
@@ -24,7 +25,8 @@ class UserLoaded extends UserState {
       required this.email,
       required this.about,
       required this.birthDate,
-      this.phoneNumber});
+      this.phoneNumber,
+      this.urlImage});
 }
 
 class UserError extends UserState {}
