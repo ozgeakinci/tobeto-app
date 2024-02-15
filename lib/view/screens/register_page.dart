@@ -66,22 +66,25 @@ class _RegisterPageState extends State<RegisterPage> {
                     labelText: LanguageItems.hintNameText,
                     prefixIcon: Icons.person_2_rounded),
                 CustomTextField(
-                    onSaved: (value) => _department = value!,
-                    labelText: LanguageItems.hintDepartmentText,
-                    prefixIcon: Icons.person_2_rounded),
-                CustomTextField(
                     onSaved: (value) => _email = value!,
                     labelText: LanguageItems.hintEmailText,
-                    prefixIcon: Icons.person_2_rounded),
+                    prefixIcon: Icons.mail),
+                CustomTextField(
+                  onSaved: (value) => _password = value!,
+                  labelText: LanguageItems.hintTextPassword,
+                  prefixIcon: Icons.lock,
+                  obscureText: true,
+                  maxLines: 1,
+                ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.92,
+                  width: MediaQuery.of(context).size.width * 0.89,
                   height: 100, // TextFormField'ın yüksekliği ile aynı olabilir
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                     child: DropdownButtonFormField<String>(
                       value: _department,
-                      hint: Text('Ders Türünü Seçiniz'),
+                      hint: const Text('Ders Türünü Seçiniz'),
                       onSaved: (value) => _department = value!,
                       items: departmentList.map((type) {
                         return DropdownMenuItem<String>(
@@ -92,13 +95,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       onChanged: (String? value) {},
                     ),
                   ),
-                ),
-                CustomTextField(
-                  onSaved: (value) => _password = value!,
-                  labelText: LanguageItems.hintTextPassword,
-                  prefixIcon: Icons.lock,
-                  obscureText: true,
-                  maxLines: 1,
                 ),
                 SizedBox(
                   height: ProjectUtilities.paddingAll_8,

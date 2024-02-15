@@ -4,6 +4,7 @@ import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/language/language_items.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
+import 'package:tobeto_app/view/screens/forgot_password_page.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 
 class LoginPage extends StatefulWidget {
@@ -39,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
           CustomTextField(
               onSaved: (value) => _email = value!,
               labelText: LanguageItems.hintEmailText,
-              prefixIcon: Icons.person_2_rounded),
+              prefixIcon: Icons.mail),
           CustomTextField(
             onSaved: (value) => _password = value!,
             labelText: LanguageItems.hintTextPassword,
@@ -54,7 +55,12 @@ class _LoginPageState extends State<LoginPage> {
                 padding:
                     EdgeInsets.only(right: ProjectUtilities.projectHeight_24),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPasswordPage()));
+                  },
                   child: const Text(
                     LanguageItems.forgotPassword,
                   ),

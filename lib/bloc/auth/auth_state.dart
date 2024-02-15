@@ -18,3 +18,12 @@ class Authenticated extends AuthState {
     this.user,
   });
 }
+
+class PasswordResetEmailSent extends AuthState {}
+
+class PasswordResetError extends AuthState {
+  String errorMessage;
+  PasswordResetError({
+    required this.errorMessage,
+  });
+}
