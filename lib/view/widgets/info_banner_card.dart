@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_app/theme/tobeto_theme.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 
 class InfoBannerCard extends StatelessWidget {

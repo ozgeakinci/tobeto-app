@@ -9,6 +9,3 @@ final menus = [
   MenuModel(name: "Katalog", menuIcon: const Icon(Icons.chevron_right)),
   MenuModel(name: "Takvim", menuIcon: const Icon(Icons.chevron_right)),
 ];
-
-
-

@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
-import 'package:tobeto_app/model/user_model.dart';
+import 'package:tobeto_app/models/user_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
@@ -103,8 +103,8 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                     shape: BoxShape.circle,
                                     border: Border.all(
                                         width: 2,
-                                        color:
-                                            Color.fromARGB(255, 214, 213, 213)),
+                                        color: const Color.fromARGB(
+                                            255, 214, 213, 213)),
                                     color: TobetoAppColor.textColor
                                         .withOpacity(0.1),
                                   ),
@@ -118,7 +118,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return Padding(
-                                    padding: EdgeInsets.all(20.0),
+                                    padding: const EdgeInsets.all(20.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:
@@ -132,7 +132,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                             foregroundImage:
                                                 FileImage(_pickedFile!),
                                           ),
-                                        SizedBox(height: 20),
+                                        const SizedBox(height: 20),
                                         TextButton(
                                           onPressed: () async {
                                             _pickImage();
@@ -147,7 +147,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                           },
                                           child: const Text("Yükle"),
                                         ),
-                                        SizedBox(height: 10),
+                                        const SizedBox(height: 10),
                                       ],
                                     ),
                                   );
@@ -294,24 +294,4 @@ class _PersonalInfoState extends State<PersonalInfo> {
           },
         ));
   }
-
-  // Widget _buildSaveButton() {
-  //   return ElevatedButton(
-  //     onPressed: () {
-  //       print('butona tıklandı');
-
-  //       if (_formKey.currentState != null &&
-  //           _formKey.currentState!.validate()) {
-  //         // Formu kaydet
-  //         _formKey.currentState!.save();
-  //       }
-  //     },
-  //     style: ElevatedButton.styleFrom(
-  //       shape: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.circular(8),
-  //       ),
-  //     ),
-  //     child: Text("Kaydet"),
-  //   );
-  // }
 }

@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tobeto_app/model/calendar_model.dart';
-import 'package:tobeto_app/model/catalog_model.dart';
-import 'package:tobeto_app/model/user_model.dart';
-import 'package:tobeto_app/model/department_model.dart';
-import 'package:tobeto_app/model/notification_model.dart';
-import 'package:tobeto_app/view/screens/menu/catalog.dart';
+import 'package:tobeto_app/models/calendar_model.dart';
+import 'package:tobeto_app/models/catalog_model.dart';
+import 'package:tobeto_app/models/user_model.dart';
+import 'package:tobeto_app/models/department_model.dart';
+import 'package:tobeto_app/models/notification_model.dart';
 
 class UserRepositories {
   final firebaseFirestore = FirebaseFirestore.instance;

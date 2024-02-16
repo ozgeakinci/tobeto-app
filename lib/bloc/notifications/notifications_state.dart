@@ -1,4 +1,4 @@
-import 'package:tobeto_app/model/notification_model.dart';
+import 'package:tobeto_app/models/notification_model.dart';
 
 abstract class NotificationState {}
 

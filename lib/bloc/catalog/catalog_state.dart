@@ -1,4 +1,4 @@
-import 'package:tobeto_app/model/catalog_model.dart';
+import 'package:tobeto_app/models/catalog_model.dart';
 
 abstract class CatalogState {}
 

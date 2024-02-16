@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_app/bloc/department/department_bloc.dart';
-import 'package:tobeto_app/bloc/department/department_event.dart';
-import 'package:tobeto_app/bloc/department/department_state.dart';
+import 'package:tobeto_app/bloc/educations/educations_bloc.dart';
+import 'package:tobeto_app/bloc/educations/educations_event.dart';
+import 'package:tobeto_app/bloc/educations/educations_state.dart';
 import 'package:tobeto_app/view/widgets/educational_card.dart';
 
 class Educations extends StatelessWidget {
@@ -22,10 +22,10 @@ class Educations extends StatelessWidget {
           "Eğitimlerim",
         ),
       ),
-      body: BlocBuilder<DepartmentBloc, DepartmentState>(
+      body: BlocBuilder<DepartmentBloc, EducationsState>(
           builder: (context, state) {
         print("Departmenetttadadasd---  $state");
-        if (state is DepartmentInitial) {
+        if (state is EducationsInitial) {
           print("Departmenettt  $state");
 
           context
@@ -33,13 +33,13 @@ class Educations extends StatelessWidget {
               .add(FetchDepartmentRequested(department: department));
         }
 
-        if (state is DepartmentLoading) {
+        if (state is EducationsLoading) {
           print("Departmenettt  $state");
 
           /*     */
         }
 
-        if (state is DepartmentLoaded) {
+        if (state is EducationsLoaded) {
           print(state.educationDepartmenogInfo.length);
           return ListView.builder(
               itemCount: state.educationDepartmenogInfo.length,

@@ -5,7 +5,7 @@ import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/bottom_navbar/bottom_navbar_bloc.dart';
 import 'package:tobeto_app/bloc/calendar/calendar_bloc.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_bloc.dart';
-import 'package:tobeto_app/bloc/department/department_bloc.dart';
+import 'package:tobeto_app/bloc/educations/educations_bloc.dart';
 import 'package:tobeto_app/bloc/notifications/notifications_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/firebase_options.dart';

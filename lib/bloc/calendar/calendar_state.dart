@@ -1,4 +1,4 @@
-import 'package:tobeto_app/model/calendar_model.dart';
+import 'package:tobeto_app/models/calendar_model.dart';
 
 abstract class CalendarState {}
 
