@@ -4,7 +4,10 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:tobeto_app/bloc/calendar/calendar_bloc.dart';
 import 'package:tobeto_app/bloc/calendar/calendar_event.dart';
 import 'package:tobeto_app/bloc/calendar/calendar_state.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
+import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class Calender extends StatefulWidget {
   @override
@@ -96,64 +99,67 @@ Gürkan İlişen */
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TableCalendar(
-                    firstDay: DateTime.utc(2023, 1, 1),
-                    lastDay: DateTime.utc(2025, 12, 31),
-                    focusedDay: _focusedDay,
-                    calendarFormat: _calendarFormat,
-                    eventLoader: _getEventsForDay,
-                    headerStyle: HeaderStyle(
-                      formatButtonVisible: false,
-                    ),
-                    calendarStyle: CalendarStyle(
-                      todayDecoration: BoxDecoration(
-                        color: Colors.blue.withOpacity(0.3),
+                  Padding(
+                    padding: EdgeInsets.all(ProjectUtilities.sizeWidth_16),
+                    child: TableCalendar(
+                      firstDay: DateTime.utc(2023, 1, 1),
+                      lastDay: DateTime.utc(2025, 12, 31),
+                      focusedDay: _focusedDay,
+                      calendarFormat: _calendarFormat,
+                      eventLoader: _getEventsForDay,
+                      headerStyle: const HeaderStyle(
+                        titleCentered: true,
+                        formatButtonVisible: false,
                       ),
-                      selectedDecoration: BoxDecoration(
-                        color: Colors.blue,
+                      calendarStyle: CalendarStyle(
+                        cellMargin:
+                            EdgeInsets.all(ProjectUtilities.sizeWidth_8),
+                        todayDecoration: BoxDecoration(
+                            color: TobetoAppColor.primaryBackgroundColor
+                                .withOpacity(0.7),
+                            shape: BoxShape.circle),
+                        selectedDecoration: BoxDecoration(
+                          color: TobetoAppColor.primaryBackgroundColor
+                              .withOpacity(0.7),
+                          shape: BoxShape.circle,
+                        ),
                       ),
+                      onFormatChanged: (format) {
+                        setState(() {
+                          _calendarFormat = format;
+                        });
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        setState(() {
+                          _selectedDay = selectedDay;
+                          _focusedDay = focusedDay;
+                        });
+                      },
                     ),
-                    onFormatChanged: (format) {
-                      setState(() {
-                        _calendarFormat = format;
-                      });
-                    },
-                    onDaySelected: (selectedDay, focusedDay) {
-                      setState(() {
-                        _selectedDay = selectedDay;
-                        _focusedDay = focusedDay;
-                      });
-                    },
                   ),
                   const SizedBox(height: 20),
                   _selectedDay != null
                       ? Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Seçilen Tarih: ${_selectedDay!.day}/${_selectedDay!.month}/${_selectedDay!.year}',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              const SizedBox(height: 10),
-                              const Text(
-                                'Dersler:',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(height: 5),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: _getEventsForDay(_selectedDay!)
-                                    .map((event) {
-                                  return Text(
-                                    '- $event',
-                                    style: TextStyle(fontSize: 14),
-                                  );
-                                }).toList(),
-                              ),
-                            ],
+                          padding:
+                              EdgeInsets.all(ProjectUtilities.paddingAll_16),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: _getEventsForDay(_selectedDay!).length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var event =
+                                  _getEventsForDay(_selectedDay!)[index];
+                              print(' event geldi $event');
+                              return SkillsCard(
+                                title: Text(event.toString()),
+                                subTitle: Text(
+                                    '${_selectedDay!.day}/${_selectedDay!.month}/${_selectedDay!.year}'),
+                                icon: Icon(
+                                  Icons.calendar_month,
+                                  color:
+                                      TobetoAppColor.colorSchemeLight.secondary,
+                                ),
+                              );
+                            },
                           ),
                         )
                       : SizedBox.shrink(),
