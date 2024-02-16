@@ -59,9 +59,16 @@ class HomePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+                                  state.urlImage != null
+                                      ? CircleAvatar(
+                                          radius: 20,
+                                          backgroundColor: Colors.grey,
+                                          backgroundImage:
+                                              NetworkImage(state.urlImage!),
+                                        )
+                                      : const SizedBox.shrink(),
                                   Text(
                                       state.username.isNotEmpty ||
                                               state.greeting.isNotEmpty

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -46,18 +45,23 @@ class _PersonalInfoState extends State<PersonalInfo> {
   }
 
   void _uploadImage(File? picketFileImage) async {
-    print("Yüklee");
-    final user = firebaseAuthInstance.currentUser;
-    final storageRef = firebaseStorageInstance
-        .ref()
-        .child("profile_images")
-        .child("${user!.uid}.jpg");
+    if (picketFileImage != null) {
+      // Fonksiyon içeriği
+      print("Yüklee");
+      final user = firebaseAuthInstance.currentUser;
+      final storageRef = firebaseStorageInstance
+          .ref()
+          .child("profile_images")
+          .child("${user!.uid}.jpg");
 
-    await storageRef.putFile(picketFileImage!);
+      await storageRef.putFile(picketFileImage!);
 
-    final url = await storageRef.getDownloadURL();
+      final url = await storageRef.getDownloadURL();
 
-    _urlImage = url;
+      setState(() {
+        _urlImage = url;
+      });
+    }
   }
 
   @override
@@ -89,8 +93,8 @@ class _PersonalInfoState extends State<PersonalInfo> {
                               ? CircleAvatar(
                                   radius: 40,
                                   backgroundColor: Colors.grey,
-                                  backgroundImage: NetworkImage(state
-                                      .urlImage!), // Firebase'den gelen URL buraya gelecek
+                                  backgroundImage:
+                                      NetworkImage(state.urlImage!),
                                 )
                               : Container(
                                   width: 72,
@@ -113,61 +117,39 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                 isScrollControlled: true,
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return Center(
-                                    child: Column(children: [
-                                      const SizedBox(height: 15),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            height: 30,
+                                  return Padding(
+                                    padding: EdgeInsets.all(20.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        const SizedBox(height: 15),
+                                        if (_pickedFile != null)
+                                          CircleAvatar(
+                                            radius: 40,
+                                            backgroundColor: Colors.grey,
+                                            foregroundImage:
+                                                FileImage(_pickedFile!),
                                           ),
-                                          SizedBox(
-                                            height: 60,
-                                          ),
-                                          if (_pickedFile != null)
-                                            CircleAvatar(
-                                              radius: 40,
-                                              backgroundColor: Colors.grey,
-                                              foregroundImage:
-                                                  FileImage(_pickedFile!),
-                                            ),
-                                          TextButton(
-                                              onPressed: () {
-                                                showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) =>
-                                                          AlertDialog(
-                                                    title: const Text(
-                                                        'AlertDialog Title'),
-                                                    content: const Text(
-                                                        'AlertDialog description'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            _pickImage(),
-                                                        child: const Text(
-                                                            'Kamera'),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                              child: const Text("Resim Seç")),
-                                          ElevatedButton(
-                                              onPressed: () {
-                                                _uploadImage(_pickedFile);
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text("Yükle")),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                        ],
-                                      )
-                                    ]),
+                                        SizedBox(height: 20),
+                                        TextButton(
+                                          onPressed: () async {
+                                            _pickImage();
+                                            setState(() {});
+                                          },
+                                          child: const Text("Resim Seç"),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () async {
+                                            _uploadImage(_pickedFile);
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("Yükle"),
+                                        ),
+                                        SizedBox(height: 10),
+                                      ],
+                                    ),
                                   );
                                 },
                               );
