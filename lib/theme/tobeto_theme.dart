@@ -80,6 +80,10 @@ class TobetoAppTheme {
             fixedSize: const Size(140, 60)),
       ),
       iconTheme: IconThemeData(color: TobetoAppColor.buttonColorDark, size: 30),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          elevation: 0,
+          selectedItemColor: TobetoAppColor.primaryBackgroundColor,
+          unselectedItemColor: TobetoAppColor.textColor),
 
       //Drawer Control
 
@@ -157,7 +161,12 @@ class TobetoAppTheme {
         ),
         iconTheme:
             IconThemeData(color: TobetoAppColor.buttonColorDark, size: 30),
-        drawerTheme:
-            DrawerThemeData(backgroundColor: TobetoAppColor.backgroundDark));
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            elevation: 0,
+            selectedItemColor: Color.fromARGB(255, 157, 64, 250),
+            unselectedItemColor: TobetoAppColor.textColor),
+        drawerTheme: DrawerThemeData(
+          backgroundColor: TobetoAppColor.backgroundDark,
+        ));
   }
 }

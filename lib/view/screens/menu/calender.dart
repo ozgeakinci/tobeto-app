@@ -4,6 +4,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:tobeto_app/bloc/calendar/calendar_bloc.dart';
 import 'package:tobeto_app/bloc/calendar/calendar_event.dart';
 import 'package:tobeto_app/bloc/calendar/calendar_state.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
 class Calender extends StatefulWidget {
   @override
@@ -36,24 +37,13 @@ Gürkan İlişen */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Takvim"),
+      appBar: CustomAppbar(
+        title: 'Takvim',
         actions: [
-          Row(
-            children: [
-              IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  print("searchicon");
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.filter_list_alt),
-                onPressed: () {
-                  calenderAddIcon(context);
-                },
-              ),
-            ],
+          IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.filter_alt),
           ),
         ],
       ),

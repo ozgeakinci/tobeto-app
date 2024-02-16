@@ -9,7 +9,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firebaseFirestore;
 
-  AuthBloc({FirebaseAuth? firebaseAuth, FirebaseFirestore? firebaseFirestore})
+  AuthBloc(
+      {FirebaseAuth? firebaseAuth,
+      FirebaseFirestore? firebaseFirestore,
+      required GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
         super(AuthInitial()) {
@@ -30,8 +33,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(Authenticated(user: userCredential.user));
       } on FirebaseAuthException catch (e) {
         emit(NotAuthenticated(errorMessage: e.message));
-        // ScaffoldMessenger.of(event.context!)
-        //     .showSnackBar(SnackBar(content: Text('hata')));
+        scaffoldMessengerKey.currentState?.showSnackBar(
+            SnackBar(content: Text('Oturum açma başarısız: ${e.message}')));
       }
     });
     on<Register>(
@@ -56,10 +59,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             'about': '',
             'phoneNumber': event.phoneNumber
           });
-        } on FirebaseAuthException catch (e) {
-          // ScaffoldMessenger.of(event.context!)
-          //     .showSnackBar(SnackBar(content: Text('hata')));
-        }
+        } on FirebaseAuthException catch (e) {}
       },
     );
 

@@ -6,11 +6,10 @@ abstract class AuthEvent {}
 class Login extends AuthEvent {
   String email;
   String password;
-  // BuildContext? context;
+
   Login({
     required this.email,
     required this.password,
-    // this.context
   });
 }
 
@@ -23,7 +22,6 @@ class Register extends AuthEvent {
   String? about;
   DateTime? birthDate;
   int? phoneNumber;
-  // BuildContext? context;
 
   Register({
     required this.email,
@@ -34,7 +32,6 @@ class Register extends AuthEvent {
     this.about,
     this.birthDate,
     this.phoneNumber,
-    // this.context
   });
 }
 

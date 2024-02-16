@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/theme/tobeto_theme.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
@@ -7,6 +9,7 @@ class ResetPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
         appBar: const CustomAppbar(title: 'Şifre Sıfırlama'),
         body: Padding(
@@ -14,6 +17,9 @@ class ResetPasswordPage extends StatelessWidget {
               horizontal: ProjectUtilities.sizeWidth_16,
               vertical: ProjectUtilities.projectHeight_32),
           child: Card(
+              color: isDarkMode
+                  ? TobetoAppColor.inputDarkBackground
+                  : TobetoAppColor.colorSchemeLight.onPrimary,
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),

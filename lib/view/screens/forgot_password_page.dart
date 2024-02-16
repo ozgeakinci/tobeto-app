@@ -64,6 +64,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomTextField(
+                    keyboardType: TextInputType.emailAddress,
                     onSaved: (value) => _email = value!,
                     labelText: LanguageItems.hintEmailText,
                   ),

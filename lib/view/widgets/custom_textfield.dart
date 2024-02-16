@@ -27,6 +27,14 @@ class CustomTextField extends StatelessWidget {
       this.height})
       : super(key: key);
 
+  String? _validateInput(String? value, String fieldName) {
+    if (value == null || value.trim().isEmpty) {
+      return '$fieldName boş olamaz';
+    }
+
+    return null; // Geçerli durumu temsil eder
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -42,6 +50,7 @@ class CustomTextField extends StatelessWidget {
           keyboardType: keyboardType,
           obscureText: obscureText,
           initialValue: initialValue,
+          validator: (value) => _validateInput(value, labelText),
           maxLines: maxLines,
           decoration: InputDecoration(
             labelText: labelText,

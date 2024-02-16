@@ -15,7 +15,7 @@ class Reviews extends StatelessWidget {
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle.light,
           title: const Text(
-            'Katalog',
+            'Değerlendirmeler',
             style: TextStyle(color: Colors.white),
           ),
           flexibleSpace: Container(

@@ -15,10 +15,14 @@ import 'package:tobeto_app/view/screens/start_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+        BlocProvider<AuthBloc>(
+            create: (context) =>
+                AuthBloc(scaffoldMessengerKey: _scaffoldMessengerKey)),
         BlocProvider<UserBloc>(create: (context) => UserBloc()),
         BlocProvider<DepartmentBloc>(create: (context) => DepartmentBloc()),
         BlocProvider<CatalogBloc>(create: (context) => CatalogBloc()),

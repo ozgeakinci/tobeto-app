@@ -67,6 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     prefixIcon: Icons.person_2_rounded),
                 CustomTextField(
                     onSaved: (value) => _email = value!,
+                    keyboardType: TextInputType.emailAddress,
                     labelText: LanguageItems.hintEmailText,
                     prefixIcon: Icons.mail),
                 CustomTextField(
@@ -84,6 +85,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                     child: DropdownButtonFormField<String>(
                       value: _department,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Ders türü boş olamaz';
+                        }
+                        return null;
+                      },
                       hint: const Text('Ders Türünü Seçiniz'),
                       onSaved: (value) => _department = value!,
                       items: departmentList.map((type) {

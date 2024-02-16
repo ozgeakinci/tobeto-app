@@ -40,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
           CustomTextField(
               onSaved: (value) => _email = value!,
               labelText: LanguageItems.hintEmailText,
+              keyboardType: TextInputType.emailAddress,
               prefixIcon: Icons.mail),
           CustomTextField(
             onSaved: (value) => _password = value!,

@@ -22,6 +22,7 @@ class _StartPageState extends State<StartPage> {
         context.read<UserBloc>().add(FetchUserRequested());
         return const BottomNavbar();
       }
+
 /*       if (state is Authenticated || state is GetUserInfo) {
         print('$state  tüm state');
         return const SwiperPage();

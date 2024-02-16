@@ -9,7 +9,6 @@ import 'package:tobeto_app/view/screens/menu/calender.dart';
 import 'package:tobeto_app/view/screens/menu/catalog.dart';
 import 'package:tobeto_app/view/screens/menu/profile.dart';
 import 'package:tobeto_app/view/screens/menu/reviews.dart';
-import 'package:tobeto_app/view/swiper_page.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -21,6 +20,7 @@ class BottomNavbar extends StatefulWidget {
 class _BottomNavigatorState extends State<BottomNavbar> {
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return BlocBuilder<BottomNavbarBloc, BottomNavbarUpdate>(
       builder: (context, state) {
         return Scaffold(
@@ -37,48 +37,50 @@ class _BottomNavigatorState extends State<BottomNavbar> {
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: state.currentIndex,
             iconSize: 24,
-            selectedItemColor:
-                TobetoAppColor.primaryBackgroundColor, // Seçilen ikon rengi
-            unselectedItemColor: Colors.black45, //
-
             onTap: (index) {
               context.read<BottomNavbarBloc>().add(UpdatePageIndexEvent(index));
             },
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home_outlined,
-                ),
-                label: 'Anasayfa',
-                backgroundColor: Colors.white,
-              ),
+                  icon: const Icon(
+                    Icons.home_outlined,
+                  ),
+                  label: 'Anasayfa',
+                  backgroundColor: isDarkMode
+                      ? TobetoAppColor.inputDarkBackground
+                      : TobetoAppColor.backgroundLight),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.play_lesson_outlined,
-                ),
-                label: 'Katalog',
-              ),
+                  icon: const Icon(
+                    Icons.play_lesson_outlined,
+                  ),
+                  label: 'Katalog',
+                  backgroundColor: isDarkMode
+                      ? TobetoAppColor.inputDarkBackground
+                      : TobetoAppColor.backgroundLight),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.calendar_month_outlined,
-                ),
-                label: 'Takvim',
-                backgroundColor: Colors.white,
-              ),
+                  icon: const Icon(
+                    Icons.calendar_month_outlined,
+                  ),
+                  label: 'Takvim',
+                  backgroundColor: isDarkMode
+                      ? TobetoAppColor.inputDarkBackground
+                      : TobetoAppColor.backgroundLight),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person_2_outlined,
-                ),
-                label: 'Profilim',
-                backgroundColor: Colors.white,
-              ),
+                  icon: const Icon(
+                    Icons.person_2_outlined,
+                  ),
+                  label: 'Profilim',
+                  backgroundColor: isDarkMode
+                      ? TobetoAppColor.inputDarkBackground
+                      : TobetoAppColor.backgroundLight),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.rate_review_outlined,
-                ),
-                label: 'Değerlendirme',
-                backgroundColor: Colors.white,
-              ),
+                  icon: const Icon(
+                    Icons.rate_review_outlined,
+                  ),
+                  label: 'Değerlendirme',
+                  backgroundColor: isDarkMode
+                      ? TobetoAppColor.inputDarkBackground
+                      : TobetoAppColor.backgroundLight),
             ],
           ),
         );
