@@ -292,6 +292,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
 
                                         context.read<UserBloc>().add(
                                             SendUserInfo(user: updatedUser));
+
                                         Navigator.pop(context);
                                       },
                                       child: const Text('Kaydet'))

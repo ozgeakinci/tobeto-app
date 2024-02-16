@@ -153,6 +153,7 @@ class Profile extends StatelessWidget {
                             .read<BottomNavbarBloc>()
                             .add(UpdatePageIndexEvent(0));
                         context.read<UserBloc>().add(ResetUserEvent());
+
                         context.read<AuthBloc>().add(Logout());
                       },
                     ),

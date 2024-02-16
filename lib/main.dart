@@ -19,10 +19,10 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+        BlocProvider<UserBloc>(create: (context) => UserBloc()),
         BlocProvider<DepartmentBloc>(create: (context) => DepartmentBloc()),
         BlocProvider<CatalogBloc>(create: (context) => CatalogBloc()),
         BlocProvider<NotificationBloc>(create: (context) => NotificationBloc()),
-        BlocProvider<UserBloc>(create: (context) => UserBloc()),
         BlocProvider<BottomNavbarBloc>(create: (context) => BottomNavbarBloc()),
         BlocProvider<CalendarBloc>(create: (context) => CalendarBloc()),
       ],
