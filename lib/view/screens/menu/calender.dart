@@ -4,6 +4,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:tobeto_app/bloc/calendar/calendar_bloc.dart';
 import 'package:tobeto_app/bloc/calendar/calendar_event.dart';
 import 'package:tobeto_app/bloc/calendar/calendar_state.dart';
+import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
@@ -39,6 +40,11 @@ Gürkan İlişen */
 
   @override
   Widget build(BuildContext context) {
+    final userBloc = BlocProvider.of<UserBloc>(context);
+
+    print("Department");
+    print(userBloc.userDepartment);
+
     return Scaffold(
       appBar: CustomAppbar(
         title: 'Takvim',
@@ -57,9 +63,15 @@ Gürkan İlişen */
           if (state is CalendarInitial) {
             print("CalendarInitial  ");
 
-            context
-                .read<CalendarBloc>()
-                .add(FetchCalendarRequested(department: "mobil"));
+            final yourDepartment = userBloc.userDepartment;
+            if (yourDepartment != null) {
+              context
+                  .read<CalendarBloc>()
+                  .add(FetchCalendarRequested(department: yourDepartment));
+            } else {
+              // yourData null ise, bir hata işleme mekanizması ekleyin veya uygun bir yedek değer atayın
+              print('yourData is null');
+            }
           }
           if (state is CalendarLoading) {
             print("Calendar Loadingg ");

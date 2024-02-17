@@ -24,16 +24,16 @@ class CalendarModel {
 
   factory CalendarModel.fromCalendarFireStore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final List<dynamic>? videosList = snapshot.data()?['dersler'];
+    final List<dynamic>? videosList = snapshot.data()?['lessons'];
     if (videosList == null) {
       return CalendarModel(lessons: []);
     }
     List<CalendarLessonModel> videos = videosList.map((lessonMap) {
-      DateTime dateTime = (lessonMap['tarih'] as Timestamp).toDate();
+      DateTime dateTime = (lessonMap['date'] as Timestamp).toDate();
 
       return CalendarLessonModel(
-        dershoca: lessonMap['hoca'] as String,
-        derskonu: lessonMap['konu'] as String,
+        dershoca: lessonMap['instructor'] as String,
+        derskonu: lessonMap['subject'] as String,
         derstarih: dateTime,
       );
     }).toList();

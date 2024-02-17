@@ -4,6 +4,8 @@ import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/repositories/user_repositories.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
+  String? userDepartment;
+
   UserBloc() : super(UserInitial()) {
     String usernameInitials = '';
 
@@ -45,6 +47,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         print("Veriler Çekildii");
         print(userInfos.username);
         print(userInfos.department);
+        userDepartment = userInfos.department;
+
         emit(UserLoaded(
             username: userInfos.username,
             department: userInfos.department,

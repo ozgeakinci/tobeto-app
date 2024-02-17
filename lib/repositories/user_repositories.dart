@@ -24,7 +24,7 @@ class UserRepositories {
   // TAKVİM SAYFASI BİLGİLERİ
   Future<CalendarModel> getCalendarInfoFromFirebase(String department) async {
     final calendarFromDb =
-        await firebaseFirestore.collection('takvim').doc(department).get();
+        await firebaseFirestore.collection('department').doc(department).get();
 
     final calendarInfo = CalendarModel.fromCalendarFireStore(calendarFromDb);
     return calendarInfo;
