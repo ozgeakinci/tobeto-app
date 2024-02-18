@@ -33,7 +33,7 @@ class UserModel {
   bool applicationStatus;
   String about;
   DateTime birthDate;
-  int? phoneNumber;
+  int phoneNumber;
   String? userImage;
 
   UserModel(
@@ -65,7 +65,8 @@ class UserModel {
         birthDate: map['birthDate'] == null
             ? DateTime.now()
             : (map['birthDate'] as Timestamp).toDate(),
-        phoneNumber: map['phoneNumber'] as int?,
+        phoneNumber:
+            map['phoneNumber'] == null ? 90 : (map['phoneNumber'] as int),
         userImage: map['imageUrl'] as String?);
   }
 
