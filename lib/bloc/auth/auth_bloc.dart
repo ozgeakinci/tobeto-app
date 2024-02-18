@@ -9,13 +9,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firebaseFirestore;
 
-  AuthBloc(
-      {FirebaseAuth? firebaseAuth,
-      FirebaseFirestore? firebaseFirestore,
-      required GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+  AuthBloc({
+    FirebaseAuth? firebaseAuth,
+    FirebaseFirestore? firebaseFirestore,
+  })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
         super(AuthInitial()) {
+    print("AuthBloc----AuthInitial-------------------------");
+
     _firebaseAuth.authStateChanges().listen(
       (user) {
         if (user != null) {
@@ -26,6 +27,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
     );
     on<Login>((event, emit) async {
+      print("AuthBloc----Login-------------------------");
+
       try {
         UserCredential userCredential =
             await _firebaseAuth.signInWithEmailAndPassword(
@@ -33,12 +36,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(Authenticated(user: userCredential.user));
       } on FirebaseAuthException catch (e) {
         emit(NotAuthenticated(errorMessage: e.message));
-        scaffoldMessengerKey.currentState?.showSnackBar(
-            SnackBar(content: Text('Oturum açma başarısız: ${e.message}')));
       }
     });
     on<Register>(
       (event, emit) async {
+        print("AuthBloc----Register-------------------------");
+
         emit(NotAuthenticated());
 
         try {

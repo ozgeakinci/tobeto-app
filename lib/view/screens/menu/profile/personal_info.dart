@@ -33,28 +33,20 @@ class _PersonalInfoState extends State<PersonalInfo> {
 
   File? _pickedFile;
 
-  void _pickImage() async {
-    final image = await ImagePicker()
+  Future<XFile?> _pickImage() async {
+    return await ImagePicker()
         .pickImage(source: ImageSource.camera, imageQuality: 50, maxWidth: 150);
-
-    if (image != null) {
-      setState(() {
-        _pickedFile = File(image.path);
-      });
-    }
   }
 
-  void _uploadImage(File? picketFileImage) async {
-    if (picketFileImage != null) {
-      // Fonksiyon içeriği
-      print("Yüklee");
+  void _uploadImage() async {
+    if (_pickedFile != null) {
       final user = firebaseAuthInstance.currentUser;
       final storageRef = firebaseStorageInstance
           .ref()
           .child("profile_images")
           .child("${user!.uid}.jpg");
 
-      await storageRef.putFile(picketFileImage!);
+      await storageRef.putFile(_pickedFile!);
 
       final url = await storageRef.getDownloadURL();
 
@@ -89,27 +81,26 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          state.urlImage != null
-                              ? CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Colors.grey,
-                                  backgroundImage:
-                                      NetworkImage(state.urlImage!),
-                                )
-                              : Container(
-                                  width: 72,
-                                  height: 72,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        width: 2,
-                                        color: const Color.fromARGB(
-                                            255, 214, 213, 213)),
-                                    color: TobetoAppColor.textColor
-                                        .withOpacity(0.1),
-                                  ),
-                                  child: Image.asset(
-                                      'assets/images/profile_icon.png')),
+                          CircleAvatar(
+                            maxRadius: 60,
+                            child: _pickedFile != null
+                                ? CircleAvatar(
+                                    radius: 60,
+                                    backgroundColor: Colors.grey,
+                                    foregroundImage: FileImage(_pickedFile!),
+                                  )
+                                : state.urlImage != null
+                                    ? CircleAvatar(
+                                        radius: 60,
+                                        backgroundColor: Colors.grey,
+                                        backgroundImage:
+                                            NetworkImage(state.urlImage!),
+                                      )
+                                    : const CircleAvatar(
+                                        radius: 40,
+                                        backgroundColor: Colors.grey,
+                                      ),
+                          ),
                           SizedBox(height: ProjectUtilities.projectHeight_24),
                           TextButton(
                             onPressed: () {
@@ -125,27 +116,49 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                           CrossAxisAlignment.stretch,
                                       children: [
                                         const SizedBox(height: 15),
-                                        if (_pickedFile != null)
-                                          CircleAvatar(
-                                            radius: 40,
-                                            backgroundColor: Colors.grey,
-                                            foregroundImage:
-                                                FileImage(_pickedFile!),
+                                        Container(
+                                          width: 72,
+                                          height: 72,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                                width: 2,
+                                                color: const Color.fromARGB(
+                                                    255, 214, 213, 213)),
+                                            color: TobetoAppColor.textColor
+                                                .withOpacity(0.1),
                                           ),
+                                          child: CircleAvatar(
+                                            maxRadius: 50,
+                                            child: state.urlImage != null
+                                                ? CircleAvatar(
+                                                    radius: 35,
+                                                    backgroundColor:
+                                                        Colors.grey,
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                            state.urlImage!),
+                                                  )
+                                                : Image.asset(
+                                                    'assets/images/profile_icon.png'),
+                                          ),
+                                        ),
                                         const SizedBox(height: 20),
                                         TextButton(
                                           onPressed: () async {
-                                            _pickImage();
-                                            setState(() {});
-                                          },
-                                          child: const Text("Resim Seç"),
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () async {
-                                            _uploadImage(_pickedFile);
+                                            XFile? pickedImage =
+                                                await _pickImage();
+                                            if (pickedImage != null) {
+                                              setState(() {
+                                                _pickedFile =
+                                                    File(pickedImage.path);
+                                              });
+                                            }
+                                            _uploadImage();
+
                                             Navigator.pop(context);
                                           },
-                                          child: const Text("Yükle"),
+                                          child: const Text("Resim Çek"),
                                         ),
                                         const SizedBox(height: 10),
                                       ],
@@ -270,7 +283,9 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                                 ? _selectedDate!
                                                 : state.birthDate,
                                             phoneNumber: _phoneNumber,
-                                            userImage: _urlImage);
+                                            userImage: _pickedFile != null
+                                                ? _urlImage
+                                                : state.urlImage);
 
                                         context.read<UserBloc>().add(
                                             SendUserInfo(user: updatedUser));
