@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tobeto_app/models/calendar_model.dart';
 import 'package:tobeto_app/models/catalog_model.dart';
+import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/user_model.dart';
 import 'package:tobeto_app/models/department_model.dart';
 import 'package:tobeto_app/models/notification_model.dart';
@@ -12,13 +13,18 @@ class UserRepositories {
 
   // KULLANICI BİLGİLERİ       // fetchUserInfoFromFirebase ?
   Future<UserModel> getUserInfoFromFirebase() async {
-    final userFromDb = await firebaseFirestore
-        .collection('users')
-        .doc(firebaseAuth.currentUser!.uid)
-        .get();
+    try {
+      final userFromDb = await firebaseFirestore
+          .collection('users')
+          .doc(firebaseAuth.currentUser!.uid)
+          .get();
 
-    final userInfo = UserModel.fromUserFireStore(userFromDb);
-    return userInfo;
+      final userInfo = UserModel.fromUserFireStore(userFromDb);
+      return userInfo;
+    } catch (e) {
+      print("getUserInfoFromFirebase error: $e");
+      throw e;
+    }
   }
 
   // TAKVİM SAYFASI BİLGİLERİ
@@ -71,5 +77,41 @@ class UserRepositories {
 
     await userRef.set(user.toMap());
     return user;
+  }
+
+  Future<UserModel> addExperienceToUser({
+    required String userId,
+    required ExperienceInfo experienceInfo,
+  }) async {
+    try {
+      // Firestore'dan kullanıcının mevcut bilgilerini çek
+      DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await firebaseFirestore.collection('users').doc(userId).get();
+
+      if (!userDoc.exists) {
+        throw Exception("Kullanıcı bulunamadı");
+      }
+
+      // Kullanıcının mevcut deneyim listesini al
+      List<dynamic>? currentExperiences = userDoc.data()?['experiences'];
+
+      // Yeni deneyimi ekle
+      if (currentExperiences != null) {
+        currentExperiences.add(experienceInfo.toMap());
+      } else {
+        currentExperiences = [experienceInfo.toMap()];
+      }
+
+      // Firestore'a güncellenmiş bilgileri geri yaz
+      await firebaseFirestore.collection('users').doc(userId).update({
+        'experiences': currentExperiences,
+      });
+
+      // Güncellenmiş kullanıcı bilgilerini döndür
+      return UserModel.fromUserFireStore(userDoc);
+    } catch (e) {
+      // Hata durumunda Exception fırlat
+      throw Exception("Deneyim eklenirken bir hata oluştu: $e");
+    }
   }
 }

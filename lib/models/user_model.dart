@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tobeto_app/models/expreince_model.dart';
+import 'package:tobeto_app/view/screens/menu/profile/experience.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
@@ -8,6 +10,18 @@ enum Department {
   fullstack,
   work,
 }
+
+// class ExperienceInfo {
+//   String experienceName;
+//   String experienceDate;
+//   String experienceExplain;
+
+//   ExperienceInfo({
+//     required this.experienceName,
+//     required this.experienceDate,
+//     required this.experienceExplain,
+//   });
+// }
 
 extension DepartmentExtension on Department {
   String get stringValue {
@@ -35,6 +49,8 @@ class UserModel {
   DateTime birthDate;
   int phoneNumber;
   String? userImage;
+  List<String>? userExperiences;
+  List<ExperienceInfo>? experiences;
 
   UserModel(
       {required this.username,
@@ -44,7 +60,9 @@ class UserModel {
       required this.about,
       required this.birthDate,
       required this.phoneNumber,
-      required this.userImage});
+      required this.userImage,
+      this.userExperiences,
+      this.experiences});
 
 /*   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -57,17 +75,29 @@ class UserModel {
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final map = snapshot.data() as Map;
     return UserModel(
-        username: map['username'] as String,
-        department: map['department'] as String,
-        email: map['email'] as String,
-        applicationStatus: map['applicationStatus'] as bool,
-        about: map['about'] as String,
-        birthDate: map['birthDate'] == null
-            ? DateTime.now()
-            : (map['birthDate'] as Timestamp).toDate(),
-        phoneNumber:
-            map['phoneNumber'] == null ? 90 : (map['phoneNumber'] as int),
-        userImage: map['imageUrl'] as String?);
+      username: map['username'] as String,
+      department: map['department'] as String,
+      email: map['email'] as String,
+      applicationStatus: map['applicationStatus'] as bool,
+      about: map['about'] as String,
+      birthDate: map['birthDate'] == null
+          ? DateTime.now()
+          : (map['birthDate'] as Timestamp).toDate(),
+      phoneNumber:
+          map['phoneNumber'] == null ? 90 : (map['phoneNumber'] as int),
+      userImage: map['imageUrl'] as String?,
+      userExperiences: map['experiences'] != null
+          ? List<String>.from(map['experiences'])
+          : [],
+      experiences: map['experiences'] != null
+          ? List<ExperienceInfo>.from(
+              (map['experiences'] as List<dynamic>).map(
+                (experience) =>
+                    ExperienceInfo.fromJson(experience as Map<String, dynamic>),
+              ),
+            )
+          : [],
+    );
   }
 
   Map<String, dynamic> toMap() {
@@ -79,7 +109,11 @@ class UserModel {
       'about': about,
       'birthDate': birthDate,
       'phoneNumber': phoneNumber,
-      'imageUrl': userImage
+      'imageUrl': userImage,
+      'userExperienses': userExperiences,
+      'experiences': experiences != null
+          ? experiences!.map((experience) => experience.toMap()).toList()
+          : [],
     };
   }
 
@@ -93,11 +127,40 @@ class UserModel {
       birthDate: json['birthDate'] as DateTime,
       phoneNumber: json['phoneNumber'] as int,
       userImage: json['imageUrl'] as String,
+      userExperiences: json['experiences'] as List<String>,
+      experiences: (json['experiences'] as List<dynamic>?)
+          ?.map((exp) => ExperienceInfo.fromJson(exp as Map<String, dynamic>))
+          .toList(),
     );
   }
+
+  UserModel copyWith({
+    String? username,
+    String? department,
+    String? about,
+    DateTime? birthDate,
+    String? email,
+    bool? applicationStatus,
+    int? phoneNumber,
+    String? userImage,
+    List<String>? experiences,
+  }) {
+    return UserModel(
+      username: username ?? this.username,
+      department: department ?? this.department,
+      about: about ?? this.about,
+      birthDate: birthDate ?? this.birthDate,
+      email: email ?? this.email,
+      applicationStatus: applicationStatus ?? this.applicationStatus,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      userImage: userImage ?? this.userImage,
+      userExperiences: experiences ?? this.userExperiences,
+    );
+  }
+}
 
 /*   String toJson() => json.encode(toMap());
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromFireStore(json.decode(source) as DocumentSnapshot<Map<String, dynamic>>); */
-}
+
