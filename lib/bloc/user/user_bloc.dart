@@ -68,8 +68,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
                   ?.map((dynamic item) => item.toString())
                   .toList() ??
               [],
-          experiences: (userInfos.userExperiences as List<dynamic>?)
-              ?.map((dynamic item) => ExperienceInfo.fromJson(item))
+          experiences: (userInfos.experiences as List<dynamic>?)
+              ?.map((dynamic item) {
+                if (item is Map<String, dynamic>) {
+                  return ExperienceInfo.fromJson(item);
+                }
+                return null;
+              })
+              .whereType<ExperienceInfo>() // Null olmayanları seçer
               .toList(),
         ));
       } catch (e) {

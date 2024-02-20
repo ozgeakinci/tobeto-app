@@ -86,8 +86,8 @@ class UserModel {
       phoneNumber:
           map['phoneNumber'] == null ? 90 : (map['phoneNumber'] as int),
       userImage: map['imageUrl'] as String?,
-      userExperiences: map['experiences'] != null
-          ? List<String>.from(map['experiences'])
+      userExperiences: map['userExperiences'] != null
+          ? List<String>.from(map['userExperiences'])
           : [],
       experiences: map['experiences'] != null
           ? List<ExperienceInfo>.from(
@@ -127,7 +127,9 @@ class UserModel {
       birthDate: json['birthDate'] as DateTime,
       phoneNumber: json['phoneNumber'] as int,
       userImage: json['imageUrl'] as String,
-      userExperiences: json['experiences'] as List<String>,
+      userExperiences: json['userExperiences'] != null
+          ? List<String>.from(json['userExperiences'])
+          : [],
       experiences: (json['experiences'] as List<dynamic>?)
           ?.map((exp) => ExperienceInfo.fromJson(exp as Map<String, dynamic>))
           .toList(),
