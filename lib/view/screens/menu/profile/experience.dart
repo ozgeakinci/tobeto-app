@@ -2,40 +2,70 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
+import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/user_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
+import 'package:tobeto_app/view/widgets/exprience_card.dart';
+import 'package:tobeto_app/view/widgets/skills_card.dart';
 
-class Experience extends StatelessWidget {
+class Experience extends StatefulWidget {
   const Experience({Key? key}) : super(key: key);
 
+  @override
+  State<Experience> createState() => _ExperienceState();
+}
+
+class _ExperienceState extends State<Experience> {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: CustomAppbar(
-        title: 'Deneyimlerim',
-        actions: [
-          IconButton(
-              onPressed: () {
-                _showAddExperienceBottomSheet(context);
-              },
-              icon: Icon(Icons.add))
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildNoExperienceWidget(),
+        appBar: CustomAppbar(
+          title: 'Deneyimlerim',
+          actions: [
+            IconButton(
+                onPressed: () {
+                  _showAddExperienceBottomSheet(context);
+                },
+                icon: Icon(Icons.add))
           ],
         ),
-      ),
-    );
+        body: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+          // if (state is UserInitial) {
+          //   context.read<UserBloc>().add(FetchUserRequested());
+          //   print(state);
+          // }
+          // if (state is UserLoading) {
+          //   const Center(
+          //     child: CircularProgressIndicator(),
+          //   );
+          // }
+          if (state is UserLoaded) {
+            print('------------------- deneyimmmmmm');
+            print(state.email);
+            print(state.experiences);
+            print(state.experiences!.length);
+
+            return ListView.builder(
+              itemCount: state.experiences!.length,
+              itemBuilder: ((context, index) => ExperienceCard(
+                    icon: const Icon(Icons.business_sharp),
+                    title: Text(state.experiences![index].organizationName),
+                    subTitle: Text(state.experiences![index].position),
+                    startDate: Text(state.experiences![index].startDate),
+                    finishDate: Text(state.experiences![index].endDate),
+                  )),
+            );
+          } else {
+            print('No state $state');
+            return _buildNoExperienceWidget();
+          }
+        }));
   }
 }
 

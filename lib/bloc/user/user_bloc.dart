@@ -64,11 +64,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           birthDate: userInfos.birthDate,
           phoneNumber: userInfos.phoneNumber,
           urlImage: userInfos.userImage,
-          userExperiences: (userInfos.userExperiences as List<dynamic>?)
+          userExperiences: (userInfos.userExperiences)
                   ?.map((dynamic item) => item.toString())
                   .toList() ??
               [],
-          experiences: (userInfos.experiences as List<dynamic>?)
+          experiences: (userInfos.experiences)
               ?.map((dynamic item) {
                 if (item is Map<String, dynamic>) {
                   return ExperienceInfo.fromJson(item);

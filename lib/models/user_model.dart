@@ -165,4 +165,3 @@ class UserModel {
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromFireStore(json.decode(source) as DocumentSnapshot<Map<String, dynamic>>); */
-
