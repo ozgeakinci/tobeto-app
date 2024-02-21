@@ -11,6 +11,7 @@ class ProjectUtilities {
   static double projectHeight_16 = 16;
   static double projectHeight_24 = 24;
   static double projectHeight_32 = 32;
+  static double projectHeight_64 = 64;
 
   static double paddingAll_8 = 8;
   static double paddingAll_16 = 16;

@@ -5,6 +5,7 @@ import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/user_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 
@@ -66,63 +67,137 @@ void _showAddExperienceBottomSheet(
   BuildContext context,
 ) {
   final _formKey = GlobalKey<FormState>();
-  String _experienceName = '';
-  String _experienceDate = '';
-  String _experienceExplain = '';
+  String _organizationName = '';
+  String _position = '';
+  String _startDate = '';
+  String _endDate = '';
+
   showModalBottomSheet(
-    useSafeArea: true,
-    context: context,
-    builder: (context) {
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              CustomTextField(
-                labelText: 'Deneyim Adı',
-                onSaved: (value) => _experienceName = value!,
-              ),
-              CustomTextField(
-                labelText: 'Deneyim Tarihi',
-                onSaved: (value) => _experienceDate = value!,
-              ),
-              CustomTextField(
-                labelText: 'Deneyimin Açıklaması',
-                onSaved: (value) => _experienceExplain = value!,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    print(_experienceDate);
-                    print(_experienceExplain);
-                    print(_experienceName);
-                    ExperienceInfo experienceInfo = ExperienceInfo(
-                      experienceName: _experienceName,
-                      experienceDate: _experienceDate,
-                      experienceExplain: _experienceExplain,
-                    );
-
-                    context.read<UserBloc>().add(
-                          AddExperience(
-                            experienceDetail: experienceInfo,
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      elevation: 0,
+      builder: (context) => DraggableScrollableSheet(
+            expand: false,
+            initialChildSize: 0.92,
+            maxChildSize: 1,
+            minChildSize: 0.6,
+            builder: (context, scrollController) => ListView(
+                shrinkWrap: true,
+                controller: ScrollController(),
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom,
+                        right: 16,
+                        left: 16,
+                        top: 16),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            'Deneyim Ekle',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w600),
                           ),
-                        );
+                          SizedBox(
+                            height: ProjectUtilities.projectHeight_8,
+                          ),
+                          Divider(),
+                          SizedBox(
+                            height: ProjectUtilities.projectHeight_16,
+                          ),
+                          CustomTextField(
+                            labelText: 'Kurum Adı',
+                            onSaved: (value) => _organizationName = value!,
+                          ),
+                          SizedBox(
+                            height: ProjectUtilities.projectHeight_16,
+                          ),
+                          CustomTextField(
+                            labelText: 'Pozisyon',
+                            onSaved: (value) => _position = value!,
+                          ),
+                          SizedBox(
+                            height: ProjectUtilities.projectHeight_16,
+                          ),
+                          CustomTextField(
+                            labelText: 'İşe Giriş Tarihiı',
+                            onSaved: (value) => _startDate = value!,
+                          ),
+                          SizedBox(
+                            height: ProjectUtilities.projectHeight_16,
+                          ),
+                          CustomTextField(
+                            labelText: 'İşten Çıkış Tarihi',
+                            onSaved: (value) => _endDate = value!,
+                          ),
+                          SizedBox(
+                            height: ProjectUtilities.projectHeight_64,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
+                                        side: BorderSide(
+                                            color: TobetoAppColor
+                                                .textColor), // Border'ı belirleyebilirsiniz.
+                                      ),
+                                      elevation: 0,
+                                      backgroundColor:
+                                          TobetoAppColor.buttonColorLight,
+                                      foregroundColor:
+                                          TobetoAppColor.primaryBackgroundColor,
+                                      fixedSize: Size(175, 45)),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('Vazgeç')),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(175, 45)),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    _formKey.currentState!.save();
+                                    print(_organizationName);
+                                    print(_position);
+                                    print(_startDate);
+                                    print(_endDate);
 
-                    Navigator.pop(context); // Bottom sheet'i kapat
-                  }
-                },
-                child: Text('Deneyim Ekle'),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
+                                    ExperienceInfo experienceInfo =
+                                        ExperienceInfo(
+                                      organizationName: _organizationName,
+                                      position: _position,
+                                      startDate: _startDate,
+                                      endDate: _endDate,
+                                    );
+
+                                    context.read<UserBloc>().add(
+                                          AddExperience(
+                                            experienceDetail: experienceInfo,
+                                          ),
+                                        );
+
+                                    Navigator.pop(
+                                        context); // Bottom sheet'i kapat
+                                  }
+                                },
+                                child: Text('Kaydet'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ]),
+          ));
 }
