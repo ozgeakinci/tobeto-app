@@ -29,7 +29,6 @@ class _PersonalInfoState extends State<PersonalInfo> {
   String _about = '';
   String? _urlImage;
   DateTime? _selectedDate;
-  List<String>? _experiences;
   int _phoneNumber = 90;
 
   File? _pickedFile;
@@ -262,23 +261,6 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                       }
                                     },
                                   ),
-                                  CustomTextField(
-                                    labelText: 'Deneyimler',
-                                    initialValue:
-                                        (state.userExperiences != null)
-                                            ? (state.userExperiences!
-                                                    as List<String>)
-                                                .join(', ')
-                                            : '',
-                                    // Deneyimleri kullanıcıdan almak için gerekli düzenlemeler
-                                    onSaved: (value) {
-                                      _experiences = value!
-                                          .split(',')
-                                          .map((e) => e.trim())
-                                          .toList();
-                                    },
-                                    maxLines: 8,
-                                  ),
                                   SizedBox(
                                       height:
                                           ProjectUtilities.projectHeight_24),
@@ -304,13 +286,11 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                             userImage: _pickedFile != null
                                                 ? _urlImage
                                                 : state.urlImage,
-                                            userExperiences: _experiences,
                                             experiences: state.experiences);
 
                                         print(
                                             '----------dene ${state.experiences}');
-                                        print(
-                                            '----------dene1 ${state.userExperiences}');
+
                                         context.read<UserBloc>().add(
                                             SendUserInfo(user: updatedUser));
 

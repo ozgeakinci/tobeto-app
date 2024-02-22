@@ -65,7 +65,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             birthDate: userInfos.birthDate,
             phoneNumber: userInfos.phoneNumber,
             urlImage: userInfos.userImage,
-            userExperiences: userInfos.userExperiences,
+            skills: userInfos.skills,
             experiences: userInfos.experiences,
             languages: userInfos.languages));
       } catch (e) {
@@ -101,13 +101,37 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             birthDate: userInfo.birthDate,
             phoneNumber: userInfo.phoneNumber,
             urlImage: userInfo.userImage,
-            userExperiences: userInfo.userExperiences,
+            skills: userInfo.skills,
             experiences: userInfo.experiences,
             languages: userInfo.languages));
       },
     );
 
-    //------------------Experience BLOC-----------------------
+    on<AddSkills>((event, emit) async {
+      try {
+        // Kullanıcının yeteneklerini Firestore'a eklemek için UserRepository'deki uygun fonksiyonu çağırın
+        final skillsInfo =
+            await UserRepositories().addUserSkills(event.addedSkills);
+        // İşlem başarılı olduğunda bir UserSuccess durumu yayınlayın
+        emit(UserLoaded(
+          username: skillsInfo.username,
+          department: skillsInfo.department,
+          applicationStatus: skillsInfo.applicationStatus,
+          greeting: "greeting",
+          usernameInitials: usernameInitials,
+          email: skillsInfo.email,
+          about: skillsInfo.about,
+          birthDate: skillsInfo.birthDate,
+          phoneNumber: skillsInfo.phoneNumber,
+          urlImage: skillsInfo.userImage,
+          experiences: skillsInfo.experiences,
+        ));
+      } catch (e) {
+        print("ERrorrSkilss");
+        // Hata durumunda bir UserError durumu yayınlayın
+        emit(UserError());
+      }
+    });
 
     on<AddExperience>((event, emit) async {
       String greeting = getGreetingMessage();
@@ -164,7 +188,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             birthDate: updatedUser.birthDate,
             phoneNumber: updatedUser.phoneNumber,
             urlImage: updatedUser.userImage,
-            userExperiences: updatedUser.userExperiences,
+            skills: updatedUser.skills,
             experiences: updatedUser.experiences,
           ));
         }

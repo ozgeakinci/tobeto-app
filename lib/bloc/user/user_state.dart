@@ -19,7 +19,7 @@ class UserLoaded extends UserState {
   DateTime birthDate;
   int? phoneNumber;
   String? urlImage;
-  List<String>? userExperiences;
+  List<String>? skills;
   List<ExperienceInfo>? experiences;
   List<LanguageModel>? languages;
 
@@ -32,7 +32,7 @@ class UserLoaded extends UserState {
       required this.email,
       required this.about,
       required this.birthDate,
-      this.userExperiences,
+      this.skills,
       this.experiences,
       this.languages,
       this.phoneNumber,

@@ -22,6 +22,14 @@ class AddExperience extends UserEvent {
   });
 }
 
+class AddSkills extends UserEvent {
+  final List<String> addedSkills;
+
+  AddSkills({
+    required this.addedSkills,
+  });
+}
+
 class DeleteExperience extends UserEvent {
   int index;
 

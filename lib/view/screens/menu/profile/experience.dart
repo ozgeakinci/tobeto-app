@@ -50,7 +50,6 @@ class _ExperienceState extends State<Experience> {
           print('------------------- deneyimmmmmm');
           print(state.email);
           print(state.experiences);
-          print('  useerrrr  ${state.userExperiences}');
 
           print(
             state.experiences != null ? state.experiences!.length : 100,

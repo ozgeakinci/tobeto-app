@@ -80,6 +80,26 @@ class UserRepositories {
     return user;
   }
 
+  // SKİLL EKLEME
+  Future<UserModel> addUserSkills(List<String> skills) async {
+    try {
+      // Firestore'dan kullanıcının mevcut bilgilerini çek
+      DocumentSnapshot<Map<String, dynamic>> userDoc = await firebaseFirestore
+          .collection('users')
+          .doc(firebaseAuth.currentUser!.uid)
+          .get();
+      await firebaseFirestore
+          .collection('users')
+          .doc(firebaseAuth.currentUser!.uid)
+          .update({
+        'skills': FieldValue.arrayUnion(skills),
+      });
+      return UserModel.fromUserFireStore(userDoc);
+    } catch (e) {
+      throw Exception("Kullanıcı yetenekleri eklenirken bir hata oluştu: $e");
+    }
+  }
+
   Future<UserModel> addExperienceToUser({
     required String userId,
     required ExperienceInfo experienceInfo,

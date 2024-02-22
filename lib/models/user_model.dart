@@ -50,7 +50,7 @@ class UserModel {
   DateTime birthDate;
   int phoneNumber;
   String? userImage;
-  List<String>? userExperiences;
+  List<String>? skills; // Kullanıcının yetenekleri
   List<ExperienceInfo>? experiences;
   List<LanguageModel>? languages;
 
@@ -63,7 +63,7 @@ class UserModel {
       required this.birthDate,
       required this.phoneNumber,
       required this.userImage,
-      this.userExperiences,
+      this.skills, // Yetenekler listesi
       this.experiences,
       this.languages});
 
@@ -77,6 +77,7 @@ class UserModel {
   factory UserModel.fromUserFireStore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final map = snapshot.data() as Map;
+
     return UserModel(
       username: map['username'] as String,
       department: map['department'] as String,
@@ -89,9 +90,9 @@ class UserModel {
       phoneNumber:
           map['phoneNumber'] == null ? 90 : (map['phoneNumber'] as int),
       userImage: map['imageUrl'] as String?,
-      userExperiences: map['userExperiences'] != null
-          ? List<String>.from(map['userExperiences'])
-          : [],
+      skills: map['skills'] != null
+          ? List<String>.from(map['skills'])
+          : null, // Yetenekler listesi
       experiences: map['experiences'] != null
           ? List<ExperienceInfo>.from(
               (map['experiences'] as List<dynamic>).map(
@@ -121,7 +122,7 @@ class UserModel {
       'birthDate': birthDate,
       'phoneNumber': phoneNumber,
       'imageUrl': userImage,
-      'userExperiences': userExperiences,
+      'skills': skills, // Yetenekler listesi
       'experiences': experiences != null
           ? experiences!.map((experience) => experience.toMap()).toList()
           : [],
@@ -141,9 +142,7 @@ class UserModel {
       birthDate: json['birthDate'] as DateTime,
       phoneNumber: json['phoneNumber'] as int,
       userImage: json['imageUrl'] as String,
-      userExperiences: json['userExperiences'] != null
-          ? List<String>.from(json['userExperiences'])
-          : [],
+      skills: json['skills'] != null ? List<String>.from(json['skills']) : [],
       experiences: (json['experiences'] as List<dynamic>?)
           ?.map((exp) => ExperienceInfo.fromJson(exp as Map<String, dynamic>))
           .toList(),
@@ -173,7 +172,6 @@ class UserModel {
       applicationStatus: applicationStatus ?? this.applicationStatus,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       userImage: userImage ?? this.userImage,
-      userExperiences: experiences ?? this.userExperiences,
     );
   }
 }
