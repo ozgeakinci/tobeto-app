@@ -304,11 +304,13 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                             userImage: _pickedFile != null
                                                 ? _urlImage
                                                 : state.urlImage,
-                                            userExperiences: _experiences);
-                                        // UserModel içindeki deneyimleri güncelle
-                                        updatedUser = updatedUser.copyWith(
-                                            experiences: _experiences);
+                                            userExperiences: _experiences,
+                                            experiences: state.experiences);
 
+                                        print(
+                                            '----------dene ${state.experiences}');
+                                        print(
+                                            '----------dene1 ${state.userExperiences}');
                                         context.read<UserBloc>().add(
                                             SendUserInfo(user: updatedUser));
 

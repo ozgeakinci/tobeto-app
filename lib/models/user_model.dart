@@ -110,7 +110,7 @@ class UserModel {
       'birthDate': birthDate,
       'phoneNumber': phoneNumber,
       'imageUrl': userImage,
-      'userExperienses': userExperiences,
+      'userExperiences': userExperiences,
       'experiences': experiences != null
           ? experiences!.map((experience) => experience.toMap()).toList()
           : [],

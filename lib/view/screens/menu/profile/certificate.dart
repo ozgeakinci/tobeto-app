@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/view/screens/menu/profile/skills.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class Certificate extends StatelessWidget {
@@ -8,8 +9,9 @@ class Certificate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Sertifikalarım'),
+      appBar: CustomAppbar(
+        title: 'Sertifikalarım',
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
       ),
       body: ListView(children: [
         SkillsCard(

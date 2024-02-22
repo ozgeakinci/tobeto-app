@@ -114,4 +114,34 @@ class UserRepositories {
       throw Exception("Deneyim eklenirken bir hata oluştu: $e");
     }
   }
+
+  Future<UserModel> updateExperienceToUser({
+    required String userId,
+    required List<ExperienceInfo> updatedExperiences,
+  }) async {
+    try {
+      // Firestore'dan kullanıcının mevcut bilgilerini çek
+      DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await firebaseFirestore.collection('users').doc(userId).get();
+
+      if (!userDoc.exists) {
+        throw Exception("Kullanıcı bulunamadı");
+      }
+
+      // Firestore'dan mevcut deneyim listesini al
+      List<dynamic>? currentExperiences = userDoc.data()?['experiences'];
+
+      // Güncellenmiş deneyim listesini Firestore'a yaz
+      await firebaseFirestore.collection('users').doc(userId).update({
+        'experiences':
+            updatedExperiences.map((experience) => experience.toMap()).toList(),
+      });
+
+      // Güncellenmiş kullanıcı bilgilerini döndür
+      return UserModel.fromUserFireStore(userDoc);
+    } catch (e) {
+      // Hata durumunda Exception fırlat
+      throw Exception("Deneyim güncellenirken bir hata oluştu: $e");
+    }
+  }
 }

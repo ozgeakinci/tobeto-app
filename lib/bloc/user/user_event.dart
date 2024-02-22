@@ -21,4 +21,12 @@ class AddExperience extends UserEvent {
   });
 }
 
+class DeleteExperience extends UserEvent {
+  int index;
+
+  DeleteExperience({
+    required this.index,
+  });
+}
+
 class ResetUserEvent extends UserEvent {}

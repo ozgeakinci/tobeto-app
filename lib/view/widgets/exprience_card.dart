@@ -40,8 +40,13 @@ class ExperienceCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   subTitle ?? SizedBox.shrink(),
-                  startDate ?? SizedBox.shrink(),
-                  startDate ?? SizedBox.shrink(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      startDate ?? SizedBox.shrink(),
+                      finishDate ?? SizedBox.shrink(),
+                    ],
+                  ),
                 ],
               ),
               trailing: textButton),

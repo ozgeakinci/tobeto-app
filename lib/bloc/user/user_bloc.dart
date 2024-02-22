@@ -54,30 +54,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         userDepartment = userInfos.department;
 
         emit(UserLoaded(
-          username: userInfos.username,
-          department: userInfos.department,
-          email: userInfos.email,
-          applicationStatus: userInfos.applicationStatus,
-          greeting: greeting,
-          usernameInitials: usernameInitials,
-          about: userInfos.about,
-          birthDate: userInfos.birthDate,
-          phoneNumber: userInfos.phoneNumber,
-          urlImage: userInfos.userImage,
-          userExperiences: (userInfos.userExperiences)
-                  ?.map((dynamic item) => item.toString())
-                  .toList() ??
-              [],
-          experiences: (userInfos.experiences)
-              ?.map((dynamic item) {
-                if (item is Map<String, dynamic>) {
-                  return ExperienceInfo.fromJson(item);
-                }
-                return null;
-              })
-              .whereType<ExperienceInfo>() // Null olmayanları seçer
-              .toList(),
-        ));
+            username: userInfos.username,
+            department: userInfos.department,
+            email: userInfos.email,
+            applicationStatus: userInfos.applicationStatus,
+            greeting: greeting,
+            usernameInitials: usernameInitials,
+            about: userInfos.about,
+            birthDate: userInfos.birthDate,
+            phoneNumber: userInfos.phoneNumber,
+            urlImage: userInfos.userImage,
+            userExperiences: userInfos.userExperiences,
+            experiences: userInfos.experiences));
       } catch (e) {
         emit(UserLoaded(
           username: "No name",
@@ -111,7 +99,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             birthDate: userInfo.birthDate,
             phoneNumber: userInfo.phoneNumber,
             urlImage: userInfo.userImage,
-            userExperiences: userInfo.userExperiences));
+            userExperiences: userInfo.userExperiences,
+            experiences: userInfo.experiences));
       },
     );
 
@@ -138,6 +127,43 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         urlImage: updatedUser.userImage,
         experiences: updatedUser.experiences,
       ));
+    });
+
+    on<DeleteExperience>((event, emit) async {
+      String greeting = getGreetingMessage();
+      if (state is UserLoaded) {
+        // Kullanıcının mevcut deneyimlerini al
+        List<ExperienceInfo>? experiences =
+            List.from((state as UserLoaded).experiences ?? []);
+
+        // Verilen indeksin geçerli olup olmadığını kontrol et
+        if (event.index >= 0 && event.index < experiences.length) {
+          // Deneyimi listeden kaldır
+          experiences.removeAt(event.index);
+
+          // Deneyimi Firebase'e güncelle
+          final updatedUser = await UserRepositories().updateExperienceToUser(
+            userId: _firebaseAuth.currentUser!.uid,
+            updatedExperiences: experiences,
+          );
+
+          // Güncellenmiş kullanıcı bilgilerini emit et
+          emit(UserLoaded(
+            username: updatedUser.username,
+            department: updatedUser.department,
+            applicationStatus: updatedUser.applicationStatus,
+            greeting: greeting,
+            usernameInitials: usernameInitials,
+            email: updatedUser.email,
+            about: updatedUser.about,
+            birthDate: updatedUser.birthDate,
+            phoneNumber: updatedUser.phoneNumber,
+            urlImage: updatedUser.userImage,
+            userExperiences: updatedUser.userExperiences,
+            experiences: updatedUser.experiences,
+          ));
+        }
+      }
     });
 
     on<ResetUserEvent>((event, emit) async {
