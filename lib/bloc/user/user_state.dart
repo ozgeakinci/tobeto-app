@@ -1,4 +1,5 @@
 import 'package:tobeto_app/models/expreince_model.dart';
+import 'package:tobeto_app/models/language_model.dart';
 import 'package:tobeto_app/models/user_model.dart';
 
 abstract class UserState {}
@@ -20,6 +21,7 @@ class UserLoaded extends UserState {
   String? urlImage;
   List<String>? userExperiences;
   List<ExperienceInfo>? experiences;
+  List<LanguageModel>? languages;
 
   UserLoaded(
       {required this.username,
@@ -32,6 +34,7 @@ class UserLoaded extends UserState {
       required this.birthDate,
       this.userExperiences,
       this.experiences,
+      this.languages,
       this.phoneNumber,
       this.urlImage});
 }

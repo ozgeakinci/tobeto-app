@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
+import 'package:tobeto_app/models/language_model.dart';
 import 'package:tobeto_app/models/user_model.dart';
 import 'package:tobeto_app/repositories/user_repositories.dart';
 
@@ -65,7 +66,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             phoneNumber: userInfos.phoneNumber,
             urlImage: userInfos.userImage,
             userExperiences: userInfos.userExperiences,
-            experiences: userInfos.experiences));
+            experiences: userInfos.experiences,
+            languages: userInfos.languages));
       } catch (e) {
         emit(UserLoaded(
           username: "No name",
@@ -100,9 +102,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             phoneNumber: userInfo.phoneNumber,
             urlImage: userInfo.userImage,
             userExperiences: userInfo.userExperiences,
-            experiences: userInfo.experiences));
+            experiences: userInfo.experiences,
+            languages: userInfo.languages));
       },
     );
+
+    //------------------Experience BLOC-----------------------
 
     on<AddExperience>((event, emit) async {
       String greeting = getGreetingMessage();
@@ -162,6 +167,70 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             userExperiences: updatedUser.userExperiences,
             experiences: updatedUser.experiences,
           ));
+        }
+      }
+    });
+
+    //------------------Language BLOC-----------------------
+
+    on<AddLanguage>((event, emit) async {
+      String greeting = getGreetingMessage();
+
+      // Dil bilgisini kullanıcı bilgilerine ekleyin
+      final updatedUser = await UserRepositories().addLanguageToUser(
+        userId: _firebaseAuth.currentUser!.uid,
+        languageInfo: event.language,
+      );
+
+      // UserLoaded event'i ile güncellenmiş kullanıcı bilgilerini emit edin
+      emit(UserLoaded(
+        username: updatedUser.username,
+        department: updatedUser.department,
+        applicationStatus: updatedUser.applicationStatus,
+        greeting: greeting,
+        usernameInitials: usernameInitials,
+        email: updatedUser.email,
+        about: updatedUser.about,
+        birthDate: updatedUser.birthDate,
+        phoneNumber: updatedUser.phoneNumber,
+        urlImage: updatedUser.userImage,
+        languages: updatedUser.languages,
+      ));
+    });
+
+    on<DeleteLanguage>((event, emit) async {
+      String greeting = getGreetingMessage();
+      if (state is UserLoaded) {
+        // Kullanıcının mevcut deneyimlerini al
+        List<LanguageModel>? languages =
+            List.from((state as UserLoaded).languages ?? []);
+
+        // Verilen indeksin geçerli olup olmadığını kontrol et
+        if (event.index >= 0 && event.index < languages.length) {
+          // Deneyimi listeden kaldır
+          languages.removeAt(event.index);
+
+          // Deneyimi Firebase'e güncelle
+          final updatedUser = await UserRepositories().updateLanguagesToUser(
+            userId: _firebaseAuth.currentUser!.uid,
+            updatedLanguages: languages,
+          );
+
+          // Güncellenmiş kullanıcı bilgilerini emit et
+          emit(UserLoaded(
+              username: updatedUser.username,
+              department: updatedUser.department,
+              applicationStatus: updatedUser.applicationStatus,
+              greeting: greeting,
+              usernameInitials: usernameInitials,
+              email: updatedUser.email,
+              about: updatedUser.about,
+              birthDate: updatedUser.birthDate,
+              phoneNumber: updatedUser.phoneNumber,
+              urlImage: updatedUser.userImage,
+              userExperiences: updatedUser.userExperiences,
+              experiences: updatedUser.experiences,
+              languages: updatedUser.languages));
         }
       }
     });

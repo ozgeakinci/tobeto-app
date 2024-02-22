@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_app/bloc/user/user_bloc.dart';
+import 'package:tobeto_app/bloc/user/user_event.dart';
+import 'package:tobeto_app/bloc/user/user_state.dart';
+import 'package:tobeto_app/models/language_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/screens/menu/profile/skills.dart';
@@ -12,24 +17,47 @@ class ForeignLanguage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(
-        title: 'Yabancı Dillerim',
-        actions: [
-          IconButton(
-              onPressed: () {
-                _showAddLanguagesBottomSheet(context);
-              },
-              icon: Icon(Icons.add))
-        ],
-      ),
-      body: ListView(children: [
-        SkillsCard(
-            icon: Image.asset("assets/images/world_icon.png"),
-            title: const Text('İngilizce'),
-            subTitle: const Text("Orta Seviye (B1, B2)"),
-            textButton: DeleteButton.deleteIconButton),
-      ]),
-    );
+        appBar: CustomAppbar(
+          title: 'Yabancı Dillerim',
+          actions: [
+            IconButton(
+                onPressed: () {
+                  _showAddLanguagesBottomSheet(context);
+                },
+                icon: Icon(Icons.add))
+          ],
+        ),
+        body: BlocBuilder<UserBloc, UserState>(builder: ((context, state) {
+          if (state is UserLoaded) {
+            return ListView.builder(
+                itemCount:
+                    state.languages != null ? state.languages!.length : 0,
+                itemBuilder: (context, index) => SkillsCard(
+                    icon: Image.asset("assets/images/world_icon.png"),
+                    title: Text(state.languages![index].language),
+                    subTitle: Text(state.languages![index].level),
+                    textButton: TextButton(
+                        onPressed: () {
+                          context
+                              .read<UserBloc>()
+                              .add(DeleteLanguage(index: index));
+                        },
+                        child: Image.asset('assets/images/delete_icon.png'))));
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        }))
+
+        //  ListView(children: [
+        //   SkillsCard(
+        //       icon: Image.asset("assets/images/world_icon.png"),
+        //       title: const Text('İngilizce'),
+        //       subTitle: const Text("Orta Seviye (B1, B2)"),
+        //       textButton: DeleteButton.deleteIconButton),
+        // ]),
+        );
   }
 }
 
@@ -37,6 +65,9 @@ void _showAddLanguagesBottomSheet(
   BuildContext context,
 ) {
   final _formKey = GlobalKey<FormState>();
+
+  String _languageName = '';
+  String _languageLevel = '';
 
   showModalBottomSheet(
     context: context,
@@ -77,12 +108,14 @@ void _showAddLanguagesBottomSheet(
                 ),
                 CustomTextField(
                   labelText: 'Dil',
+                  onSaved: (value) => _languageName = value!,
                 ),
                 SizedBox(
                   height: ProjectUtilities.projectHeight_16,
                 ),
                 CustomTextField(
                   labelText: 'Seviye',
+                  onSaved: (value) => _languageLevel = value!,
                 ),
                 SizedBox(
                   height: ProjectUtilities.projectHeight_64,
@@ -113,6 +146,18 @@ void _showAddLanguagesBottomSheet(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
+
+                          LanguageModel language = LanguageModel(
+                            language: _languageName,
+                            level: _languageLevel,
+                          );
+
+                          print(_languageName);
+                          print(_languageLevel);
+
+                          context
+                              .read<UserBloc>()
+                              .add(AddLanguage(language: language));
 
                           Navigator.pop(context);
                         }

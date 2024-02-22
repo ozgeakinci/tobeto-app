@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
+import 'package:tobeto_app/models/language_model.dart';
 import 'package:tobeto_app/view/screens/menu/profile/experience.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
@@ -51,6 +52,7 @@ class UserModel {
   String? userImage;
   List<String>? userExperiences;
   List<ExperienceInfo>? experiences;
+  List<LanguageModel>? languages;
 
   UserModel(
       {required this.username,
@@ -62,7 +64,8 @@ class UserModel {
       required this.phoneNumber,
       required this.userImage,
       this.userExperiences,
-      this.experiences});
+      this.experiences,
+      this.languages});
 
 /*   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -97,6 +100,14 @@ class UserModel {
               ),
             )
           : [],
+      languages: map['languages'] != null
+          ? List<LanguageModel>.from(
+              (map['languages'] as List<dynamic>).map(
+                (language) =>
+                    LanguageModel.fromJson(language as Map<String, dynamic>),
+              ),
+            )
+          : [],
     );
   }
 
@@ -113,6 +124,9 @@ class UserModel {
       'userExperiences': userExperiences,
       'experiences': experiences != null
           ? experiences!.map((experience) => experience.toMap()).toList()
+          : [],
+      'languages': languages != null
+          ? languages!.map((language) => language.toMap()).toList()
           : [],
     };
   }
@@ -132,6 +146,9 @@ class UserModel {
           : [],
       experiences: (json['experiences'] as List<dynamic>?)
           ?.map((exp) => ExperienceInfo.fromJson(exp as Map<String, dynamic>))
+          .toList(),
+      languages: (json['languages'] as List<dynamic>?)
+          ?.map((exp) => LanguageModel.fromJson(exp as Map<String, dynamic>))
           .toList(),
     );
   }
