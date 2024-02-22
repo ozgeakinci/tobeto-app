@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
+import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/language_model.dart';
 import 'package:tobeto_app/models/user_model.dart';
@@ -42,6 +43,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       return initials;
     }
 
+    //------------ User Bilgilerini Getir -------------------
+
     on<FetchUserRequested>((event, emit) async {
       emit(UserLoading());
 
@@ -66,6 +69,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             phoneNumber: userInfos.phoneNumber,
             urlImage: userInfos.userImage,
             skills: userInfos.skills,
+            // userExperiences: userInfos.userExperiences,
             experiences: userInfos.experiences,
             languages: userInfos.languages));
       } catch (e) {
@@ -84,6 +88,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         print(e);
       }
     });
+    //------------ User Bilgilerini Gönder -------------------
 
     on<SendUserInfo>(
       (event, emit) async {
@@ -103,7 +108,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             urlImage: userInfo.userImage,
             skills: userInfo.skills,
             experiences: userInfo.experiences,
-            languages: userInfo.languages));
+            languages: userInfo.languages,
+            userEducations: userInfo.userEducations));
       },
     );
 
@@ -114,18 +120,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             await UserRepositories().addUserSkills(event.addedSkills);
         // İşlem başarılı olduğunda bir UserSuccess durumu yayınlayın
         emit(UserLoaded(
-          username: skillsInfo.username,
-          department: skillsInfo.department,
-          applicationStatus: skillsInfo.applicationStatus,
-          greeting: "greeting",
-          usernameInitials: usernameInitials,
-          email: skillsInfo.email,
-          about: skillsInfo.about,
-          birthDate: skillsInfo.birthDate,
-          phoneNumber: skillsInfo.phoneNumber,
-          urlImage: skillsInfo.userImage,
-          experiences: skillsInfo.experiences,
-        ));
+            username: skillsInfo.username,
+            department: skillsInfo.department,
+            applicationStatus: skillsInfo.applicationStatus,
+            greeting: "greeting",
+            usernameInitials: usernameInitials,
+            email: skillsInfo.email,
+            about: skillsInfo.about,
+            birthDate: skillsInfo.birthDate,
+            phoneNumber: skillsInfo.phoneNumber,
+            urlImage: skillsInfo.userImage,
+            experiences: skillsInfo.experiences,
+            skills: skillsInfo.skills));
       } catch (e) {
         print("ERrorrSkilss");
         // Hata durumunda bir UserError durumu yayınlayın
@@ -252,9 +258,72 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               birthDate: updatedUser.birthDate,
               phoneNumber: updatedUser.phoneNumber,
               urlImage: updatedUser.userImage,
-              userExperiences: updatedUser.userExperiences,
+              // userExperiences: updatedUser.userExperiences,
               experiences: updatedUser.experiences,
               languages: updatedUser.languages));
+        }
+      }
+    });
+
+    //------------------EducationLife BLOC-----------------------
+
+    on<AddEducation>((event, emit) async {
+      String greeting = getGreetingMessage();
+
+      // Eğitimi kullanıcı bilgilerine ekleyin
+      final updatedUser = await UserRepositories().addEducationToUser(
+          userId: _firebaseAuth.currentUser!.uid,
+          userEducation: event.userEducations);
+
+      // UserLoaded event'i ile güncellenmiş kullanıcı bilgilerini emit et
+      emit(UserLoaded(
+          username: updatedUser.username,
+          department: updatedUser.department,
+          applicationStatus: updatedUser.applicationStatus,
+          greeting: greeting,
+          usernameInitials: usernameInitials,
+          email: updatedUser.email,
+          about: updatedUser.about,
+          birthDate: updatedUser.birthDate,
+          phoneNumber: updatedUser.phoneNumber,
+          urlImage: updatedUser.userImage,
+          userEducations: updatedUser.userEducations));
+    });
+
+    on<DeleteEducation>((event, emit) async {
+      String greeting = getGreetingMessage();
+      if (state is UserLoaded) {
+        // Kullanıcının mevcut deneyimlerini al
+        List<EducationInfo>? userEducations =
+            List.from((state as UserLoaded).userEducations ?? []);
+
+        // Verilen indeksin geçerli olup olmadığını kontrol et
+        if (event.index >= 0 && event.index < userEducations.length) {
+          // Deneyimi listeden kaldır
+          userEducations.removeAt(event.index);
+
+          // Deneyimi Firebase'e güncelle
+          final updatedUser = await UserRepositories().updateEducationToUser(
+              userId: _firebaseAuth.currentUser!.uid,
+              updatedEducations: userEducations);
+
+          // Güncellenmiş kullanıcı bilgilerini emit et
+          emit(UserLoaded(
+              username: updatedUser.username,
+              department: updatedUser.department,
+              applicationStatus: updatedUser.applicationStatus,
+              greeting: greeting,
+              usernameInitials: usernameInitials,
+              email: updatedUser.email,
+              about: updatedUser.about,
+              birthDate: updatedUser.birthDate,
+              phoneNumber: updatedUser.phoneNumber,
+              urlImage: updatedUser.userImage,
+
+              // userExperiences: updatedUser.userExperiences,
+              experiences: updatedUser.experiences,
+              languages: updatedUser.languages,
+              userEducations: updatedUser.userEducations));
         }
       }
     });

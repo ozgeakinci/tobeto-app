@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/language_model.dart';
 import 'package:tobeto_app/models/user_model.dart';
@@ -13,6 +14,8 @@ class SendUserInfo extends UserEvent {
     required this.user,
   });
 }
+
+//--------Experience AREA----------------
 
 class AddExperience extends UserEvent {
   ExperienceInfo experienceDetail;
@@ -38,6 +41,8 @@ class DeleteExperience extends UserEvent {
   });
 }
 
+//--------Language AREA----------------
+
 class AddLanguage extends UserEvent {
   LanguageModel language;
   AddLanguage({
@@ -49,6 +54,23 @@ class DeleteLanguage extends UserEvent {
   int index;
 
   DeleteLanguage({
+    required this.index,
+  });
+}
+
+//--------Education AREA----------------
+
+class AddEducation extends UserEvent {
+  EducationInfo userEducations;
+  AddEducation({
+    required this.userEducations,
+  });
+}
+
+class DeleteEducation extends UserEvent {
+  int index;
+
+  DeleteEducation({
     required this.index,
   });
 }

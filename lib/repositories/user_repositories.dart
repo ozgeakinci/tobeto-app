@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tobeto_app/models/calendar_model.dart';
 import 'package:tobeto_app/models/catalog_model.dart';
+import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/language_model.dart';
 import 'package:tobeto_app/models/user_model.dart';
@@ -223,6 +224,74 @@ class UserRepositories {
       await firebaseFirestore.collection('users').doc(userId).update({
         'languages':
             updatedLanguages.map((language) => language.toMap()).toList(),
+      });
+
+      // Güncellenmiş kullanıcı bilgilerini döndür
+      return UserModel.fromUserFireStore(userDoc);
+    } catch (e) {
+      // Hata durumunda Exception fırlat
+      throw Exception("Deneyim güncellenirken bir hata oluştu: $e");
+    }
+  }
+
+  //-----------------------EducationLife AREA -----------------------
+
+  Future<UserModel> addEducationToUser({
+    required String userId,
+    required EducationInfo userEducation,
+  }) async {
+    try {
+      // Firestore'dan kullanıcının mevcut bilgilerini çek
+      DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await firebaseFirestore.collection('users').doc(userId).get();
+
+      if (!userDoc.exists) {
+        throw Exception("Kullanıcı bulunamadı");
+      }
+
+      // Kullanıcının mevcut eğitim listesini al
+      List<dynamic>? currentEducations = userDoc.data()?['userEducations'];
+
+      // Yeni eğitimi ekle
+      if (currentEducations != null) {
+        currentEducations.add(userEducation.toMap());
+      } else {
+        currentEducations = [userEducation.toMap()];
+      }
+
+      // Firestore'a güncellenmiş bilgileri geri yaz
+      await firebaseFirestore.collection('users').doc(userId).update({
+        'userEducations': currentEducations,
+      });
+
+      // Güncellenmiş kullanıcı bilgilerini döndür
+      return UserModel.fromUserFireStore(userDoc);
+    } catch (e) {
+      // Hata durumunda Exception fırlat
+      throw Exception("Eğitim eklenirken bir hata oluştu: $e");
+    }
+  }
+
+  Future<UserModel> updateEducationToUser({
+    required String userId,
+    required List<EducationInfo> updatedEducations,
+  }) async {
+    try {
+      // Firestore'dan kullanıcının mevcut bilgilerini çek
+      DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await firebaseFirestore.collection('users').doc(userId).get();
+
+      if (!userDoc.exists) {
+        throw Exception("Kullanıcı bulunamadı");
+      }
+
+      // Firestore'dan mevcut deneyim listesini al
+      List<dynamic>? currentEducations = userDoc.data()?['userEducations'];
+
+      // Güncellenmiş deneyim listesini Firestore'a yaz
+      await firebaseFirestore.collection('users').doc(userId).update({
+        'userEducations':
+            updatedEducations.map((education) => education.toMap()).toList(),
       });
 
       // Güncellenmiş kullanıcı bilgilerini döndür
