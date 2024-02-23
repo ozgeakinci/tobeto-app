@@ -13,6 +13,7 @@ import 'package:tobeto_app/theme/tobeto_theme.dart';
 import 'package:tobeto_app/view/screens/start_page.dart';
 
 void main() async {
+  print("Run Run Run");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
@@ -24,7 +25,7 @@ void main() async {
         BlocProvider<DepartmentBloc>(create: (context) => DepartmentBloc()),
         BlocProvider<CatalogBloc>(create: (context) => CatalogBloc()),
         BlocProvider<NotificationBloc>(create: (context) => NotificationBloc()),
-        BlocProvider<BottomNavbarBloc>(create: (context) => BottomNavbarBloc()),
+        BlocProvider<NavigationBloc>(create: (context) => NavigationBloc()),
         BlocProvider<CalendarBloc>(create: (context) => CalendarBloc()),
       ],
       child: MaterialApp(

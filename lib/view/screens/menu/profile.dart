@@ -149,9 +149,6 @@ class Profile extends StatelessWidget {
                           backgroundColor: Colors.white),
                       child: const Text('Çıkış yap'),
                       onPressed: () {
-                        context
-                            .read<BottomNavbarBloc>()
-                            .add(UpdatePageIndexEvent(0));
                         context.read<UserBloc>().add(ResetUserEvent());
 
                         context.read<AuthBloc>().add(Logout());

@@ -1,7 +1,14 @@
-abstract class BottomNavBarState {}
+/* abstract class NavBarState {}
 
-class BottomNavbarUpdate extends BottomNavBarState {
+class NavBarInitial extends NavBarState {}
+
+class NavBarLoading extends NavBarState {}
+
+class NavBarLoaded extends NavBarState {
   final int currentIndex;
 
-  BottomNavbarUpdate(this.currentIndex);
+  NavBarLoaded(this.currentIndex);
 }
+
+class NavBarError extends NavBarState {}
+ */

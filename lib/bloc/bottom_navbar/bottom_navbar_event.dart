@@ -1,7 +1,10 @@
-abstract class BottomNavbarEvent {}
+/* abstract class NavBarEvent {}
 
-class UpdatePageIndexEvent extends BottomNavbarEvent {
+class FetchNavBarRequested extends NavBarEvent {
   final int index;
 
-  UpdatePageIndexEvent(this.index);
+  FetchNavBarRequested(this.index);
 }
+
+class ResetNavBarEvent extends NavBarEvent {}
+ */

@@ -1,25 +1,27 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_app/bloc/bottom_navbar/bottom_navbar_event.dart';
-import 'package:tobeto_app/bloc/bottom_navbar/bottom_navbar_state.dart';
 
-class BottomNavbarBloc extends Bloc<BottomNavbarEvent, BottomNavbarUpdate> {
-  BottomNavbarBloc() : super(BottomNavbarUpdate(0)) {
-    on<UpdatePageIndexEvent>(_onUpdatePageIndex);
-  }
+enum NavigationEvent { Anasayfa, Katalog, Takvim, Profil, Degerlendirmeler }
 
-  void _onUpdatePageIndex(
-      UpdatePageIndexEvent event, Emitter<BottomNavbarUpdate> emit) {
-    emit(BottomNavbarUpdate(event.index));
-  }
-
-  void reset() {
-    add(UpdatePageIndexEvent(0));
-  }
-
-  @override
-  Stream<BottomNavbarUpdate> mapEventToState(BottomNavbarEvent event) async* {
-    if (event is UpdatePageIndexEvent) {
-      yield BottomNavbarUpdate(event.index);
-    }
+class NavigationBloc extends Bloc<NavigationEvent, int> {
+  NavigationBloc() : super(0) {
+    on<NavigationEvent>((event, emit) {
+      switch (event) {
+        case NavigationEvent.Anasayfa:
+          emit(0);
+          break;
+        case NavigationEvent.Katalog:
+          emit(1);
+          break;
+        case NavigationEvent.Takvim:
+          emit(2);
+          break;
+        case NavigationEvent.Profil:
+          emit(3);
+          break;
+        case NavigationEvent.Degerlendirmeler:
+          emit(4);
+          break;
+      }
+    });
   }
 }
