@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
 class Surveys extends StatelessWidget {
   const Surveys({Key? key}) : super(key: key);
@@ -9,11 +10,8 @@ class Surveys extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Anketlerim",
-          style: TextStyle(color: TobetoAppColor.backgroundLight),
-        ),
+      appBar: const CustomAppbar(
+        title: 'Anketlerim',
       ),
       body: Center(
         child: Column(

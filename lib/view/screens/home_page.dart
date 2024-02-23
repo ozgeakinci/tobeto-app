@@ -56,37 +56,43 @@ class HomePage extends StatelessWidget {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  state.urlImage != null
-                                      ? CircleAvatar(
-                                          radius: 20,
-                                          backgroundColor: Colors.grey,
-                                          backgroundImage:
-                                              NetworkImage(state.urlImage!),
-                                        )
-                                      : const SizedBox.shrink(),
-                                  Text(
-                                      state.username.isNotEmpty ||
-                                              state.greeting.isNotEmpty
-                                          ? '${state.greeting} ${state.username} 🖐️'
-                                          : 'Hoşgeldin Kullanıcı',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        right: ProjectUtilities.sizeWidth_16),
-                                    child: IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                          Icons.notifications_active_rounded),
-                                      color: TobetoAppColor.textColor,
-                                      iconSize: 24,
-                                    ),
-                                  )
-                                ],
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    right: ProjectUtilities.projectHeight_24),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        state.username.isNotEmpty ||
+                                                state.greeting.isNotEmpty
+                                            ? '${state.greeting} ${state.username} 🖐️'
+                                            : 'Hoşgeldin Kullanıcı',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge),
+
+                                    state.urlImage != null
+                                        ? CircleAvatar(
+                                            radius: 20,
+                                            backgroundColor: Colors.grey,
+                                            backgroundImage:
+                                                NetworkImage(state.urlImage!),
+                                          )
+                                        : const SizedBox.shrink(),
+                                    // Padding(
+                                    //   padding: EdgeInsets.only(
+                                    //       right: ProjectUtilities.sizeWidth_16),
+                                    //   child: IconButton(
+                                    //     onPressed: () {},
+                                    //     icon: const Icon(
+                                    //         Icons.notifications_active_rounded),
+                                    //     color: TobetoAppColor.textColor,
+                                    //     iconSize: 24,
+                                    //   ),
+                                    // )
+                                  ],
+                                ),
                               ),
                               const SizedBox(
                                 height: 4,

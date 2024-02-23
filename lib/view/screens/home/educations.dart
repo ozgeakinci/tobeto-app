@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/educations/educations_bloc.dart';
 import 'package:tobeto_app/bloc/educations/educations_event.dart';
 import 'package:tobeto_app/bloc/educations/educations_state.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/educational_card.dart';
 
 class Educations extends StatelessWidget {
@@ -17,10 +18,8 @@ class Educations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Eğitimlerim",
-        ),
+      appBar: const CustomAppbar(
+        title: 'Eğitimlerim',
       ),
       body: BlocBuilder<DepartmentBloc, EducationsState>(
           builder: (context, state) {

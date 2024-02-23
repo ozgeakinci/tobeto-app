@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
 class Recourses extends StatelessWidget {
   const Recourses({Key? key}) : super(key: key);
@@ -8,11 +9,8 @@ class Recourses extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Başvurularım",
-          style: TextStyle(color: TobetoAppColor.textColorDark),
-        ),
+      appBar: const CustomAppbar(
+        title: 'Başvurularım',
       ),
       body: Padding(
         padding: const EdgeInsets.all(14.0),

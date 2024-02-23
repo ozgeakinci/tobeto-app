@@ -284,7 +284,11 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                             userImage: _pickedFile != null
                                                 ? _urlImage
                                                 : state.urlImage,
-                                            experiences: state.experiences);
+                                            experiences: state.experiences,
+                                            userEducations:
+                                                state.userEducations,
+                                            skills: state.skills,
+                                            languages: state.languages);
 
                                         context.read<UserBloc>().add(
                                             SendUserInfo(user: updatedUser));

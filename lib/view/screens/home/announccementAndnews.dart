@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/notifications/notifications_bloc.dart';
 import 'package:tobeto_app/bloc/notifications/notifications_event.dart';
 import 'package:tobeto_app/bloc/notifications/notifications_state.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
 import 'package:tobeto_app/view/widgets/notification_card.dart';
 
@@ -15,10 +16,8 @@ class AnnounccementAndnews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Duyuru ve Haberler",
-        ),
+      appBar: const CustomAppbar(
+        title: 'Duyuru ve Haberlerim',
       ),
       body: BlocBuilder<NotificationBloc, NotificationState>(
           builder: (context, state) {

@@ -131,6 +131,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             urlImage: skillsInfo.userImage,
             experiences: skillsInfo.experiences,
             skills: skillsInfo.skills));
+
+        fetchAndUpdateUser();
       } catch (e) {
         emit(UserError());
       }
@@ -226,6 +228,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         urlImage: updatedUser.userImage,
         languages: updatedUser.languages,
       ));
+      fetchAndUpdateUser();
     });
 
     on<DeleteLanguage>((event, emit) async {
@@ -260,6 +263,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               urlImage: updatedUser.userImage,
               experiences: updatedUser.experiences,
               languages: updatedUser.languages));
+          fetchAndUpdateUser();
         }
       }
     });
@@ -287,6 +291,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           phoneNumber: updatedUser.phoneNumber,
           urlImage: updatedUser.userImage,
           userEducations: updatedUser.userEducations));
+      fetchAndUpdateUser();
     });
 
     on<DeleteEducation>((event, emit) async {
@@ -323,6 +328,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               experiences: updatedUser.experiences,
               languages: updatedUser.languages,
               userEducations: updatedUser.userEducations));
+          fetchAndUpdateUser();
         }
       }
     });
