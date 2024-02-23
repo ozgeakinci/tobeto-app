@@ -1,18 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-/* class DepartmentModel {
-  String videoInfo;
-  DepartmentModel({required this.videoInfo});
 
-  factory DepartmentModel.fromDepartmentFireStore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final map = snapshot.data() as Map;
-    return DepartmentModel(
-      videoInfo: map['videos'] as String,
-    );
-  }
-} */
 class DepartmentModel {
   final List<DepartmentLessonModel> lessonList;
 

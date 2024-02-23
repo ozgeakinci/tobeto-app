@@ -1,7 +1,6 @@
 import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/language_model.dart';
-import 'package:tobeto_app/models/user_model.dart';
 
 abstract class UserState {}
 

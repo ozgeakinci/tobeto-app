@@ -33,7 +33,6 @@ class _SkillsState extends State<Skills> {
       body: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
         if (state is UserInitial) {
           context.read<UserBloc>().add(FetchUserRequested());
-          print(state);
         }
         if (state is UserLoading) {
           const Center(
@@ -41,9 +40,6 @@ class _SkillsState extends State<Skills> {
           );
         }
         if (state is UserLoaded) {
-          print(state.email);
-          print(state.skills);
-
           return ListView.builder(
               itemCount: state.skills != null ? state.skills!.length : 0,
               itemBuilder: ((context, index) => SkillsCard(
@@ -53,9 +49,7 @@ class _SkillsState extends State<Skills> {
                   icon: Icon(Icons.work_outline_outlined,
                       color: ColorScheme.dark().secondary),
                   textButton: TextButton(
-                      onPressed: () {
-                        print("Yetkinliklerim silme butonu click");
-                      },
+                      onPressed: () {},
                       child: Image.asset('assets/images/delete_icon.png')))));
         } else {
           return Center(
@@ -115,9 +109,6 @@ void _showAddSkillsBottomSheet(
                 SizedBox(
                   height: ProjectUtilities.projectHeight_16,
                 ),
-                /*  CustomTextField(
-                  labelText: 'Yetkinlik',
-                ), */
                 CustomTextField(
                   labelText: 'Yetenek ekle',
                   onSaved: (value) => skills = value!.split(','),

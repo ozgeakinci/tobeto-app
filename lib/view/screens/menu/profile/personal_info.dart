@@ -266,8 +266,6 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                           ProjectUtilities.projectHeight_24),
                                   ElevatedButton(
                                       onPressed: () {
-                                        print("Kaydetttt---------");
-                                        print(_urlImage);
                                         if (_formKey.currentState!.validate()) {
                                           _formKey.currentState!.save();
                                         }
@@ -287,9 +285,6 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                                 ? _urlImage
                                                 : state.urlImage,
                                             experiences: state.experiences);
-
-                                        print(
-                                            '----------dene ${state.experiences}');
 
                                         context.read<UserBloc>().add(
                                             SendUserInfo(user: updatedUser));

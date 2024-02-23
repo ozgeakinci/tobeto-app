@@ -23,21 +23,17 @@ class AnnounccementAndnews extends StatelessWidget {
       body: BlocBuilder<NotificationBloc, NotificationState>(
           builder: (context, state) {
         if (state is NotificationInitial) {
-          print('Notiiiii çalıştı ');
           context
               .read<NotificationBloc>()
               .add(FetchNotificationsRequested(department: department));
         }
 
         if (state is NotificationLoading) {
-          print('Notiii loading ');
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
         if (state is NotificationLoaded) {
-          print('Notiii loaded ${state.notifications}');
-          // return Text(state.notifications[1].title);
           return Padding(
               padding: const EdgeInsets.all(14.0),
               child: ListView.builder(
@@ -51,13 +47,3 @@ class AnnounccementAndnews extends StatelessWidget {
     );
   }
 }
-      // children: const [
-              // NotificationCard(
-              //   title: "Yeni grupların Discorda katılımı",
-              //   date: "12.12.2023",
-              //   image: "assets/images/message_icon.png",
-              // ),
-              //   SizedBox(
-              //     height: 16,
-              //   ),
-              // ],

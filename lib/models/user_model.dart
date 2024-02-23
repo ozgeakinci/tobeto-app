@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/language_model.dart';
-import 'package:tobeto_app/view/screens/menu/profile/experience.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
@@ -12,18 +11,6 @@ enum Department {
   fullstack,
   work,
 }
-
-// class ExperienceInfo {
-//   String experienceName;
-//   String experienceDate;
-//   String experienceExplain;
-
-//   ExperienceInfo({
-//     required this.experienceName,
-//     required this.experienceDate,
-//     required this.experienceExplain,
-//   });
-// }
 
 extension DepartmentExtension on Department {
   String get stringValue {
@@ -51,7 +38,7 @@ class UserModel {
   DateTime birthDate;
   int phoneNumber;
   String? userImage;
-  List<String>? skills; // Kullanıcının yetenekleri
+  List<String>? skills;
   List<ExperienceInfo>? experiences;
   List<LanguageModel>? languages;
   List<EducationInfo>? userEducations;
@@ -65,17 +52,10 @@ class UserModel {
       required this.birthDate,
       required this.phoneNumber,
       required this.userImage,
-      this.skills, // Yetenekler listesi
+      this.skills,
       this.experiences,
       this.languages,
       this.userEducations});
-
-/*   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'username': username,
-      'email': email,
-    };
-  } */
 
   factory UserModel.fromUserFireStore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
@@ -194,8 +174,3 @@ class UserModel {
     );
   }
 }
-
-/*   String toJson() => json.encode(toMap());
-
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromFireStore(json.decode(source) as DocumentSnapshot<Map<String, dynamic>>); */

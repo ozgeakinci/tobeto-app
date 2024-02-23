@@ -28,22 +28,10 @@ class _MyHomePageState extends State<Calender> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-/*   Map<DateTime, List<dynamic>> _events = {
-    DateTime(2024, 2, 10): ['engin', 'döngüler'],
-    DateTime(2024, 2, 15): ['Mobil Geliştirici (Flutter) - 1A Gürkan İlişen'],
-    DateTime(2024, 2, 20): ['halit', 'firebase'],
-  }; */
-
-/* 12:00
-Mobil Geliştirici (Flutter) - 1A
-Gürkan İlişen */
 
   @override
   Widget build(BuildContext context) {
     final userBloc = BlocProvider.of<UserBloc>(context);
-
-    print("Department");
-    print(userBloc.userDepartment);
 
     return Scaffold(
       appBar: CustomAppbar(
@@ -58,11 +46,7 @@ Gürkan İlişen */
       ),
       body: BlocBuilder<CalendarBloc, CalendarState>(
         builder: (context, state) {
-          print(state);
-
           if (state is CalendarInitial) {
-            print("CalendarInitial  ");
-
             final yourDepartment = userBloc.userDepartment;
             if (yourDepartment != null) {
               context
@@ -70,14 +54,9 @@ Gürkan İlişen */
                   .add(FetchCalendarRequested(department: yourDepartment));
             } else {
               // yourData null ise, bir hata işleme mekanizması ekleyin veya uygun bir yedek değer atayın
-              print('yourData is null');
             }
           }
           if (state is CalendarLoading) {
-            print("Calendar Loadingg ");
-
-            print(state);
-
             return Center(
               child: Transform.scale(
                 scale: 3,
@@ -101,11 +80,6 @@ Gürkan İlişen */
 
               return events;
             }
-
-            print("Calendar CalendarLoaded ");
-
-            print("Derslerr-----------");
-            print(state.derslerInfo);
 
             return SingleChildScrollView(
               child: Column(
@@ -160,7 +134,6 @@ Gürkan İlişen */
                             itemBuilder: (BuildContext context, int index) {
                               var event =
                                   _getEventsForDay(_selectedDay!)[index];
-                              print(' event geldi $event');
                               return SkillsCard(
                                 title: Text(event.toString()),
                                 subTitle: Text(
@@ -187,7 +160,6 @@ Gürkan İlişen */
   }
 
   void calenderAddIcon(BuildContext context) {
-    print("Calender sayfasındaki ikon tıklandı");
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -218,11 +190,7 @@ Gürkan İlişen */
                         ),
                       );
                     }).toList(),
-                    onChanged: (newValue) {
-                      /*   setState(() {
-                        selectedmenu = newValue;
-                      }); */
-                    },
+                    onChanged: (newValue) {},
                   ),
                   const SizedBox(height: 16),
                   const Text(
@@ -260,9 +228,7 @@ Gürkan İlişen */
                       const SizedBox(width: 10),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {
-                            print("Kaydet button tıklanı");
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(

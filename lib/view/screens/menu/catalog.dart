@@ -26,13 +26,9 @@ class Catalog extends StatelessWidget {
         ),
         body: BlocBuilder<CatalogBloc, CatalogState>(builder: (context, state) {
           if (state is CatalogInitial) {
-            print("nsbdjhsdjhsdk  $state");
-
             context.read<CatalogBloc>().add(FetchCatalogRequested());
           }
           if (state is CatalogLoading) {
-            print("nsbdjhsdjhsdk  $state");
-
             return Center(
               child: Transform.scale(
                 scale: 1,
@@ -44,14 +40,11 @@ class Catalog extends StatelessWidget {
           }
 
           if (state is CatalogLoaded) {
-            print(state.catalogItem.length);
-
             return ListView.builder(
                 itemCount: state.catalogItem.length,
                 itemBuilder: (context, index) =>
                     CatalogVideoCard(catalogItem: state.catalogItem[index]));
           } else {
-            print("Unknown State: $state");
             return const Center(child: Text("Unknown State"));
           }
         }));
@@ -59,9 +52,7 @@ class Catalog extends StatelessWidget {
 
   Widget buildBottomSheetOption(String title) {
     return InkWell(
-      onTap: () {
-        print('Tapped $title');
-      },
+      onTap: () {},
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
         child: Row(
@@ -123,6 +114,5 @@ class Catalog extends StatelessWidget {
 
   void catalogAddSearchIcon(BuildContext context) {
     // Buraya arama işlevini ekleyin
-    print('Arama işlevi');
   }
 }

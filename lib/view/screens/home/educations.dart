@@ -24,23 +24,15 @@ class Educations extends StatelessWidget {
       ),
       body: BlocBuilder<DepartmentBloc, EducationsState>(
           builder: (context, state) {
-        print("Departmenetttadadasd---  $state");
         if (state is EducationsInitial) {
-          print("Departmenettt  $state");
-
           context
               .read<DepartmentBloc>()
               .add(FetchDepartmentRequested(department: department));
         }
 
-        if (state is EducationsLoading) {
-          print("Departmenettt  $state");
-
-          /*     */
-        }
+        if (state is EducationsLoading) {}
 
         if (state is EducationsLoaded) {
-          print(state.educationDepartmenogInfo.length);
           return ListView.builder(
               itemCount: state.educationDepartmenogInfo.length,
               itemBuilder: (context, index) => EducationalCard(

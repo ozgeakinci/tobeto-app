@@ -14,8 +14,6 @@ class DepartmentBloc extends Bloc<EducationsEvent, EducationsState> {
             educationDepartmenogInfo: departmentInfo.lessonList));
       } catch (e) {
         emit(EducationsError());
-        print("DepartmentError FetchDepartmentRequested erorrrr");
-        print(e);
       }
     });
 
@@ -24,8 +22,6 @@ class DepartmentBloc extends Bloc<EducationsEvent, EducationsState> {
         emit(EducationsInitial());
       } catch (e) {
         emit(EducationsError());
-        print("DepartmentError ResetDepartmentEvent erorrrr");
-        print(e);
       }
     });
   }

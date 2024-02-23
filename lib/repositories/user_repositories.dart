@@ -24,7 +24,6 @@ class UserRepositories {
       final userInfo = UserModel.fromUserFireStore(userFromDb);
       return userInfo;
     } catch (e) {
-      print("getUserInfoFromFirebase error: $e");
       throw e;
     }
   }

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/bloc/auth/auth_state.dart';
@@ -73,7 +72,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ResetPassword>((event, emit) async {
       try {
         await _firebaseAuth.sendPasswordResetEmail(email: event.email);
-        print('şifre sıfırlama gönderildi');
         emit(PasswordResetEmailSent());
       } catch (e) {
         emit(PasswordResetError(errorMessage: e.toString()));

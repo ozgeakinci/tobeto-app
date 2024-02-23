@@ -1,21 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-/* class CalendarModeleski {
-  DateTime calendar;
-
-  CalendarModeleski({
-    required this.calendar,
-  });
-
-  factory CalendarModeleski.fromCalendarFireStore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final map = snapshot.data() as Map;
-    return CalendarModeleski(
-      calendar: map['takvim'] as DateTime,
-    );
-  }
-} */
 
 class CalendarModel {
   final List<CalendarLessonModel> lessons;

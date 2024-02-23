@@ -29,11 +29,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {
-          print(state);
-
           if (state is UserInitial) {
             context.read<UserBloc>().add(FetchUserRequested());
-            print(state);
           }
           if (state is UserLoading) {
             return Center(
@@ -46,10 +43,6 @@ class HomePage extends StatelessWidget {
             );
           }
           if (state is UserLoaded) {
-            print(state.username);
-            print(state.department);
-            print(state.applicationStatus);
-
             if (state.applicationStatus) {
               return SafeArea(
                 child: SingleChildScrollView(

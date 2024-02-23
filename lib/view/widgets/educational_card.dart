@@ -8,9 +8,6 @@ import 'package:tobeto_app/view/screens/video_player.dart';
 class EducationalCard extends StatelessWidget {
   const EducationalCard({Key? key, required this.department}) : super(key: key);
 
-  /* final String title;
-  final String subTitle; */
-
   final DepartmentLessonModel department;
 
   @override
@@ -61,9 +58,6 @@ class EducationalCard extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          //     VideoApp(videoUrl: department.videoUrl),
-
-          // Margin derini nereden alıyor ?
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: TextButton(

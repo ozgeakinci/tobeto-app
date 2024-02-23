@@ -4,14 +4,11 @@ import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
-import 'package:tobeto_app/models/user_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
-import 'package:tobeto_app/view/screens/menu/profile/skills.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 import 'package:tobeto_app/view/widgets/exprience_card.dart';
-import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class Experience extends StatefulWidget {
   const Experience({Key? key}) : super(key: key);
@@ -23,7 +20,7 @@ class Experience extends StatefulWidget {
 class _ExperienceState extends State<Experience> {
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    // bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       appBar: CustomAppbar(
@@ -39,7 +36,6 @@ class _ExperienceState extends State<Experience> {
       body: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
         if (state is UserInitial) {
           context.read<UserBloc>().add(FetchUserRequested());
-          print(state);
         }
         if (state is UserLoading) {
           const Center(
@@ -47,14 +43,6 @@ class _ExperienceState extends State<Experience> {
           );
         }
         if (state is UserLoaded) {
-          print('------------------- deneyimmmmmm');
-          print(state.email);
-          print(state.experiences);
-
-          print(
-            state.experiences != null ? state.experiences!.length : 100,
-          );
-
           return ListView.builder(
             itemCount:
                 state.experiences != null ? state.experiences!.length : 0,
@@ -211,10 +199,6 @@ void _showAddExperienceBottomSheet(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          print(_organizationName);
-                          print(_position);
-                          print(_startDate);
-                          print(_endDate);
 
                           ExperienceInfo experienceInfo = ExperienceInfo(
                             organizationName: _organizationName,

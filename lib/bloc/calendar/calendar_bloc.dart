@@ -12,15 +12,11 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         final calendarInfos = await UserRepositories()
             .getCalendarInfoFromFirebase(event.department);
 
-        print("Veriler calendar");
-        print(calendarInfos.lessons);
         emit(CalendarLoaded(
           derslerInfo: calendarInfos.lessons,
         ));
       } catch (e) {
-        emit(CalendarError()); // Degişecek
-        print("HatayaDüştü calendar");
-        print(e);
+        emit(CalendarError());
       }
     });
 

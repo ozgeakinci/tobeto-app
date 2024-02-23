@@ -14,7 +14,6 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
         emit(NotificationLoaded(notifications: natificationInfo.notifications));
       } catch (e) {
         emit(NotificationError());
-        print("NotificationError FetchNotificationsRequested erorrrr");
         print(e);
       }
     });
@@ -22,10 +21,8 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     on<ResetNotificationsEvent>((event, emit) async {
       try {
         emit(NotificationInitial());
-        print("NotificationInitial Durumuna geçildiiiii");
       } catch (e) {
         emit(NotificationError());
-        print("NotificationError ResetNotificationsEvent erorrrr");
         print(e);
       }
     });

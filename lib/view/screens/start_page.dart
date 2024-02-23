@@ -23,11 +23,6 @@ class _StartPageState extends State<StartPage> {
         return const BottomNavbar();
       }
 
-/*       if (state is Authenticated || state is GetUserInfo) {
-        print('$state  tüm state');
-        return const SwiperPage();
-      } */
-
       return AuthPage();
     });
   }

@@ -5,7 +5,6 @@ import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/language_model.dart';
-import 'package:tobeto_app/models/user_model.dart';
 import 'package:tobeto_app/repositories/user_repositories.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -52,9 +51,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         final userInfos = await UserRepositories().getUserInfoFromFirebase();
         String greeting = getGreetingMessage();
         usernameInitials = getUserInitials(userInfos.username);
-        print("Veriler Çekildii");
-        print(userInfos.username);
-        print(userInfos.department);
+
         userDepartment = userInfos.department;
 
         emit(UserLoaded(
@@ -84,8 +81,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           birthDate: DateTime.now(),
           phoneNumber: 5432144321,
         ));
-        print("HatayaDüştü");
-        print(e);
       }
     });
     //------------ User Bilgilerini Gönder -------------------
@@ -133,8 +128,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             experiences: skillsInfo.experiences,
             skills: skillsInfo.skills));
       } catch (e) {
-        print("ERrorrSkilss");
-        // Hata durumunda bir UserError durumu yayınlayın
         emit(UserError());
       }
     });
@@ -258,7 +251,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               birthDate: updatedUser.birthDate,
               phoneNumber: updatedUser.phoneNumber,
               urlImage: updatedUser.userImage,
-              // userExperiences: updatedUser.userExperiences,
               experiences: updatedUser.experiences,
               languages: updatedUser.languages));
         }

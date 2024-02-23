@@ -7,11 +7,9 @@ class CalendarInitial extends CalendarState {}
 class CalendarLoading extends CalendarState {}
 
 class CalendarLoaded extends CalendarState {
-  // final DateTime calendar;
   final List<CalendarLessonModel> derslerInfo;
 
   CalendarLoaded({
-    // required this.calendar,
     required this.derslerInfo,
   });
 }
