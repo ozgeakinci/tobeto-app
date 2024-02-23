@@ -31,7 +31,7 @@ class Profile extends StatelessWidget {
     'Yetkinlik rozetlerim': CompetencyBadge(),
     'Activite Haritam': Experience(),
     'Eğitim hayatım ve deneyimlerim': EducationLife(),
-    'Ayarlar': Setting(),
+    'Şifremi Değiştir': Setting(),
   };
 
   Profile({Key? key}) : super(key: key);
