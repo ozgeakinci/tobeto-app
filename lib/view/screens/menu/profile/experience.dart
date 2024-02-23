@@ -35,7 +35,7 @@ class _ExperienceState extends State<Experience> {
       ),
       body: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
         if (state is UserInitial) {
-          context.read<UserBloc>().add(FetchUserRequested());
+          context.read<UserBloc>().add(ResetUserEvent());
         }
         if (state is UserLoading) {
           const Center(

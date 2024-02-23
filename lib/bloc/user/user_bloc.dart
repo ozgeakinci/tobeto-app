@@ -42,6 +42,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       return initials;
     }
 
+    void fetchAndUpdateUser() {
+      add(FetchUserRequested());
+    }
+
     //------------ User Bilgilerini Getir -------------------
 
     on<FetchUserRequested>((event, emit) async {
@@ -66,7 +70,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             phoneNumber: userInfos.phoneNumber,
             urlImage: userInfos.userImage,
             skills: userInfos.skills,
-            // userExperiences: userInfos.userExperiences,
+            userEducations: userInfos.userEducations,
             experiences: userInfos.experiences,
             languages: userInfos.languages));
       } catch (e) {
@@ -155,6 +159,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         urlImage: updatedUser.userImage,
         experiences: updatedUser.experiences,
       ));
+      fetchAndUpdateUser();
     });
 
     on<DeleteExperience>((event, emit) async {
@@ -190,6 +195,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             skills: updatedUser.skills,
             experiences: updatedUser.experiences,
           ));
+
+          fetchAndUpdateUser();
         }
       }
     });

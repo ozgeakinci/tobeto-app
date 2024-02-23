@@ -27,7 +27,7 @@ class Profile extends StatelessWidget {
     'Sertifikalarım': Certificate(),
     'Medya Hesaplarım': Experience(),
     'Tobeto işte başarı modelim': TobetoSuccesModelAtwork(),
-    'Tobeto seviye testlereim': TobetoLevelTest(),
+    'Tobeto seviye testlerim': TobetoLevelTest(),
     'Yetkinlik rozetlerim': CompetencyBadge(),
     'Activite Haritam': Experience(),
     'Eğitim hayatım ve deneyimlerim': EducationLife(),
