@@ -43,8 +43,8 @@ class InfoBannerCard extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(
-                      width: 190,
-                      height: 86,
+                      width: 160,
+                      height: 90,
                       child: Padding(
                           padding: const EdgeInsets.only(top: 8),
                           child: Text(

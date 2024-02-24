@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     isDarkMode
         ? SystemChrome.setSystemUIOverlayStyle(
-            SystemUiOverlayStyle.light.copyWith(
+            SystemUiOverlayStyle.dark.copyWith(
             statusBarColor: Colors.transparent,
             statusBarBrightness: Brightness.dark,
           ))
