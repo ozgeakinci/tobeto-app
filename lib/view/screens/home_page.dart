@@ -6,6 +6,7 @@ import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
+import 'package:tobeto_app/view/screens/menu/reviews.dart';
 import 'package:tobeto_app/view/widgets/big_button.dart';
 import 'package:tobeto_app/view/widgets/info_banner_card.dart';
 
@@ -71,7 +72,6 @@ class HomePage extends StatelessWidget {
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleLarge),
-
                                     state.urlImage != null
                                         ? CircleAvatar(
                                             radius: 20,
@@ -79,18 +79,12 @@ class HomePage extends StatelessWidget {
                                             backgroundImage:
                                                 NetworkImage(state.urlImage!),
                                           )
-                                        : const SizedBox.shrink(),
-                                    // Padding(
-                                    //   padding: EdgeInsets.only(
-                                    //       right: ProjectUtilities.sizeWidth_16),
-                                    //   child: IconButton(
-                                    //     onPressed: () {},
-                                    //     icon: const Icon(
-                                    //         Icons.notifications_active_rounded),
-                                    //     color: TobetoAppColor.textColor,
-                                    //     iconSize: 24,
-                                    //   ),
-                                    // )
+                                        : const CircleAvatar(
+                                            radius: 20,
+                                            child: Icon(Icons.person),
+                                            backgroundColor: Color.fromARGB(
+                                                255, 255, 255, 255),
+                                          ),
                                   ],
                                 ),
                               ),
@@ -117,7 +111,7 @@ class HomePage extends StatelessWidget {
                         button: Image.asset('assets/images/hello_tobeto.png'),
                       ),
 
-                      //Bilgilendirmeler Bölümü
+                      //----------------Bilgilendirmeler Bölümü--------------------------
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Column(
@@ -190,7 +184,7 @@ class HomePage extends StatelessWidget {
                             ]),
                       ),
 
-                      //Gelişim Bölümü
+                      //------------------------Gelişim Bölümü------------------------
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 20.0, right: 20, bottom: 20),
@@ -210,6 +204,16 @@ class HomePage extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     BigButton(
+                                      button: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Reviews()));
+                                        },
+                                        child: Text(''),
+                                      ),
                                       department: state.department,
                                       title: 'Sınavlarım',
                                       color: const Color(0xffEC7B9C),

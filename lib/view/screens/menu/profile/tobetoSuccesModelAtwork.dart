@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
 class TobetoSuccesModelAtwork extends StatelessWidget {
   const TobetoSuccesModelAtwork({Key? key}) : super(key: key);
@@ -6,8 +7,8 @@ class TobetoSuccesModelAtwork extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Ayarlar"),
+      appBar: CustomAppbar(
+        title: "Tobeto İşte Başarı Modelim",
       ),
       body: Padding(
         padding: const EdgeInsets.all(5.0),

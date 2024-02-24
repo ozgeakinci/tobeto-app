@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final bool? enabled;
   final int? maxLines;
   final double? height;
+  final String? Function(String?)? phoneValidator;
 
   const CustomTextField(
       {Key? key,
@@ -24,7 +25,8 @@ class CustomTextField extends StatelessWidget {
       this.initialValue,
       this.onSaved,
       this.maxLines,
-      this.height})
+      this.height,
+      this.phoneValidator})
       : super(key: key);
 
   String? _validateInput(String? value, String fieldName) {
@@ -32,7 +34,7 @@ class CustomTextField extends StatelessWidget {
       return '$fieldName boş olamaz';
     }
 
-    return null; // Geçerli durumu temsil eder
+    return null;
   }
 
   @override
@@ -50,7 +52,23 @@ class CustomTextField extends StatelessWidget {
           keyboardType: keyboardType,
           obscureText: obscureText,
           initialValue: initialValue,
-          validator: (value) => _validateInput(value, labelText),
+          validator: (value) {
+            // Genel validasyon
+            final generalValidation = _validateInput(value, labelText);
+            if (generalValidation != null) {
+              return generalValidation;
+            }
+
+            // Özel validasyon sadece telefon numarası alanı için
+            if (phoneValidator != null) {
+              final phoneValidation = phoneValidator!(value);
+              if (phoneValidation != null) {
+                return phoneValidation;
+              }
+            }
+
+            return null;
+          },
           maxLines: maxLines,
           decoration: InputDecoration(
             labelText: labelText,

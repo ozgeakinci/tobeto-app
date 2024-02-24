@@ -15,6 +15,16 @@ class SendUserInfo extends UserEvent {
   });
 }
 
+//--------Skills AREA----------------
+
+class AddSkills extends UserEvent {
+  final List<String> addedSkills;
+
+  AddSkills({
+    required this.addedSkills,
+  });
+}
+
 //--------Experience AREA----------------
 
 class AddExperience extends UserEvent {
@@ -22,14 +32,6 @@ class AddExperience extends UserEvent {
 
   AddExperience({
     required this.experienceDetail,
-  });
-}
-
-class AddSkills extends UserEvent {
-  final List<String> addedSkills;
-
-  AddSkills({
-    required this.addedSkills,
   });
 }
 

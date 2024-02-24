@@ -80,7 +80,7 @@ class UserRepositories {
     return user;
   }
 
-  // SKİLL EKLEME
+  //---------------------- SKİLLS REPO-----------------------
   Future<UserModel> addUserSkills(List<String> skills) async {
     try {
       // Firestore'dan kullanıcının mevcut bilgilerini çek
@@ -100,6 +100,7 @@ class UserRepositories {
     }
   }
 
+  //---------------------- EXPERİENCE REPO-----------------------
   Future<UserModel> addExperienceToUser({
     required String userId,
     required ExperienceInfo experienceInfo,
@@ -165,7 +166,7 @@ class UserRepositories {
       throw Exception("Deneyim güncellenirken bir hata oluştu: $e");
     }
   }
-//-----------------------Language AREA -----------------------
+//-----------------------Language REPO -----------------------
 
   Future<UserModel> addLanguageToUser({
     required String userId,
@@ -233,7 +234,7 @@ class UserRepositories {
     }
   }
 
-  //-----------------------EducationLife AREA -----------------------
+  //-----------------------Educations REPO -----------------------
 
   Future<UserModel> addEducationToUser({
     required String userId,

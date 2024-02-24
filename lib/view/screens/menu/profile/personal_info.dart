@@ -97,8 +97,10 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                             NetworkImage(state.urlImage!),
                                       )
                                     : const CircleAvatar(
-                                        radius: 40,
-                                        backgroundColor: Colors.grey,
+                                        radius: 50,
+                                        child: Icon(Icons.person),
+                                        backgroundColor:
+                                            Color.fromARGB(255, 255, 255, 255),
                                       ),
                           ),
                           SizedBox(height: ProjectUtilities.projectHeight_24),
@@ -243,7 +245,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                     labelText: 'Hakkımda',
                                     initialValue: state.about,
                                     onSaved: (value) => _about = value!,
-                                    maxLines: 8,
+                                    maxLines: 2,
                                   ),
                                   CustomTextField(
                                     labelText: 'Telefon Numaranız',
@@ -252,6 +254,21 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                             ? state.phoneNumber.toString()
                                             : '+90',
                                     keyboardType: TextInputType.phone,
+                                    // phoneValidator: (value) {
+                                    //   if (value == null || value.isEmpty) {
+                                    //     return 'Telefon numarası boş olamaz';
+                                    //   }
+                                    //   // Telefon numarasının uzunluğunu kontrol et
+                                    //   if (value.length != 10) {
+                                    //     return 'Telefon numarası 10 haneli olmalıdır';
+                                    //   }
+                                    //   // Telefon numarasının sadece rakamlardan oluştuğunu kontrol et
+                                    //   if (!RegExp(r'^[0-9]+$')
+                                    //       .hasMatch(value)) {
+                                    //     return 'Telefon numarası sadece rakamlardan oluşmalıdır';
+                                    //   }
+                                    //   return null; // Hata yoksa null döndür
+                                    // },
                                     onSaved: (value) {
                                       try {
                                         _phoneNumber = int.parse(value!);

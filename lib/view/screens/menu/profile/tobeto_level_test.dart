@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
 import 'package:tobeto_app/view/widgets/skills_card.dart';
 
@@ -9,8 +10,8 @@ class TobetoLevelTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tobeto Seviye Testlerim'),
+      appBar: CustomAppbar(
+        title: 'Tobeto Seviye Testlerim',
       ),
       body: ListView(children: [
         SkillsCard(

@@ -5,6 +5,7 @@ import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/language_model.dart';
+import 'package:tobeto_app/models/user_model.dart';
 import 'package:tobeto_app/repositories/user_repositories.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -112,6 +113,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       },
     );
 
+    //------------------Skills BLOC-----------------------
+
     on<AddSkills>((event, emit) async {
       try {
         // Kullanıcının yeteneklerini Firestore'a eklemek için UserRepository'deki uygun fonksiyonu çağırın
@@ -137,6 +140,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserError());
       }
     });
+
+    //------------------Experince BLOC-----------------------
 
     on<AddExperience>((event, emit) async {
       String greeting = getGreetingMessage();

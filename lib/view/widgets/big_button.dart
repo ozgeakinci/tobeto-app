@@ -4,6 +4,10 @@ import 'package:tobeto_app/view/screens/home/announccementAndnews.dart';
 import 'package:tobeto_app/view/screens/home/educations.dart';
 import 'package:tobeto_app/view/screens/home/recourses.dart';
 import 'package:tobeto_app/view/screens/home/surveys.dart';
+import 'package:tobeto_app/view/screens/menu/catalog.dart';
+import 'package:tobeto_app/view/screens/menu/profile.dart';
+import 'package:tobeto_app/view/screens/menu/profile/tobeto_level_test.dart';
+import 'package:tobeto_app/view/screens/menu/reviews.dart';
 
 class BigButton extends StatelessWidget {
   BigButton({
@@ -12,6 +16,7 @@ class BigButton extends StatelessWidget {
     required this.department,
     required this.color,
     Color? textColor,
+    this.button,
   })  : textColor = textColor ?? TobetoAppColor.textColor,
         super(key: key);
 
@@ -19,6 +24,7 @@ class BigButton extends StatelessWidget {
   final String department;
   final Color color;
   final Color? textColor;
+  final Widget? button;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +37,10 @@ class BigButton extends StatelessWidget {
         department: department,
       ),
       "Anketlerim": const Surveys(),
+      "Sınavlarım": const TobetoLevelTest(),
+      "Profil Oluştur": Profile(),
+      "Kendini Değerlendir": Reviews(),
+      "Öğrenmeye başla": Catalog()
     };
     return Expanded(
         child: InkWell(

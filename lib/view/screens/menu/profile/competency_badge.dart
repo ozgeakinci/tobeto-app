@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class CompetencyBadge extends StatelessWidget {
@@ -7,8 +8,8 @@ class CompetencyBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Yetkinlik Rozetim'),
+      appBar: CustomAppbar(
+        title: 'Yetkinlik Rozetim',
       ),
       body: ListView(children: [
         SkillsCard(
