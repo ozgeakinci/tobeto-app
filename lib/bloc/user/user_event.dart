@@ -26,7 +26,7 @@ class AddSkills extends UserEvent {
 }
 
 class DeleteSkills extends UserEvent {
-  final List<String> deletedSkills;
+  final String deletedSkills;
 
   DeleteSkills({
     required this.deletedSkills,

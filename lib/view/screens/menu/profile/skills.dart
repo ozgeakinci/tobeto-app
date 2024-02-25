@@ -50,10 +50,10 @@ class _SkillsState extends State<Skills> {
                       color: ColorScheme.dark().secondary),
                   textButton: TextButton(
                       onPressed: () {
-                        List<String> deletedSkills = [state.skills![index]];
+                        String deletedSkill = state.skills![index];
                         context
                             .read<UserBloc>()
-                            .add(DeleteSkills(deletedSkills: deletedSkills));
+                            .add(DeleteSkills(deletedSkills: deletedSkill));
                       },
                       child: Image.asset('assets/images/delete_icon.png')))));
         } else {

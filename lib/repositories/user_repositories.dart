@@ -102,7 +102,7 @@ class UserRepositories {
 
   Future<UserModel> updateSkillsToUser({
     required String userId,
-    required List<String> updatedSkills,
+    required String deletedSkill,
   }) async {
     try {
       // Firestore'dan kullanıcının mevcut bilgilerini çek
@@ -113,16 +113,15 @@ class UserRepositories {
         throw Exception("Kullanıcı bulunamadı");
       }
 
-      // Firestore'dan mevcut beceri listesini al
+      // Mevcut beceri listesini al
       List<dynamic>? currentSkills = userDoc.data()?['skills'];
+
+      // Seçilen beceriyi mevcut beceri listesinden kaldır
+      currentSkills?.remove(deletedSkill);
 
       // Güncellenmiş beceri listesini Firestore'a yaz
       await firebaseFirestore.collection('users').doc(userId).update({
-        'skills': FieldValue.arrayRemove(currentSkills ?? []),
-      });
-
-      await firebaseFirestore.collection('users').doc(userId).update({
-        'skills': FieldValue.arrayUnion(updatedSkills),
+        'skills': currentSkills, // Güncellenmiş beceri listesini yaz
       });
 
       // Güncellenmiş kullanıcı bilgilerini döndür

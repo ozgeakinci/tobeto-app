@@ -144,10 +144,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<DeleteSkills>((event, emit) async {
       try {
         final skillsInfo = await UserRepositories().updateSkillsToUser(
-          updatedSkills: event.deletedSkills,
+          deletedSkill: event.deletedSkills,
           userId: _firebaseAuth.currentUser!.uid,
         );
 
+        // Güncellenmiş beceri listesini oluşturun ve silinmek istenen becerileri kaldırın
         List<String>? updatedSkills = List.from((skillsInfo.skills ?? []));
         updatedSkills
             .removeWhere((skill) => event.deletedSkills.contains(skill));
