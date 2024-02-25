@@ -34,7 +34,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 email: event.email, password: event.password);
         emit(Authenticated(user: userCredential.user));
       } on FirebaseAuthException catch (e) {
-        emit(NotAuthenticated(errorMessage: e.message));
+        print("------- Giriş Hataları-------- ");
+        print(e);
+        if (e.code == 'invalid-email') {
+          print('E-posta adresi yanlış biçimlendirilmiş.');
+          emit(NotAuthenticated(
+              errorMessage: 'E-posta adresi yanlış biçimlendirilmiş.'));
+        } else if (e.code == 'user-not-found') {
+          print('Girilen e-posta adresine sahip kullanıcı bulunamadı.');
+          emit(NotAuthenticated(
+              errorMessage:
+                  'Girilen e-posta adresine sahip kullanıcı bulunamadı.'));
+        } else if (e.code == 'wrong-password') {
+          print('Girilen parola yanlış.');
+          emit(NotAuthenticated(errorMessage: 'Girilen parola yanlış.'));
+        } else {
+          print('Giriş yapılırken bir hata oluştu: ${e.message}');
+          emit(NotAuthenticated(
+              errorMessage:
+                  'Giriş yapılırken bir hata oluştusaddas: ${e.message}'));
+        }
       }
     });
     on<Register>(
@@ -61,7 +80,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             'about': '',
             'phoneNumber': event.phoneNumber
           });
-        } on FirebaseAuthException catch (e) {}
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'weak-password') {
+            print('The password provided is too weak.');
+            emit(NotAuthenticated(
+                errorMessage: 'The password provided is too weak.'));
+          } else if (e.code == 'email-already-in-use') {
+            print('The account already exists for that email.');
+            emit(NotAuthenticated(
+                errorMessage: 'The account already exists for that email.'));
+          }
+        }
       },
     );
 
