@@ -42,4 +42,5 @@ class TobetoAppColor {
   static Color backgroundLight = const Color(0xfff5f5f5);
   static Color inputDarkBackground = const Color(0xff232531);
   static Color primaryBackgroundColor = Color.fromARGB(255, 105, 10, 200);
+  static Color selecetedItemColor = Color.fromARGB(255, 157, 64, 250);
 }

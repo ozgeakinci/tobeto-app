@@ -98,6 +98,7 @@ Widget _buildErrorWidget(String error) {
 void _showAddExperienceBottomSheet(
   BuildContext context,
 ) {
+  bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
   final _formKey = GlobalKey<FormState>();
   String _organizationName = '';
   String _position = '';
@@ -105,6 +106,9 @@ void _showAddExperienceBottomSheet(
   String _endDate = '';
 
   showModalBottomSheet(
+    // backgroundColor: isDarkMode
+    //     ? TobetoAppColor.backgroundDark
+    //     : TobetoAppColor.buttonColorLight,
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
@@ -176,47 +180,58 @@ void _showAddExperienceBottomSheet(
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
-                              side: BorderSide(
-                                  color: TobetoAppColor
-                                      .textColor), // Border'ı belirleyebilirsiniz.
-                            ),
-                            elevation: 0,
-                            backgroundColor: TobetoAppColor.buttonColorLight,
-                            foregroundColor:
-                                TobetoAppColor.primaryBackgroundColor,
-                            fixedSize: Size(175, 45)),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
+                                side: isDarkMode
+                                    ? BorderSide.none
+                                    : BorderSide(
+                                        color: TobetoAppColor
+                                            .textColor), // Border'ı belirleyebilirsiniz.
+                              ),
+                              elevation: 0,
+                              backgroundColor: isDarkMode
+                                  ? TobetoAppColor.inputDarkBackground
+                                  : TobetoAppColor.buttonColorLight,
+                              foregroundColor:
+                                  TobetoAppColor.selecetedItemColor,
+                              fixedSize: Size(160, 45)),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Vazgeç')),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style:
+                            ElevatedButton.styleFrom(fixedSize: Size(160, 45)),
                         onPressed: () {
-                          Navigator.pop(context);
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+
+                            ExperienceInfo experienceInfo = ExperienceInfo(
+                              organizationName: _organizationName,
+                              position: _position,
+                              startDate: _startDate,
+                              endDate: _endDate,
+                            );
+
+                            context.read<UserBloc>().add(
+                                  AddExperience(
+                                    experienceDetail: experienceInfo,
+                                  ),
+                                );
+
+                            Navigator.pop(context);
+                          }
                         },
-                        child: Text('Vazgeç')),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(fixedSize: Size(175, 45)),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-
-                          ExperienceInfo experienceInfo = ExperienceInfo(
-                            organizationName: _organizationName,
-                            position: _position,
-                            startDate: _startDate,
-                            endDate: _endDate,
-                          );
-
-                          context.read<UserBloc>().add(
-                                AddExperience(
-                                  experienceDetail: experienceInfo,
-                                ),
-                              );
-
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Text('Kaydet'),
+                        child: Text('Kaydet'),
+                      ),
                     ),
                   ],
                 ),

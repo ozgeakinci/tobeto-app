@@ -18,16 +18,8 @@ class EducationalCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          boxShadow: [
-            BoxShadow(
-                color: isDarkMode
-                    ? Colors.grey.withOpacity(0.1)
-                    : Colors.grey.withOpacity(0.3),
-                spreadRadius: 2,
-                blurRadius: 3),
-          ],
           color: isDarkMode
-              ? TobetoAppColor.buttonColorDark
+              ? TobetoAppColor.inputDarkBackground
               : TobetoAppColor.buttonColorLight),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

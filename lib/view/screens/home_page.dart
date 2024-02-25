@@ -8,6 +8,7 @@ import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/screens/menu/reviews.dart';
 import 'package:tobeto_app/view/widgets/big_button.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/info_banner_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     isDarkMode
         ? SystemChrome.setSystemUIOverlayStyle(
-            SystemUiOverlayStyle.dark.copyWith(
+            SystemUiOverlayStyle.light.copyWith(
             statusBarColor: Colors.transparent,
             statusBarBrightness: Brightness.dark,
           ))
@@ -79,11 +80,14 @@ class HomePage extends StatelessWidget {
                                             backgroundImage:
                                                 NetworkImage(state.urlImage!),
                                           )
-                                        : const CircleAvatar(
+                                        : CircleAvatar(
                                             radius: 20,
                                             child: Icon(Icons.person),
-                                            backgroundColor: Color.fromARGB(
-                                                255, 255, 255, 255),
+                                            backgroundColor: isDarkMode
+                                                ? TobetoAppColor
+                                                    .inputDarkBackground
+                                                : TobetoAppColor
+                                                    .buttonColorLight,
                                           ),
                                   ],
                                 ),

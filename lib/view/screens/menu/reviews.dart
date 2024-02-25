@@ -112,8 +112,8 @@ class Reviews extends StatelessWidget {
                   },
                   child: Text('Başla',
                       style: TextStyle(
-                        color: TobetoAppColor.primaryBackgroundColor,
-                      )),
+                          color: TobetoAppColor.selecetedItemColor,
+                          fontWeight: FontWeight.normal)),
                 ),
               ),
               ExamStatusCard(
@@ -125,7 +125,7 @@ class Reviews extends StatelessWidget {
                   },
                   child: Text('Başla',
                       style: TextStyle(
-                          color: TobetoAppColor.primaryBackgroundColor,
+                          color: TobetoAppColor.selecetedItemColor,
                           fontWeight: FontWeight.normal)),
                 ),
               ),
@@ -135,12 +135,10 @@ class Reviews extends StatelessWidget {
                 point: '--',
                 section: 'Masaüstü Programlama',
                 icon: TextButton(
-                  onPressed: () {
-                    _launchUrl();
-                  },
+                  onPressed: () {},
                   child: Text('Başla',
                       style: TextStyle(
-                          color: TobetoAppColor.primaryBackgroundColor,
+                          color: TobetoAppColor.selecetedItemColor,
                           fontWeight: FontWeight.normal)),
                 ),
               ),

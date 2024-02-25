@@ -17,6 +17,7 @@ import 'package:tobeto_app/view/screens/menu/profile/setting.dart';
 import 'package:tobeto_app/view/screens/menu/profile/skills.dart';
 import 'package:tobeto_app/view/screens/menu/profile/tobetoSuccesModelAtwork.dart';
 import 'package:tobeto_app/view/screens/menu/profile/tobeto_level_test.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
 class Profile extends StatelessWidget {
   final Map<String, dynamic> profileData = {
@@ -42,27 +43,9 @@ class Profile extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: TobetoAppColor.primaryBackgroundColor,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFF6A00FF),
-                Color(0xFF9013FE).withOpacity(0.9),
-                Color(0xFFC100FF).withOpacity(0.9),
-              ],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
-          ),
-        ),
-        elevation: 0,
+      appBar: CustomAppbar(
+        title: 'Profilim',
         centerTitle: true,
-        title: const Text(
-          'Profilim',
-          style: TextStyle(color: Colors.white),
-        ),
       ),
       body: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {
@@ -82,8 +65,8 @@ class Profile extends StatelessWidget {
                           Color(0xFF9013FE).withOpacity(0.9),
                           Color(0xFFC100FF).withOpacity(0.9),
                         ],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft,
                       ),
                     ),
                     // color: TobetoAppColor.primaryBackgroundColor,
@@ -143,10 +126,6 @@ class Profile extends StatelessWidget {
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 16),
                     child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          backgroundColor: Colors.white),
                       child: const Text('Çıkış yap'),
                       onPressed: () {
                         context.read<UserBloc>().add(ResetUserEvent());
@@ -159,7 +138,7 @@ class Profile extends StatelessWidget {
               ],
             );
           } else {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }
         },
       ),

@@ -29,7 +29,7 @@ class Recourses extends StatelessWidget {
                         blurRadius: 3),
                   ],
                   color: isDarkMode
-                      ? TobetoAppColor.buttonColorDark
+                      ? TobetoAppColor.inputDarkBackground
                       : TobetoAppColor.buttonColorLight),
               child: Padding(
                 padding: const EdgeInsets.all(16),

@@ -10,7 +10,7 @@ class TobetoAppTheme {
       colorScheme: TobetoAppColor.colorSchemeLight,
       scaffoldBackgroundColor: TobetoAppColor.backgroundLight,
 
-      //Appbar Control
+      //-----------------------Appbar Control--------------------
 
       appBarTheme: AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -22,9 +22,10 @@ class TobetoAppTheme {
       ),
 
       // showModalBottomSheet => Üst köşelerin düz olması saglandı
-      bottomSheetTheme: const BottomSheetThemeData(
+      bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: TobetoAppColor.backgroundLight,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
-      //Text Control
+      //-----------------------Text Control-------------------
       textTheme: TextTheme(
         // size = 16
         bodyLarge: TextStyle(
@@ -43,7 +44,7 @@ class TobetoAppTheme {
             color: TobetoAppColor.textColor, fontWeight: FontWeight.bold),
       ),
 
-      //Input Control
+      //--------------------------Input Control-----------------------------
       inputDecorationTheme: InputDecorationTheme(
         prefixIconColor: TobetoAppColor.textColor,
         suffixIconColor: TobetoAppColor.textColor,
@@ -51,7 +52,7 @@ class TobetoAppTheme {
           color: TobetoAppColor.textColor,
         ),
       ),
-      //Button Control
+      //------------------------Button Control-------------------------------
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             textStyle: const TextStyle(
@@ -78,11 +79,29 @@ class TobetoAppTheme {
             foregroundColor: TobetoAppColor.colorSchemeLight.primary,
             fixedSize: const Size(140, 60)),
       ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)))),
       iconTheme: IconThemeData(color: TobetoAppColor.buttonColorDark, size: 30),
+
+      //Bottom Navbar Controll
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           elevation: 0,
           selectedItemColor: TobetoAppColor.primaryBackgroundColor,
           unselectedItemColor: TobetoAppColor.textColor),
+
+      //------------------Card Controll----------------------
+
+      cardTheme: CardTheme(
+        elevation: 0,
+        color: TobetoAppColor.backgroundLight,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+            side: const BorderSide(
+                style: BorderStyle.solid,
+                color: Color.fromARGB(255, 221, 221, 221))),
+      ),
 
       //Drawer Control
 
@@ -91,11 +110,13 @@ class TobetoAppTheme {
     );
   }
 
-  //Dark Theme
+  //--------------Dark Theme---------------
   static ThemeData darkTheme() {
     return ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: TobetoAppColor.backgroundDark,
+
+        //-------------------AppBAr Control ---------------------
         appBarTheme: AppBarTheme(
             color: TobetoAppColor.colorSchemeDark.primary,
             systemOverlayStyle:
@@ -104,9 +125,6 @@ class TobetoAppTheme {
             titleTextStyle:
                 TextStyle(color: TobetoAppColor.textColorDark, fontSize: 20)),
         colorScheme: TobetoAppColor.colorSchemeDark,
-        // showModalBottomSheet => Üst köşelerin düz olması saglandı
-        bottomSheetTheme: const BottomSheetThemeData(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
         textTheme: TextTheme(
           bodyLarge: TextStyle(
             color: TobetoAppColor.textColorDark,
@@ -121,7 +139,14 @@ class TobetoAppTheme {
           displayLarge: TextStyle(color: TobetoAppColor.textColorBlack),
         ),
 
-        //Input Control
+        //-----------BottomSheet Controll----------------------
+
+        // showModalBottomSheet => Üst köşelerin düz olması saglandı
+        bottomSheetTheme: BottomSheetThemeData(
+            backgroundColor: TobetoAppColor.backgroundDark,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)),
+
+        //-------------------Input Control----------------------
         inputDecorationTheme: InputDecorationTheme(
           prefixIconColor: TobetoAppColor.textColor,
           suffixIconColor: TobetoAppColor.textColor,
@@ -130,7 +155,7 @@ class TobetoAppTheme {
           ),
         ),
 
-        //Button Control
+        //-------------------Button Control--------------------------
 
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -158,12 +183,28 @@ class TobetoAppTheme {
             fixedSize: const Size(140, 60),
           ),
         ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+                backgroundColor: TobetoAppColor.backgroundDark,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)))),
         iconTheme:
             IconThemeData(color: TobetoAppColor.buttonColorDark, size: 30),
+
+        //------------------Bottom Navbar Controll----------------------
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
             elevation: 0,
             selectedItemColor: Color.fromARGB(255, 157, 64, 250),
             unselectedItemColor: TobetoAppColor.textColor),
+
+        //------------------Card Controll----------------------
+
+        cardTheme: CardTheme(
+          elevation: 0,
+          color: TobetoAppColor.inputDarkBackground,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5), side: BorderSide.none),
+        ),
         drawerTheme: DrawerThemeData(
           backgroundColor: TobetoAppColor.backgroundDark,
         ));

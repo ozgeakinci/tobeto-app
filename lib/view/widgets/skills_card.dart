@@ -20,12 +20,6 @@ class SkillsCard extends StatelessWidget {
     return Padding(
       padding: ProjectUtilities.skillsCardPadding,
       child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
-            side: const BorderSide(
-                style: BorderStyle.solid,
-                color: Color.fromARGB(255, 221, 221, 221))),
         child: Padding(
           padding: const EdgeInsets.only(left: 8, right: 0, top: 8, bottom: 8),
           child: ListTile(

@@ -14,7 +14,7 @@ class InfoBannerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final cardColor = color ?? TobetoAppColor.primaryBackgroundColor;
+    final cardColor = color ?? TobetoAppColor.selecetedItemColor;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),

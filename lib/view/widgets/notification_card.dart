@@ -20,16 +20,8 @@ class NotificationCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                  color: isDarkMode
-                      ? Colors.grey.withOpacity(0.1)
-                      : Colors.grey.withOpacity(0.3),
-                  spreadRadius: 2,
-                  blurRadius: 3),
-            ],
             color: isDarkMode
-                ? TobetoAppColor.buttonColorDark
+                ? TobetoAppColor.inputDarkBackground
                 : TobetoAppColor.buttonColorLight),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

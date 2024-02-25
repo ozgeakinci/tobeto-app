@@ -58,6 +58,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
         appBar: const CustomAppbar(
           title: 'Kişisel Bilgilerim',
@@ -96,17 +97,21 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                         backgroundImage:
                                             NetworkImage(state.urlImage!),
                                       )
-                                    : const CircleAvatar(
+                                    : CircleAvatar(
                                         radius: 50,
                                         child: Icon(Icons.person),
-                                        backgroundColor:
-                                            Color.fromARGB(255, 255, 255, 255),
+                                        backgroundColor: isDarkMode
+                                            ? TobetoAppColor.inputDarkBackground
+                                            : TobetoAppColor.buttonColorLight,
                                       ),
                           ),
                           SizedBox(height: ProjectUtilities.projectHeight_24),
                           TextButton(
                             onPressed: () {
                               showModalBottomSheet(
+                                backgroundColor: isDarkMode
+                                    ? TobetoAppColor.inputDarkBackground
+                                    : TobetoAppColor.buttonColorLight,
                                 isScrollControlled: true,
                                 context: context,
                                 builder: (BuildContext context) {
@@ -125,9 +130,10 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                             shape: BoxShape.circle,
                                             border: Border.all(
                                                 width: 2,
-                                                color: const Color.fromARGB(
-                                                    255, 214, 213, 213)),
-                                            color: TobetoAppColor.textColor
+                                                color: TobetoAppColor
+                                                    .selecetedItemColor),
+                                            color: TobetoAppColor
+                                                .inputDarkBackground
                                                 .withOpacity(0.1),
                                           ),
                                           child: CircleAvatar(
@@ -141,8 +147,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                                         NetworkImage(
                                                             state.urlImage!),
                                                   )
-                                                : Image.asset(
-                                                    'assets/images/profile_icon.png'),
+                                                : Icon(Icons.person),
                                           ),
                                         ),
                                         const SizedBox(height: 20),
