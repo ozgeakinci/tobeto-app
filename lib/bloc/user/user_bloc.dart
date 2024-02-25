@@ -141,6 +141,37 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       }
     });
 
+    on<DeleteSkills>((event, emit) async {
+      try {
+        final skillsInfo = await UserRepositories().updateSkillsToUser(
+          updatedSkills: event.deletedSkills,
+          userId: _firebaseAuth.currentUser!.uid,
+        );
+
+        List<String>? updatedSkills = List.from((skillsInfo.skills ?? []));
+        updatedSkills
+            .removeWhere((skill) => event.deletedSkills.contains(skill));
+
+        emit(UserLoaded(
+          username: skillsInfo.username,
+          department: skillsInfo.department,
+          applicationStatus: skillsInfo.applicationStatus,
+          greeting: "greeting",
+          usernameInitials: usernameInitials,
+          email: skillsInfo.email,
+          about: skillsInfo.about,
+          birthDate: skillsInfo.birthDate,
+          phoneNumber: skillsInfo.phoneNumber,
+          urlImage: skillsInfo.userImage,
+          skills: skillsInfo.skills,
+        ));
+        fetchAndUpdateUser();
+      } catch (e) {
+        // Hata durumunu yönetin (örneğin, loglama veya hatayı başka bir katmana iletme)
+        emit(UserError());
+      }
+    });
+
     //------------------Experince BLOC-----------------------
 
     on<AddExperience>((event, emit) async {

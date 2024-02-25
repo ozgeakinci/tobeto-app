@@ -25,6 +25,13 @@ class AddSkills extends UserEvent {
   });
 }
 
+class DeleteSkills extends UserEvent {
+  final List<String> deletedSkills;
+
+  DeleteSkills({
+    required this.deletedSkills,
+  });
+}
 //--------Experience AREA----------------
 
 class AddExperience extends UserEvent {

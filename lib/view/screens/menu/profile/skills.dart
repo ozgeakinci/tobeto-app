@@ -49,7 +49,12 @@ class _SkillsState extends State<Skills> {
                   icon: Icon(Icons.work_outline_outlined,
                       color: ColorScheme.dark().secondary),
                   textButton: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        List<String> deletedSkills = [state.skills![index]];
+                        context
+                            .read<UserBloc>()
+                            .add(DeleteSkills(deletedSkills: deletedSkills));
+                      },
                       child: Image.asset('assets/images/delete_icon.png')))));
         } else {
           return Center(

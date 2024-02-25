@@ -100,6 +100,39 @@ class UserRepositories {
     }
   }
 
+  Future<UserModel> updateSkillsToUser({
+    required String userId,
+    required List<String> updatedSkills,
+  }) async {
+    try {
+      // Firestore'dan kullanıcının mevcut bilgilerini çek
+      DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await firebaseFirestore.collection('users').doc(userId).get();
+
+      if (!userDoc.exists) {
+        throw Exception("Kullanıcı bulunamadı");
+      }
+
+      // Firestore'dan mevcut beceri listesini al
+      List<dynamic>? currentSkills = userDoc.data()?['skills'];
+
+      // Güncellenmiş beceri listesini Firestore'a yaz
+      await firebaseFirestore.collection('users').doc(userId).update({
+        'skills': FieldValue.arrayRemove(currentSkills ?? []),
+      });
+
+      await firebaseFirestore.collection('users').doc(userId).update({
+        'skills': FieldValue.arrayUnion(updatedSkills),
+      });
+
+      // Güncellenmiş kullanıcı bilgilerini döndür
+      return UserModel.fromUserFireStore(userDoc);
+    } catch (e) {
+      // Hata durumunda Exception fırlat
+      throw Exception("Beceriler güncellenirken bir hata oluştu: $e");
+    }
+  }
+
   //---------------------- EXPERİENCE REPO-----------------------
   Future<UserModel> addExperienceToUser({
     required String userId,
