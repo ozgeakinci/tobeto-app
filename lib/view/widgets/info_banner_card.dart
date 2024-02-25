@@ -21,7 +21,6 @@ class InfoBannerCard extends StatelessWidget {
       child: Container(
         height: 180,
         child: Card(
-          elevation: 0,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           color: cardColor,
@@ -29,7 +28,7 @@ class InfoBannerCard extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              if (title!.isNotEmpty)
+              if (title != null && title!.isNotEmpty)
                 Text(
                   title!,
                   style: TextStyle(
@@ -41,23 +40,20 @@ class InfoBannerCard extends StatelessWidget {
                 ),
               if (button != null)
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: 160,
-                      height: 90,
-                      child: Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: Text(
-                            subtitle,
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: isDarkMode
-                                    ? TobetoAppColor.backgroundDark
-                                    : TobetoAppColor.backgroundLight),
-                          )),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        subtitle,
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: isDarkMode
+                                ? TobetoAppColor.backgroundDark
+                                : TobetoAppColor.backgroundLight),
+                      ),
                     ),
-                    Spacer(),
-                    button!
+                    Expanded(flex: 2, child: button!)
                   ],
                 )
               else

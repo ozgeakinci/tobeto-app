@@ -107,12 +107,16 @@ class HomePage extends StatelessWidget {
                       SizedBox(
                         height: ProjectUtilities.projectHeight_8,
                       ),
-                      InfoBannerCard(
-                        title: '',
-                        subtitle:
-                            'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al. Aradığın “İş” Burada!',
-                        color: TobetoAppColor.colorSchemeLight.secondary,
-                        button: Image.asset('assets/images/hello_tobeto.png'),
+                      Container(
+                        child: InfoBannerCard(
+                          subtitle:
+                              'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al. Aradığın “İş” Burada!',
+                          color: TobetoAppColor.colorSchemeLight.secondary,
+                          button: SizedBox(
+                              height: 120,
+                              child: Image.asset(
+                                  'assets/images/hello_tobeto.png')),
+                        ),
                       ),
 
                       //----------------Bilgilendirmeler Bölümü--------------------------

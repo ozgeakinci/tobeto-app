@@ -4,10 +4,10 @@ import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/language_model.dart';
-import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
+import 'package:tobeto_app/view/widgets/save_cancel_button.dart';
 import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class ForeignLanguage extends StatelessWidget {
@@ -110,49 +110,67 @@ void _showAddLanguagesBottomSheet(
                 SizedBox(
                   height: ProjectUtilities.projectHeight_64,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
-                              side: BorderSide(
-                                  color: TobetoAppColor
-                                      .textColor), // Border'ı belirleyebilirsiniz.
-                            ),
-                            elevation: 0,
-                            backgroundColor: TobetoAppColor.buttonColorLight,
-                            foregroundColor:
-                                TobetoAppColor.primaryBackgroundColor,
-                            fixedSize: Size(175, 45)),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('Vazgeç')),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(fixedSize: Size(175, 45)),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
+                SaveCancelButton(onCancel: () {
+                  Navigator.pop(context);
+                }, onSave: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
 
-                          LanguageModel language = LanguageModel(
-                            language: _languageName,
-                            level: _languageLevel,
-                          );
+                    LanguageModel language = LanguageModel(
+                      language: _languageName,
+                      level: _languageLevel,
+                    );
 
-                          context
-                              .read<UserBloc>()
-                              .add(AddLanguage(language: language));
+                    context
+                        .read<UserBloc>()
+                        .add(AddLanguage(language: language));
 
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Text('Kaydet'),
-                    ),
-                  ],
-                ),
+                    Navigator.pop(context);
+                  }
+                }),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     ElevatedButton(
+                //         style: ElevatedButton.styleFrom(
+                //             shape: RoundedRectangleBorder(
+                //               borderRadius: BorderRadius.circular(
+                //                   8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
+                //               side: BorderSide(
+                //                   color: TobetoAppColor
+                //                       .textColor), // Border'ı belirleyebilirsiniz.
+                //             ),
+                //             elevation: 0,
+                //             backgroundColor: TobetoAppColor.buttonColorLight,
+                //             foregroundColor:
+                //                 TobetoAppColor.primaryBackgroundColor,
+                //             fixedSize: Size(175, 45)),
+                //         onPressed: () {
+                //           Navigator.pop(context);
+                //         },
+                //         child: Text('Vazgeç')),
+                //     ElevatedButton(
+                //       style: ElevatedButton.styleFrom(fixedSize: Size(175, 45)),
+                //       onPressed: () {
+                //         if (_formKey.currentState!.validate()) {
+                //           _formKey.currentState!.save();
+
+                //           LanguageModel language = LanguageModel(
+                //             language: _languageName,
+                //             level: _languageLevel,
+                //           );
+
+                //           context
+                //               .read<UserBloc>()
+                //               .add(AddLanguage(language: language));
+
+                //           Navigator.pop(context);
+                //         }
+                //       },
+                //       child: Text('Kaydet'),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

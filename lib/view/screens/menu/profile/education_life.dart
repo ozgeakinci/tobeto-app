@@ -11,6 +11,7 @@ import 'package:tobeto_app/view/screens/menu/profile/skills.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 import 'package:tobeto_app/view/widgets/exprience_card.dart';
+import 'package:tobeto_app/view/widgets/save_cancel_button.dart';
 import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class EducationLife extends StatelessWidget {
@@ -156,55 +157,74 @@ void _showAddEducationLifeBottomSheet(
                 SizedBox(
                   height: ProjectUtilities.projectHeight_64,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
-                              side: BorderSide(
-                                  color: TobetoAppColor
-                                      .textColor), // Border'ı belirleyebilirsiniz.
-                            ),
-                            elevation: 0,
-                            backgroundColor: TobetoAppColor.buttonColorLight,
-                            foregroundColor:
-                                TobetoAppColor.primaryBackgroundColor,
-                            fixedSize: Size(175, 45)),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('Vazgeç')),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(fixedSize: Size(175, 45)),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
+                SaveCancelButton(onCancel: () {
+                  Navigator.pop(context);
+                }, onSave: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
 
-                          EducationInfo educations = EducationInfo(
-                              schoolName: _schoolName,
-                              department: _department,
-                              startDate: _startDate,
-                              endDate: _endDate);
+                    EducationInfo educations = EducationInfo(
+                        schoolName: _schoolName,
+                        department: _department,
+                        startDate: _startDate,
+                        endDate: _endDate);
 
-                          print(_schoolName);
-                          print(_department);
-                          print(_startDate);
-                          print(_endDate);
+                    context
+                        .read<UserBloc>()
+                        .add(AddEducation(userEducations: educations));
 
-                          context
-                              .read<UserBloc>()
-                              .add(AddEducation(userEducations: educations));
+                    Navigator.pop(context);
+                  }
+                }),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     ElevatedButton(
+                //         style: ElevatedButton.styleFrom(
+                //             shape: RoundedRectangleBorder(
+                //               borderRadius: BorderRadius.circular(
+                //                   8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
+                //               side: BorderSide(
+                //                   color: TobetoAppColor
+                //                       .textColor), // Border'ı belirleyebilirsiniz.
+                //             ),
+                //             elevation: 0,
+                //             backgroundColor: TobetoAppColor.buttonColorLight,
+                //             foregroundColor:
+                //                 TobetoAppColor.primaryBackgroundColor,
+                //             fixedSize: Size(175, 45)),
+                //         onPressed: () {
+                //           Navigator.pop(context);
+                //         },
+                //         child: Text('Vazgeç')),
+                //     ElevatedButton(
+                //       style: ElevatedButton.styleFrom(fixedSize: Size(175, 45)),
+                //       onPressed: () {
+                //         if (_formKey.currentState!.validate()) {
+                //           _formKey.currentState!.save();
 
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Text('Kaydet'),
-                    ),
-                  ],
-                ),
+                //           EducationInfo educations = EducationInfo(
+                //               schoolName: _schoolName,
+                //               department: _department,
+                //               startDate: _startDate,
+                //               endDate: _endDate);
+
+                //           print(_schoolName);
+                //           print(_department);
+                //           print(_startDate);
+                //           print(_endDate);
+
+                //           context
+                //               .read<UserBloc>()
+                //               .add(AddEducation(userEducations: educations));
+
+                //           Navigator.pop(context);
+                //         }
+                //       },
+                //       child: Text('Kaydet'),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),
