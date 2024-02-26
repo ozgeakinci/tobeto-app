@@ -159,7 +159,7 @@ void _showAddExperienceBottomSheet(
                 ),
                 CustomTextField(
                   labelText: 'İşe Giriş Tarihiı',
-                  initialValue: 'Gün/Ay/Yıl',
+                  hintText: 'Gün/Ay/Yıl',
                   onSaved: (value) => _startDate = value!,
                   keyboardType: TextInputType.datetime,
                 ),
@@ -168,14 +168,13 @@ void _showAddExperienceBottomSheet(
                 ),
                 CustomTextField(
                   labelText: 'İşten Çıkış Tarihi',
-                  initialValue: 'Gün/Ay/Yıl',
+                  hintText: 'Gün/Ay/Yıl',
                   onSaved: (value) => _endDate = value!,
                   keyboardType: TextInputType.datetime,
                 ),
                 SizedBox(
                   height: ProjectUtilities.projectHeight_64,
                 ),
-
                 SaveCancelButton(onCancel: () {
                   Navigator.pop(context);
                 }, onSave: () {
@@ -198,64 +197,6 @@ void _showAddExperienceBottomSheet(
                     Navigator.pop(context);
                   }
                 })
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     Padding(
-                //       padding: const EdgeInsets.all(8.0),
-                //       child: ElevatedButton(
-                //           style: ElevatedButton.styleFrom(
-                //               shape: RoundedRectangleBorder(
-                //                 borderRadius: BorderRadius.circular(
-                //                     8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
-                //                 side: isDarkMode
-                //                     ? BorderSide.none
-                //                     : BorderSide(
-                //                         color: TobetoAppColor
-                //                             .textColor), // Border'ı belirleyebilirsiniz.
-                //               ),
-                //               elevation: 0,
-                //               backgroundColor: isDarkMode
-                //                   ? TobetoAppColor.inputDarkBackground
-                //                   : TobetoAppColor.buttonColorLight,
-                //               foregroundColor:
-                //                   TobetoAppColor.selecetedItemColor,
-                //               fixedSize: Size(160, 45)),
-                //           onPressed: () {
-                //             Navigator.pop(context);
-                //           },
-                //           child: Text('Vazgeç')),
-                //     ),
-                //     Padding(
-                //       padding: const EdgeInsets.all(8.0),
-                //       child: ElevatedButton(
-                //         style:
-                //             ElevatedButton.styleFrom(fixedSize: Size(160, 45)),
-                //         onPressed: () {
-                //           if (_formKey.currentState!.validate()) {
-                //             _formKey.currentState!.save();
-
-                //             ExperienceInfo experienceInfo = ExperienceInfo(
-                //               organizationName: _organizationName,
-                //               position: _position,
-                //               startDate: _startDate,
-                //               endDate: _endDate,
-                //             );
-
-                //             context.read<UserBloc>().add(
-                //                   AddExperience(
-                //                     experienceDetail: experienceInfo,
-                //                   ),
-                //                 );
-
-                //             Navigator.pop(context);
-                //           }
-                //         },
-                //         child: Text('Kaydet'),
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),

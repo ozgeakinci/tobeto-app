@@ -84,7 +84,6 @@ flutter:
      - assets/images/time_icon.png
      - assets/images/message_icon.png
      - assets/images/video_image.png
-     - assets/images/spiderman.jpeg
      - assets/images/badge_coding.png
      - assets/images/file_png_icon.png
      - assets/images/file_pdf_icon.png
@@ -94,6 +93,8 @@ flutter:
      - assets/images/profile_icon.png
      - assets/images/mobil_education_image.png
      - assets/images/tobeto-icon.png
+     - assets/images/spider.jpeg
+     - assets/images/tobeto_logo_w.png
 
      
 

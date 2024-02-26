@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
 class TobetoSuccesModelAtwork extends StatelessWidget {
@@ -20,8 +21,10 @@ class TobetoSuccesModelAtwork extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                    width: 2,
-                    color: Color.fromARGB(255, 226, 223, 223),
+                    width: 1,
+                    color: isDarkMode
+                        ? TobetoAppColor.backgroundDark
+                        : TobetoAppColor.backgroundLight,
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -31,37 +34,37 @@ class TobetoSuccesModelAtwork extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Image.asset(
-                        'assets/images/spiderman.jpeg',
-                        fit: BoxFit.cover,
+                        'assets/images/spider.jpeg',
+                        fit: BoxFit.contain,
                         width: double.infinity,
                         height: 200,
                       ),
                       const SizedBox(height: 20),
-                      succesItem(
-                          "4.5", "Yeni dünyaya hazırlanıyorum", Colors.grey),
+                      succesItem("4.5", "Yeni dünyaya hazırlanıyorum",
+                          TobetoAppColor.greyColor),
                       const SizedBox(height: 10),
                       succesItem("5", "Profesyonel duruşumu geliştiriyorum",
-                          Colors.green),
+                          TobetoAppColor.greenColor),
                       const SizedBox(height: 10),
                       succesItem("4.4", "Kendimi tanıyor ve yönetiyorum",
-                          Colors.yellow),
+                          TobetoAppColor.yellowColor),
                       const SizedBox(height: 10),
                       succesItem(
                           "4.8",
                           "Yaratıcı ve doğru çözümler geliştiriyorum",
-                          Colors.brown),
+                          TobetoAppColor.selecetedItemColor),
                       const SizedBox(height: 10),
-                      succesItem(
-                          "5", "Kendimi sürekli geliştiriyorum", Colors.pink),
+                      succesItem("5", "Kendimi sürekli geliştiriyorum",
+                          TobetoAppColor.pinkColor),
                       const SizedBox(height: 10),
                       succesItem("3.8", "Başkaları ile birlikte çalışıyorum",
-                          Colors.orange),
+                          TobetoAppColor.orchisColor),
                       const SizedBox(height: 10),
-                      succesItem(
-                          "4.6", "Sonuç ve başarı odaklıyım", Colors.purple),
+                      succesItem("4.6", "Sonuç ve başarı odaklıyım",
+                          TobetoAppColor.lightPinkColor),
                       const SizedBox(height: 10),
-                      succesItem(
-                          "4.9", "Anlıyorum ve anlaşılıyorum", Colors.blue),
+                      succesItem("4.9", "Anlıyorum ve anlaşılıyorum",
+                          TobetoAppColor.darkYellowColor),
                     ],
                   ),
                 ),
@@ -85,7 +88,7 @@ class TobetoSuccesModelAtwork extends StatelessWidget {
           ),
           child: Text(
             leftText,
-            style: TextStyle(),
+            style: TextStyle(color: TobetoAppColor.backgroundLight),
             textAlign: TextAlign.center,
           ),
         ),

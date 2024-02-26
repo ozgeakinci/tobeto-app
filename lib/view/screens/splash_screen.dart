@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/screens/start_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,19 +26,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Text(
-        "TOBETOO",
-        style: TextStyle(
-          color: Colors.purple,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Color(0xFF6A00FF),
+            Color(0xFF9013FE),
+            Color(0xFFC100FF),
+          ], begin: Alignment.topRight, end: Alignment.bottomLeft),
         ),
-      )
-
-          /* AnimatedTextKit(animatedTexts: [
-          WavyAnimatedText("TOBETOO",
-              textStyle: TextStyle(color: Color(0xFFFBCA2C), fontSize: 40))
-        ]), */
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset("assets/images/tobeto_logo_w.png"),
+            ],
           ),
+        ),
+      ),
     );
   }
 }

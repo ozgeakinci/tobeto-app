@@ -73,10 +73,19 @@ class _RegisterPageState extends State<RegisterPage> {
                           labelText: LanguageItems.hintNameText,
                           prefixIcon: Icons.person_2_rounded),
                       CustomTextField(
-                          onSaved: (value) => _email = value!,
-                          keyboardType: TextInputType.emailAddress,
-                          labelText: LanguageItems.hintEmailText,
-                          prefixIcon: Icons.mail),
+                        onSaved: (value) => _email = value!,
+                        keyboardType: TextInputType.emailAddress,
+                        labelText: LanguageItems.hintEmailText,
+                        prefixIcon: Icons.mail,
+                        customValidator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
+                                  .hasMatch(value)) {
+                            return 'Geçerli bir email adresi giriniz';
+                          }
+                          return null;
+                        },
+                      ),
                       CustomTextField(
                         onSaved: (value) => _password = value!,
                         labelText: LanguageItems.hintTextPassword,

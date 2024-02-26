@@ -254,26 +254,22 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                   ),
                                   CustomTextField(
                                     labelText: 'Telefon Numaranız',
-                                    initialValue:
-                                        state.phoneNumber.toString() != null
-                                            ? state.phoneNumber.toString()
-                                            : '+90',
+                                    hintText: '5431101010',
+                                    initialValue: state.phoneNumber.toString(),
                                     keyboardType: TextInputType.phone,
-                                    // phoneValidator: (value) {
-                                    //   if (value == null || value.isEmpty) {
-                                    //     return 'Telefon numarası boş olamaz';
-                                    //   }
-                                    //   // Telefon numarasının uzunluğunu kontrol et
-                                    //   if (value.length != 10) {
-                                    //     return 'Telefon numarası 10 haneli olmalıdır';
-                                    //   }
-                                    //   // Telefon numarasının sadece rakamlardan oluştuğunu kontrol et
-                                    //   if (!RegExp(r'^[0-9]+$')
-                                    //       .hasMatch(value)) {
-                                    //     return 'Telefon numarası sadece rakamlardan oluşmalıdır';
-                                    //   }
-                                    //   return null; // Hata yoksa null döndür
-                                    // },
+                                    customValidator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Telefon numarası boş olamaz';
+                                      } else if (value.length != 10) {
+                                        return 'Telefon numarası 10 haneli olmalıdır';
+                                      }
+                                      // Telefon numarasının sadece rakamlardan oluştuğunu kontrol et
+                                      else if (!RegExp(r'^[0-9]+$')
+                                          .hasMatch(value)) {
+                                        return 'Telefon numarası sadece rakamlardan oluşmalıdır';
+                                      }
+                                      return null; // Hata yoksa null döndür
+                                    },
                                     onSaved: (value) {
                                       try {
                                         _phoneNumber = int.parse(value!);
@@ -314,8 +310,29 @@ class _PersonalInfoState extends State<PersonalInfo> {
 
                                         context.read<UserBloc>().add(
                                             SendUserInfo(user: updatedUser));
-
-                                        Navigator.pop(context);
+                                        if ((state.about != updatedUser.about ||
+                                            state.birthDate !=
+                                                updatedUser.birthDate ||
+                                            state.phoneNumber !=
+                                                updatedUser.phoneNumber)) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                  "Bilgileriniz başarıyla kaydedildi."),
+                                              backgroundColor: Colors.green,
+                                              duration: Duration(seconds: 1),
+                                            ),
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                            content: Text(
+                                                "Güncel bilgi bulunamadı."),
+                                            backgroundColor: Colors.red,
+                                            duration: Duration(seconds: 1),
+                                          ));
+                                        }
                                       },
                                       child: const Text('Kaydet'))
                                 ],

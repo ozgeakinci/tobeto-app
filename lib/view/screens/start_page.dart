@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_state.dart';
+import 'package:tobeto_app/bloc/bottom_navbar/bottom_navbar_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/view/screens/auth_page.dart';
@@ -24,9 +25,9 @@ class _StartPageState extends State<StartPage> {
 
       if (state is Authenticated) {
         print("StartPage AuthBloc Authenticated");
-        //  print("StartPage AuthBloc FetchUserRequested");
 
         context.read<UserBloc>().add(FetchUserRequested());
+        context.read<NavigationBloc>().add(NavigationEvent.Anasayfa);
 
         return BottomNavbar();
       }

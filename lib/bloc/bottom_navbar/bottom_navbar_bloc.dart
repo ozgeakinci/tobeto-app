@@ -24,4 +24,8 @@ class NavigationBloc extends Bloc<NavigationEvent, int> {
       }
     });
   }
+
+  void resetToHomepage() {
+    add(NavigationEvent.Anasayfa);
+  }
 }

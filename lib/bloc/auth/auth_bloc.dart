@@ -37,7 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         print("------- Giriş Hataları-------- ");
         print(e);
         if (e.code == 'invalid-email') {
-          print('E-posta adresi yanlış biçimlendirilmiş.');
+          print('Geçersiz e-mail adresi');
           emit(NotAuthenticated(
               errorMessage: 'E-posta adresi yanlış biçimlendirilmiş.'));
         } else if (e.code == 'user-not-found') {

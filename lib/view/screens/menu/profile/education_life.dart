@@ -4,15 +4,11 @@ import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/education_model.dart';
-import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
-import 'package:tobeto_app/view/screens/menu/profile/experience.dart';
-import 'package:tobeto_app/view/screens/menu/profile/skills.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 import 'package:tobeto_app/view/widgets/exprience_card.dart';
 import 'package:tobeto_app/view/widgets/save_cancel_button.dart';
-import 'package:tobeto_app/view/widgets/skills_card.dart';
 
 class EducationLife extends StatelessWidget {
   const EducationLife({Key? key}) : super(key: key);
@@ -54,27 +50,7 @@ class EducationLife extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-        }))
-
-        // ListView(children: [
-        //   SkillsCard(
-        //       icon: Image.asset("assets/images/education_icon.png"),
-        //       title: const Text('Anadolu Üniversitesi \nWeb Tasarım ve Kodlama'),
-        //       subTitle: const Text("2017/2019"),
-        //       textButton: DeleteButton.deleteIconButton),
-        //   SkillsCard(
-        //       icon: Image.asset("assets/images/education_icon.png"),
-        //       title: const Text('Anadolu Üniversitesi \nİşletme'),
-        //       subTitle: const Text("2012/2014"),
-        //       textButton: DeleteButton.deleteIconButton),
-        //   SkillsCard(
-        //       icon: Image.asset("assets/images/education_icon.png"),
-        //       title: const Text(
-        //           'Çanakkale 18 Mart Üniversitesi \nGıda Teknolojileri'),
-        //       subTitle: const Text("2017/2019"),
-        //       textButton: DeleteButton.deleteIconButton),
-        // ]),
-        );
+        })));
   }
 }
 
@@ -140,7 +116,7 @@ void _showAddEducationLifeBottomSheet(
                   height: ProjectUtilities.projectHeight_16,
                 ),
                 CustomTextField(
-                  initialValue: 'Yıl',
+                  hintText: 'Yıl',
                   labelText: 'Başlangıç Tarihi',
                   onSaved: (value) => _startDate = value!,
                   keyboardType: TextInputType.datetime,
@@ -149,7 +125,7 @@ void _showAddEducationLifeBottomSheet(
                   height: ProjectUtilities.projectHeight_16,
                 ),
                 CustomTextField(
-                  initialValue: 'Yıl',
+                  hintText: 'Yıl',
                   labelText: 'Bitiş Tarihi',
                   onSaved: (value) => _endDate = value!,
                   keyboardType: TextInputType.datetime,
@@ -176,55 +152,6 @@ void _showAddEducationLifeBottomSheet(
                     Navigator.pop(context);
                   }
                 }),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     ElevatedButton(
-                //         style: ElevatedButton.styleFrom(
-                //             shape: RoundedRectangleBorder(
-                //               borderRadius: BorderRadius.circular(
-                //                   8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
-                //               side: BorderSide(
-                //                   color: TobetoAppColor
-                //                       .textColor), // Border'ı belirleyebilirsiniz.
-                //             ),
-                //             elevation: 0,
-                //             backgroundColor: TobetoAppColor.buttonColorLight,
-                //             foregroundColor:
-                //                 TobetoAppColor.primaryBackgroundColor,
-                //             fixedSize: Size(175, 45)),
-                //         onPressed: () {
-                //           Navigator.pop(context);
-                //         },
-                //         child: Text('Vazgeç')),
-                //     ElevatedButton(
-                //       style: ElevatedButton.styleFrom(fixedSize: Size(175, 45)),
-                //       onPressed: () {
-                //         if (_formKey.currentState!.validate()) {
-                //           _formKey.currentState!.save();
-
-                //           EducationInfo educations = EducationInfo(
-                //               schoolName: _schoolName,
-                //               department: _department,
-                //               startDate: _startDate,
-                //               endDate: _endDate);
-
-                //           print(_schoolName);
-                //           print(_department);
-                //           print(_startDate);
-                //           print(_endDate);
-
-                //           context
-                //               .read<UserBloc>()
-                //               .add(AddEducation(userEducations: educations));
-
-                //           Navigator.pop(context);
-                //         }
-                //       },
-                //       child: Text('Kaydet'),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),

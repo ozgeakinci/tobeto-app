@@ -45,16 +45,49 @@ class _LoginPageState extends State<LoginPage> {
                   height: ProjectUtilities.projectHeight_32,
                 ),
                 CustomTextField(
-                    onSaved: (value) => _email = value!,
-                    labelText: LanguageItems.hintEmailText,
-                    keyboardType: TextInputType.emailAddress,
-                    prefixIcon: Icons.mail),
+                  onSaved: (value) => _email = value!,
+                  labelText: LanguageItems.hintEmailText,
+                  keyboardType: TextInputType.emailAddress,
+                  prefixIcon: Icons.mail,
+                  customValidator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
+                            .hasMatch(value)) {
+                      return 'Geçerli bir email adresi giriniz';
+                    }
+                    return null;
+                  },
+                ),
                 CustomTextField(
                   onSaved: (value) => _password = value!,
                   labelText: LanguageItems.hintTextPassword,
                   prefixIcon: Icons.lock,
                   obscureText: true,
                   maxLines: 1,
+                   customValidator: (value) {
+                    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+    return 'Şifre en az bir büyük harf içermelidir';
+  }
+
+  // Şifre en az bir küçük harf içermelidir
+  if (!RegExp(r'[a-z]').hasMatch(value)) {
+    return 'Şifre en az bir küçük harf içermelidir';
+  }
+
+  // Şifre en az bir rakam içermelidir
+  if (!RegExp(r'[0-9]').hasMatch(value)) {
+    return 'Şifre en az bir rakam içermelidir';
+  }
+
+  // Şifre en az bir özel karakter içermelidir
+  if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+    return 'Şifre en az bir özel karakter içermelidir';
+  }
+
+  // Şifre en az 8 karakterden oluşmalıdır
+  if (value.length < 8) {
+    return 'Şifre en az 8 karakterden oluşmalıdır';
+  }
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -81,15 +114,16 @@ class _LoginPageState extends State<LoginPage> {
                       fixedSize: Size(MediaQuery.of(context).size.width * 0.89,
                           MediaQuery.of(context).size.height * 0.064)),
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          state.errorMessage.toString(),
-                          style: TextStyle(color: Colors.white),
+                    if (state.errorMessage != null)
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            state.errorMessage.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.red,
                         ),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
+                      );
 
                     _submit();
                   },

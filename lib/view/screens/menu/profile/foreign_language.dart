@@ -128,49 +128,6 @@ void _showAddLanguagesBottomSheet(
                     Navigator.pop(context);
                   }
                 }),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     ElevatedButton(
-                //         style: ElevatedButton.styleFrom(
-                //             shape: RoundedRectangleBorder(
-                //               borderRadius: BorderRadius.circular(
-                //                   8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
-                //               side: BorderSide(
-                //                   color: TobetoAppColor
-                //                       .textColor), // Border'ı belirleyebilirsiniz.
-                //             ),
-                //             elevation: 0,
-                //             backgroundColor: TobetoAppColor.buttonColorLight,
-                //             foregroundColor:
-                //                 TobetoAppColor.primaryBackgroundColor,
-                //             fixedSize: Size(175, 45)),
-                //         onPressed: () {
-                //           Navigator.pop(context);
-                //         },
-                //         child: Text('Vazgeç')),
-                //     ElevatedButton(
-                //       style: ElevatedButton.styleFrom(fixedSize: Size(175, 45)),
-                //       onPressed: () {
-                //         if (_formKey.currentState!.validate()) {
-                //           _formKey.currentState!.save();
-
-                //           LanguageModel language = LanguageModel(
-                //             language: _languageName,
-                //             level: _languageLevel,
-                //           );
-
-                //           context
-                //               .read<UserBloc>()
-                //               .add(AddLanguage(language: language));
-
-                //           Navigator.pop(context);
-                //         }
-                //       },
-                //       child: Text('Kaydet'),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),
