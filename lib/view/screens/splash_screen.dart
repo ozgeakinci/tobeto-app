@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset("assets/images/tobeto_logo_w.png"),
+              Image.asset("assets/images/tobeto-logo_w.png"),
             ],
           ),
         ),
