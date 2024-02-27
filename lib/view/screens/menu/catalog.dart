@@ -1,30 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_bloc.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_event.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_state.dart';
 import 'package:tobeto_app/view/widgets/catalog_video_card.dart';
-import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
-class Catalog extends StatelessWidget {
+class Catalog extends StatefulWidget {
   const Catalog({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    context.read<CatalogBloc>().add(ResetCatalogEvent());
+  _CatalogState createState() => _CatalogState();
+}
 
+class _CatalogState extends State<Catalog> {
+  late TextEditingController _searchController;
+  bool _isSearchVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppbar(
-          title: 'Katalog',
-          actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.filter_alt),
-            ),
-          ],
+      appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        title: _isSearchVisible
+            ? TextField(
+                controller: _searchController,
+                onChanged: (_) {
+                  setState(() {});
+                },
+                decoration: InputDecoration(
+                  hintText: 'Ara...',
+                  hintStyle: TextStyle(color: Colors.white),
+                  border: InputBorder.none,
+                ),
+              )
+            : Text(
+                'Katalog',
+                style: const TextStyle(color: Colors.white),
+              ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Color(0xFF6A00FF),
+              Color(0xFF9013FE),
+              Color(0xFFC100FF),
+            ], begin: Alignment.topRight, end: Alignment.bottomLeft),
+          ),
         ),
-        body: BlocBuilder<CatalogBloc, CatalogState>(builder: (context, state) {
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _isSearchVisible = !_isSearchVisible;
+              });
+            },
+            icon: Icon(Icons.search),
+          ),
+        ],
+      ),
+      body: BlocBuilder<CatalogBloc, CatalogState>(
+        builder: (context, state) {
           if (state is CatalogInitial) {
             context.read<CatalogBloc>().add(FetchCatalogRequested());
           }
@@ -40,16 +87,33 @@ class Catalog extends StatelessWidget {
           }
 
           if (state is CatalogLoaded) {
-            return ListView.builder(
-                itemCount: state.catalogItem.length,
-                itemBuilder: (context, index) =>
-                    CatalogVideoCard(catalogItem: state.catalogItem[index]));
+            // Arama sorgusuna göre öğeleri filtreleme
+            final filteredItems = state.catalogItem
+                .where((item) => item.videoName.toLowerCase().contains(
+                      _searchController.text.toLowerCase(),
+                    ));
+
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: filteredItems.length,
+                    itemBuilder: (context, index) => CatalogVideoCard(
+                        catalogItem: filteredItems.elementAt(index)),
+                  ),
+                ),
+              ],
+            );
           } else {
             return const Center(child: Text("Yükleniyor....."));
           }
-        }));
+        },
+      ),
+    );
   }
+}
 
+/* 
   Widget buildBottomSheetOption(String title) {
     return InkWell(
       onTap: () {},
@@ -115,4 +179,4 @@ class Catalog extends StatelessWidget {
   void catalogAddSearchIcon(BuildContext context) {
     // Buraya arama işlevini ekleyin
   }
-}
+ */
