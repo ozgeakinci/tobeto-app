@@ -23,7 +23,7 @@ void main() async {
       providers: [
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
         BlocProvider<UserBloc>(create: (context) => UserBloc()),
-        BlocProvider<DepartmentBloc>(create: (context) => DepartmentBloc()),
+        BlocProvider<EducationsBloc>(create: (context) => EducationsBloc()),
         BlocProvider<CatalogBloc>(create: (context) => CatalogBloc()),
         BlocProvider<NotificationBloc>(create: (context) => NotificationBloc()),
         BlocProvider<NavigationBloc>(create: (context) => NavigationBloc()),

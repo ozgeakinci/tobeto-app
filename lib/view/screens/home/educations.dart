@@ -20,11 +20,11 @@ class Educations extends StatelessWidget {
       appBar: const CustomAppbar(
         title: 'Eğitimlerim',
       ),
-      body: BlocBuilder<DepartmentBloc, EducationsState>(
+      body: BlocBuilder<EducationsBloc, EducationsState>(
           builder: (context, state) {
         if (state is EducationsInitial) {
-          context.read<DepartmentBloc>().add(
-              FetchDepartmentRequested(department: userBloc.userDepartment!));
+          context.read<EducationsBloc>().add(
+              FetchEducationsRequested(department: userBloc.userDepartment!));
         }
 
         if (state is EducationsLoading) {}

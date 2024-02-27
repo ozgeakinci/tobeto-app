@@ -1,10 +1,10 @@
 abstract class EducationsEvent {}
 
-class FetchDepartmentRequested extends EducationsEvent {
+class FetchEducationsRequested extends EducationsEvent {
   String department;
-  FetchDepartmentRequested({
+  FetchEducationsRequested({
     required this.department,
   });
 }
 
-class ResetDepartmentEvent extends EducationsEvent {}
+class ResetEducationsEvent extends EducationsEvent {}

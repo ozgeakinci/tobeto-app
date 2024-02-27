@@ -3,9 +3,9 @@ import 'package:tobeto_app/bloc/educations/educations_event.dart';
 import 'package:tobeto_app/bloc/educations/educations_state.dart';
 import 'package:tobeto_app/repositories/user_repositories.dart';
 
-class DepartmentBloc extends Bloc<EducationsEvent, EducationsState> {
-  DepartmentBloc() : super(EducationsInitial()) {
-    on<FetchDepartmentRequested>((event, emit) async {
+class EducationsBloc extends Bloc<EducationsEvent, EducationsState> {
+  EducationsBloc() : super(EducationsInitial()) {
+    on<FetchEducationsRequested>((event, emit) async {
       try {
         final departmentInfo = await UserRepositories()
             .getDepartmentInfoFromFirebase(event.department);
@@ -17,7 +17,7 @@ class DepartmentBloc extends Bloc<EducationsEvent, EducationsState> {
       }
     });
 
-    on<ResetDepartmentEvent>((event, emit) async {
+    on<ResetEducationsEvent>((event, emit) async {
       try {
         emit(EducationsInitial());
       } catch (e) {
