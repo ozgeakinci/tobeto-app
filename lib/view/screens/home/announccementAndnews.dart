@@ -3,18 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/notifications/notifications_bloc.dart';
 import 'package:tobeto_app/bloc/notifications/notifications_event.dart';
 import 'package:tobeto_app/bloc/notifications/notifications_state.dart';
+import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
 import 'package:tobeto_app/view/widgets/notification_card.dart';
 
 class AnnounccementAndnews extends StatelessWidget {
-  const AnnounccementAndnews({Key? key, required this.department})
-      : super(key: key);
-
-  final String department;
+  const AnnounccementAndnews({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final userBloc = BlocProvider.of<UserBloc>(context);
+
     return Scaffold(
       appBar: const CustomAppbar(
         title: 'Duyuru ve Haberlerim',
@@ -22,9 +24,8 @@ class AnnounccementAndnews extends StatelessWidget {
       body: BlocBuilder<NotificationBloc, NotificationState>(
           builder: (context, state) {
         if (state is NotificationInitial) {
-          context
-              .read<NotificationBloc>()
-              .add(FetchNotificationsRequested(department: department));
+          context.read<NotificationBloc>().add(FetchNotificationsRequested(
+              department: userBloc.userDepartment!));
         }
 
         if (state is NotificationLoading) {

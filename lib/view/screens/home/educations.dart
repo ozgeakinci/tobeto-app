@@ -4,19 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/educations/educations_bloc.dart';
 import 'package:tobeto_app/bloc/educations/educations_event.dart';
 import 'package:tobeto_app/bloc/educations/educations_state.dart';
+import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/educational_card.dart';
 
 class Educations extends StatelessWidget {
   const Educations({
     Key? key,
-    required this.department,
   }) : super(key: key);
-
-  final String department;
 
   @override
   Widget build(BuildContext context) {
+    final userBloc = BlocProvider.of<UserBloc>(context);
     return Scaffold(
       appBar: const CustomAppbar(
         title: 'Eğitimlerim',
@@ -24,9 +23,8 @@ class Educations extends StatelessWidget {
       body: BlocBuilder<DepartmentBloc, EducationsState>(
           builder: (context, state) {
         if (state is EducationsInitial) {
-          context
-              .read<DepartmentBloc>()
-              .add(FetchDepartmentRequested(department: department));
+          context.read<DepartmentBloc>().add(
+              FetchDepartmentRequested(department: userBloc.userDepartment!));
         }
 
         if (state is EducationsLoading) {}

@@ -5,6 +5,8 @@ import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/bloc/auth/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  String? errorMessages;
+
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firebaseFirestore;
 
@@ -35,6 +37,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(Authenticated(user: userCredential.user));
       } on FirebaseAuthException catch (e) {
         print("------- Giriş Hataları-------- ");
+
+        errorMessages = e.toString();
         print(e);
         if (e.code == 'invalid-email') {
           print('Geçersiz e-mail adresi');
@@ -86,6 +90,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             emit(NotAuthenticated(
                 errorMessage: 'The password provided is too weak.'));
           } else if (e.code == 'email-already-in-use') {
+            errorMessages = e.code.toString();
+
             print('The account already exists for that email.');
             emit(NotAuthenticated(
                 errorMessage: 'The account already exists for that email.'));

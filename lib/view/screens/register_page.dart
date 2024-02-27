@@ -33,6 +33,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = BlocProvider.of<AuthBloc>(context);
+
     final _formKey = GlobalKey<FormState>();
     String _email = '';
     String _password = '';
@@ -50,116 +52,98 @@ class _RegisterPageState extends State<RegisterPage> {
       }
     }
 
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (context, state) {
-        if (state is AuthInitial) {
-          print("AuthInitial İnitial");
-        }
-        if (state is NotAuthenticated) {
-          return Stack(
-            children: [
-              Center(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(
-                        height: ProjectUtilities.projectHeight_32,
-                      ),
-                      CustomTextField(
-                          onSaved: (value) => _username = value!,
-                          labelText: LanguageItems.hintNameText,
-                          prefixIcon: Icons.person_2_rounded),
-                      CustomTextField(
-                        onSaved: (value) => _email = value!,
-                        keyboardType: TextInputType.emailAddress,
-                        labelText: LanguageItems.hintEmailText,
-                        prefixIcon: Icons.mail,
-                        customValidator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
-                                  .hasMatch(value)) {
-                            return 'Geçerli bir email adresi giriniz';
-                          }
-                          return null;
-                        },
-                      ),
-                      CustomTextField(
-                        onSaved: (value) => _password = value!,
-                        labelText: LanguageItems.hintTextPassword,
-                        prefixIcon: Icons.lock,
-                        obscureText: true,
-                        maxLines: 1,
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.89,
-                        height:
-                            100, // TextFormField'ın yüksekliği ile aynı olabilir
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 5),
-                          child: DropdownButtonFormField<String>(
-                            value: _department,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Ders türü boş olamaz';
-                              }
-                              return null;
-                            },
-                            hint: const Text('Ders Türünü Seçiniz'),
-                            onSaved: (value) => _department = value!,
-                            items: departmentList.map((type) {
-                              return DropdownMenuItem<String>(
-                                value: type,
-                                child: Text(type),
-                              );
-                            }).toList(),
-                            onChanged: (String? value) {},
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: ProjectUtilities.paddingAll_8,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            fixedSize: Size(
-                                MediaQuery.of(context).size.width * 0.89,
-                                MediaQuery.of(context).size.height * 0.064)),
-                        onPressed: () {
-                          _submit();
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                state.errorMessage.toString(),
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        },
-                        child: const Text(LanguageItems.registerText),
-                      ),
-                    ],
+    return Stack(
+      children: [
+        Center(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: ProjectUtilities.projectHeight_32,
+                ),
+                CustomTextField(
+                    onSaved: (value) => _username = value!,
+                    labelText: LanguageItems.hintNameText,
+                    prefixIcon: Icons.person_2_rounded),
+                CustomTextField(
+                  onSaved: (value) => _email = value!,
+                  keyboardType: TextInputType.emailAddress,
+                  labelText: LanguageItems.hintEmailText,
+                  prefixIcon: Icons.mail,
+                  customValidator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
+                            .hasMatch(value)) {
+                      return 'Geçerli bir email adresi giriniz';
+                    }
+                    return null;
+                  },
+                ),
+                CustomTextField(
+                  onSaved: (value) => _password = value!,
+                  labelText: LanguageItems.hintTextPassword,
+                  prefixIcon: Icons.lock,
+                  obscureText: true,
+                  maxLines: 1,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.89,
+                  height: 100, // TextFormField'ın yüksekliği ile aynı olabilir
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                    child: DropdownButtonFormField<String>(
+                      value: _department,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Ders türü boş olamaz';
+                        }
+                        return null;
+                      },
+                      hint: const Text('Ders Türünü Seçiniz'),
+                      onSaved: (value) => _department = value!,
+                      items: departmentList.map((type) {
+                        return DropdownMenuItem<String>(
+                          value: type,
+                          child: Text(type),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {},
+                    ),
                   ),
                 ),
-              ),
-            ],
-          );
-        } else {
-          return Center(
-            child: Transform.scale(
-              scale: 3,
-              child: const CircularProgressIndicator(
-                strokeWidth: 1,
-              ),
+                SizedBox(
+                  height: ProjectUtilities.paddingAll_8,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(MediaQuery.of(context).size.width * 0.89,
+                          MediaQuery.of(context).size.height * 0.064)),
+                  onPressed: () {
+                    _submit();
+
+                    if (authBloc.errorMessages != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            authBloc.errorMessages!,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text(LanguageItems.registerText),
+                ),
+              ],
             ),
-          );
-        }
-      },
+          ),
+        ),
+      ],
     );
   }
 }

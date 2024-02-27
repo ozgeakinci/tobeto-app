@@ -13,7 +13,6 @@ class BigButton extends StatelessWidget {
   BigButton({
     Key? key,
     required this.title,
-    required this.department,
     required this.color,
     Color? textColor,
     this.button,
@@ -21,7 +20,6 @@ class BigButton extends StatelessWidget {
         super(key: key);
 
   final String title;
-  final String department;
   final Color color;
   final Color? textColor;
   final Widget? button;
@@ -32,10 +30,8 @@ class BigButton extends StatelessWidget {
 
     routes = {
       "Başvurularım": const Recourses(),
-      "Eğitimlerim": Educations(department: department),
-      "Duyuru ve Haberler": AnnounccementAndnews(
-        department: department,
-      ),
+      "Eğitimlerim": Educations(),
+      "Duyuru ve Haberler": AnnounccementAndnews(),
       "Anketlerim": const Surveys(),
       "Sınavlarım": const TobetoLevelTest(),
       "Profil Oluştur": Profile(),

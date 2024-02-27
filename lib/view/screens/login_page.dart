@@ -18,6 +18,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    final authBloc = BlocProvider.of<AuthBloc>(context);
+
     final _formKey = GlobalKey<FormState>();
     String _email = '';
     String _password = '';
@@ -29,117 +31,79 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
 
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (context, state) {
-        if (state is AuthInitial) {
-          print("NotAuthenticated İnitial");
-        }
-        if (state is NotAuthenticated) {
-          return Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: ProjectUtilities.projectHeight_32,
-                ),
-                CustomTextField(
-                  onSaved: (value) => _email = value!,
-                  labelText: LanguageItems.hintEmailText,
-                  keyboardType: TextInputType.emailAddress,
-                  prefixIcon: Icons.mail,
-                  customValidator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
-                            .hasMatch(value)) {
-                      return 'Geçerli bir email adresi giriniz';
-                    }
-                    return null;
-                  },
-                ),
-                CustomTextField(
-                  onSaved: (value) => _password = value!,
-                  labelText: LanguageItems.hintTextPassword,
-                  prefixIcon: Icons.lock,
-                  obscureText: true,
-                  maxLines: 1,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          right: ProjectUtilities.projectHeight_24),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ForgotPasswordPage()));
-                        },
-                        child: const Text(
-                          LanguageItems.forgotPassword,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: Size(MediaQuery.of(context).size.width * 0.89,
-                          MediaQuery.of(context).size.height * 0.064)),
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: ProjectUtilities.projectHeight_32,
+          ),
+          CustomTextField(
+            onSaved: (value) => _email = value!,
+            labelText: LanguageItems.hintEmailText,
+            keyboardType: TextInputType.emailAddress,
+            prefixIcon: Icons.mail,
+            customValidator: (value) {
+              if (value!.isEmpty ||
+                  !RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
+                      .hasMatch(value)) {
+                return 'Geçerli bir email adresi giriniz';
+              }
+              return null;
+            },
+          ),
+          CustomTextField(
+            onSaved: (value) => _password = value!,
+            labelText: LanguageItems.hintTextPassword,
+            prefixIcon: Icons.lock,
+            obscureText: true,
+            maxLines: 1,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding:
+                    EdgeInsets.only(right: ProjectUtilities.projectHeight_24),
+                child: TextButton(
                   onPressed: () {
-                    if (state.errorMessage != null)
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            state.errorMessage.toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-
-                    _submit();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPasswordPage()));
                   },
-                  child: const Text(LanguageItems.loginIn),
-                ),
-              ],
-            ),
-          );
-        }
-        if (state is Authenticated) {
-          print("NotAuthenticated   Giriş hyapıltı ");
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Transform.scale(
-                  scale: 3,
-                  child: const CircularProgressIndicator(
-                    strokeWidth: 1,
+                  child: const Text(
+                    LanguageItems.forgotPassword,
                   ),
                 ),
-                SizedBox(height: 30),
-                Text(
-                  "Giriş yapılıyor...",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ],
-            ),
-          );
-        } else {
-          return Center(
-            child: Transform.scale(
-              scale: 3,
-              child: const CircularProgressIndicator(
-                strokeWidth: 1,
               ),
-            ),
-          );
-        }
-      },
+            ],
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                fixedSize: Size(MediaQuery.of(context).size.width * 0.89,
+                    MediaQuery.of(context).size.height * 0.064)),
+            onPressed: () {
+              if (authBloc.errorMessages != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      authBloc.errorMessages!,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+
+              _submit();
+            },
+            child: const Text(LanguageItems.loginIn),
+          ),
+        ],
+      ),
     );
   }
 }
