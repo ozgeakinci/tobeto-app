@@ -250,17 +250,18 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                     labelText: 'Hakkımda',
                                     initialValue: state.about,
                                     onSaved: (value) => _about = value!,
-                                    maxLines: 2,
+                                    maxLines: 4,
                                   ),
                                   CustomTextField(
                                     labelText: 'Telefon Numaranız',
-                                    hintText: '5431101010',
+                                    hintText: '05434303212',
+                                    maxLength: 11,
                                     initialValue: state.phoneNumber.toString(),
                                     keyboardType: TextInputType.phone,
                                     customValidator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return 'Telefon numarası boş olamaz';
-                                      } else if (value.length != 10) {
+                                      } else if (value.length != 11) {
                                         return 'Telefon numarası 10 haneli olmalıdır';
                                       }
                                       // Telefon numarasının sadece rakamlardan oluştuğunu kontrol et
@@ -310,6 +311,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
 
                                         context.read<UserBloc>().add(
                                             SendUserInfo(user: updatedUser));
+
                                         if ((state.about != updatedUser.about ||
                                             state.birthDate !=
                                                 updatedUser.birthDate ||

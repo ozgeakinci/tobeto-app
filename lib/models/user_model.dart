@@ -70,8 +70,7 @@ class UserModel {
       birthDate: map['birthDate'] == null
           ? DateTime.now()
           : (map['birthDate'] as Timestamp).toDate(),
-      phoneNumber:
-          map['phoneNumber'] == null ? 90 : (map['phoneNumber'] as int),
+      phoneNumber: map['phoneNumber'] == null ? 0 : (map['phoneNumber'] as int),
       userImage: map['imageUrl'] as String?,
       skills: map['skills'] != null
           ? List<String>.from(map['skills'])

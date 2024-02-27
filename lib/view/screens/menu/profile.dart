@@ -129,7 +129,6 @@ class Profile extends StatelessWidget {
                       child: const Text('Çıkış yap'),
                       onPressed: () {
                         context.read<UserBloc>().add(ResetUserEvent());
-
                         context.read<AuthBloc>().add(Logout());
                       },
                     ),

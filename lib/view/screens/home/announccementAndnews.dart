@@ -41,7 +41,7 @@ class AnnounccementAndnews extends StatelessWidget {
                   itemBuilder: (context, index) => NotificationCard(
                       department: state.notifications[index])));
         } else {
-          return const Center(child: Text("Unknown State"));
+          return const Center(child: Text("Yükleniyor....."));
         }
       }),
     );

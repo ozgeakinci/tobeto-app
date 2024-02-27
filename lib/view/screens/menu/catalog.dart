@@ -45,7 +45,7 @@ class Catalog extends StatelessWidget {
                 itemBuilder: (context, index) =>
                     CatalogVideoCard(catalogItem: state.catalogItem[index]));
           } else {
-            return const Center(child: Text("Unknown State"));
+            return const Center(child: Text("Yükleniyor....."));
           }
         }));
   }

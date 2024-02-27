@@ -109,7 +109,7 @@ class BottomNavbar extends StatelessWidget {
         return Reviews();
       default:
         return const Center(
-          child: Text('Unknown Page'),
+          child: Text('Yükleniyor...'),
         );
     }
   }

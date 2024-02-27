@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? customValidator;
   final String? hintText;
   final String? helperText;
+  final int? maxLength;
 
   const CustomTextField(
       {Key? key,
@@ -30,7 +31,8 @@ class CustomTextField extends StatelessWidget {
       this.height,
       this.customValidator,
       this.hintText,
-      this.helperText})
+      this.helperText,
+      this.maxLength})
       : super(key: key);
 
   String? _validateInput(String? value, String fieldName) {
@@ -50,6 +52,7 @@ class CustomTextField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
         child: TextFormField(
+          maxLength: maxLength,
           enabled: enabled,
           onSaved: onSaved,
           controller: controller,
@@ -75,6 +78,7 @@ class CustomTextField extends StatelessWidget {
           },
           maxLines: maxLines,
           decoration: InputDecoration(
+            alignLabelWithHint: true,
             helperText: helperText,
             hintText: hintText,
             labelText: labelText,

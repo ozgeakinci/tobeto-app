@@ -8,7 +8,6 @@ import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/screens/menu/reviews.dart';
 import 'package:tobeto_app/view/widgets/big_button.dart';
-import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/info_banner_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -273,32 +272,54 @@ class HomePage extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                                state.username.isNotEmpty
-                                    ? 'Hoşgeldin ${state.username} 🖐️'
-                                    : 'Hoşgeldin Kullanıcı',
-                                style: Theme.of(context).textTheme.titleLarge),
-                            const SizedBox(
-                              height: 4,
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  right: ProjectUtilities.projectHeight_24),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                      state.username.isNotEmpty ||
+                                              state.greeting.isNotEmpty
+                                          ? '${state.greeting} ${state.username} 🖐️'
+                                          : 'Hoşgeldin Kullanıcı',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge),
+                                  state.urlImage != null
+                                      ? CircleAvatar(
+                                          radius: 20,
+                                          backgroundColor: Colors.grey,
+                                          backgroundImage:
+                                              NetworkImage(state.urlImage!),
+                                        )
+                                      : CircleAvatar(
+                                          radius: 20,
+                                          child: Icon(Icons.person),
+                                          backgroundColor: isDarkMode
+                                              ? TobetoAppColor
+                                                  .inputDarkBackground
+                                              : TobetoAppColor.buttonColorLight,
+                                        ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              'Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(color: TobetoAppColor.textColor),
-                            )
                           ]),
                     ),
                     SizedBox(
                       height: ProjectUtilities.projectHeight_8,
                     ),
-                    InfoBannerCard(
-                      title: '',
-                      subtitle:
-                          'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al. Aradığın “İş” Burada!',
-                      color: TobetoAppColor.colorSchemeLight.secondary,
-                      button: Image.asset('assets/images/hello_tobeto.png'),
+                    Container(
+                      child: InfoBannerCard(
+                        subtitle:
+                            'Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al. Aradığın “İş” Burada!',
+                        color: TobetoAppColor.colorSchemeLight.secondary,
+                        button: SizedBox(
+                            height: 120,
+                            child:
+                                Image.asset('assets/images/hello_tobeto.png')),
+                      ),
                     ),
                     SizedBox(
                       height: ProjectUtilities.projectHeight_8,
@@ -416,7 +437,7 @@ class HomePage extends StatelessWidget {
               );
             }
           } else {
-            return const Center(child: Text("Unknown State"));
+            return const Center(child: Text("Yükleniyor....."));
           }
         },
       ),
