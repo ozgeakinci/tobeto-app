@@ -269,6 +269,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                             child: Icon(Icons.info)),
                                         alignLabelWithHint: true,
                                         labelText: 'Hakkımda',
+                                        filled: true,
                                         fillColor: isDarkMode
                                             ? TobetoAppColor.inputDarkBackground
                                             : TobetoAppColor.backgroundLight,
@@ -293,6 +294,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                         labelText: 'Telefon Numaranız',
                                         hintText: '905434303212',
                                         prefixIcon: Icon(Icons.phone),
+                                        filled: true,
                                         fillColor: isDarkMode
                                             ? TobetoAppColor.inputDarkBackground
                                             : TobetoAppColor.backgroundLight,
@@ -375,7 +377,10 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                                 SnackBar(
                                                   content: Text(
                                                       "Bilgileriniz başarıyla kaydedildi."),
-                                                  backgroundColor: Colors.green,
+                                                  backgroundColor:
+                                                      TobetoAppColor
+                                                          .colorSchemeLight
+                                                          .secondary,
                                                   duration:
                                                       Duration(seconds: 1),
                                                 ),
@@ -386,7 +391,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                                 content: Text(
                                                     "Güncel bilgi bulunamadı."),
                                                 backgroundColor: Colors.red,
-                                                duration: Duration(seconds: 1),
+                                                duration: Duration(seconds: 5),
                                               ));
                                               setState(() {
                                                 _isFormChanged = false;

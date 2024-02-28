@@ -8,7 +8,7 @@ import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 import 'package:tobeto_app/view/widgets/save_cancel_button.dart';
-import 'package:tobeto_app/view/widgets/skills_card.dart';
+import 'package:tobeto_app/view/widgets/skill_card.dart';
 
 class Skills extends StatefulWidget {
   const Skills({Key? key}) : super(key: key);
@@ -43,7 +43,7 @@ class _SkillsState extends State<Skills> {
         if (state is UserLoaded) {
           return ListView.builder(
               itemCount: state.skills != null ? state.skills!.length : 0,
-              itemBuilder: ((context, index) => SkillsCard(
+              itemBuilder: ((context, index) => SkillCard(
                   title: Text(
                     state.skills![index],
                   ),

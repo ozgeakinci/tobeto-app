@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 
-import 'package:tobeto_app/view/widgets/skills_card.dart';
+import 'package:tobeto_app/view/widgets/skill_card.dart';
 
 class TobetoLevelTest extends StatelessWidget {
   const TobetoLevelTest({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class TobetoLevelTest extends StatelessWidget {
         title: 'Tobeto Seviye Testlerim',
       ),
       body: ListView(children: [
-        SkillsCard(
+        SkillCard(
           icon: Text(
             "84.00",
             style: CardTextStyle.textStyle,
@@ -22,7 +22,7 @@ class TobetoLevelTest extends StatelessWidget {
           title: const Text('Front-End'),
           subTitle: const Text("05.10.2023"),
         ),
-        SkillsCard(
+        SkillCard(
           icon: Text(
             "68.00",
             style: CardTextStyle.textStyle,

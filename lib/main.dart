@@ -11,10 +11,8 @@ import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/firebase_options.dart';
 import 'package:tobeto_app/theme/tobeto_theme.dart';
 import 'package:tobeto_app/view/screens/splash_screen.dart';
-import 'package:tobeto_app/view/screens/start_page.dart';
 
 void main() async {
-  print("Run Run Run");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 

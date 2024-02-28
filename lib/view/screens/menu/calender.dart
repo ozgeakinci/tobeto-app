@@ -8,7 +8,7 @@ import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
-import 'package:tobeto_app/view/widgets/skills_card.dart';
+import 'package:tobeto_app/view/widgets/skill_card.dart';
 
 class Calender extends StatefulWidget {
   @override
@@ -134,7 +134,7 @@ class _MyHomePageState extends State<Calender> {
                             itemBuilder: (BuildContext context, int index) {
                               var event =
                                   _getEventsForDay(_selectedDay!)[index];
-                              return SkillsCard(
+                              return SkillCard(
                                 title: Text(event.toString()),
                                 subTitle: Text(
                                     '${_selectedDay!.day}/${_selectedDay!.month}/${_selectedDay!.year}'),

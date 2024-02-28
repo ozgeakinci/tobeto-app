@@ -8,7 +8,7 @@ import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 import 'package:tobeto_app/view/widgets/save_cancel_button.dart';
-import 'package:tobeto_app/view/widgets/skills_card.dart';
+import 'package:tobeto_app/view/widgets/skill_card.dart';
 
 class ForeignLanguage extends StatelessWidget {
   const ForeignLanguage({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class ForeignLanguage extends StatelessWidget {
             return ListView.builder(
                 itemCount:
                     state.languages != null ? state.languages!.length : 0,
-                itemBuilder: (context, index) => SkillsCard(
+                itemBuilder: (context, index) => SkillCard(
                     icon: Image.asset("assets/images/world_icon.png"),
                     title: Text(state.languages![index].language),
                     subTitle: Text(state.languages![index].level),

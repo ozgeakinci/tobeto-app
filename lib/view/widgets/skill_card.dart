@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 
-class SkillsCard extends StatelessWidget {
-  const SkillsCard(
+class SkillCard extends StatelessWidget {
+  const SkillCard(
       {Key? key,
       this.icon,
       this.textButton,
@@ -21,7 +21,11 @@ class SkillsCard extends StatelessWidget {
       padding: ProjectUtilities.skillsCardPadding,
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.only(left: 8, right: 0, top: 8, bottom: 8),
+          padding: EdgeInsets.only(
+              left: ProjectUtilities.sizeWidth_8,
+              right: 0,
+              top: ProjectUtilities.projectHeight_8,
+              bottom: ProjectUtilities.projectHeight_8),
           child: ListTile(
               dense: true,
               leading: icon,
