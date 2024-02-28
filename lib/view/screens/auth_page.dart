@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tobeto_app/language/language_items.dart';
 import 'package:tobeto_app/view/screens/login_page.dart';
 import 'package:tobeto_app/view/screens/register_page.dart';
@@ -12,9 +13,21 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   bool _isLogin = true;
+
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    isDarkMode
+        ? SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle.light.copyWith(
+            statusBarColor: Colors.transparent,
+            statusBarBrightness: Brightness.dark,
+          ))
+        : SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle.dark.copyWith(
+            statusBarColor: Colors.transparent,
+            statusBarBrightness: Brightness.dark,
+          ));
     Widget formWidget = _isLogin ? const LoginPage() : const RegisterPage();
     return Scaffold(
         body: SingleChildScrollView(
@@ -35,7 +48,7 @@ class _AuthPageState extends State<AuthPage> {
               child: formWidget,
             ),
             const SizedBox(
-              height: 50,
+              height: 8,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,

@@ -4,6 +4,7 @@ import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/bloc/auth/auth_state.dart';
 import 'package:tobeto_app/language/language_items.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
 
@@ -34,6 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthBloc>(context);
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     final _formKey = GlobalKey<FormState>();
     String _email = '';
@@ -62,13 +64,18 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                  height: ProjectUtilities.projectHeight_32,
+                  height: ProjectUtilities.projectHeight_16,
                 ),
                 CustomTextField(
-                    onSaved: (value) => _username = value!,
-                    labelText: LanguageItems.hintNameText,
-                    prefixIcon: Icons.person_2_rounded),
+                  externalPadding:
+                      EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  onSaved: (value) => _username = value!,
+                  labelText: LanguageItems.hintNameText,
+                  prefixIcon: Icons.person_2_rounded,
+                ),
                 CustomTextField(
+                  externalPadding:
+                      EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   onSaved: (value) => _email = value!,
                   keyboardType: TextInputType.emailAddress,
                   labelText: LanguageItems.hintEmailText,
@@ -83,6 +90,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                 ),
                 CustomTextField(
+                  externalPadding:
+                      EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   onSaved: (value) => _password = value!,
                   labelText: LanguageItems.hintTextPassword,
                   prefixIcon: Icons.lock,
@@ -90,12 +99,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   maxLines: 1,
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.89,
-                  height: 100, // TextFormField'ın yüksekliği ile aynı olabilir
+                  width: MediaQuery.of(context).size.width * 0.92,
+                  height: 80,
                   child: Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: DropdownButtonFormField<String>(
+                      dropdownColor: isDarkMode
+                          ? TobetoAppColor.inputDarkBackground
+                          : TobetoAppColor.backgroundLight,
                       value: _department,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -103,12 +115,44 @@ class _RegisterPageState extends State<RegisterPage> {
                         }
                         return null;
                       },
-                      hint: const Text('Ders Türünü Seçiniz'),
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: isDarkMode
+                              ? TobetoAppColor.inputDarkBackground
+                              : TobetoAppColor.backgroundLight,
+                          prefixIcon: Icon(Icons.cast_for_education),
+                          border: OutlineInputBorder(
+                            borderSide: isDarkMode
+                                ? BorderSide.none
+                                : BorderSide(color: TobetoAppColor.textColor),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: isDarkMode
+                                ? BorderSide.none
+                                : BorderSide(color: TobetoAppColor.textColor),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: isDarkMode
+                                  ? BorderSide.none
+                                  : BorderSide(color: TobetoAppColor.textColor),
+                              borderRadius: BorderRadius.circular(8))),
+                      hint: Text(
+                        'Ders Türünü Seçiniz',
+                        style: TextStyle(color: TobetoAppColor.textColor),
+                      ),
                       onSaved: (value) => _department = value!,
                       items: departmentList.map((type) {
                         return DropdownMenuItem<String>(
                           value: type,
-                          child: Text(type),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            type,
+                            style: TextStyle(
+                              color: TobetoAppColor.textColor,
+                            ),
+                          ),
                         );
                       }).toList(),
                       onChanged: (String? value) {},
@@ -116,12 +160,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 SizedBox(
-                  height: ProjectUtilities.paddingAll_8,
+                  height: ProjectUtilities.projectHeight_16,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      fixedSize: Size(MediaQuery.of(context).size.width * 0.89,
-                          MediaQuery.of(context).size.height * 0.064)),
+                      fixedSize: Size(MediaQuery.of(context).size.width * 0.84,
+                          MediaQuery.of(context).size.height * 0.067)),
                   onPressed: () {
                     _submit();
 

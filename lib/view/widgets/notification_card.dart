@@ -28,7 +28,7 @@ class NotificationCard extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Image.network(department.image),
+              child: Image.asset('assets/images/message_icon.png'),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ class NotificationCard extends StatelessWidget {
                     Row(
                       children: [
                         if (department.subImage!.isNotEmpty)
-                          Image.network(department.subImage!),
+                          Image.asset('assets/images/time_icon.png'),
                         const SizedBox(width: 6),
                         Text(
                           department.date,

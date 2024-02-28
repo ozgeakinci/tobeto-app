@@ -17,6 +17,7 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   final String? helperText;
   final int? maxLength;
+  final EdgeInsetsGeometry? externalPadding;
 
   const CustomTextField(
       {Key? key,
@@ -33,7 +34,8 @@ class CustomTextField extends StatelessWidget {
       this.customValidator,
       this.hintText,
       this.helperText,
-      this.maxLength})
+      this.maxLength,
+      this.externalPadding})
       : super(key: key);
 
   String? _validateInput(String? value, String fieldName) {
@@ -48,12 +50,11 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.92,
+      width: MediaQuery.of(context).size.width * 0.88,
       height: height,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: ProjectUtilities.projectHeight_8,
-            vertical: ProjectUtilities.sizeWidth_16),
+        padding: externalPadding ??
+            EdgeInsets.symmetric(horizontal: 8, vertical: 10),
         child: TextFormField(
           maxLength: maxLength,
           enabled: enabled,
@@ -91,7 +92,8 @@ class CustomTextField extends StatelessWidget {
                 : TobetoAppColor.backgroundLight,
             border: OutlineInputBorder(
                 borderSide: isDarkMode ? BorderSide.none : BorderSide(),
-                borderRadius: BorderRadius.all(Radius.circular(8))),
+                borderRadius: BorderRadius.all(
+                    Radius.circular(ProjectUtilities.paddingAll_8))),
             prefixIcon: Icon(prefixIcon),
           ),
         ),

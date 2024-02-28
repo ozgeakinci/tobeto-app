@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            height: ProjectUtilities.projectHeight_32,
+            height: ProjectUtilities.projectHeight_24,
           ),
           CustomTextField(
             onSaved: (value) => _email = value!,
@@ -83,8 +83,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.89,
-                    MediaQuery.of(context).size.height * 0.064)),
+                fixedSize: Size(MediaQuery.of(context).size.width * 0.84,
+                    MediaQuery.of(context).size.height * 0.067)),
             onPressed: () {
               if (authBloc.errorMessages != null) {
                 ScaffoldMessenger.of(context).showSnackBar(
