@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/utilities/utilities.dart';
 
 class CustomTextField extends StatelessWidget {
   final String labelText;
@@ -50,7 +51,9 @@ class CustomTextField extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.92,
       height: height,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+        padding: EdgeInsets.symmetric(
+            horizontal: ProjectUtilities.projectHeight_8,
+            vertical: ProjectUtilities.sizeWidth_16),
         child: TextFormField(
           maxLength: maxLength,
           enabled: enabled,

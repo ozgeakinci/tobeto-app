@@ -112,15 +112,12 @@ void _showAddSkillsBottomSheet(
                   height: ProjectUtilities.projectHeight_8,
                 ),
                 Divider(),
-                SizedBox(
-                  height: ProjectUtilities.projectHeight_16,
-                ),
                 CustomTextField(
                   labelText: 'Yetenek ekle',
                   onSaved: (value) => skills = value!.split(','),
                 ),
                 SizedBox(
-                  height: ProjectUtilities.projectHeight_64,
+                  height: ProjectUtilities.projectHeight_32,
                 ),
                 SaveCancelButton(onCancel: () {
                   Navigator.pop(context);
@@ -135,44 +132,6 @@ void _showAddSkillsBottomSheet(
                     Navigator.pop(context);
                   }
                 }),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     ElevatedButton(
-                //         style: ElevatedButton.styleFrom(
-                //             shape: RoundedRectangleBorder(
-                //               borderRadius: BorderRadius.circular(
-                //                   8.0), // İstediğiniz border radius'u belirleyebilirsiniz.
-                //               side: BorderSide(
-                //                   color: TobetoAppColor
-                //                       .textColor), // Border'ı belirleyebilirsiniz.
-                //             ),
-                //             elevation: 0,
-                //             backgroundColor: TobetoAppColor.buttonColorLight,
-                //             foregroundColor:
-                //                 TobetoAppColor.primaryBackgroundColor,
-                //             fixedSize: Size(175, 45)),
-                //         onPressed: () {
-                //           Navigator.pop(context);
-                //         },
-                //         child: Text('Vazgeç')),
-                //     ElevatedButton(
-                //       style: ElevatedButton.styleFrom(fixedSize: Size(175, 45)),
-                //       onPressed: () {
-                //         if (_formKey.currentState!.validate()) {
-                //           _formKey.currentState!.save();
-
-                //           context
-                //               .read<UserBloc>()
-                //               .add(AddSkills(addedSkills: skills));
-
-                //           Navigator.pop(context);
-                //         }
-                //       },
-                //       child: Text('Kaydet'),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),

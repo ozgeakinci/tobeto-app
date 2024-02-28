@@ -30,8 +30,9 @@ class _PersonalInfoState extends State<PersonalInfo> {
   String? _urlImage;
   DateTime? _selectedDate;
   int _phoneNumber = 90;
-
+  String _userName = '';
   File? _pickedFile;
+  bool _isFormChanged = false;
 
   Future<XFile?> _pickImage() async {
     return await ImagePicker()
@@ -183,91 +184,135 @@ class _PersonalInfoState extends State<PersonalInfo> {
                             ),
                           ),
                           Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  CustomTextField(
-                                    labelText: 'Adınız Soyadınız*',
-                                    initialValue: state.username,
-                                    enabled: false,
-                                  ),
-                                  CustomTextField(
-                                    labelText: 'E-Posta*',
-                                    enabled: false,
-                                    initialValue: state.email,
-                                  ),
-                                  CustomTextField(
-                                    labelText: 'Bölüm',
-                                    initialValue: state.department,
-                                    enabled: false,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Stack(
-                                          children: [
-                                            CustomTextField(
-                                                labelText: _selectedDate
-                                                        ?.toString()
-                                                        .split(' ')
-                                                        .first ??
-                                                    'Doğum Tarihi',
-                                                initialValue: state.birthDate
-                                                    .toString()
+                            onChanged: () {
+                              setState(() {
+                                _isFormChanged = true;
+                              });
+                            },
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                CustomTextField(
+                                  labelText: 'Adınız Soyadınız*',
+                                  initialValue: state.username,
+                                  onSaved: (value) => _userName = value!,
+                                  prefixIcon: Icons.person,
+                                ),
+                                CustomTextField(
+                                  labelText: 'E-Posta*',
+                                  enabled: false,
+                                  initialValue: state.email,
+                                  prefixIcon: Icons.mail,
+                                ),
+                                CustomTextField(
+                                  labelText: 'Bölüm',
+                                  initialValue: state.department,
+                                  enabled: false,
+                                  prefixIcon: Icons.business_sharp,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Stack(
+                                        children: [
+                                          CustomTextField(
+                                            prefixIcon: Icons.date_range,
+                                            labelText: _selectedDate
+                                                    ?.toString()
                                                     .split(' ')
-                                                    .first),
-                                            Positioned(
-                                              right: 20,
-                                              top: 0,
-                                              bottom: 0,
-                                              child: IconButton(
-                                                icon: const Icon(
-                                                    Icons.calendar_month),
-                                                onPressed: () async {
-                                                  DateTime? pickedDate =
-                                                      await showDatePicker(
-                                                    context: context,
-                                                    initialDate: DateTime.now(),
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime.now(),
-                                                  );
+                                                    .first ??
+                                                'Doğum Tarihi',
+                                            initialValue: state.birthDate
+                                                .toString()
+                                                .split(' ')
+                                                .first,
+                                          ),
+                                          Positioned(
+                                            right: 20,
+                                            top: 0,
+                                            bottom: 0,
+                                            child: IconButton(
+                                              icon: const Icon(
+                                                  Icons.calendar_month),
+                                              onPressed: () async {
+                                                DateTime? pickedDate =
+                                                    await showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime(1900),
+                                                  lastDate: DateTime.now(),
+                                                );
 
-                                                  if (pickedDate != null) {
-                                                    setState(() {
-                                                      _selectedDate =
-                                                          pickedDate;
-                                                    });
-                                                  }
-                                                },
-                                              ),
+                                                if (pickedDate != null) {
+                                                  setState(() {
+                                                    _selectedDate = pickedDate;
+                                                  });
+                                                }
+                                              },
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        ProjectUtilities.projectHeight_8,
+                                    vertical: ProjectUtilities.sizeWidth_16,
                                   ),
-                                  CustomTextField(
-                                    labelText: 'Hakkımda',
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                        prefixIcon: Padding(
+                                            padding: EdgeInsets.only(top: 0),
+                                            child: Icon(Icons.info)),
+                                        alignLabelWithHint: true,
+                                        labelText: 'Hakkımda',
+                                        fillColor: isDarkMode
+                                            ? TobetoAppColor.inputDarkBackground
+                                            : TobetoAppColor.backgroundLight,
+                                        border: OutlineInputBorder(
+                                            borderSide: isDarkMode
+                                                ? BorderSide.none
+                                                : BorderSide(),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8)))),
                                     initialValue: state.about,
                                     onSaved: (value) => _about = value!,
-                                    maxLines: 4,
+                                    maxLines: 1,
                                   ),
-                                  CustomTextField(
-                                    labelText: 'Telefon Numaranız',
-                                    hintText: '05434303212',
-                                    maxLength: 11,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          ProjectUtilities.projectHeight_8,
+                                      vertical: ProjectUtilities.sizeWidth_16),
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                        labelText: 'Telefon Numaranız',
+                                        hintText: '905434303212',
+                                        prefixIcon: Icon(Icons.phone),
+                                        fillColor: isDarkMode
+                                            ? TobetoAppColor.inputDarkBackground
+                                            : TobetoAppColor.backgroundLight,
+                                        border: OutlineInputBorder(
+                                            borderSide: isDarkMode
+                                                ? BorderSide.none
+                                                : BorderSide(),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8)))),
+                                    maxLength: 12,
                                     initialValue: state.phoneNumber.toString(),
                                     keyboardType: TextInputType.phone,
-                                    customValidator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Telefon numarası boş olamaz';
-                                      } else if (value.length != 11) {
-                                        return 'Telefon numarası 10 haneli olmalıdır';
-                                      }
-                                      // Telefon numarasının sadece rakamlardan oluştuğunu kontrol et
-                                      else if (!RegExp(r'^[0-9]+$')
-                                          .hasMatch(value)) {
-                                        return 'Telefon numarası sadece rakamlardan oluşmalıdır';
+                                    validator: (value) {
+                                      if (value != null && value.isNotEmpty) {
+                                        if (value.length != 12) {
+                                          return 'Telefon numarası 12 haneli olmalıdır';
+                                        } else if (!RegExp(r'^[0-9]+$')
+                                            .hasMatch(value)) {
+                                          return 'Telefon numarası sadece rakamlardan oluşmalıdır';
+                                        }
                                       }
                                       return null; // Hata yoksa null döndür
                                     },
@@ -280,65 +325,79 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                       }
                                     },
                                   ),
-                                  SizedBox(
-                                      height:
-                                          ProjectUtilities.projectHeight_24),
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        if (_formKey.currentState!.validate()) {
-                                          _formKey.currentState!.save();
-                                        }
+                                ),
+                                SizedBox(
+                                    height: ProjectUtilities.projectHeight_24),
+                                ElevatedButton(
+                                    onPressed: _isFormChanged
+                                        ? () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              _formKey.currentState!.save();
+                                            }
 
-                                        UserModel updatedUser = UserModel(
-                                            username: state.username,
-                                            department: state.department,
-                                            email: state.email,
-                                            applicationStatus:
-                                                state.applicationStatus,
-                                            about: _about,
-                                            birthDate: _selectedDate != null
-                                                ? _selectedDate!
-                                                : state.birthDate,
-                                            phoneNumber: _phoneNumber,
-                                            userImage: _pickedFile != null
-                                                ? _urlImage
-                                                : state.urlImage,
-                                            experiences: state.experiences,
-                                            userEducations:
-                                                state.userEducations,
-                                            skills: state.skills,
-                                            languages: state.languages);
+                                            UserModel updatedUser = UserModel(
+                                                username: _userName != null
+                                                    ? _userName
+                                                    : state.username,
+                                                department: state.department,
+                                                email: state.email,
+                                                applicationStatus:
+                                                    state.applicationStatus,
+                                                about: _about,
+                                                birthDate: _selectedDate != null
+                                                    ? _selectedDate!
+                                                    : state.birthDate,
+                                                phoneNumber: _phoneNumber,
+                                                userImage: _pickedFile != null
+                                                    ? _urlImage
+                                                    : state.urlImage,
+                                                experiences: state.experiences,
+                                                userEducations:
+                                                    state.userEducations,
+                                                skills: state.skills,
+                                                languages: state.languages);
 
-                                        context.read<UserBloc>().add(
-                                            SendUserInfo(user: updatedUser));
+                                            context.read<UserBloc>().add(
+                                                SendUserInfo(
+                                                    user: updatedUser));
 
-                                        if ((state.about != updatedUser.about ||
-                                            state.birthDate !=
-                                                updatedUser.birthDate ||
-                                            state.phoneNumber !=
-                                                updatedUser.phoneNumber)) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                  "Bilgileriniz başarıyla kaydedildi."),
-                                              backgroundColor: Colors.green,
-                                              duration: Duration(seconds: 1),
-                                            ),
-                                          );
-                                        } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                            content: Text(
-                                                "Güncel bilgi bulunamadı."),
-                                            backgroundColor: Colors.red,
-                                            duration: Duration(seconds: 1),
-                                          ));
-                                        }
-                                      },
-                                      child: const Text('Kaydet'))
-                                ],
-                              ))
+                                            if ((state.username !=
+                                                    updatedUser.username ||
+                                                state.about !=
+                                                    updatedUser.about ||
+                                                state.birthDate !=
+                                                    updatedUser.birthDate ||
+                                                state.phoneNumber !=
+                                                    updatedUser.phoneNumber)) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                      "Bilgileriniz başarıyla kaydedildi."),
+                                                  backgroundColor: Colors.green,
+                                                  duration:
+                                                      Duration(seconds: 1),
+                                                ),
+                                              );
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "Güncel bilgi bulunamadı."),
+                                                backgroundColor: Colors.red,
+                                                duration: Duration(seconds: 1),
+                                              ));
+                                              setState(() {
+                                                _isFormChanged = false;
+                                              });
+                                            }
+                                          }
+                                        : null,
+                                    child: const Text('Kaydet'))
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),

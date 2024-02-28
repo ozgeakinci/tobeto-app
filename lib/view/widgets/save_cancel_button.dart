@@ -11,6 +11,8 @@ class SaveCancelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double buttonWidth = screenWidth * 0.4;
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -30,7 +32,7 @@ class SaveCancelButton extends StatelessWidget {
                   ? TobetoAppColor.inputDarkBackground
                   : TobetoAppColor.backgroundLight,
               foregroundColor: TobetoAppColor.selecetedItemColor,
-              fixedSize: Size(160, 45),
+              fixedSize: Size(buttonWidth, 45),
             ),
             onPressed: onCancel,
             child: Text('Vazgeç'),
@@ -39,7 +41,7 @@ class SaveCancelButton extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(fixedSize: Size(160, 45)),
+            style: ElevatedButton.styleFrom(fixedSize: Size(buttonWidth, 45)),
             onPressed: onSave,
             child: Text('Kaydet'),
           ),

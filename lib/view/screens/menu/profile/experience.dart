@@ -147,24 +147,15 @@ void _showAddExperienceBottomSheet(
                   labelText: 'Kurum Adı',
                   onSaved: (value) => _organizationName = value!,
                 ),
-                SizedBox(
-                  height: ProjectUtilities.projectHeight_16,
-                ),
                 CustomTextField(
                   labelText: 'Pozisyon',
                   onSaved: (value) => _position = value!,
-                ),
-                SizedBox(
-                  height: ProjectUtilities.projectHeight_16,
                 ),
                 CustomTextField(
                   labelText: 'İşe Giriş Tarihiı',
                   hintText: 'Gün/Ay/Yıl',
                   onSaved: (value) => _startDate = value!,
                   keyboardType: TextInputType.datetime,
-                ),
-                SizedBox(
-                  height: ProjectUtilities.projectHeight_16,
                 ),
                 CustomTextField(
                   labelText: 'İşten Çıkış Tarihi',
@@ -173,7 +164,7 @@ void _showAddExperienceBottomSheet(
                   keyboardType: TextInputType.datetime,
                 ),
                 SizedBox(
-                  height: ProjectUtilities.projectHeight_64,
+                  height: ProjectUtilities.projectHeight_32,
                 ),
                 SaveCancelButton(onCancel: () {
                   Navigator.pop(context);

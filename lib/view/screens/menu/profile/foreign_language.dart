@@ -93,22 +93,16 @@ void _showAddLanguagesBottomSheet(
                   height: ProjectUtilities.projectHeight_8,
                 ),
                 Divider(),
-                SizedBox(
-                  height: ProjectUtilities.projectHeight_16,
-                ),
                 CustomTextField(
                   labelText: 'Dil',
                   onSaved: (value) => _languageName = value!,
-                ),
-                SizedBox(
-                  height: ProjectUtilities.projectHeight_16,
                 ),
                 CustomTextField(
                   labelText: 'Seviye',
                   onSaved: (value) => _languageLevel = value!,
                 ),
                 SizedBox(
-                  height: ProjectUtilities.projectHeight_64,
+                  height: ProjectUtilities.projectHeight_32,
                 ),
                 SaveCancelButton(onCancel: () {
                   Navigator.pop(context);

@@ -105,24 +105,15 @@ void _showAddEducationLifeBottomSheet(
                   labelText: 'Okul Adı ',
                   onSaved: (value) => _schoolName = value!,
                 ),
-                SizedBox(
-                  height: ProjectUtilities.projectHeight_16,
-                ),
                 CustomTextField(
                   labelText: 'Bölümü',
                   onSaved: (value) => _department = value!,
-                ),
-                SizedBox(
-                  height: ProjectUtilities.projectHeight_16,
                 ),
                 CustomTextField(
                   hintText: 'Yıl',
                   labelText: 'Başlangıç Tarihi',
                   onSaved: (value) => _startDate = value!,
                   keyboardType: TextInputType.datetime,
-                ),
-                SizedBox(
-                  height: ProjectUtilities.projectHeight_16,
                 ),
                 CustomTextField(
                   hintText: 'Yıl',
@@ -131,7 +122,7 @@ void _showAddEducationLifeBottomSheet(
                   keyboardType: TextInputType.datetime,
                 ),
                 SizedBox(
-                  height: ProjectUtilities.projectHeight_64,
+                  height: ProjectUtilities.projectHeight_32,
                 ),
                 SaveCancelButton(onCancel: () {
                   Navigator.pop(context);
