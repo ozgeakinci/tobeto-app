@@ -106,7 +106,7 @@ class _MyHomePageState extends State<Calender> {
                             shape: BoxShape.circle),
                         selectedDecoration: BoxDecoration(
                           color: TobetoAppColor.primaryBackgroundColor
-                              .withOpacity(0.7),
+                              .withOpacity(0.4),
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -114,6 +114,9 @@ class _MyHomePageState extends State<Calender> {
                         setState(() {
                           _calendarFormat = format;
                         });
+                      },
+                      selectedDayPredicate: (day) {
+                        return isSameDay(_selectedDay, day);
                       },
                       onDaySelected: (selectedDay, focusedDay) {
                         setState(() {
