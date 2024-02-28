@@ -43,6 +43,13 @@ class EducationalCard extends StatelessWidget {
                 Image.network(
                   department.imageURL,
                   fit: BoxFit.fill,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
                 ),
               ],
             ),

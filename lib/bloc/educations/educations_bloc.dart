@@ -6,6 +6,7 @@ import 'package:tobeto_app/repositories/user_repositories.dart';
 class EducationsBloc extends Bloc<EducationsEvent, EducationsState> {
   EducationsBloc() : super(EducationsInitial()) {
     on<FetchEducationsRequested>((event, emit) async {
+      emit(EducationsLoading());
       try {
         final departmentInfo = await UserRepositories()
             .getDepartmentInfoFromFirebase(event.department);

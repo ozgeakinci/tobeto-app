@@ -27,7 +27,16 @@ class Educations extends StatelessWidget {
               FetchEducationsRequested(department: userBloc.userDepartment!));
         }
 
-        if (state is EducationsLoading) {}
+        if (state is EducationsLoading) {
+          return Center(
+            child: Transform.scale(
+              scale: 3,
+              child: const CircularProgressIndicator(
+                strokeWidth: 1,
+              ),
+            ),
+          );
+        }
 
         if (state is EducationsLoaded) {
           return ListView.builder(
