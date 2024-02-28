@@ -20,6 +20,8 @@ class Skills extends StatefulWidget {
 class _SkillsState extends State<Skills> {
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: CustomAppbar(
         title: 'Yetkinliklerim',
@@ -31,38 +33,77 @@ class _SkillsState extends State<Skills> {
               icon: Icon(Icons.add))
         ],
       ),
-      body: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-        if (state is UserInitial) {
-          context.read<UserBloc>().add(FetchUserRequested());
-        }
-        if (state is UserLoading) {
-          const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (state is UserLoaded) {
-          return ListView.builder(
-              itemCount: state.skills != null ? state.skills!.length : 0,
-              itemBuilder: ((context, index) => SkillCard(
-                  title: Text(
-                    state.skills![index],
-                  ),
-                  icon: Icon(Icons.work_outline_outlined,
-                      color: ColorScheme.dark().secondary),
-                  textButton: TextButton(
-                      onPressed: () {
-                        String deletedSkill = state.skills![index];
-                        context
-                            .read<UserBloc>()
-                            .add(DeleteSkills(deletedSkills: deletedSkill));
-                      },
-                      child: Image.asset('assets/images/delete_icon.png')))));
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      }),
+      body: BlocBuilder<UserBloc, UserState>(
+        builder: (context, state) {
+          if (state is UserInitial) {
+            context.read<UserBloc>().add(FetchUserRequested());
+          }
+          if (state is UserLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is UserLoaded) {
+            print("State Skill");
+            print(state.skills);
+            if (state.skills != null && state.skills!.isNotEmpty) {
+              print("if girdi");
+              return ListView.builder(
+                  itemCount: state.skills != null ? state.skills!.length : 0,
+                  itemBuilder: ((context, index) => SkillCard(
+                      title: Text(
+                        state.skills![index],
+                      ),
+                      icon: Icon(Icons.work_outline_outlined,
+                          color: ColorScheme.dark().secondary),
+                      textButton: TextButton(
+                          onPressed: () {
+                            String deletedSkill = state.skills![index];
+                            context
+                                .read<UserBloc>()
+                                .add(DeleteSkills(deletedSkills: deletedSkill));
+                          },
+                          child:
+                              Image.asset('assets/images/delete_icon.png')))));
+            } else {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/survey_image.png',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Yetkinlik Bulunmamakta!",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Text(
+                      "Eklenmiş herhangi bir yetkinlik bulunamadı",
+                      style: TextStyle(
+                          color: isDarkMode
+                              ? TobetoAppColor.textColorDark
+                              : TobetoAppColor.colorSchemeLight.primary),
+                    ),
+                  ],
+                ),
+              );
+            }
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
     );
   }
 }

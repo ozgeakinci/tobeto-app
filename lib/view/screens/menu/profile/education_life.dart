@@ -4,6 +4,7 @@ import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/education_model.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
@@ -15,6 +16,8 @@ class EducationLife extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
         appBar: CustomAppbar(
           title: 'Eğitim Hayatım ',
@@ -28,23 +31,58 @@ class EducationLife extends StatelessWidget {
         ),
         body: BlocBuilder<UserBloc, UserState>(builder: ((context, state) {
           if (state is UserLoaded) {
-            return ListView.builder(
-                itemCount: state.userEducations != null
-                    ? state.userEducations!.length
-                    : 0,
-                itemBuilder: (context, index) => ExperienceCard(
-                    icon: Image.asset("assets/images/education_icon.png"),
-                    title: Text(state.userEducations![index].schoolName),
-                    subTitle: Text(state.userEducations![index].department),
-                    startDate: Text(state.userEducations![index].startDate),
-                    finishDate: Text(state.userEducations![index].endDate),
-                    textButton: TextButton(
-                        onPressed: () {
-                          context
-                              .read<UserBloc>()
-                              .add(DeleteEducation(index: index));
-                        },
-                        child: Image.asset('assets/images/delete_icon.png'))));
+            if (state.userEducations != null &&
+                state.userEducations!.isNotEmpty) {
+              return ListView.builder(
+                  itemCount: state.userEducations != null
+                      ? state.userEducations!.length
+                      : 0,
+                  itemBuilder: (context, index) => ExperienceCard(
+                      icon: Image.asset("assets/images/education_icon.png"),
+                      title: Text(state.userEducations![index].schoolName),
+                      subTitle: Text(state.userEducations![index].department),
+                      startDate: Text(state.userEducations![index].startDate),
+                      finishDate: Text(state.userEducations![index].endDate),
+                      textButton: TextButton(
+                          onPressed: () {
+                            context
+                                .read<UserBloc>()
+                                .add(DeleteEducation(index: index));
+                          },
+                          child:
+                              Image.asset('assets/images/delete_icon.png'))));
+            } else {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/survey_image.png',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Eğitim Bulunmamakta!",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Text(
+                      "Eklenmiş herhangi eğitim yetkinlik bulunamadı",
+                      style: TextStyle(
+                          color: isDarkMode
+                              ? TobetoAppColor.textColorDark
+                              : TobetoAppColor.colorSchemeLight.primary),
+                    ),
+                  ],
+                ),
+              );
+            }
           } else {
             return const Center(
               child: CircularProgressIndicator(),
