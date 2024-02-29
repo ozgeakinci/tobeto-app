@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_bloc.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_event.dart';
 import 'package:tobeto_app/bloc/catalog/catalog_state.dart';
+import 'package:tobeto_app/theme/tobeto_theme_color.dart';
 import 'package:tobeto_app/view/widgets/catalog_video_card.dart';
 
 class Catalog extends StatefulWidget {
@@ -40,11 +41,19 @@ class _CatalogState extends State<Catalog> {
                 onChanged: (_) {
                   setState(() {});
                 },
-                decoration: InputDecoration(
-                  hintText: 'Ara...',
-                  hintStyle: TextStyle(color: Colors.white),
-                  border: InputBorder.none,
+                style: TextStyle(
+                  color: TobetoAppColor.backgroundLight,
+                  fontSize: 20,
+                  decoration: TextDecoration.none,
+                  decorationColor: Colors.transparent,
                 ),
+                decoration: InputDecoration(
+                    hintText: 'Ara...',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    border: InputBorder.none,
+                    focusColor: Colors.white),
               )
             : Text(
                 'Katalog',

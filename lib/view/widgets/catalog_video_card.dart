@@ -65,6 +65,7 @@ class CatalogVideoCard extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (ctx) => LessonVideo(
+                          videoTitle: catalogItem.videoName,
                           videoUrl: catalogItem.videoUrl,
                         )));
               },

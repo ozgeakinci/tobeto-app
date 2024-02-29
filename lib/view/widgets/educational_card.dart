@@ -63,6 +63,7 @@ class EducationalCard extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (ctx) => LessonVideo(
+                          videoTitle: department.videoName,
                           videoUrl: department.videoUrl,
                         )));
               },
