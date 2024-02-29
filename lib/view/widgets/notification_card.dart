@@ -45,8 +45,7 @@ class NotificationCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        if (department.subImage!.isNotEmpty)
-                          Image.asset('assets/images/time_icon.png'),
+                        Image.asset('assets/images/time_icon.png'),
                         const SizedBox(width: 6),
                         Text(
                           department.date,
