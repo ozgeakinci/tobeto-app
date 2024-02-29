@@ -34,9 +34,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 email: event.email, password: event.password);
         emit(Authenticated(user: userCredential.user));
       } on FirebaseAuthException catch (e) {
-        print("------- Giriş Hataları-------- ");
-        print(e);
+        if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+          emit(NotAuthenticated(errorMessage: 'E-posta veya şifre hatalı.'));
+        } else {
+          emit(NotAuthenticated(
+              errorMessage: 'Giriş yapılırken bir hata oluştu.'));
+        }
       }
+      print("------- Giriş Hataları-------- ");
     });
     on<Register>(
       (event, emit) async {
@@ -63,14 +68,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             'phoneNumber': event.phoneNumber
           });
         } on FirebaseAuthException catch (e) {
-          print("------- Kayıt Hataları-------- ");
-          print(e);
+          String errorMessage = '';
+          switch (e.code) {
+            case 'email-already-in-use':
+              errorMessage =
+                  'Girilen e-posta adresine sahip kullanıcı zaten mevcut';
+              break;
+
+            case 'weak-password':
+              errorMessage = 'Zayıf şifre: Şifre 6 karakterden az olmamalı';
+              break;
+            default:
+              errorMessage =
+                  'Giriş yapılırken bir hata oluştu: ${errorMessage.isEmpty ? e.message : errorMessage}';
+              break;
+          }
+          emit(NotAuthenticated(errorMessage: errorMessage));
         }
       },
     );
 
     on<Logout>((event, emit) async {
       await _firebaseAuth.signOut();
+      emit(NotAuthenticated());
     });
 
     on<ResetPassword>((event, emit) async {

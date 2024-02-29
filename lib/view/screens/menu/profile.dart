@@ -26,7 +26,7 @@ import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 class Profile extends StatelessWidget {
   final Map<String, dynamic> profileData = {
     'Kişisel Bilgiler': PersonalInfo(),
-    'Deneyimlerm': Experience(),
+    'Deneyimlerim': Experience(),
     'Yetkinliklerim': Skills(),
     'Yabancı dillerim': ForeignLanguage(),
     'Sertifikalarım': Certificate(),

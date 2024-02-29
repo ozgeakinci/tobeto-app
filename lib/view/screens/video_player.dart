@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tobeto_app/utilities/utilities.dart';
+import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:video_player/video_player.dart';
 
 class LessonVideo extends StatefulWidget {
@@ -34,36 +36,47 @@ class _VideoAppState extends State<LessonVideo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.videoTitle)),
-      body: Stack(
-        children: [
-          // Arkaplan resmi
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                    'assets/images/video_image.png'), // Arkaplan resmi
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          // Video oynatıcı ve kontrolleri
-          GestureDetector(
-            onTap: () => setState(() => _isControlVisible = !_isControlVisible),
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: <Widget>[
-                _controller.value.isInitialized
-                    ? AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        child: VideoPlayer(_controller),
-                      )
-                    : Center(child: CircularProgressIndicator()),
-                _isControlVisible ? _videoControls(context) : SizedBox.shrink(),
+      appBar: CustomAppbar(title: 'Eğitim Video'),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                // Video oynatıcı ve kontrolleri
+                GestureDetector(
+                  onTap: () =>
+                      setState(() => _isControlVisible = !_isControlVisible),
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      _controller.value.isInitialized
+                          ? AspectRatio(
+                              aspectRatio: _controller.value.aspectRatio,
+                              child: VideoPlayer(_controller),
+                            )
+                          : Center(child: CircularProgressIndicator()),
+                      _isControlVisible
+                          ? _videoControls(context)
+                          : SizedBox.shrink(),
+                    ],
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
+            SizedBox(
+              height: 16,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: ProjectUtilities.sizeWidth_8),
+              child: Text(
+                widget.videoTitle,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.start,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
