@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_bloc.dart';
 import 'package:tobeto_app/bloc/auth/auth_event.dart';
-import 'package:tobeto_app/bloc/auth/auth_state.dart';
 import 'package:tobeto_app/language/language_items.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/screens/forgot_password_page.dart';
@@ -86,18 +85,6 @@ class _LoginPageState extends State<LoginPage> {
                 fixedSize: Size(MediaQuery.of(context).size.width * 0.84,
                     MediaQuery.of(context).size.height * 0.067)),
             onPressed: () {
-              if (authBloc.errorMessages != null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      authBloc.errorMessages!,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
-
               _submit();
             },
             child: const Text(LanguageItems.loginIn),

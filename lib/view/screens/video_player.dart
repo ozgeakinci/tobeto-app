@@ -1,152 +1,146 @@
 import 'package:flutter/material.dart';
-import 'package:lecle_yoyo_player/lecle_yoyo_player.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
-import 'package:tobeto_app/theme/tobeto_theme_color.dart';
-import 'package:tobeto_app/view/widgets/custom_appbar.dart';
-
 class LessonVideo extends StatefulWidget {
+  final String videoUrl;
+  final String videoTitle;
+
   const LessonVideo({
     Key? key,
     required this.videoUrl,
     required this.videoTitle,
   }) : super(key: key);
 
-  final String videoUrl;
-  final String videoTitle;
-
   @override
   _VideoAppState createState() => _VideoAppState();
 }
 
 class _VideoAppState extends State<LessonVideo> {
+  late VideoPlayerController _controller;
+  bool _isControlVisible = false;
+  bool _isMuted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
+      ..initialize().then((_) {
+        setState(() {});
+      });
+    _controller.setLooping(true);
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool fullscreen = false;
     return Scaffold(
-      appBar: fullscreen ? null : CustomAppbar(title: 'Eğitim Video'),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 16,
-            ),
-            Container(
-              height: 200,
-              child: YoYoPlayer(
-                aspectRatio: 16 / 9,
-                url: widget.videoUrl,
-                videoStyle: VideoStyle(
-                  progressIndicatorColors: VideoProgressColors(
-                    playedColor: TobetoAppColor.selecetedItemColor,
-                    backgroundColor: Colors.black.withOpacity(0.3),
-                  ),
-                  qualityStyle:
-                      Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.background,
-                            fontWeight: FontWeight.bold,
-                          ),
-                  forwardAndBackwardBtSize:
-                      MediaQuery.of(context).size.width * 0.05,
-                  actionBarBgColor: Colors.black.withOpacity(0.3),
-                  actionBarPadding: EdgeInsets.zero,
-                  forwardIcon: CircleAvatar(
-                    radius: MediaQuery.of(context).size.width * 0.035,
-                    backgroundColor: Colors.black.withOpacity(0.3),
-                    child: Icon(
-                      Icons.forward_10,
-                      color: Theme.of(context).colorScheme.background,
-                      size: MediaQuery.of(context).size.width * 0.04,
-                    ),
-                  ),
-                  backwardIcon: CircleAvatar(
-                    radius: MediaQuery.of(context).size.width * 0.035,
-                    backgroundColor: Colors.black.withOpacity(0.3),
-                    child: Icon(
-                      Icons.replay_10,
-                      color: Theme.of(context).colorScheme.background,
-                      size: MediaQuery.of(context).size.width * 0.05,
-                    ),
-                  ),
-                  playIcon: CircleAvatar(
-                    radius: MediaQuery.of(context).size.width * 0.045,
-                    backgroundColor: Colors.black.withOpacity(0.3),
-                    child: Icon(
-                      Icons.play_arrow_rounded,
-                      color: Theme.of(context).colorScheme.background,
-                      size: MediaQuery.of(context).size.width * 0.08,
-                    ),
-                  ),
-                  pauseIcon: CircleAvatar(
-                    radius: MediaQuery.of(context).size.width * 0.045,
-                    backgroundColor: Colors.black.withOpacity(0.3),
-                    child: Icon(
-                      Icons.pause,
-                      color: Theme.of(context).colorScheme.background,
-                      size: MediaQuery.of(context).size.width * 0.08,
-                    ),
-                  ),
-                  videoQualityPadding: EdgeInsets.all(4.0),
-                ),
-                videoLoadingStyle: const VideoLoadingStyle(
-                  loading: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Loading video..."),
-                      ],
-                    ),
-                  ),
-                ),
-                onFullScreen: (value) {
-                  setState(() {
-                    if (fullscreen != value) {
-                      fullscreen = value;
-                    }
-                  });
-                },
+      appBar: AppBar(title: Text(widget.videoTitle)),
+      body: Stack(
+        children: [
+          // Arkaplan resmi
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'assets/images/video_image.png'), // Arkaplan resmi
+                fit: BoxFit.cover,
               ),
             ),
-            // Video Description
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.videoTitle,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  SizedBox(height: 8),
-                ],
-              ),
-            ),
-            // Interaction Buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.thumb_up),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.thumb_down),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.share),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.save_alt),
-                ),
+          ),
+          // Video oynatıcı ve kontrolleri
+          GestureDetector(
+            onTap: () => setState(() => _isControlVisible = !_isControlVisible),
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: <Widget>[
+                _controller.value.isInitialized
+                    ? AspectRatio(
+                        aspectRatio: _controller.value.aspectRatio,
+                        child: VideoPlayer(_controller),
+                      )
+                    : Center(child: CircularProgressIndicator()),
+                _isControlVisible ? _videoControls(context) : SizedBox.shrink(),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _videoControls(BuildContext context) {
+    return AnimatedOpacity(
+      opacity: _isControlVisible ? 1.0 : 0.0,
+      duration: Duration(milliseconds: 300),
+      child: Container(
+        color: Colors.black45,
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              icon: Icon(Icons.replay_10),
+              color: Colors.white,
+              onPressed: () => _controller
+                  .seekTo(_controller.value.position - Duration(seconds: 10)),
+            ),
+            IconButton(
+              icon: Icon(
+                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
+              color: Colors.white,
+              onPressed: () {
+                setState(() {
+                  _controller.value.isPlaying
+                      ? _controller.pause()
+                      : _controller.play();
+                });
+              },
+            ),
+            IconButton(
+              icon: Icon(_isMuted ? Icons.volume_off : Icons.volume_up),
+              color: Colors.white,
+              onPressed: () {
+                setState(() {
+                  _isMuted = !_isMuted;
+                  _controller.setVolume(_isMuted ? 0 : 1);
+                });
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.forward_10),
+              color: Colors.white,
+              onPressed: () => _controller
+                  .seekTo(_controller.value.position + Duration(seconds: 10)),
+            ),
+            IconButton(
+              icon: Icon(Icons.fullscreen),
+              color: Colors.white,
+              onPressed: _toggleFullScreen,
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _toggleFullScreen() {
+    setState(() {
+      if (MediaQuery.of(context).orientation == Orientation.landscape) {
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+      } else {
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft,
+        ]);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

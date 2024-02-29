@@ -5,8 +5,6 @@ import 'package:tobeto_app/bloc/auth/auth_event.dart';
 import 'package:tobeto_app/bloc/auth/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  String? errorMessages;
-
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firebaseFirestore;
 
@@ -37,27 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(Authenticated(user: userCredential.user));
       } on FirebaseAuthException catch (e) {
         print("------- Giriş Hataları-------- ");
-
-        errorMessages = e.toString();
         print(e);
-        if (e.code == 'invalid-email') {
-          print('Geçersiz e-mail adresi');
-          emit(NotAuthenticated(
-              errorMessage: 'E-posta adresi yanlış biçimlendirilmiş.'));
-        } else if (e.code == 'user-not-found') {
-          print('Girilen e-posta adresine sahip kullanıcı bulunamadı.');
-          emit(NotAuthenticated(
-              errorMessage:
-                  'Girilen e-posta adresine sahip kullanıcı bulunamadı.'));
-        } else if (e.code == 'wrong-password') {
-          print('Girilen parola yanlış.');
-          emit(NotAuthenticated(errorMessage: 'Girilen parola yanlış.'));
-        } else {
-          print('Giriş yapılırken bir hata oluştu: ${e.message}');
-          emit(NotAuthenticated(
-              errorMessage:
-                  'Giriş yapılırken bir hata oluştusaddas: ${e.message}'));
-        }
       }
     });
     on<Register>(
@@ -85,17 +63,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             'phoneNumber': event.phoneNumber
           });
         } on FirebaseAuthException catch (e) {
-          if (e.code == 'weak-password') {
-            print('The password provided is too weak.');
-            emit(NotAuthenticated(
-                errorMessage: 'The password provided is too weak.'));
-          } else if (e.code == 'email-already-in-use') {
-            errorMessages = e.code.toString();
-
-            print('The account already exists for that email.');
-            emit(NotAuthenticated(
-                errorMessage: 'The account already exists for that email.'));
-          }
+          print("------- Kayıt Hataları-------- ");
+          print(e);
         }
       },
     );
