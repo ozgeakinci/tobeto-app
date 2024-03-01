@@ -110,7 +110,7 @@ class Reviews extends StatelessWidget {
                   onPressed: () {
                     _launchUrl();
                   },
-                  child: Text('Başla',
+                  child: Text('Git',
                       style: TextStyle(
                           color: TobetoAppColor.selecetedItemColor,
                           fontWeight: FontWeight.normal)),
@@ -123,7 +123,7 @@ class Reviews extends StatelessWidget {
                   onPressed: () {
                     _launchUrl();
                   },
-                  child: Text('Başla',
+                  child: Text('Git',
                       style: TextStyle(
                           color: TobetoAppColor.selecetedItemColor,
                           fontWeight: FontWeight.normal)),
@@ -133,10 +133,10 @@ class Reviews extends StatelessWidget {
                   point: '76.00', section: 'Microsoft SQL Server'),
               ExamStatusCard(
                 point: '--',
-                section: 'Masaüstü Programlama',
+                section: 'Sistem ve Network',
                 icon: TextButton(
                   onPressed: () {},
-                  child: Text('Başla',
+                  child: Text('Git',
                       style: TextStyle(
                           color: TobetoAppColor.selecetedItemColor,
                           fontWeight: FontWeight.normal)),
