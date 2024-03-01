@@ -14,9 +14,11 @@ class ExamStatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: ProjectUtilities.projectHeight_8),
+      padding: EdgeInsets.symmetric(
+        horizontal: screenWidth * 0.02,
+      ),
       child: Card(
         elevation: 0,
         color: isDarkMode
@@ -28,7 +30,7 @@ class ExamStatusCard extends StatelessWidget {
               color: TobetoAppColor.inputDarkBackground.withOpacity(0.3),
             )),
         child: Container(
-          height: 55,
+          height: screenWidth * 0.15,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Row(
@@ -58,6 +60,7 @@ class ExamStatusCard extends StatelessWidget {
                         flex: 1,
                         child: Icon(
                           Icons.chevron_right,
+                          size: 18,
                           color: isDarkMode
                               ? TobetoAppColor.backgroundLight
                               : TobetoAppColor.backgroundDark,

@@ -22,6 +22,7 @@ class _VideoAppState extends State<LessonVideo> {
   late VideoPlayerController _controller;
   bool _isControlVisible = false;
   bool _isMuted = false;
+  bool _isFullScreen = false;
 
   @override
   void initState() {
@@ -36,7 +37,7 @@ class _VideoAppState extends State<LessonVideo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(title: 'Eğitim Video'),
+      appBar: !_isFullScreen ? CustomAppbar(title: 'Eğitim Video') : null,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,7 +139,8 @@ class _VideoAppState extends State<LessonVideo> {
 
   void _toggleFullScreen() {
     setState(() {
-      if (MediaQuery.of(context).orientation == Orientation.landscape) {
+      if (_isFullScreen &&
+          MediaQuery.of(context).orientation == Orientation.landscape) {
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
         SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
       } else {
@@ -148,6 +150,8 @@ class _VideoAppState extends State<LessonVideo> {
           DeviceOrientation.landscapeLeft,
         ]);
       }
+      _isFullScreen = !_isFullScreen;
+      //merhaba
     });
   }
 
