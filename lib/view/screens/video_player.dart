@@ -151,6 +151,7 @@ class _VideoAppState extends State<LessonVideo> {
         ]);
       }
       _isFullScreen = !_isFullScreen;
+      //merhaba
     });
   }
 
