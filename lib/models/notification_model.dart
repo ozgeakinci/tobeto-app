@@ -16,8 +16,6 @@ class NotificationModel {
       return NotificationsModel(
         title: notificationsMap['title'] as String,
         date: notificationsMap['date'] as String,
-        image: notificationsMap['image'] as String,
-        subImage: notificationsMap['subImage'] as String,
       );
     }).toList();
     return NotificationModel(notifications: notifications);
@@ -27,12 +25,9 @@ class NotificationModel {
 class NotificationsModel {
   final String title;
   final String date;
-  final String image;
-  final String? subImage;
 
-  NotificationsModel(
-      {required this.title,
-      required this.date,
-      required this.image,
-      this.subImage});
+  NotificationsModel({
+    required this.title,
+    required this.date,
+  });
 }
