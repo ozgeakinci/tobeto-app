@@ -75,17 +75,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             experiences: userInfos.experiences,
             languages: userInfos.languages));
       } catch (e) {
-        emit(UserLoaded(
-          username: "No name",
-          department: "No Department",
-          email: '',
-          applicationStatus: false,
-          greeting: '',
-          usernameInitials: '',
-          about: '',
-          birthDate: DateTime.now(),
-          phoneNumber: 5432144321,
-        ));
+        emit(UserError());
       }
     });
     //------------ User Bilgilerini Gönder -------------------

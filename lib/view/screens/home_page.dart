@@ -43,6 +43,7 @@ class HomePage extends StatelessWidget {
               ),
             );
           }
+
           if (state is UserLoaded) {
             if (state.applicationStatus) {
               return SafeArea(
@@ -436,6 +437,17 @@ class HomePage extends StatelessWidget {
                 ),
               );
             }
+          }
+          if (state is UserError) {
+            return Center(
+              child: Column(
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 16),
+                  Text("Hata! Tekrar Deneyin..")
+                ],
+              ),
+            );
           } else {
             return const Center(child: Text("Yükleniyor....."));
           }

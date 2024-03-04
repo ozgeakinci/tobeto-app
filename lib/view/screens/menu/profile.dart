@@ -147,6 +147,17 @@ class Profile extends StatelessWidget {
                 )
               ],
             );
+          }
+          if (state is UserError) {
+            return Center(
+              child: Column(
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 16),
+                  Text("Hata! Tekrar Deneyin..")
+                ],
+              ),
+            );
           } else {
             return Center(child: CircularProgressIndicator());
           }
