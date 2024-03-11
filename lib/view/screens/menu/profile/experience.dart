@@ -5,6 +5,7 @@ import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/utilities/delete_confirmation_dialog.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
@@ -56,10 +57,20 @@ class _ExperienceState extends State<Experience> {
                   startDate: Text(state.experiences![index].startDate),
                   finishDate: Text(state.experiences![index].endDate),
                   textButton: TextButton(
-                      onPressed: () {
-                        context
-                            .read<UserBloc>()
-                            .add(DeleteExperience(index: index));
+                      onPressed: () async {
+                        bool? confirmDeletion =
+                            await DeleteConfirmationDialog.show(
+                                context,
+                                'Deneyimi Sil',
+                                'Bu deneyimi silmek istediğinizden emin misiniz?');
+
+                        if (confirmDeletion == true) {
+                          context
+                              .read<UserBloc>()
+                              .add(DeleteExperience(index: index));
+                        } else {
+                          print('Silme iptal');
+                        }
                       },
                       child: Image.asset('assets/images/delete_icon.png')))),
             );
@@ -104,21 +115,6 @@ class _ExperienceState extends State<Experience> {
     );
   }
 }
-
-/* Widget _buildNoExperienceWidget() {
-  return Column(
-    children: [
-      Image.asset('assets/images/survey_image.png'),
-      const SizedBox(height: 20),
-      Text(
-        "Deneyim Bulunmamakta!",
-        style: TextStyle(fontWeight: FontWeight.w600),
-      ),
-      const SizedBox(height: 3),
-      Text("Eklenmiş deneyim bulunamadı"),
-    ],
-  );
-} */
 
 Widget _buildErrorWidget(String error) {
   return Center(
