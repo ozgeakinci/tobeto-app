@@ -5,6 +5,7 @@ import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/utilities/delete_confirmation_dialog.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
@@ -44,10 +45,20 @@ class EducationLife extends StatelessWidget {
                       startDate: Text(state.userEducations![index].startDate),
                       finishDate: Text(state.userEducations![index].endDate),
                       textButton: TextButton(
-                          onPressed: () {
-                            context
-                                .read<UserBloc>()
-                                .add(DeleteEducation(index: index));
+                          onPressed: () async {
+                            bool? confirmDeletion =
+                                await DeleteConfirmationDialog.show(
+                                    context,
+                                    'Deneyimi Sil',
+                                    'Bu deneyimi silmek istediğinizden emin misiniz?');
+
+                            if (confirmDeletion == true) {
+                              context
+                                  .read<UserBloc>()
+                                  .add(DeleteEducation(index: index));
+                            } else {
+                              print('Silme iptal');
+                            }
                           },
                           child:
                               Image.asset('assets/images/delete_icon.png'))));

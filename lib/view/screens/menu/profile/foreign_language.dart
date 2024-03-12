@@ -5,6 +5,7 @@ import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/models/language_model.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/utilities/delete_confirmation_dialog.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
@@ -40,10 +41,20 @@ class ForeignLanguage extends StatelessWidget {
                       title: Text(state.languages![index].language),
                       subTitle: Text(state.languages![index].level),
                       textButton: TextButton(
-                          onPressed: () {
-                            context
-                                .read<UserBloc>()
-                                .add(DeleteLanguage(index: index));
+                          onPressed: () async {
+                            bool? confirmDeletion =
+                                await DeleteConfirmationDialog.show(
+                                    context,
+                                    'Deneyimi Sil',
+                                    'Bu deneyimi silmek istediğinizden emin misiniz?');
+
+                            if (confirmDeletion == true) {
+                              context
+                                  .read<UserBloc>()
+                                  .add(DeleteLanguage(index: index));
+                            } else {
+                              print('Silme iptal');
+                            }
                           },
                           child:
                               Image.asset('assets/images/delete_icon.png'))));

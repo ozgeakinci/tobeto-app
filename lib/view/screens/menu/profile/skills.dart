@@ -4,6 +4,7 @@ import 'package:tobeto_app/bloc/user/user_bloc.dart';
 import 'package:tobeto_app/bloc/user/user_event.dart';
 import 'package:tobeto_app/bloc/user/user_state.dart';
 import 'package:tobeto_app/theme/tobeto_theme_color.dart';
+import 'package:tobeto_app/utilities/delete_confirmation_dialog.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:tobeto_app/view/widgets/custom_textfield.dart';
@@ -57,11 +58,20 @@ class _SkillsState extends State<Skills> {
                       icon: Icon(Icons.work_outline_outlined,
                           color: ColorScheme.dark().secondary),
                       textButton: TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             String deletedSkill = state.skills![index];
-                            context
-                                .read<UserBloc>()
-                                .add(DeleteSkills(deletedSkills: deletedSkill));
+                            bool? confirmDeletion =
+                                await DeleteConfirmationDialog.show(
+                                    context,
+                                    'Deneyimi Sil',
+                                    'Bu deneyimi silmek istediğinizden emin misiniz?');
+
+                            if (confirmDeletion == true) {
+                              context.read<UserBloc>().add(
+                                  DeleteSkills(deletedSkills: deletedSkill));
+                            } else {
+                              print('Silme iptal');
+                            }
                           },
                           child:
                               Image.asset('assets/images/delete_icon.png')))));
