@@ -8,6 +8,7 @@ import 'package:tobeto_app/models/language_model.dart';
 import 'package:tobeto_app/models/user_model.dart';
 import 'package:tobeto_app/models/department_model.dart';
 import 'package:tobeto_app/models/notification_model.dart';
+import 'package:tobeto_app/models/watched_video_model.dart';
 
 class UserRepositories {
   final firebaseFirestore = FirebaseFirestore.instance;
@@ -331,6 +332,38 @@ class UserRepositories {
     } catch (e) {
       // Hata durumunda Exception fırlat
       throw Exception("Deneyim güncellenirken bir hata oluştu: $e");
+    }
+  }
+
+  //-----------------------WatchedVideo REPO -----------------------
+
+  Future<UserModel> updateWatchedVideosToUser({
+    required String userId,
+    required List<WatchedVideo> updatedWatchedVideos,
+  }) async {
+    try {
+      // Firestore'dan kullanıcının mevcut bilgilerini çek
+      DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await firebaseFirestore.collection('users').doc(userId).get();
+
+      if (!userDoc.exists) {
+        throw Exception("Kullanıcı bulunamadı");
+      }
+
+      // Firestore'dan mevcut watchedVideos map'ini al
+      Map<String, dynamic>? currentWatchedVideos =
+          userDoc.data()?['watchedVideos'];
+
+      // Güncellenmiş watchedVideos map'ini Firestore'a yaz
+      await firebaseFirestore.collection('users').doc(userId).update({
+        'watchedVideos': updatedWatchedVideos,
+      });
+
+      // Güncellenmiş kullanıcı bilgilerini döndür
+      return UserModel.fromUserFireStore(userDoc);
+    } catch (e) {
+      // Hata durumunda Exception fırlat
+      throw Exception("İzlenen videolar güncellenirken bir hata oluştu: $e");
     }
   }
 }

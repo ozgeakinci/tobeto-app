@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_app/bloc/user/user_bloc.dart';
+import 'package:tobeto_app/bloc/user/user_event.dart';
+import 'package:tobeto_app/bloc/user/user_state.dart';
+import 'package:tobeto_app/models/watched_video_model.dart';
 import 'package:tobeto_app/utilities/utilities.dart';
+import 'package:tobeto_app/view/screens/menu/profile/skills.dart';
 import 'package:tobeto_app/view/widgets/custom_appbar.dart';
 import 'package:video_player/video_player.dart';
 
@@ -39,46 +45,96 @@ class _VideoAppState extends State<LessonVideo> {
     return Scaffold(
       appBar: !_isFullScreen ? CustomAppbar(title: 'Eğitim Video') : null,
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          child: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+        if (state is UserLoaded) {
+          return _buildVideoPlayer(context, state.watchedVideos);
+        } else {
+          return CircularProgressIndicator();
+        }
+      })
+
+          //  Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     Stack(
+          //       children: [
+          //         // Video oynatıcı ve kontrolleri
+          //         GestureDetector(
+          //           onTap: () =>
+          //               setState(() => _isControlVisible = !_isControlVisible),
+          //           child: Stack(
+          //             alignment: Alignment.bottomCenter,
+          //             children: [
+          //               _controller.value.isInitialized
+          //                   ? AspectRatio(
+          //                       aspectRatio: _controller.value.aspectRatio,
+          //                       child: VideoPlayer(_controller),
+          //                     )
+          //                   : Center(child: CircularProgressIndicator()),
+          //               _isControlVisible
+          //                   ? _videoControls(context)
+          //                   : SizedBox.shrink(),
+          //             ],
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     SizedBox(
+          //       height: 16,
+          //     ),
+          //     Padding(
+          //       padding: EdgeInsets.only(left: ProjectUtilities.sizeWidth_8),
+          //       child: Text(
+          //         widget.videoTitle,
+          //         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          //         textAlign: TextAlign.start,
+          //       ),
+          //     )
+          //   ],
+          // ),
+          ),
+    );
+  }
+
+  Widget _buildVideoPlayer(
+      BuildContext context, List<WatchedVideo>? watchedVideos) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Stack(
           children: [
-            Stack(
-              children: [
-                // Video oynatıcı ve kontrolleri
-                GestureDetector(
-                  onTap: () =>
-                      setState(() => _isControlVisible = !_isControlVisible),
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      _controller.value.isInitialized
-                          ? AspectRatio(
-                              aspectRatio: _controller.value.aspectRatio,
-                              child: VideoPlayer(_controller),
-                            )
-                          : Center(child: CircularProgressIndicator()),
-                      _isControlVisible
-                          ? _videoControls(context)
-                          : SizedBox.shrink(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: ProjectUtilities.sizeWidth_8),
-              child: Text(
-                widget.videoTitle,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                textAlign: TextAlign.start,
+            GestureDetector(
+              onTap: () =>
+                  setState(() => _isControlVisible = !_isControlVisible),
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  _controller.value.isInitialized
+                      ? AspectRatio(
+                          aspectRatio: _controller.value.aspectRatio,
+                          child: VideoPlayer(_controller),
+                        )
+                      : Center(child: CircularProgressIndicator()),
+                  _isControlVisible
+                      ? _videoControls(context)
+                      : SizedBox.shrink(),
+                ],
               ),
-            )
+            ),
           ],
         ),
-      ),
+        SizedBox(
+          height: 16,
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: ProjectUtilities.sizeWidth_8),
+          child: Text(
+            widget.videoTitle,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            textAlign: TextAlign.start,
+          ),
+        )
+      ],
     );
   }
 
@@ -153,6 +209,15 @@ class _VideoAppState extends State<LessonVideo> {
       _isFullScreen = !_isFullScreen;
       //merhaba
     });
+
+    if (_controller.value.isPlaying &&
+        _controller.value.position.inMilliseconds == 0) {
+      final List<WatchedVideo> watchedVideos = [
+        WatchedVideo(isWatched: true, videoID: 'hey')
+      ];
+      BlocProvider.of<UserBloc>(context)
+          .add(UpdateWatchedVideos(watchedVideos: watchedVideos));
+    }
   }
 
   @override

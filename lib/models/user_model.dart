@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/language_model.dart';
+import 'package:tobeto_app/models/watched_video_model.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
@@ -42,6 +43,7 @@ class UserModel {
   List<ExperienceInfo>? experiences;
   List<LanguageModel>? languages;
   List<EducationInfo>? userEducations;
+  List<WatchedVideo>? watchedVideos;
 
   UserModel(
       {required this.username,
@@ -55,7 +57,8 @@ class UserModel {
       this.skills,
       this.experiences,
       this.languages,
-      this.userEducations});
+      this.userEducations,
+      this.watchedVideos});
 
   factory UserModel.fromUserFireStore(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
@@ -99,6 +102,11 @@ class UserModel {
               ),
             )
           : [],
+      watchedVideos: map['watchedVideos'] != null
+          ? List<WatchedVideo>.from((map['watchedVideos'] as List<dynamic>).map(
+              (watchedVideo) =>
+                  WatchedVideo.fromJson(watchedVideo as Map<String, dynamic>)))
+          : null,
     );
   }
 
@@ -124,6 +132,9 @@ class UserModel {
               .map((userEducation) => userEducation.toMap())
               .toList()
           : [],
+      'watchedVideos': watchedVideos != null
+          ? watchedVideos!.map((watchedVideo) => watchedVideo.toMap()).toList()
+          : null,
     };
   }
 

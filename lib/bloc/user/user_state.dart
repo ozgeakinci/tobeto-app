@@ -1,6 +1,7 @@
 import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/language_model.dart';
+import 'package:tobeto_app/models/watched_video_model.dart';
 
 abstract class UserState {}
 
@@ -23,6 +24,7 @@ class UserLoaded extends UserState {
   List<ExperienceInfo>? experiences;
   List<LanguageModel>? languages;
   List<EducationInfo>? userEducations;
+  List<WatchedVideo>? watchedVideos;
 
   UserLoaded(
       {required this.username,
@@ -38,7 +40,8 @@ class UserLoaded extends UserState {
       this.userEducations,
       this.languages,
       this.phoneNumber,
-      this.urlImage});
+      this.urlImage,
+      this.watchedVideos});
 }
 
 class UserError extends UserState {}

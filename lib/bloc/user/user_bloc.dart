@@ -360,6 +360,36 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       }
     });
 
+    on<UpdateWatchedVideos>((event, emit) async {
+      String greeting = getGreetingMessage();
+      try {
+        // Kullanıcının mevcut ID'sini al
+        String userId = FirebaseAuth.instance.currentUser!.uid;
+
+        // Güncellenmiş izlenen videoları Firestore'a gönder
+        final updatedUser = await UserRepositories().updateWatchedVideosToUser(
+          userId: userId,
+          updatedWatchedVideos: event.watchedVideos,
+        );
+
+        // Güncellenmiş kullanıcı bilgilerini emit et
+        emit(UserLoaded(
+          username: updatedUser.username,
+          department: updatedUser.department,
+          applicationStatus: updatedUser.applicationStatus,
+          greeting: greeting,
+          usernameInitials: usernameInitials,
+          email: updatedUser.email,
+          about: updatedUser.about,
+          birthDate: updatedUser.birthDate,
+          watchedVideos: updatedUser.watchedVideos,
+        ));
+      } catch (e) {
+        // Hata durumunu yönetin
+        emit(UserError());
+      }
+    });
+
     on<ResetUserEvent>((event, emit) async {
       emit(UserInitial());
     });

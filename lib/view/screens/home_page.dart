@@ -449,7 +449,8 @@ class HomePage extends StatelessWidget {
               ),
             );
           } else {
-            return const Center(child: Text("Yükleniyor....."));
+            return const Center(
+                child: Text("Lütfen programı yeniden başlatın..."));
           }
         },
       ),

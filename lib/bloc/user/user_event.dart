@@ -3,6 +3,7 @@ import 'package:tobeto_app/models/education_model.dart';
 import 'package:tobeto_app/models/expreince_model.dart';
 import 'package:tobeto_app/models/language_model.dart';
 import 'package:tobeto_app/models/user_model.dart';
+import 'package:tobeto_app/models/watched_video_model.dart';
 
 abstract class UserEvent {}
 
@@ -81,6 +82,16 @@ class DeleteEducation extends UserEvent {
 
   DeleteEducation({
     required this.index,
+  });
+}
+
+//--------WatchedVideo AREA----------------
+
+class UpdateWatchedVideos extends UserEvent {
+  final List<WatchedVideo> watchedVideos;
+
+  UpdateWatchedVideos({
+    required this.watchedVideos,
   });
 }
 
